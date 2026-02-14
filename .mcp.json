@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "procurement-api": {
+      "command": "node",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/servers/dist/index.js"],
+      "env": {
+        "DATA_GO_KR_API_KEY": "${DATA_GO_KR_API_KEY}",
+        "BIZINFO_API_KEY": "${BIZINFO_API_KEY}",
+        "NTIS_API_KEY": "${NTIS_API_KEY}",
+        "DOWNLOAD_DIR": "${CLAUDE_PLUGIN_ROOT}/downloads"
+      }
+    }
+  }
+}

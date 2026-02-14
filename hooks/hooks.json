@@ -1,0 +1,17 @@
+{
+  "description": "Proposal Specialist 환경 검증 훅",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/validate-env.sh",
+            "timeout": 10,
+            "statusMessage": "API 키 검증 중..."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "proposal-specialist",
+  "version": "1.0.0",
+  "description": "기업 문서 기반 공공조달/지원사업 탐색 및 제안 전략 수립 플러그인",
+  "author": {
+    "name": "Zeans",
+    "email": "zeans@astravision.co.kr"
+  },
+  "license": "MIT",
+  "keywords": [
+    "proposal",
+    "g2b",
+    "procurement",
+    "k-startup",
+    "rfp",
+    "bid",
+    "korean-government"
+  ]
+}

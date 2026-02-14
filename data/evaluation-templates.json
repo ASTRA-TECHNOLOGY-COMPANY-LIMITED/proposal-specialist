@@ -1,0 +1,128 @@
+{
+  "version": "1.0.0",
+  "description": "공공 조달 평가 기준 템플릿",
+  "templates": {
+    "negotiated_contract": {
+      "name": "협상에 의한 계약",
+      "description": "기술+가격 종합평가 방식. IT 용역 입찰에서 가장 일반적",
+      "scoring": {
+        "technical": {
+          "weight": 90,
+          "items": [
+            { "name": "사업이해도", "minScore": 10, "maxScore": 15, "criteria": "과업 이해, 현황 분석, 추진 방향" },
+            { "name": "기술성", "minScore": 20, "maxScore": 30, "criteria": "기술 방안, 아키텍처, 혁신성" },
+            { "name": "수행체계", "minScore": 15, "maxScore": 20, "criteria": "조직, 인력, 일정 관리" },
+            { "name": "유사실적", "minScore": 10, "maxScore": 15, "criteria": "관련 프로젝트 수행 경험" },
+            { "name": "보안/품질", "minScore": 5, "maxScore": 10, "criteria": "보안 대책, 품질 관리 방안" },
+            { "name": "프레젠테이션", "minScore": 10, "maxScore": 15, "criteria": "발표 능력, 질의응답 대응" }
+          ]
+        },
+        "price": {
+          "weight": 10,
+          "method": "예정가격 대비 투찰율 기반 산정"
+        }
+      }
+    },
+    "qualification_review": {
+      "name": "적격심사",
+      "description": "최저가 낙찰 방식. 중소규모 물품/용역에 적용",
+      "scoring": {
+        "price": {
+          "weight": 90,
+          "method": "예정가격 이하 최저가 입찰",
+          "recommendedRate": {
+            "government": 87.745,
+            "localGov": 87.745,
+            "publicOrg": 88.0
+          }
+        },
+        "qualification": {
+          "weight": 10,
+          "items": [
+            { "name": "이행실적", "score": 3, "criteria": "최근 3년 유사 실적" },
+            { "name": "기술능력", "score": 3, "criteria": "기술인력, 인증" },
+            { "name": "경영상태", "score": 2, "criteria": "재무 건전성" },
+            { "name": "신인도", "score": 2, "criteria": "가감점 항목" }
+          ]
+        }
+      }
+    },
+    "restricted_competition": {
+      "name": "제한경쟁 입찰",
+      "description": "참가 자격을 제한하여 경쟁 범위를 좁힌 입찰",
+      "restrictions": [
+        { "type": "실적 제한", "description": "유사 실적 보유 기업만 참가" },
+        { "type": "지역 제한", "description": "특정 지역 소재 기업만 참가" },
+        { "type": "면허 제한", "description": "관련 면허 보유 기업만 참가" },
+        { "type": "규모 제한", "description": "중소기업/소기업 한정" }
+      ]
+    }
+  },
+  "evaluationCriteria": {
+    "proposalFit": {
+      "name": "제안 적합성 평가",
+      "totalScore": 100,
+      "items": [
+        {
+          "name": "자격 요건 충족",
+          "score": 20,
+          "criteria": "참가 자격, 면허, 인증 충족 여부",
+          "subItems": [
+            "필수 자격 요건 충족",
+            "가점 요건 보유",
+            "컨소시엄 필요 여부"
+          ]
+        },
+        {
+          "name": "기술 역량 매칭",
+          "score": 30,
+          "criteria": "요구 기술과 보유 기술 일치도",
+          "subItems": [
+            "핵심 기술 보유 여부",
+            "기술 차별화 요소",
+            "기술 인력 적합성"
+          ]
+        },
+        {
+          "name": "유사 실적",
+          "score": 25,
+          "criteria": "관련 프로젝트 수행 경험",
+          "subItems": [
+            "유사 사업 수행 건수",
+            "유사 기술 적용 경험",
+            "공공 사업 수행 이력"
+          ]
+        },
+        {
+          "name": "가격 경쟁력",
+          "score": 15,
+          "criteria": "추정가격 대비 원가 적정성",
+          "subItems": [
+            "원가 산정 가능 여부",
+            "투찰율 적정성",
+            "수익성 확보 가능 여부"
+          ]
+        },
+        {
+          "name": "일정 적합성",
+          "score": 10,
+          "criteria": "준비기간 및 수행기간 적합성",
+          "subItems": [
+            "제안서 준비 기간 충분 여부",
+            "프로젝트 수행 기간 적합성",
+            "인력 투입 가능 시점"
+          ]
+        }
+      ]
+    }
+  },
+  "scoreInterpretation": {
+    "ranges": [
+      { "min": 80, "max": 100, "label": "매우 적합", "recommendation": "적극 참여 권장" },
+      { "min": 60, "max": 79, "label": "적합", "recommendation": "참여 가능, 보완 필요 항목 점검" },
+      { "min": 40, "max": 59, "label": "보통", "recommendation": "보완 후 참여 또는 컨소시엄 검토" },
+      { "min": 20, "max": 39, "label": "부적합", "recommendation": "참여 재고, 역량 보완 우선" },
+      { "min": 0, "max": 19, "label": "매우 부적합", "recommendation": "참여 비권장" }
+    ]
+  }
+}
