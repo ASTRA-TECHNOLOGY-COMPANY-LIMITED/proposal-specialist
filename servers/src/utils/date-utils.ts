@@ -25,3 +25,47 @@ function formatDate(date: Date): string {
   const d = String(date.getDate()).padStart(2, '0');
   return `${y}-${m}-${d}`;
 }
+
+/**
+ * 마감일 상태 정보
+ */
+export interface DeadlineInfo {
+  isClosed: boolean;
+  daysRemaining: number;
+  deadlineStatus: 'expired' | 'urgent' | 'normal' | 'upcoming' | 'unknown';
+}
+
+/**
+ * 마감일시 문자열로부터 마감 상태를 계산한다.
+ *
+ * @param deadlineStr - 마감일시 문자열 (예: "2026/02/28 18:00:00", "2026-03-15")
+ * @returns 마감 상태 정보
+ */
+export function calcDeadlineInfo(deadlineStr: string | undefined | null): DeadlineInfo {
+  if (!deadlineStr) {
+    return { isClosed: false, daysRemaining: -1, deadlineStatus: 'unknown' };
+  }
+
+  // 다양한 날짜 형식 지원: "/" → "-" 치환 후 파싱
+  const normalized = deadlineStr.replace(/\//g, '-');
+  const deadline = new Date(normalized);
+
+  if (isNaN(deadline.getTime())) {
+    return { isClosed: false, daysRemaining: -1, deadlineStatus: 'unknown' };
+  }
+
+  const now = new Date();
+  const diffMs = deadline.getTime() - now.getTime();
+  const daysRemaining = Math.ceil(diffMs / (24 * 60 * 60 * 1000));
+
+  if (daysRemaining < 0) {
+    return { isClosed: true, daysRemaining, deadlineStatus: 'expired' };
+  }
+  if (daysRemaining <= 3) {
+    return { isClosed: false, daysRemaining, deadlineStatus: 'urgent' };
+  }
+  if (daysRemaining < 14) {
+    return { isClosed: false, daysRemaining, deadlineStatus: 'normal' };
+  }
+  return { isClosed: false, daysRemaining, deadlineStatus: 'upcoming' };
+}

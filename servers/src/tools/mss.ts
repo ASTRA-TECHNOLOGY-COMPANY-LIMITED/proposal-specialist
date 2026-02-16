@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { callDataGoKrApi } from '../utils/api-client.js';
+import { calcDeadlineInfo } from '../utils/date-utils.js';
 
 const MSS_BASE = 'https://apis.data.go.kr/1421000/mssBizService_v2';
 
@@ -29,20 +30,34 @@ export function registerMssTools(server: McpServer) {
 
       const items = data.items || [];
 
+      // 마감일 정보 계산 및 마감 건 필터링
+      const mappedItems = items.map((item: any) => {
+        const deadlineInfo = calcDeadlineInfo(item.applicationEndDate);
+        return {
+          title: item.title,
+          dataContents: item.dataContents,
+          viewUrl: item.viewUrl,
+          fileName: item.fileName,
+          fileUrl: item.fileUrl,
+          applicationStartDate: item.applicationStartDate,
+          applicationEndDate: item.applicationEndDate,
+          isClosed: deadlineInfo.isClosed,
+          daysRemaining: deadlineInfo.daysRemaining,
+          deadlineStatus: deadlineInfo.deadlineStatus,
+        };
+      });
+
+      const activeItems = mappedItems.filter((item: any) => !item.isClosed);
+      const expiredCount = mappedItems.length - activeItems.length;
+
       return {
         content: [{
           type: 'text' as const,
           text: JSON.stringify({
-            totalCount: data.totalCount,
-            items: items.map((item: any) => ({
-              title: item.title,
-              dataContents: item.dataContents,
-              viewUrl: item.viewUrl,
-              fileName: item.fileName,
-              fileUrl: item.fileUrl,
-              applicationStartDate: item.applicationStartDate,
-              applicationEndDate: item.applicationEndDate,
-            })),
+            totalCount: activeItems.length,
+            serverTotalCount: data.totalCount,
+            expiredCount,
+            items: mappedItems,
           }, null, 2),
         }],
       };
