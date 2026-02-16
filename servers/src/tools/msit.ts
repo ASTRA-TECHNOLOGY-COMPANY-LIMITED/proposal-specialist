@@ -26,19 +26,34 @@ export function registerMsitTools(server: McpServer) {
 
       const items = data.items || [];
 
+      // 게시일 기준 3개월 이내 공고만 필터링 (마감일 필드 없음)
+      const threeMonthsAgo = new Date();
+      threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+
+      const mappedItems = items.map((item: any) => ({
+        subject: item.subject,
+        viewUrl: item.viewUrl,
+        deptName: item.deptName,
+        pressDt: item.pressDt,
+        fileName: item.fileName,
+        fileUrl: item.fileUrl,
+      }));
+
+      const recentItems = mappedItems.filter((item: any) => {
+        if (!item.pressDt) return true; // 게시일 없으면 포함
+        const pressDate = new Date(item.pressDt);
+        return !isNaN(pressDate.getTime()) && pressDate >= threeMonthsAgo;
+      });
+      const filteredCount = mappedItems.length - recentItems.length;
+
       return {
         content: [{
           type: 'text' as const,
           text: JSON.stringify({
-            totalCount: data.totalCount,
-            items: items.map((item: any) => ({
-              subject: item.subject,
-              viewUrl: item.viewUrl,
-              deptName: item.deptName,
-              pressDt: item.pressDt,
-              fileName: item.fileName,
-              fileUrl: item.fileUrl,
-            })),
+            totalCount: recentItems.length,
+            serverTotalCount: data.totalCount,
+            filteredCount,
+            items: recentItems,
           }, null, 2),
         }],
       };

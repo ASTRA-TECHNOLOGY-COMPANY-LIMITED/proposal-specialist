@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { callDataGoKrApi } from '../utils/api-client.js';
-import { getDefaultDateRange, toG2bDateFormat } from '../utils/date-utils.js';
+import { getDefaultDateRange, toG2bDateFormat, calcDeadlineInfo } from '../utils/date-utils.js';
 
 const G2B_BID_BASE_URL = 'https://apis.data.go.kr/1230000/ad/BidPublicInfoService';
 
@@ -70,23 +70,35 @@ export function registerG2bTools(server: McpServer) {
         });
       }
 
-      const summary = items.slice(0, args.numOfRows).map((item: any) => ({
-        bidNtceNo: item.bidNtceNo,
-        bidNtceNm: item.bidNtceNm,
-        ntceInsttNm: item.ntceInsttNm,
-        dminsttNm: item.dminsttNm,
-        presmptPrce: item.presmptPrce,
-        bidClseDt: item.bidClseDt,
-        bidNtceUrl: item.bidNtceUrl,
-        hasAttachment: !!(item.ntceSpecDocUrl1),
-      }));
+      // 마감일 정보 계산 및 마감 건 필터링
+      const itemsWithDeadline = items.map((item: any) => {
+        const deadlineInfo = calcDeadlineInfo(item.bidClseDt);
+        return {
+          bidNtceNo: item.bidNtceNo,
+          bidNtceNm: item.bidNtceNm,
+          ntceInsttNm: item.ntceInsttNm,
+          dminsttNm: item.dminsttNm,
+          presmptPrce: item.presmptPrce,
+          bidClseDt: item.bidClseDt,
+          bidNtceUrl: item.bidNtceUrl,
+          hasAttachment: !!(item.ntceSpecDocUrl1),
+          isClosed: deadlineInfo.isClosed,
+          daysRemaining: deadlineInfo.daysRemaining,
+          deadlineStatus: deadlineInfo.deadlineStatus,
+        };
+      });
+
+      const activeItems = itemsWithDeadline.filter((item: any) => !item.isClosed);
+      const expiredCount = itemsWithDeadline.length - activeItems.length;
+      const summary = activeItems.slice(0, args.numOfRows);
 
       return {
         content: [{
           type: 'text' as const,
           text: JSON.stringify({
-            totalCount: items.length,
+            totalCount: activeItems.length,
             serverTotalCount: data.totalCount,
+            expiredCount,
             currentPage: args.pageNo,
             items: summary,
           }, null, 2),
