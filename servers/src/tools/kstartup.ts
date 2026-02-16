@@ -60,7 +60,7 @@ export function registerKStartupTools(server: McpServer) {
             totalCount: activeItems.length,
             serverTotalCount: data.totalCount,
             expiredCount,
-            items: mappedItems,
+            items: activeItems,
           }, null, 2),
         }],
       };

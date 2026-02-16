@@ -54,11 +54,19 @@ export function calcDeadlineInfo(deadlineStr: string | undefined | null): Deadli
     return { isClosed: false, daysRemaining: -1, deadlineStatus: 'unknown' };
   }
 
+  // KST(UTC+9) 기준으로 계산 — API 마감일시는 한국 시간 기준
   const now = new Date();
-  const diffMs = deadline.getTime() - now.getTime();
-  const daysRemaining = Math.ceil(diffMs / (24 * 60 * 60 * 1000));
+  const KST_OFFSET_MS = 9 * 60 * 60 * 1000;
+  const nowKst = now.getTime() + (now.getTimezoneOffset() * 60 * 1000) + KST_OFFSET_MS;
+  const diffMs = deadline.getTime() - nowKst;
+  const MS_PER_DAY = 24 * 60 * 60 * 1000;
+  const daysRemaining = diffMs < 0
+    ? Math.floor(diffMs / MS_PER_DAY)   // 마감: 음수 유지
+    : diffMs < MS_PER_DAY
+      ? 0                                // 24시간 미만: 당일 마감
+      : Math.ceil(diffMs / MS_PER_DAY);
 
-  if (daysRemaining < 0) {
+  if (diffMs < 0) {
     return { isClosed: true, daysRemaining, deadlineStatus: 'expired' };
   }
   if (daysRemaining <= 3) {
