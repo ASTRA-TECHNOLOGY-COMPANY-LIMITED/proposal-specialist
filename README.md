@@ -12,14 +12,51 @@
 
 ## 설치
 
-### 1. 저장소 클론
+### 방법 1: 마켓플레이스에서 설치 (권장)
+
+Claude Code의 플러그인 마켓플레이스를 통해 간편하게 설치할 수 있습니다.
 
 ```bash
-git clone <repository-url>
+# 1. 마켓플레이스 추가
+/plugins marketplace add zeanxai/proposal-specialist
+
+# 2. 플러그인 설치
+/plugins install proposal-specialist@proposal-specialist-marketplace
+```
+
+설치 후 Claude Code를 재시작하면 플러그인이 자동으로 로드됩니다.
+
+**팀/조직 배포:** 프로젝트의 `.claude/settings.json`에 아래 설정을 추가하면, 팀원이 Claude Code 실행 시 자동으로 플러그인 설치를 안내받습니다.
+
+```json
+{
+  "permissions": {
+    "additionalDirectories": []
+  },
+  "extraKnownMarketplaces": {
+    "proposal-specialist-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "zeanxai/proposal-specialist"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "proposal-specialist@proposal-specialist-marketplace": true
+  }
+}
+```
+
+### 방법 2: 소스에서 직접 설치
+
+#### 1. 저장소 클론
+
+```bash
+git clone https://github.com/zeanxai/proposal-specialist.git
 cd proposal-specialist
 ```
 
-### 2. MCP 서버 빌드
+#### 2. MCP 서버 빌드
 
 ```bash
 cd servers
@@ -30,7 +67,7 @@ cd ..
 
 빌드 결과물은 `servers/dist/index.js`에 생성됩니다.
 
-### 3. 플러그인 등록
+#### 3. 플러그인 등록
 
 Claude Code에서 플러그인 디렉토리를 지정하여 실행합니다.
 
@@ -194,7 +231,9 @@ claude --plugin-dir /path/to/proposal-specialist
 
 ```
 proposal-specialist/
-├── .claude-plugin/plugin.json   # 플러그인 매니페스트
+├── .claude-plugin/
+│   ├── plugin.json              # 플러그인 매니페스트
+│   └── marketplace.json         # 마켓플레이스 설정
 ├── .mcp.json                    # MCP 서버 설정
 ├── CLAUDE.md                    # Claude Code 지침
 ├── commands/                    # 사용자 호출 명령어
