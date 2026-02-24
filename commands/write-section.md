@@ -57,15 +57,32 @@ RFP와 시드 문서를 Read Tool로 다시 읽어 전체 컨텍스트를 확보
 ```
 ## 작성 대상 섹션
 
-| # | 장 | 절 | 핵심 메시지 | 도표(HTML) | 이미지(AI) | 분량 |
-|---|---|---|---|---|---|---|
-| 1 | I. 일반현황 | 1.1 제안사 일반현황 | {메시지} | 4개 | 1개 | 4p |
-| 2 | I. 일반현황 | 1.2 조직 및 인원현황 | {메시지} | 2개 | 1개 | 3p |
+1. **I. 일반현황 > 1.1 제안사 일반현황** — 도표 4개, 이미지 1개 | 4p
+   - 핵심메시지: {메시지}
+2. **I. 일반현황 > 1.2 조직 및 인원현황** — 도표 2개, 이미지 1개 | 3p
+   - 핵심메시지: {메시지}
 ...
 
 총 {N}개 섹션, 예상 {P}페이지 (A4 세로 꽉 채움), 도표 {T}개 + 이미지 {I}개 생성 예정입니다.
 전체 작성하시겠습니까? (Y/N, 또는 섹션 번호를 쉼표로 입력)
 ```
+
+### Step 3.5: 공통 스타일 생성
+
+섹션 작성 전에 공통 CSS/JS 파일을 출력 디렉토리에 복사한다.
+
+1. 플러그인 루트의 스타일 파일을 확인한다:
+   - Glob Tool로 `skills/html-design-system/page-frame.css` 경로 확인
+   - Glob Tool로 `skills/html-design-system/page-frame.js` 경로 확인
+
+2. Read Tool로 원본 파일을 읽는다
+
+3. Write Tool로 출력 디렉토리에 복사한다:
+   - `data/output/{사업명_경로}/_common/page-frame.css`
+   - `data/output/{사업명_경로}/_common/page-frame.js`
+
+이후 section-writer가 생성하는 모든 HTML 파일은
+`<link rel="stylesheet" href="../_common/page-frame.css">`로 공유 CSS를 참조한다.
 
 ### Step 4: 섹션별 작성 (반복)
 
@@ -116,6 +133,11 @@ HTML 저장 경로: data/output/{사업명_경로}/html/
 - {이미지1 설명}
 - {이미지2 설명}
 이미지 저장 경로: data/output/{사업명_경로}/images/
+
+**공유 스타일 경로:**
+- CSS: data/output/{사업명_경로}/_common/page-frame.css
+- JS: data/output/{사업명_경로}/_common/page-frame.js
+- HTML에서 참조: `<link rel="stylesheet" href="../_common/page-frame.css">`
 
 **레이아웃 규칙:**
 - 마크다운 테이블 금지 — 모든 표는 HTML 도표 이미지로 대체
@@ -186,10 +208,8 @@ Chrome MCP를 통해 이미지로 변환한다.
 
 ### 작성 결과
 
-| # | 섹션 | 파일 | 분량 | 도표(HTML) | 개념도(AI) |
-|---|---|---|---|---|---|
-| 1 | I-1. 제안사 일반현황 | sections/01_제안사일반현황.md | 4p | 3개 | 1개 |
-| 2 | I-2. 조직 및 인원현황 | sections/02_조직및인원현황.md | 3p | 2개 | 1개 |
+1. **I-1. 제안사 일반현황** → `sections/01_제안사일반현황.md` — 4p | 도표 3개, 개념도 1개
+2. **I-2. 조직 및 인원현황** → `sections/02_조직및인원현황.md` — 3p | 도표 2개, 개념도 1개
 ...
 
 - **총 섹션 수**: {N}개

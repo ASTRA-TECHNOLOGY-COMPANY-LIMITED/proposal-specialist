@@ -1,0 +1,624 @@
+/*
+ * page-frame.css — A4 페이지 프레임 + 차트 컴포넌트 통합 스타일
+ *
+ * 사용법:
+ *   <link rel="stylesheet" href="../_common/page-frame.css">
+ *
+ * 구조:
+ *   .a4-page > table.pf > thead(header) + tfoot(footer) + tbody(content)
+ *   - 수동 HTML 구조 또는 page-frame.js 자동 주입 모두 지원
+ *
+ * 이 파일은 두 가지 용도로 사용된다:
+ *   1. 페이지 프레임 레이아웃 (A4 카드, 헤더/푸터, 타이포그래피)
+ *   2. 차트 컴포넌트 (도표, 비교표, 플로우, KPI, 타임라인, 조직도)
+ */
+
+/* ===== Reset ===== */
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* ===== CSS Variables (Design Tokens) ===== */
+:root {
+  --primary: #1B3A5C;
+  --primary-light: #2E5C8A;
+  --accent: #0078D4;
+  --accent-light: #E8F4FD;
+  --success: #2E7D32;
+  --warning: #F57C00;
+  --danger: #C62828;
+  --gray-50: #FAFAFA;
+  --gray-100: #F5F5F5;
+  --gray-200: #EEEEEE;
+  --gray-300: #E0E0E0;
+  --gray-600: #757575;
+  --gray-800: #424242;
+  --text-primary: #1a1a2e;
+  --text-secondary: #4a4a6a;
+  --border: #D6E4F0;
+}
+
+body {
+  font-family: 'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+  background: #E5E9EF;
+  color: #1A202C;
+  line-height: 1.7;
+  padding: 24px 0;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ===== A4 Card ===== */
+.a4-page {
+  width: 210mm;
+  height: 297mm;
+  margin: 0 auto 28px;
+  background: #fff;
+  box-shadow: 0 2px 24px rgba(0,0,0,.10);
+  position: relative;
+  overflow: hidden;
+}
+.a4-page.last-page { margin-bottom:0 }
+
+/* left stripe via border + triangle via pseudo */
+.a4-page::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 5px; height: 100%;
+  background: linear-gradient(180deg,#1B2A4A,#2E75B6);
+  z-index: 5;
+}
+.a4-page::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  border-left: 48px solid #1B2A4A;
+  border-bottom: 36px solid transparent;
+  z-index: 6;
+}
+
+/* ===== Page-Frame Table ===== */
+.pf {
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.pf th, .pf > thead > tr > th,
+.pf td, .pf > tbody > tr > td,
+.pf > tfoot > tr > td {
+  padding: 0; border: none;
+  text-align: left; font-weight: normal;
+  vertical-align: top;
+}
+
+/* ===== Header (in thead) ===== */
+.hdr {
+  padding: 22px 36px 0 48px;
+}
+.hdr-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.hdr-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.hdr-badge {
+  background: linear-gradient(135deg,#1B2A4A,#2E75B6);
+  color: #fff; font-size: 15px; font-weight: 700;
+  padding: 5px 18px; border-radius: 5px;
+  letter-spacing: 1.5px; white-space: nowrap;
+}
+.hdr-title {
+  font-size: 17px; font-weight: 700;
+  color: #1A3C5E; letter-spacing: .5px;
+}
+.hdr-project {
+  font-size: 10px; color: #999;
+  letter-spacing: .3px; text-align: right; flex-shrink: 0;
+}
+.hdr-line {
+  height: 2.5px;
+  background: linear-gradient(90deg,#1B2A4A 0%,#2E75B6 40%,#5B9BD5 75%,#E2E8F0 100%);
+  margin-top: 12px; border-radius: 2px;
+}
+
+/* ===== Page Body (in tbody) ===== */
+.pf > tbody > tr > td.page-body {
+  padding: 20px 36px 24px 48px;
+  height: 100%;
+}
+
+/* ===== Footer (in tfoot) ===== */
+.ftr {
+  padding: 0 36px 16px 48px;
+}
+.ftr-line {
+  height: 1px;
+  background: linear-gradient(90deg,#CBD5E0 0%,#E2E8F0 60%,transparent 100%);
+  margin-bottom: 8px;
+}
+.ftr-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ftr-text {
+  font-size: 9px; color: #A0AEC0; letter-spacing: .3px;
+}
+.ftr-badge {
+  background: #C0392B; color: #fff;
+  font-size: 8px; font-weight: 700;
+  padding: 3px 12px; border-radius: 3px; letter-spacing: .5px;
+}
+
+/* ===== Typography ===== */
+h1 { font-size:26px;color:#1B2A4A;border-bottom:3px solid #2D5F8A;padding-bottom:12px;margin:4px 0 20px;letter-spacing:1px }
+h2 { font-size:20px;color:#1B2A4A;border-left:4px solid #2D5F8A;padding-left:14px;margin:4px 0 14px }
+h3 { font-size:17px;color:#2D5F8A;margin:4px 0 12px;padding-bottom:6px;border-bottom:1px solid #E2E8F0 }
+h4 { font-size:14.5px;color:#2D3748;margin:18px 0 8px }
+h5 { font-size:13.5px;color:#4A5568;margin:14px 0 6px }
+h6 { font-size:12.5px;color:#718096;margin:12px 0 5px }
+p  { font-size:12.5px;line-height:1.85;margin:6px 0;color:#2D3748 }
+strong { color:#1A202C }
+code { background:#EDF2F7;padding:2px 6px;border-radius:3px;font-size:11.5px;font-family:'Consolas','Monaco',monospace;color:#C53030 }
+a { color:#2B6CB0;text-decoration:none }
+a:hover { text-decoration:underline }
+
+/* ===== Content Tables (.ctbl) ===== */
+.table-wrapper { overflow-x:auto;margin:10px 0;border-radius:6px;border:1px solid #E2E8F0 }
+.ctbl { width:100%;border-collapse:collapse;font-size:12px }
+.ctbl thead th { background:linear-gradient(135deg,#1B2A4A,#2D5F8A);color:#fff;padding:9px 12px;text-align:left;font-weight:600;font-size:11.5px;letter-spacing:.3px;white-space:nowrap }
+.ctbl tbody td { padding:8px 12px;border-bottom:1px solid #EDF2F7;color:#2D3748;vertical-align:top }
+.ctbl tbody tr:nth-child(even) { background:#F7FAFC }
+.ctbl tbody tr:hover { background:#EBF4FF }
+
+/* ===== Lists ===== */
+ul,ol { margin:8px 0 8px 22px;font-size:12.5px;color:#2D3748 }
+li { margin:3px 0;line-height:1.75 }
+
+/* ===== Blockquotes ===== */
+blockquote { border-left:4px solid #4A90D9;background:linear-gradient(135deg,#EBF8FF,#F0F7FF);padding:12px 18px;margin:12px 0;border-radius:0 6px 6px 0 }
+blockquote p { font-size:12px;color:#2A4365;margin:3px 0 }
+
+/* ===== HR ===== */
+hr { border:none;height:2px;background:linear-gradient(90deg,#2D5F8A,#E2E8F0);margin:24px 0;border-radius:1px }
+
+/* ===== Figures & Charts ===== */
+.figure-container { margin:16px 0;text-align:center }
+.figure-image { max-width:100%;height:auto;border-radius:6px;box-shadow:0 2px 10px rgba(0,0,0,.07) }
+.figure-caption { font-size:10.5px;color:#718096;margin-top:6px;font-style:italic;text-align:center }
+.embedded-chart { margin:6px 0;border-radius:6px;overflow:hidden;border:1px solid #E2E8F0;box-shadow:0 1px 8px rgba(0,0,0,.04);background:#fff }
+
+/* =========================================================================
+   Chart Components — 도표/차트/다이어그램 공통 컴포넌트
+   ========================================================================= */
+
+/* === 도표 제목 === */
+.table-title {
+  font-size: 13pt;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 12px;
+  padding-left: 12px;
+  border-left: 4px solid var(--accent);
+}
+.table-subtitle {
+  font-size: 10pt;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  padding-left: 16px;
+}
+
+/* === 데이터 테이블 === */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0 16px 0;
+  font-size: 10pt;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+thead th {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: #ffffff;
+  font-weight: 600;
+  padding: 10px 12px;
+  text-align: center;
+  font-size: 10pt;
+  letter-spacing: 0.3px;
+  border: 1px solid var(--primary);
+}
+tbody td {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  vertical-align: middle;
+  line-height: 1.5;
+}
+tbody tr:nth-child(even) {
+  background-color: var(--gray-50);
+}
+tbody tr:hover {
+  background-color: var(--accent-light);
+}
+/* 첫 번째 열 강조 */
+tbody td:first-child {
+  font-weight: 600;
+  color: var(--primary);
+  background-color: var(--gray-100);
+  text-align: center;
+}
+
+/* === 강조 박스 === */
+.highlight-box {
+  background: linear-gradient(135deg, var(--accent-light), #f0f7ff);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 12px 0;
+}
+.highlight-box .label {
+  font-size: 9pt;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+/* === 상태 뱃지 === */
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 9pt;
+  font-weight: 600;
+}
+.badge-primary { background: var(--accent-light); color: var(--accent); }
+.badge-success { background: #E8F5E9; color: var(--success); }
+.badge-warning { background: #FFF3E0; color: var(--warning); }
+.badge-danger { background: #FFEBEE; color: var(--danger); }
+
+/* === 프로세스/플로우 === */
+.flow-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px 0;
+}
+.flow-step {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 10pt;
+  font-weight: 600;
+  min-width: 120px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+.flow-arrow {
+  color: var(--accent);
+  font-size: 20pt;
+  font-weight: 700;
+}
+
+/* === KPI/수치 카드 === */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.kpi-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.kpi-card .value {
+  font-size: 22pt;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1.2;
+}
+.kpi-card .label {
+  font-size: 9pt;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* === 비교표 (AS-IS / TO-BE) === */
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  gap: 0;
+  margin: 16px 0;
+  align-items: stretch;
+}
+.comparison-left {
+  background: var(--gray-100);
+  border: 1px solid var(--gray-300);
+  border-radius: 8px 0 0 8px;
+  padding: 16px;
+}
+.comparison-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: #fff;
+  font-size: 22pt;
+  font-weight: 700;
+}
+.comparison-right {
+  background: var(--accent-light);
+  border: 1px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 16px;
+}
+.comparison h4 {
+  font-size: 11pt;
+  margin-bottom: 8px;
+}
+.comparison-left h4 { color: var(--gray-600); }
+.comparison-right h4 { color: var(--accent); }
+
+/* === 타임라인 === */
+.timeline {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  position: relative;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 40px;
+  right: 40px;
+  height: 4px;
+  background: linear-gradient(to right, var(--primary), var(--accent));
+  border-radius: 2px;
+}
+.timeline-item {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+.timeline-dot {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 8px;
+  font-weight: 700;
+  font-size: 11pt;
+  box-shadow: 0 2px 6px rgba(0,120,212,0.3);
+}
+.timeline-label {
+  font-size: 9pt;
+  font-weight: 600;
+  color: var(--primary);
+}
+.timeline-desc {
+  font-size: 8pt;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+/* === 조직도 === */
+.org-chart {
+  text-align: center;
+  margin: 16px 0;
+}
+.org-node {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 10pt;
+  font-weight: 600;
+  margin: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+.org-node.sub {
+  background: #fff;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+/* === 범례/각주 === */
+.footnote {
+  font-size: 8pt;
+  color: var(--gray-600);
+  border-top: 1px solid var(--gray-200);
+  padding-top: 8px;
+  margin-top: 16px;
+}
+
+/* ===== Sub-TOC (섹션 간지) ===== */
+.sub-toc-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0;
+}
+.sub-toc-hero {
+  background: linear-gradient(135deg, #1B2A4A 0%, #2D5F8A 60%, #3A7BD5 100%);
+  color: #fff;
+  padding: 48px 48px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.sub-toc-hero::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+}
+.sub-toc-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: 30%;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.03);
+}
+.sub-toc-badge {
+  display: inline-block;
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  opacity: 0.15;
+  position: absolute;
+  top: 20px; right: 36px;
+  font-family: 'Georgia', serif;
+}
+.sub-toc-label {
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 10px;
+}
+.sub-toc-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin: 0;
+  border: none;
+  padding: 0;
+  color: #fff;
+}
+.sub-toc-line {
+  width: 48px;
+  height: 3px;
+  background: rgba(255,255,255,0.4);
+  margin-top: 16px;
+  border-radius: 2px;
+}
+.sub-toc-body {
+  flex: 1;
+  padding: 32px 48px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.sub-toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sub-toc-item {
+  display: flex;
+  align-items: center;
+  padding: 14px 18px;
+  border-radius: 8px;
+  background: #F7FAFC;
+  border: 1px solid #EDF2F7;
+  gap: 16px;
+  transition: all 0.15s;
+}
+.sub-toc-item:hover {
+  background: #EBF4FF;
+  border-color: #BEE3F8;
+  transform: translateX(3px);
+}
+.sub-toc-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 6px;
+  flex-shrink: 0;
+  letter-spacing: 0.3px;
+  padding: 0 8px;
+}
+.sub-toc-text {
+  flex: 1;
+}
+.sub-toc-sub-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1B2A4A;
+  margin: 0 0 2px;
+  border: none;
+  padding: 0;
+}
+.sub-toc-desc {
+  font-size: 10.5px;
+  color: #718096;
+  letter-spacing: 0.2px;
+  margin: 0;
+}
+.sub-toc-arrow {
+  color: #CBD5E0;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.sub-toc-item:hover .sub-toc-arrow {
+  color: #2E75B6;
+}
+
+/* =================================================================
+   PRINT — A4 per section, thead/tfoot repeat on overflow pages
+   ================================================================= */
+@media print {
+  body { background:#fff;margin:0;padding:0 }
+  @page { size:210mm 297mm; margin:10mm 14mm 10mm 14mm }
+
+  .a4-page {
+    width:auto; height:auto; min-height:auto;
+    margin:0; box-shadow:none;
+    page-break-after: always;
+    break-after: page;
+    overflow: visible;
+  }
+  .a4-page.last-page {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  /* stripe repeats on every printed page via fixed */
+  .a4-page::before {
+    position: fixed;
+    top:0; left:0;
+    width:4px; height:100%;
+  }
+  .a4-page::after {
+    position: fixed;
+    top:0; left:0;
+  }
+
+  .hdr { padding: 2px 8px 0 12px }
+  .hdr-line { margin-top:8px }
+  .pf > tbody > tr > td.page-body,
+  .page-body { padding:12px 8px 8px 12px; height:auto }
+  .ftr { padding:0 8px 2px 12px }
+
+  .embedded-chart,.table-wrapper,.figure-container {
+    break-inside:avoid; page-break-inside:avoid
+  }
+  h2,h3,h4 { break-after:avoid; page-break-after:avoid }
+}
