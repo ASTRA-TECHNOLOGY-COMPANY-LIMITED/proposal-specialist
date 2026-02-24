@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>표지</title>
+<style>
+  /* ===== Reset & Base ===== */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #E5E9EF;
+    color: #1A202C;
+    line-height: 1.7;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ===== A4 Page Container ===== */
+  .a4-page {
+    max-width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    background: #fff;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ===== Left Accent Stripe ===== */
+  .left-stripe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(180deg, #1B2A4A 0%, #2E75B6 100%);
+    z-index: 10;
+  }
+
+  /* ===== Hero Image Area (Top ~38%) ===== */
+  .hero-area {
+    position: relative;
+    width: 100%;
+    height: 38%;
+    min-height: 260px;
+    max-height: 420px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .hero-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(27,42,74,0.25) 0%,
+      rgba(27,42,74,0.10) 50%,
+      rgba(255,255,255,0.60) 85%,
+      rgba(255,255,255,1.0) 100%
+    );
+  }
+  /* Doc type badge on the image */
+  .hero-badge {
+    position: absolute;
+    top: 32px;
+    right: 36px;
+    background: rgba(27,42,74,0.85);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 28px;
+    border-radius: 20px;
+    letter-spacing: 4px;
+    z-index: 5;
+  }
+
+  /* ===== Content Area (Bottom 58%) ===== */
+  .cover-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 52px 20px;
+    position: relative;
+  }
+
+  /* ===== Main Title Area ===== */
+  .title-area {
+    text-align: center;
+    margin-top: -20px;
+  }
+  .title-accent {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #2E75B6, #5B9BD5);
+    margin: 0 auto 18px;
+    border-radius: 2px;
+  }
+  .main-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1B2A4A;
+    letter-spacing: 2px;
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+  .sub-title {
+    font-size: 15px;
+    font-weight: 400;
+    color: #5B9BD5;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .title-accent-bottom {
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, #5B9BD5, #2E75B6);
+    margin: 16px auto 0;
+    border-radius: 2px;
+  }
+
+  /* ===== Info Table ===== */
+  .info-table {
+    margin-top: 24px;
+    border-collapse: collapse;
+    width: 400px;
+  }
+  .info-table td {
+    padding: 7px 16px;
+    font-size: 12.5px;
+    color: #2D3748;
+    border-bottom: 1px solid #EDF2F7;
+  }
+  .info-table td:first-child {
+    font-weight: 600;
+    color: #1B2A4A;
+    width: 110px;
+    text-align: right;
+    padding-right: 20px;
+    white-space: nowrap;
+    position: relative;
+  }
+  .info-table td:first-child::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 16px;
+    background: #2E75B6;
+    border-radius: 1px;
+  }
+  .info-table td:last-child {
+    color: #4A5568;
+    padding-left: 16px;
+  }
+
+  /* ===== Logo & Company Section ===== */
+  .company-section {
+    margin-top: auto;
+    padding-top: 16px;
+    text-align: center;
+    width: 100%;
+  }
+  .company-divider-line {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #CBD5E0, transparent);
+    margin-bottom: 14px;
+  }
+  .company-label {
+    font-size: 10px;
+    color: #A0AEC0;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .company-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 36px;
+  }
+  .company-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .company-logo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+  }
+  .company-logo-wrapper.quintet {
+    width: 200px;
+    height: 90px;
+  }
+  .company-logo-wrapper.astra {
+    width: 171px;
+    height: 50px;
+  }
+  .company-logo-wrapper img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  .company-role-tag {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 3px 14px;
+    border-radius: 10px;
+  }
+  .role-primary {
+    background: #1B2A4A;
+    color: #fff;
+  }
+  .role-partner {
+    background: #EDF2F7;
+    color: #2D5F8A;
+  }
+  .logo-divider {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(180deg, transparent, #CBD5E0, transparent);
+  }
+
+  /* ===== Bottom Band ===== */
+  .bottom-band {
+    height: 6px;
+    background: linear-gradient(90deg, #1B2A4A 0%, #2E75B6 40%, #5B9BD5 70%, #2E75B6 100%);
+    flex-shrink: 0;
+  }
+
+  /* ===== Print Styles ===== */
+  @media print {
+    body { background: #fff; margin: 0; padding: 0; }
+    @page { size: 210mm 297mm; margin: 0; }
+    .a4-page {
+      max-width: none; min-height: auto;
+      margin: 0; box-shadow: none;
+    }
+    .left-stripe {
+      position: fixed; top: 0; left: 0;
+      width: 5px; height: 100%;
+      background: linear-gradient(180deg, #1B2A4A 0%, #2E75B6 100%);
+      z-index: 100;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="a4-page">
+  <div class="left-stripe"></div>
+
+  <!-- Hero Image Section -->
+  <div class="hero-area">
+    <img class="hero-bg" src="_images/cover_background.png" alt="Cover Background">
+    <div class="hero-overlay"></div>
+    <span class="hero-badge">기 술 제 안 서</span>
+  </div>
+
+  <!-- Content Section -->
+  <div class="cover-content">
+
+    <div class="title-area">
+      <div class="title-accent"></div>
+      <div class="main-title">
+        온라인수출플랫폼<br>클라우드 전환 및 재구축
+      </div>
+      <div class="sub-title">Technical Proposal</div>
+      <div class="title-accent-bottom"></div>
+    </div>
+
+    <table class="info-table">
+      <tr>
+        <td>발주기관</td>
+        <td>중소벤처기업진흥공단</td>
+      </tr>
+      <tr>
+        <td>사업기간</td>
+        <td>2026. 04 ~ 2026. 12 (9개월)</td>
+      </tr>
+      <tr>
+        <td>제출일자</td>
+        <td>2026년 02월 24일</td>
+      </tr>
+    </table>
+
+    <!-- Company Logos -->
+    <div class="company-section">
+      <div class="company-divider-line"></div>
+      <div class="company-label">제 안 사</div>
+      <div class="company-logos">
+        <div class="company-card">
+          <div class="company-logo-wrapper quintet">
+            <img src="_images/quintet_logo.png" alt="QuintetSystems">
+          </div>
+          <span class="company-role-tag role-primary">대표사</span>
+        </div>
+        <div class="logo-divider"></div>
+        <div class="company-card">
+          <div class="company-logo-wrapper astra">
+            <img src="_images/astra_logo.png" alt="AstraVision">
+          </div>
+          <span class="company-role-tag role-partner">참여사</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="bottom-band"></div>
+</div>
+</body>
+</html>

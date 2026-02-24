@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+  .header { text-align: center; margin-bottom: 22px; }
+  .header h2 { font-size: 17px; color: #1B2A4A; letter-spacing: 2px; margin-bottom: 4px; }
+  .header .sub { font-size: 10px; color: #718096; letter-spacing: 1px; }
+  .header .line { width: 60px; height: 3px; background: linear-gradient(90deg, #2D5F8A, #4A90D9); margin: 10px auto 0; border-radius: 2px; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #1B2A4A;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .section-label .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2D5F8A, #4A90D9);
+  }
+
+  /* QA 조직 */
+  .org-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+  .org-top {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4px;
+  }
+  .org-card {
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    text-align: center;
+    min-width: 140px;
+  }
+  .org-card .role {
+    padding: 7px 12px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .org-card .role.pm { background: linear-gradient(135deg, #2B6CB0, #4A90D9); }
+  .org-card .role.tech { background: linear-gradient(135deg, #276749, #48BB78); }
+  .org-card .role.func { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .org-card .role.ux { background: linear-gradient(135deg, #C05621, #ED8936); }
+  .org-card .role.domain { background: linear-gradient(135deg, #9B2C2C, #E53E3E); }
+  .org-card .info {
+    padding: 6px 10px;
+    background: #fff;
+  }
+  .org-card .name { font-size: 10px; font-weight: 700; color: #1B2A4A; }
+  .org-card .desc { font-size: 8px; color: #718096; line-height: 1.4; margin-top: 2px; }
+
+  .org-row {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+  }
+  .org-connector {
+    text-align: center;
+    color: #CBD5E0;
+    font-size: 14px;
+    margin: 2px 0;
+  }
+
+  /* 5단계 품질 */
+  .phase-flow {
+    display: flex;
+    gap: 4px;
+    align-items: stretch;
+  }
+  .phase-card {
+    flex: 1;
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .phase-header {
+    padding: 8px 6px;
+    text-align: center;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+  }
+  .phase-header .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    font-size: 9px;
+    font-weight: 800;
+    margin-bottom: 3px;
+  }
+  .phase-header .label { display: block; }
+  .phase-body {
+    padding: 8px 6px;
+    background: #FAFCFF;
+  }
+  .phase-item {
+    font-size: 8px;
+    color: #4A5568;
+    padding: 3px 0;
+    border-bottom: 1px dashed #EDF2F7;
+    line-height: 1.4;
+  }
+  .phase-item:last-child { border-bottom: none; }
+  .phase-item strong { color: #1B2A4A; }
+  .phase-output {
+    margin-top: 4px;
+    padding-top: 4px;
+    border-top: 1px solid #E2E8F0;
+    font-size: 7px;
+    color: #4A90D9;
+    font-weight: 600;
+  }
+
+  .phase1 .phase-header { background: linear-gradient(135deg, #2B6CB0, #4A90D9); }
+  .phase2 .phase-header { background: linear-gradient(135deg, #276749, #48BB78); }
+  .phase3 .phase-header { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .phase4 .phase-header { background: linear-gradient(135deg, #C05621, #ED8936); }
+  .phase5 .phase-header { background: linear-gradient(135deg, #9B2C2C, #E53E3E); }
+
+  .arrow-between {
+    display: flex;
+    align-items: center;
+    color: #CBD5E0;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  /* 3대 특징 */
+  .features-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 18px;
+  }
+  .feature-card {
+    flex: 1;
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .feature-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2B6CB0, #4A90D9);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+  .feature-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: #1B2A4A;
+    margin-bottom: 4px;
+  }
+  .feature-desc {
+    font-size: 8px;
+    color: #718096;
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h2>품질보증 조직 및 단계별 품질활동</h2>
+    <div class="sub">QUALITY ASSURANCE ORGANIZATION & PHASE ACTIVITIES</div>
+    <div class="line"></div>
+  </div>
+
+  <!-- QA 조직도 -->
+  <div class="section-label"><div class="dot"></div> 품질관리 전담 조직</div>
+  <div class="org-grid">
+    <div class="org-top">
+      <div class="org-card">
+        <div class="role pm">품질관리 총괄</div>
+        <div class="info">
+          <div class="name">PMO 남의석</div>
+          <div class="desc">품질 계획 수립 · 지표 관리 · 점검 총괄</div>
+        </div>
+      </div>
+    </div>
+    <div class="org-connector">▼</div>
+    <div class="org-row">
+      <div class="org-card">
+        <div class="role tech">기술 검증</div>
+        <div class="info">
+          <div class="name">CTO 이상진</div>
+          <div class="desc">코드 리뷰 · 아키텍처<br>적합성 · 성능 기준</div>
+        </div>
+      </div>
+      <div class="org-card">
+        <div class="role func">기능 검증</div>
+        <div class="info">
+          <div class="name">PL 오대산</div>
+          <div class="desc">요구사항 충족<br>AIMS 품질 심사</div>
+        </div>
+      </div>
+      <div class="org-card">
+        <div class="role ux">UI/UX 검증</div>
+        <div class="info">
+          <div class="name">PL 김지예</div>
+          <div class="desc">디자인 일관성<br>사용성 검증</div>
+        </div>
+      </div>
+      <div class="org-card">
+        <div class="role domain">도메인 검증</div>
+        <div class="info">
+          <div class="name">PL 민세준</div>
+          <div class="desc">수출/무역 기능<br>업무 로직 정확성</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5단계 품질활동 -->
+  <div class="section-label"><div class="dot"></div> 5단계 품질보증 활동 체계</div>
+  <div class="phase-flow">
+    <div class="phase-card phase1">
+      <div class="phase-header">
+        <div class="num">1</div>
+        <div class="label">분석</div>
+      </div>
+      <div class="phase-body">
+        <div class="phase-item"><strong>요구사항 검토</strong><br>완전성·일관성·추적성</div>
+        <div class="phase-item"><strong>현행 시스템 분석</strong><br>기능/데이터/인프라</div>
+        <div class="phase-item"><strong>RTM 작성</strong><br>RFP 100% 매핑</div>
+        <div class="phase-output">→ 요구사항 추적표</div>
+      </div>
+    </div>
+    <div class="arrow-between">›</div>
+    <div class="phase-card phase2">
+      <div class="phase-header">
+        <div class="num">2</div>
+        <div class="label">설계</div>
+      </div>
+      <div class="phase-body">
+        <div class="phase-item"><strong>아키텍처 리뷰</strong><br>클라우드 전환 적합성</div>
+        <div class="phase-item"><strong>DB 설계 리뷰</strong><br>정규화·성능·무결성</div>
+        <div class="phase-item"><strong>화면/IF 리뷰</strong><br>UX 가이드 · API 적합</div>
+        <div class="phase-output">→ 설계 리뷰 결과서</div>
+      </div>
+    </div>
+    <div class="arrow-between">›</div>
+    <div class="phase-card phase3">
+      <div class="phase-header">
+        <div class="num">3</div>
+        <div class="label">구현</div>
+      </div>
+      <div class="phase-body">
+        <div class="phase-item"><strong>코드 리뷰</strong><br>코딩표준 · 시큐어코딩</div>
+        <div class="phase-item"><strong>단위 테스트</strong><br>모듈별 기능 검증</div>
+        <div class="phase-item"><strong>정적 분석</strong><br>보안 취약점 · 코드 품질</div>
+        <div class="phase-output">→ 정적 분석 보고서</div>
+      </div>
+    </div>
+    <div class="arrow-between">›</div>
+    <div class="phase-card phase4">
+      <div class="phase-header">
+        <div class="num">4</div>
+        <div class="label">테스트</div>
+      </div>
+      <div class="phase-body">
+        <div class="phase-item"><strong>통합/성능 테스트</strong><br>연계·TPS·응답시간</div>
+        <div class="phase-item"><strong>보안 테스트</strong><br>취약점 · 시큐어코딩</div>
+        <div class="phase-item"><strong>UAT 수행</strong><br>사용자 기반 기능 검증</div>
+        <div class="phase-output">→ 테스트 결과서</div>
+      </div>
+    </div>
+    <div class="arrow-between">›</div>
+    <div class="phase-card phase5">
+      <div class="phase-header">
+        <div class="num">5</div>
+        <div class="label">이행</div>
+      </div>
+      <div class="phase-body">
+        <div class="phase-item"><strong>데이터 마이그레이션</strong><br>정합성 · 누락 검증</div>
+        <div class="phase-item"><strong>시범운영</strong><br>결함률 · 장애 모니터링</div>
+        <div class="phase-item"><strong>최종 품질 검수</strong><br>전체 요구사항 충족</div>
+        <div class="phase-output">→ 최종 품질점검 보고서</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3대 특징 -->
+  <div class="features-row">
+    <div class="feature-card">
+      <div class="feature-num">01</div>
+      <div class="feature-title">최적화된 개발방법론</div>
+      <div class="feature-desc">다수 프로젝트에서 검증된<br>현장 중심 실용적 방법론<br>핵심 Task 중심 절차 적용</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">02</div>
+      <div class="feature-title">선제적 품질보증</div>
+      <div class="feature-desc">단계 말 집중 검토 → 수시 검토<br>요구사항 Baseline 설정<br>지속적 변경관리</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">03</div>
+      <div class="feature-title">전사 품질지원 체계</div>
+      <div class="feature-desc">전사 품질/방법론/테스트 지원<br>Risk 진단 및<br>프로세스 이행 점검</div>
+    </div>
+  </div>
+</body>
+</html>

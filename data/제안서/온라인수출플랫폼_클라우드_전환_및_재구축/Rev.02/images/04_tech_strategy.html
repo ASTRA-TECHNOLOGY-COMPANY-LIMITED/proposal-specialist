@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기술 전략</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    width: 700px;
+    padding: 28px;
+    background: #fff;
+    color: #2D3748;
+    line-height: 1.6;
+  }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 28px; }
+  .header h2 {
+    font-size: 17px;
+    color: #1B2A4A;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .header .sub {
+    font-size: 10px;
+    color: #718096;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .header .gradient-line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #2D5F8A, #4A90D9);
+    border-radius: 2px;
+    margin: 0 auto;
+  }
+
+  /* Section label with vertical dot */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    margin-top: 24px;
+  }
+  .section-label:first-of-type { margin-top: 0; }
+  .section-label .dot {
+    width: 4px;
+    height: 13px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, #2D5F8A, #4A90D9);
+    flex-shrink: 0;
+  }
+  .section-label span {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1B2A4A;
+  }
+
+  /* Tech stack table */
+  .tech-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    overflow: hidden;
+    margin-bottom: 4px;
+  }
+  .tech-table thead th {
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 9px 12px;
+    text-align: left;
+    letter-spacing: 0.5px;
+  }
+  .tech-table thead th:first-child { width: 90px; }
+  .tech-table thead th:nth-child(2) { width: 180px; }
+  .tech-table tbody td {
+    font-size: 11px;
+    padding: 9px 12px;
+    border-bottom: 1px solid #EDF2F7;
+    vertical-align: top;
+  }
+  .tech-table tbody tr:last-child td { border-bottom: none; }
+  .tech-table tbody td:first-child {
+    font-weight: 700;
+    color: #1B2A4A;
+    background: #F7FAFC;
+    white-space: nowrap;
+  }
+  .tech-table tbody td:nth-child(2) {
+    font-weight: 600;
+    color: #2D5F8A;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 9px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+    margin: 1px 2px;
+  }
+  .tag.blue { background: #EBF4FF; color: #2B6CB0; }
+  .tag.purple { background: #F3E8FF; color: #553C9A; }
+  .tag.green { background: #E6FFED; color: #276749; }
+  .tag.orange { background: #FEEBC8; color: #C05621; }
+
+  /* Principle cards */
+  .principles-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .principle-card {
+    flex: 1;
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    overflow: hidden;
+    background: #fff;
+  }
+  .principle-header {
+    padding: 10px 12px;
+    color: #fff;
+    text-align: center;
+  }
+  .principle-header.blue { background: linear-gradient(135deg, #2D5F8A, #4A90D9); }
+  .principle-header.purple { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .principle-header.green { background: linear-gradient(135deg, #276749, #38A169); }
+
+  .principle-icon {
+    font-size: 22px;
+    margin-bottom: 2px;
+  }
+  .principle-title-kr {
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .principle-title-en {
+    font-size: 9px;
+    opacity: 0.8;
+    letter-spacing: 0.5px;
+  }
+  .principle-body {
+    padding: 10px 12px;
+  }
+  .principle-body ul {
+    list-style: none;
+    padding: 0;
+  }
+  .principle-body li {
+    font-size: 10px;
+    color: #4A5568;
+    padding: 2px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    line-height: 1.5;
+  }
+  .principle-body li .check {
+    color: #38A169;
+    font-weight: 700;
+    flex-shrink: 0;
+    font-size: 10px;
+  }
+
+  /* Deploy note */
+  .deploy-note {
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 14px 18px;
+    background: #F7FAFC;
+    margin-top: 0;
+  }
+  .deploy-note-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #1B2A4A;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .deploy-bars {
+    display: flex;
+    gap: 0;
+    height: 22px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .deploy-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .deploy-bar.rolling {
+    flex: 85;
+    background: linear-gradient(135deg, #2D5F8A, #4A90D9);
+  }
+  .deploy-bar.bluegreen {
+    flex: 10;
+    background: linear-gradient(135deg, #276749, #38A169);
+  }
+  .deploy-bar.canary {
+    flex: 5;
+    background: linear-gradient(135deg, #C05621, #ED8936);
+  }
+  .deploy-legend {
+    display: flex;
+    gap: 14px;
+    font-size: 9px;
+    color: #718096;
+  }
+  .deploy-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .deploy-legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+  }
+  .deploy-legend-dot.blue { background: #4A90D9; }
+  .deploy-legend-dot.green { background: #38A169; }
+  .deploy-legend-dot.orange { background: #ED8936; }
+
+  /* Open source note */
+  .oss-note {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #EBF4FF, #F3E8FF);
+    border: 1px solid #D6BCFA;
+  }
+  .oss-badge {
+    font-size: 9px;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #553C9A, #805AD5);
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .oss-text {
+    font-size: 10px;
+    color: #4A5568;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h2>기술 전략</h2>
+  <div class="sub">TECHNOLOGY STRATEGY</div>
+  <div class="gradient-line"></div>
+</div>
+
+<!-- Tech Stack Table -->
+<div class="section-label">
+  <div class="dot"></div>
+  <span>기술 스택 구성</span>
+</div>
+
+<table class="tech-table">
+  <thead>
+    <tr>
+      <th>영역</th>
+      <th>기술 스택</th>
+      <th>적용 내용</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>인프라</td>
+      <td><span class="tag blue">Kubernetes</span> <span class="tag blue">하이브리드 클라우드</span></td>
+      <td>온프레미스 + G-Cloud 하이브리드 구성, 컨테이너 오케스트레이션 기반 서비스 운영</td>
+    </tr>
+    <tr>
+      <td>백엔드</td>
+      <td><span class="tag green">eGov FW 5.0</span> <span class="tag green">Spring Boot 3.x</span></td>
+      <td>전자정부 표준프레임워크 5.0 기반, RESTful API 설계, 마이크로서비스 패턴 적용</td>
+    </tr>
+    <tr>
+      <td>프론트엔드</td>
+      <td>
+        <span class="tag purple">VortexUI</span> <span class="tag purple">React 19</span> <span class="tag purple">Next.js 16</span><br/>
+        <span class="tag orange">Nexacro N V24</span>
+      </td>
+      <td>
+        국문/영문 사이트: VortexUI(React 19 + Next.js 16 SSG)<br/>
+        관리자/통합정보: Nexacro N V24 이원화 전략
+      </td>
+    </tr>
+    <tr>
+      <td>데이터</td>
+      <td><span class="tag green">MariaDB HA</span> <span class="tag orange">Oracle</span></td>
+      <td>MariaDB HA 클러스터(주) + Oracle(전환 기간 병행), 단계적 마이그레이션</td>
+    </tr>
+    <tr>
+      <td>DevOps</td>
+      <td><span class="tag blue">GitLab CI/CD</span> <span class="tag blue">Harbor</span> <span class="tag blue">ArgoCD</span></td>
+      <td>GitOps 기반 CI/CD, 컨테이너 이미지 레지스트리, 선언적 배포 자동화</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Architecture Principles -->
+<div class="section-label">
+  <div class="dot"></div>
+  <span>아키텍처 설계 원칙</span>
+</div>
+
+<div class="principles-row">
+  <div class="principle-card">
+    <div class="principle-header blue">
+      <div class="principle-icon">&#9881;</div>
+      <div class="principle-title-kr">확장성</div>
+      <div class="principle-title-en">Scalability</div>
+    </div>
+    <div class="principle-body">
+      <ul>
+        <li><span class="check">&#10003;</span>K8s HPA 기반 자동 스케일링</li>
+        <li><span class="check">&#10003;</span>마이크로서비스 독립 배포</li>
+        <li><span class="check">&#10003;</span>이벤트 기반 비동기 처리</li>
+        <li><span class="check">&#10003;</span>컨테이너 기반 자원 최적화</li>
+      </ul>
+    </div>
+  </div>
+  <div class="principle-card">
+    <div class="principle-header purple">
+      <div class="principle-icon">&#9741;</div>
+      <div class="principle-title-kr">안정성</div>
+      <div class="principle-title-en">Reliability</div>
+    </div>
+    <div class="principle-body">
+      <ul>
+        <li><span class="check">&#10003;</span>Blue/Green 무중단 배포</li>
+        <li><span class="check">&#10003;</span>DB 이중화 HA 클러스터</li>
+        <li><span class="check">&#10003;</span>자동 장애 감지 &amp; 롤백</li>
+        <li><span class="check">&#10003;</span>서킷 브레이커 패턴 적용</li>
+      </ul>
+    </div>
+  </div>
+  <div class="principle-card">
+    <div class="principle-header green">
+      <div class="principle-icon">&#9889;</div>
+      <div class="principle-title-kr">성능</div>
+      <div class="principle-title-en">Performance</div>
+    </div>
+    <div class="principle-body">
+      <ul>
+        <li><span class="check">&#10003;</span>Next.js SSG 정적 생성</li>
+        <li><span class="check">&#10003;</span>CDN 기반 정적 자원 캐싱</li>
+        <li><span class="check">&#10003;</span>Redis 캐시 레이어 적용</li>
+        <li><span class="check">&#10003;</span>DB 쿼리 최적화 &amp; 인덱싱</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Deployment Strategy -->
+<div class="section-label">
+  <div class="dot"></div>
+  <span>배포 전략 구성</span>
+</div>
+
+<div class="deploy-note">
+  <div class="deploy-note-title">
+    <span>배포 방식 비율</span>
+  </div>
+  <div class="deploy-bars">
+    <div class="deploy-bar rolling">Rolling Update 85%</div>
+    <div class="deploy-bar bluegreen">B/G 10%</div>
+    <div class="deploy-bar canary">5%</div>
+  </div>
+  <div class="deploy-legend">
+    <div class="deploy-legend-item">
+      <div class="deploy-legend-dot blue"></div>
+      <span>Rolling Update &mdash; 일반 서비스 (85%)</span>
+    </div>
+    <div class="deploy-legend-item">
+      <div class="deploy-legend-dot green"></div>
+      <span>Blue/Green &mdash; 핵심 서비스 (10%)</span>
+    </div>
+    <div class="deploy-legend-item">
+      <div class="deploy-legend-dot orange"></div>
+      <span>Canary &mdash; 신규 기능 (5%)</span>
+    </div>
+  </div>
+</div>
+
+<div class="oss-note">
+  <div class="oss-badge">100% Open Source</div>
+  <div class="oss-text">DevOps 전 구간 오픈소스 기반: GitLab CE + Harbor + Argo CD &mdash; 라이선스 비용 Zero</div>
+</div>
+
+</body>
+</html>

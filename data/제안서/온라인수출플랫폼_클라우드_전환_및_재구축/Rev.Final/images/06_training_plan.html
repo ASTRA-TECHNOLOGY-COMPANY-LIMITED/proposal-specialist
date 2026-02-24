@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+  .header { text-align: center; margin-bottom: 22px; }
+  .header h2 { font-size: 17px; color: #1B2A4A; letter-spacing: 2px; margin-bottom: 4px; }
+  .header .sub { font-size: 10px; color: #718096; letter-spacing: 1px; }
+  .header .line { width: 60px; height: 3px; background: linear-gradient(90deg, #2D5F8A, #4A90D9); margin: 10px auto 0; border-radius: 2px; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #1B2A4A;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .section-label .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2D5F8A, #4A90D9);
+  }
+
+  /* 교육 대상 카드 */
+  .target-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .target-card {
+    flex: 1;
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .target-header {
+    padding: 10px 12px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .target-header .icon { font-size: 16px; }
+  .target-header.user { background: linear-gradient(135deg, #2B6CB0, #4A90D9); }
+  .target-header.admin { background: linear-gradient(135deg, #276749, #48BB78); }
+  .target-header.ops { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .target-body {
+    padding: 10px 12px;
+    background: #FAFCFF;
+  }
+  .target-info {
+    font-size: 9px;
+    color: #4A5568;
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+  .target-info strong { color: #1B2A4A; }
+  .target-count {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-size: 8px;
+    font-weight: 700;
+    color: #fff;
+    background: #718096;
+  }
+  .target-topics {
+    margin-top: 8px;
+    padding-top: 6px;
+    border-top: 1px dashed #E2E8F0;
+  }
+  .topic-item {
+    font-size: 8px;
+    color: #4A5568;
+    padding: 2px 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .topic-item .bullet {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .topic-item .bullet.blue { background: #4A90D9; }
+  .topic-item .bullet.green { background: #48BB78; }
+  .topic-item .bullet.purple { background: #805AD5; }
+  .topic-time {
+    font-size: 7px;
+    color: #718096;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  /* 교육 일정 타임라인 */
+  .timeline-wrap {
+    margin-bottom: 16px;
+  }
+  .timeline-header {
+    display: flex;
+    margin-bottom: 4px;
+    padding-left: 100px;
+  }
+  .timeline-month {
+    flex: 1;
+    text-align: center;
+    font-size: 9px;
+    font-weight: 700;
+    color: #718096;
+    padding: 4px 0;
+    border-bottom: 2px solid #E2E8F0;
+  }
+  .timeline-month.active { border-bottom-color: #4A90D9; color: #2B6CB0; }
+  .timeline-row {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+  }
+  .timeline-label {
+    width: 100px;
+    font-size: 9px;
+    font-weight: 700;
+    color: #1B2A4A;
+    flex-shrink: 0;
+  }
+  .timeline-bar-area {
+    flex: 1;
+    display: flex;
+    height: 22px;
+    position: relative;
+  }
+  .timeline-cell {
+    flex: 1;
+    border-left: 1px dashed #EDF2F7;
+  }
+  .timeline-bar {
+    position: absolute;
+    height: 18px;
+    border-radius: 6px;
+    top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 7px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .bar-blue { background: linear-gradient(90deg, #2B6CB0, #4A90D9); }
+  .bar-green { background: linear-gradient(90deg, #276749, #48BB78); }
+  .bar-purple { background: linear-gradient(90deg, #553C9A, #805AD5); }
+  .bar-orange { background: linear-gradient(90deg, #C05621, #ED8936); }
+
+  /* 교재 */
+  .material-row {
+    display: flex;
+    gap: 6px;
+  }
+  .material-card {
+    flex: 1;
+    border-radius: 8px;
+    border: 1px solid #E2E8F0;
+    padding: 8px 8px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .material-icon { font-size: 18px; margin-bottom: 4px; }
+  .material-name { font-size: 9px; font-weight: 700; color: #1B2A4A; margin-bottom: 2px; }
+  .material-desc { font-size: 7px; color: #718096; line-height: 1.4; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h2>교육훈련 계획</h2>
+    <div class="sub">TRAINING PLAN BY TARGET GROUP (PSR-001, PSR-002)</div>
+    <div class="line"></div>
+  </div>
+
+  <!-- 교육 대상별 -->
+  <div class="section-label"><div class="dot"></div> 대상별 맞춤 교육 프로그램</div>
+  <div class="target-row">
+    <div class="target-card">
+      <div class="target-header user"><span class="icon">👤</span> 사용자 교육</div>
+      <div class="target-body">
+        <div class="target-info">
+          <strong>대상:</strong> 중진공 실무자, 사업관리 담당<br>
+          <span class="target-count">20~30명</span>
+        </div>
+        <div class="target-topics">
+          <div class="topic-item"><span class="bullet blue"></span> 시스템 개요 및 메뉴 안내 <span class="topic-time">1h</span></div>
+          <div class="topic-item"><span class="bullet blue"></span> 행정서비스 기능 실습 <span class="topic-time">2h</span></div>
+          <div class="topic-item"><span class="bullet blue"></span> 수출지원서비스 실습 <span class="topic-time">2h</span></div>
+          <div class="topic-item"><span class="bullet blue"></span> 대량메일 서비스 <span class="topic-time">1h</span></div>
+          <div class="topic-item"><span class="bullet blue"></span> Q&A 및 개별 실습 <span class="topic-time">1h</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="target-card">
+      <div class="target-header admin"><span class="icon">⚙️</span> 관리자 교육</div>
+      <div class="target-body">
+        <div class="target-info">
+          <strong>대상:</strong> 시스템 관리 담당, 콘텐츠 관리<br>
+          <span class="target-count">5~10명</span>
+        </div>
+        <div class="target-topics">
+          <div class="topic-item"><span class="bullet green"></span> 사용자/권한/메뉴 관리 <span class="topic-time">2h</span></div>
+          <div class="topic-item"><span class="bullet green"></span> 콘텐츠 관리 운영 <span class="topic-time">1h</span></div>
+          <div class="topic-item"><span class="bullet green"></span> 통계/리포트 활용 <span class="topic-time">1h</span></div>
+          <div class="topic-item"><span class="bullet green"></span> 데이터 관리/백업 <span class="topic-time">1h</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="target-card">
+      <div class="target-header ops"><span class="icon">🖥️</span> 시스템운영자 교육</div>
+      <div class="target-body">
+        <div class="target-info">
+          <strong>대상:</strong> IT 운영팀, 인프라 관리자<br>
+          <span class="target-count">3~5명</span>
+        </div>
+        <div class="target-topics">
+          <div class="topic-item"><span class="bullet purple"></span> 클라우드 인프라 운영 <span class="topic-time">2h</span></div>
+          <div class="topic-item"><span class="bullet purple"></span> 모니터링/알림/로그 <span class="topic-time">2h</span></div>
+          <div class="topic-item"><span class="bullet purple"></span> 보안 관리/점검 <span class="topic-time">1h</span></div>
+          <div class="topic-item"><span class="bullet purple"></span> 비상복구/DR 방안 <span class="topic-time">2h</span></div>
+          <div class="topic-item"><span class="bullet purple"></span> 형상관리/배포 <span class="topic-time">1h</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 교육 일정 타임라인 -->
+  <div class="section-label"><div class="dot"></div> 교육 일정 (프로젝트 후반부)</div>
+  <div class="timeline-wrap">
+    <div class="timeline-header">
+      <div class="timeline-month">M+6</div>
+      <div class="timeline-month active">M+7</div>
+      <div class="timeline-month active">M+8</div>
+      <div class="timeline-month">M+9</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-label">사용자 교육(1차)</div>
+      <div class="timeline-bar-area">
+        <div class="timeline-cell"></div><div class="timeline-cell"></div><div class="timeline-cell"></div><div class="timeline-cell"></div>
+        <div class="timeline-bar bar-blue" style="left:25%; width:22%;">기본 기능</div>
+      </div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-label">사용자 교육(2차)</div>
+      <div class="timeline-bar-area">
+        <div class="timeline-cell"></div><div class="timeline-cell"></div><div class="timeline-cell"></div><div class="timeline-cell"></div>
+        <div class="timeline-bar bar-blue" style="left:52%; width:22%;">심화 기능</div>
+      </div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-label">관리자 교육</div>
+      <div class="timeline-bar-area">
+        <div class="timeline-cell"></div><div class="timeline-cell"></div><div class="timeline-cell"></div><div class="timeline-cell"></div>
+        <div class="timeline-bar bar-green" style="left:30%; width:40%;">관리자 메뉴 · 운영</div>
+      </div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-label">시스템운영자 교육</div>
+      <div class="timeline-bar-area">
+        <div class="timeline-cell"></div><div class="timeline-cell"></div><div class="timeline-cell"></div><div class="timeline-cell"></div>
+        <div class="timeline-bar bar-purple" style="left:52%; width:22%;">운영 · 보안 · 복구</div>
+      </div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-label">교육 후 Q&A</div>
+      <div class="timeline-bar-area">
+        <div class="timeline-cell"></div><div class="timeline-cell"></div><div class="timeline-cell"></div><div class="timeline-cell"></div>
+        <div class="timeline-bar bar-orange" style="left:55%; width:42%;">이메일/전화 지원</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 교재 -->
+  <div class="section-label"><div class="dot"></div> 교육 교재 및 자료</div>
+  <div class="material-row">
+    <div class="material-card">
+      <div class="material-icon">📘</div>
+      <div class="material-name">사용자 매뉴얼</div>
+      <div class="material-desc">전체 기능 사용법<br>화면별 조작 가이드</div>
+    </div>
+    <div class="material-card">
+      <div class="material-icon">📗</div>
+      <div class="material-name">관리자 매뉴얼</div>
+      <div class="material-desc">관리자 메뉴<br>운영 절차 가이드</div>
+    </div>
+    <div class="material-card">
+      <div class="material-icon">📙</div>
+      <div class="material-name">운영 매뉴얼</div>
+      <div class="material-desc">시스템 운영/감시<br>복구 절차 가이드</div>
+    </div>
+    <div class="material-card">
+      <div class="material-icon">📋</div>
+      <div class="material-name">실습 교재</div>
+      <div class="material-desc">시나리오 기반<br>예제 데이터 실습</div>
+    </div>
+    <div class="material-card">
+      <div class="material-icon">🎬</div>
+      <div class="material-name">교육 동영상</div>
+      <div class="material-desc">주요 기능<br>동영상 가이드</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -4,3 +4,11 @@ downloads/
 data/output/
 *.log
 .DS_Store
+
+# Large binary files
+data/제안서/**/*.pptx
+data/제안서/**/*.pdf
+!data/제안서/**/template/proposal_template.pptx
+
+# Sensitive company data
+data/기업정보/

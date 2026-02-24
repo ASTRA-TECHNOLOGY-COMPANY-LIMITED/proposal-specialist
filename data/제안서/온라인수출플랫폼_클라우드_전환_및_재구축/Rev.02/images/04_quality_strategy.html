@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>품질 확보 전략</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    width: 700px;
+    padding: 28px;
+    background: #fff;
+    color: #2D3748;
+    line-height: 1.6;
+  }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 26px; }
+  .header h2 {
+    font-size: 17px;
+    color: #1B2A4A;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .header .sub {
+    font-size: 10px;
+    color: #718096;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .header .gradient-line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #2D5F8A, #4A90D9);
+    border-radius: 2px;
+    margin: 0 auto;
+  }
+
+  /* Section label */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    margin-top: 22px;
+  }
+  .section-label:first-of-type { margin-top: 0; }
+  .section-label .dot {
+    width: 4px;
+    height: 13px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, #2D5F8A, #4A90D9);
+    flex-shrink: 0;
+  }
+  .section-label span {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1B2A4A;
+  }
+
+  /* Target cards */
+  .targets-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .target-card {
+    flex: 1;
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 14px 10px;
+    text-align: center;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .target-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+  }
+  .target-card.blue::before { background: linear-gradient(90deg, #2D5F8A, #4A90D9); }
+  .target-card.purple::before { background: linear-gradient(90deg, #553C9A, #805AD5); }
+  .target-card.green::before { background: linear-gradient(90deg, #276749, #38A169); }
+  .target-card.orange::before { background: linear-gradient(90deg, #C05621, #ED8936); }
+
+  .target-value {
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  .target-card.blue .target-value { color: #2B6CB0; }
+  .target-card.purple .target-value { color: #553C9A; }
+  .target-card.green .target-value { color: #276749; }
+  .target-card.orange .target-value { color: #C05621; }
+
+  .target-label {
+    font-size: 10px;
+    color: #718096;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  /* Test Pyramid */
+  .pyramid-container {
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 18px 20px;
+    background: #fff;
+    margin-bottom: 4px;
+  }
+  .pyramid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .pyramid-level {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 6px;
+    padding: 7px 0;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    position: relative;
+  }
+  .pyramid-level:nth-child(1) {
+    width: 30%;
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+  }
+  .pyramid-level:nth-child(2) {
+    width: 45%;
+    background: linear-gradient(135deg, #553C9A, #805AD5);
+  }
+  .pyramid-level:nth-child(3) {
+    width: 60%;
+    background: linear-gradient(135deg, #2D5F8A, #4A90D9);
+  }
+  .pyramid-level:nth-child(4) {
+    width: 75%;
+    background: linear-gradient(135deg, #276749, #38A169);
+  }
+  .pyramid-level:nth-child(5) {
+    width: 90%;
+    background: linear-gradient(135deg, #C05621, #ED8936);
+  }
+  .auto-badge {
+    display: inline-block;
+    font-size: 8px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.25);
+    color: #fff;
+    letter-spacing: 0.5px;
+  }
+  .pyramid-label-row {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin-top: 6px;
+    font-size: 9px;
+    color: #A0AEC0;
+  }
+
+  /* Performance gauge cards */
+  .gauge-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .gauge-card {
+    flex: 1;
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 12px 10px;
+    background: #fff;
+    text-align: center;
+  }
+  .gauge-ring {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 6px;
+    position: relative;
+  }
+  .gauge-ring svg {
+    transform: rotate(-90deg);
+  }
+  .gauge-ring .gauge-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 13px;
+    font-weight: 800;
+  }
+  .gauge-card.blue .gauge-text { color: #2B6CB0; }
+  .gauge-card.purple .gauge-text { color: #553C9A; }
+  .gauge-card.green .gauge-text { color: #276749; }
+  .gauge-card.orange .gauge-text { color: #C05621; }
+
+  .gauge-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: #1B2A4A;
+    margin-bottom: 1px;
+  }
+  .gauge-desc {
+    font-size: 9px;
+    color: #718096;
+  }
+
+  /* Quality gate note */
+  .quality-gate {
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 14px 18px;
+    background: #F7FAFC;
+  }
+  .quality-gate-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #1B2A4A;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .gate-items {
+    display: flex;
+    gap: 8px;
+  }
+  .gate-item {
+    flex: 1;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+  }
+  .gate-item.blue-bg { background: #EBF4FF; border: 1px solid #BEE3F8; }
+  .gate-item.purple-bg { background: #F3E8FF; border: 1px solid #D6BCFA; }
+  .gate-item.green-bg { background: #E6FFED; border: 1px solid #9AE6B4; }
+
+  .gate-icon {
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+  .gate-name {
+    font-size: 10px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .gate-item.blue-bg .gate-name { color: #2B6CB0; }
+  .gate-item.purple-bg .gate-name { color: #553C9A; }
+  .gate-item.green-bg .gate-name { color: #276749; }
+
+  .gate-desc {
+    font-size: 9px;
+    color: #718096;
+    line-height: 1.4;
+  }
+
+  /* Rollback note */
+  .rollback-note {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #FFF5F5, #FEEBC8);
+    border: 1px solid #FEB2B2;
+  }
+  .rollback-badge {
+    font-size: 9px;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #C05621, #ED8936);
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .rollback-text {
+    font-size: 10px;
+    color: #4A5568;
+    font-weight: 600;
+  }
+  .rollback-condition {
+    font-size: 9px;
+    color: #C05621;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h2>품질 확보 전략</h2>
+  <div class="sub">QUALITY ASSURANCE STRATEGY</div>
+  <div class="gradient-line"></div>
+</div>
+
+<!-- Target Cards -->
+<div class="section-label">
+  <div class="dot"></div>
+  <span>품질 목표</span>
+</div>
+
+<div class="targets-row">
+  <div class="target-card blue">
+    <div class="target-value">99.9%</div>
+    <div class="target-label">가용성</div>
+  </div>
+  <div class="target-card purple">
+    <div class="target-value">&lt;1초</div>
+    <div class="target-label">응답시간</div>
+  </div>
+  <div class="target-card green">
+    <div class="target-value">0건</div>
+    <div class="target-label">보안취약점</div>
+  </div>
+  <div class="target-card orange">
+    <div class="target-value">100%</div>
+    <div class="target-label">데이터정합</div>
+  </div>
+</div>
+
+<!-- Test Pyramid -->
+<div class="section-label">
+  <div class="dot"></div>
+  <span>테스트 피라미드</span>
+</div>
+
+<div class="pyramid-container">
+  <div class="pyramid">
+    <div class="pyramid-level">
+      인수 테스트 <span class="auto-badge">UAT</span>
+    </div>
+    <div class="pyramid-level">
+      시스템 테스트 <span class="auto-badge">E2E</span>
+    </div>
+    <div class="pyramid-level">
+      성능 테스트 <span class="auto-badge">자동화</span>
+    </div>
+    <div class="pyramid-level">
+      통합 테스트 <span class="auto-badge">CI 자동화</span>
+    </div>
+    <div class="pyramid-level">
+      단위 테스트 <span class="auto-badge">CBD 컴포넌트</span> <span class="auto-badge">CI 자동화</span>
+    </div>
+  </div>
+  <div class="pyramid-label-row">
+    <span>&#8593; 비용 높음 / 범위 넓음</span>
+    <span>비용 낮음 / 빈도 높음 &#8595;</span>
+  </div>
+</div>
+
+<!-- Performance Gauges -->
+<div class="section-label">
+  <div class="dot"></div>
+  <span>핵심 품질 지표</span>
+</div>
+
+<div class="gauge-row">
+  <div class="gauge-card blue">
+    <div class="gauge-ring">
+      <svg width="64" height="64" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="26" fill="none" stroke="#EBF4FF" stroke-width="5"/>
+        <circle cx="32" cy="32" r="26" fill="none" stroke="#4A90D9" stroke-width="5"
+                stroke-dasharray="163.36" stroke-dashoffset="0.16" stroke-linecap="round"/>
+      </svg>
+      <div class="gauge-text">99.9%</div>
+    </div>
+    <div class="gauge-title">가용성</div>
+    <div class="gauge-desc">연간 다운타임 8.76시간 이내</div>
+  </div>
+  <div class="gauge-card purple">
+    <div class="gauge-ring">
+      <svg width="64" height="64" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="26" fill="none" stroke="#F3E8FF" stroke-width="5"/>
+        <circle cx="32" cy="32" r="26" fill="none" stroke="#805AD5" stroke-width="5"
+                stroke-dasharray="163.36" stroke-dashoffset="8.17" stroke-linecap="round"/>
+      </svg>
+      <div class="gauge-text">95%+</div>
+    </div>
+    <div class="gauge-title">테스트 커버리지</div>
+    <div class="gauge-desc">CBD 컴포넌트 단위 95% 이상</div>
+  </div>
+  <div class="gauge-card green">
+    <div class="gauge-ring">
+      <svg width="64" height="64" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="26" fill="none" stroke="#E6FFED" stroke-width="5"/>
+        <circle cx="32" cy="32" r="26" fill="none" stroke="#38A169" stroke-width="5"
+                stroke-dasharray="163.36" stroke-dashoffset="49.01" stroke-linecap="round"/>
+      </svg>
+      <div class="gauge-text">70%</div>
+    </div>
+    <div class="gauge-title">응답시간 단축</div>
+    <div class="gauge-desc">현행 대비 70% 성능 개선</div>
+  </div>
+  <div class="gauge-card orange">
+    <div class="gauge-ring">
+      <svg width="64" height="64" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="26" fill="none" stroke="#FEEBC8" stroke-width="5"/>
+        <circle cx="32" cy="32" r="26" fill="none" stroke="#ED8936" stroke-width="5"
+                stroke-dasharray="163.36" stroke-dashoffset="0" stroke-linecap="round"/>
+      </svg>
+      <div class="gauge-text">2인</div>
+    </div>
+    <div class="gauge-title">코드 품질</div>
+    <div class="gauge-desc">필수 2인 리뷰 승인</div>
+  </div>
+</div>
+
+<!-- Quality Gate -->
+<div class="section-label">
+  <div class="dot"></div>
+  <span>CI/CD 품질 게이트</span>
+</div>
+
+<div class="quality-gate">
+  <div class="quality-gate-title">
+    파이프라인 단계별 품질 검증
+  </div>
+  <div class="gate-items">
+    <div class="gate-item blue-bg">
+      <div class="gate-icon">&#128269;</div>
+      <div class="gate-name">정적 분석</div>
+      <div class="gate-desc">SonarQube 코드 스멜<br/>버그 &middot; 취약점 0건 기준</div>
+    </div>
+    <div class="gate-item purple-bg">
+      <div class="gate-icon">&#9989;</div>
+      <div class="gate-name">테스트 통과</div>
+      <div class="gate-desc">CBD 컴포넌트 단위 테스트<br/>커버리지 95% 이상 필수</div>
+    </div>
+    <div class="gate-item green-bg">
+      <div class="gate-icon">&#128272;</div>
+      <div class="gate-name">보안 스캔</div>
+      <div class="gate-desc">OWASP 취약점 스캔<br/>컨테이너 이미지 CVE 검사</div>
+    </div>
+  </div>
+</div>
+
+<div class="rollback-note">
+  <div class="rollback-badge">Auto Rollback</div>
+  <div class="rollback-text">
+    자동 롤백 조건:
+    <span class="rollback-condition">HTTP 5xx > 0.1%</span> 또는
+    <span class="rollback-condition">P99 응답시간 > 3초</span>
+    감지 시 즉시 이전 버전 자동 복원
+  </div>
+</div>
+
+</body>
+</html>

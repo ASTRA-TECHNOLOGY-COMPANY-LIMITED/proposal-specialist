@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+  .header { text-align: center; margin-bottom: 22px; }
+  .header h2 { font-size: 17px; color: #1B2A4A; letter-spacing: 2px; margin-bottom: 4px; }
+  .header .sub { font-size: 10px; color: #718096; letter-spacing: 1px; }
+  .header .line { width: 60px; height: 3px; background: linear-gradient(90deg, #2D5F8A, #4A90D9); margin: 10px auto 0; border-radius: 2px; }
+
+  .msg-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .msg-card {
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    text-align: center;
+  }
+  .msg-header {
+    padding: 10px 6px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .msg-header.success { background: linear-gradient(135deg, #276749, #48BB78); }
+  .msg-header.warning { background: linear-gradient(135deg, #975A16, #ECC94B); }
+  .msg-header.error { background: linear-gradient(135deg, #C53030, #E53E3E); }
+  .msg-header.confirm { background: linear-gradient(135deg, #2B6CB0, #4A90D9); }
+  .msg-header.info { background: linear-gradient(135deg, #553C9A, #805AD5); }
+
+  .msg-body {
+    padding: 12px 8px;
+    background: #FAFCFF;
+  }
+  .msg-icon { font-size: 28px; margin-bottom: 6px; }
+  .msg-type { font-size: 10px; font-weight: 700; color: #1B2A4A; margin-bottom: 4px; }
+  .msg-style {
+    font-size: 8px;
+    color: #718096;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  .msg-example {
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-size: 8px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  .msg-example.success { background: #C6F6D5; color: #276749; }
+  .msg-example.warning { background: #FEFCBF; color: #975A16; }
+  .msg-example.error { background: #FED7D7; color: #C53030; }
+  .msg-example.confirm { background: #EBF8FF; color: #2B6CB0; }
+  .msg-example.info { background: #E9D8FD; color: #553C9A; }
+
+  .design-section {
+    margin-bottom: 0;
+  }
+  .design-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #1B2A4A;
+    margin-bottom: 10px;
+    padding-left: 8px;
+    border-left: 3px solid #4A90D9;
+  }
+
+  .design-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .design-card {
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    text-align: center;
+  }
+  .design-header {
+    padding: 8px 6px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+  }
+  .design-body {
+    padding: 10px 8px;
+    background: #fff;
+  }
+  .design-icon { font-size: 22px; margin-bottom: 4px; }
+  .design-desc {
+    font-size: 8px;
+    color: #4A5568;
+    line-height: 1.5;
+  }
+  .design-tag {
+    display: inline-block;
+    font-size: 7px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    background: #EBF8FF;
+    color: #2B6CB0;
+    font-weight: 700;
+    margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h2>사용자 메시지 체계 및 디자인 원칙</h2>
+    <div class="sub">USER MESSAGE SYSTEM &amp; DESIGN PRINCIPLES (INR-003, 006, 007)</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="msg-grid">
+    <div class="msg-card">
+      <div class="msg-header success">Success</div>
+      <div class="msg-body">
+        <div class="msg-icon">✅</div>
+        <div class="msg-type">성공</div>
+        <div class="msg-style">상단 토스트 알림<br>(녹색)</div>
+        <div class="msg-example success">"상품이 등록되었습니다"</div>
+      </div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-header warning">Warning</div>
+      <div class="msg-body">
+        <div class="msg-icon">⚠️</div>
+        <div class="msg-type">경고</div>
+        <div class="msg-style">모달 다이얼로그<br>(노란색)</div>
+        <div class="msg-example warning">"필수항목 미입력"</div>
+      </div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-header error">Error</div>
+      <div class="msg-body">
+        <div class="msg-icon">❌</div>
+        <div class="msg-type">오류</div>
+        <div class="msg-style">모달 다이얼로그<br>(빨간색)</div>
+        <div class="msg-example error">"시스템 오류 발생"</div>
+      </div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-header confirm">Confirm</div>
+      <div class="msg-body">
+        <div class="msg-icon">❓</div>
+        <div class="msg-type">확인</div>
+        <div class="msg-style">확인/취소 모달<br>(파란색)</div>
+        <div class="msg-example confirm">"삭제하시겠습니까?"</div>
+      </div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-header info">Info</div>
+      <div class="msg-body">
+        <div class="msg-icon">ℹ️</div>
+        <div class="msg-type">정보</div>
+        <div class="msg-style">인라인 메시지<br>(파란색)</div>
+        <div class="msg-example info">"개인정보 포함"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="design-section">
+    <div class="design-title">UI 디자인 4대 설계 원칙 (INR-003)</div>
+    <div class="design-grid">
+      <div class="design-card">
+        <div class="design-header">Layout</div>
+        <div class="design-body">
+          <div class="design-icon">📐</div>
+          <div class="design-desc">고정/팝업 창 사용자<br>편의성 관점 구성<br>사용자 닫기 가능</div>
+          <div class="design-tag">접근성 우선</div>
+        </div>
+      </div>
+      <div class="design-card">
+        <div class="design-header">Color</div>
+        <div class="design-body">
+          <div class="design-icon">🎨</div>
+          <div class="design-desc">사용자 피로도 최소화<br>가독성 고려 배색<br>명도대비 4.5:1 이상</div>
+          <div class="design-tag">WCAG 2.1 AA</div>
+        </div>
+      </div>
+      <div class="design-card">
+        <div class="design-header">Icon</div>
+        <div class="design-body">
+          <div class="design-icon">🔣</div>
+          <div class="design-desc">기능/용도를 쉽게<br>파악 가능한<br>직관적 아이콘</div>
+          <div class="design-tag">통합 아이콘 세트</div>
+        </div>
+      </div>
+      <div class="design-card">
+        <div class="design-header">Button</div>
+        <div class="design-body">
+          <div class="design-icon">🔘</div>
+          <div class="design-desc">직관적/친화적 느낌<br>사용자 액션 중심<br>상태 피드백 제공</div>
+          <div class="design-tag">터치 영역 44px+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
