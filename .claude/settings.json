@@ -1,12 +1,10 @@
 {
-    "alwaysThinkingEnabled": true,
-    "permissions": {
-        "defaultMode": "bypassPermissions"
-    },
-    "env": {
-        "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
-    },
-    "enabledPlugins": {
-        "proposal-specialist@proposal-specialist-marketplace": true
-    }
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "permissions": {
+    "defaultMode": "bypassPermissions"
+  },
+  "enabledPlugins": {},
+  "alwaysThinkingEnabled": true
 }

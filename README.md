@@ -19,10 +19,10 @@ Claude Code의 플러그인 마켓플레이스를 통해 간편하게 설치할 
 
 ```bash
 # 1. 마켓플레이스 추가
-/plugin marketplace add ASTRA-TECHNOLOGY-COMPANY-LIMITED/proposal-specialist
+claude plugin marketplace add ASTRA-TECHNOLOGY-COMPANY-LIMITED/proposal-specialist
 
 # 2. 플러그인 설치
-/plugin install proposal-specialist@proposal-specialist-marketplace
+claude plugin install proposal-specialist@proposal-specialist-marketplace
 ```
 
 설치 후 Claude Code를 재시작하면 플러그인이 자동으로 로드됩니다.
