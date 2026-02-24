@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+  .header { text-align: center; margin-bottom: 20px; }
+  .header h2 { font-size: 17px; color: #1B2A4A; letter-spacing: 2px; margin-bottom: 4px; }
+  .header .sub { font-size: 10px; color: #718096; letter-spacing: 1px; }
+  .header .line { width: 60px; height: 3px; background: linear-gradient(90deg, #2D5F8A, #4A90D9); margin: 10px auto 0; border-radius: 2px; }
+
+  .section-label {
+    font-size: 11px; font-weight: 700; color: #1B2A4A;
+    margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+  }
+  .section-label .dot { width: 4px; height: 13px; border-radius: 2px; background: linear-gradient(180deg, #2D5F8A, #4A90D9); }
+
+  /* Communication Matrix Table */
+  .comm-table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    border-radius: 10px; overflow: hidden;
+    border: 1px solid #E2E8F0;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .comm-table thead th {
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+    color: #fff; font-size: 9.5px; font-weight: 600;
+    padding: 10px 10px; text-align: center;
+    letter-spacing: 0.5px;
+  }
+  .comm-table tbody td {
+    padding: 9px 10px; font-size: 9.5px; color: #4A5568;
+    border-bottom: 1px solid #F0F4F8;
+    vertical-align: middle; text-align: center; line-height: 1.5;
+  }
+  .comm-table tbody tr:last-child td { border-bottom: none; }
+  .comm-table tbody tr:nth-child(even) { background: #FAFBFC; }
+  .comm-table tbody td:first-child { font-weight: 700; color: #1B2A4A; text-align: left; }
+  .freq-badge {
+    display: inline-block; padding: 2px 8px;
+    border-radius: 6px; font-size: 8px; font-weight: 700; color: #fff;
+  }
+  .freq-daily { background: #E53E3E; }
+  .freq-weekly { background: #DD6B20; }
+  .freq-monthly { background: #2B6CB0; }
+  .freq-quarter { background: #553C9A; }
+  .freq-adhoc { background: #718096; }
+
+  /* Stakeholder Cards */
+  .stake-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
+  .stake-card {
+    border-radius: 12px; overflow: hidden;
+    border: 1px solid #E2E8F0; box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .sc-head {
+    padding: 10px 14px; color: #fff;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .sc-head.h1 { background: linear-gradient(135deg, #1B2A4A, #2D5F8A); }
+  .sc-head.h2 { background: linear-gradient(135deg, #2B6CB0, #4299E1); }
+  .sc-head.h3 { background: linear-gradient(135deg, #276749, #38A169); }
+  .sc-head.h4 { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .sc-icon { font-size: 20px; }
+  .sc-title-area {}
+  .sc-label { font-size: 8px; opacity: 0.7; letter-spacing: 1px; }
+  .sc-title { font-size: 12px; font-weight: 700; }
+  .sc-body { padding: 12px 14px; background: #fff; }
+  .sc-item {
+    font-size: 9.5px; color: #4A5568; line-height: 1.6;
+    display: flex; align-items: flex-start; gap: 4px;
+    margin-bottom: 4px;
+  }
+  .sc-item:last-child { margin-bottom: 0; }
+  .sc-dot { width: 4px; height: 4px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+  .sc-dot.d1 { background: #1B2A4A; }
+  .sc-dot.d2 { background: #2B6CB0; }
+  .sc-dot.d3 { background: #276749; }
+  .sc-dot.d4 { background: #553C9A; }
+
+  /* Change Management */
+  .change-flow {
+    display: flex; align-items: center; gap: 4px;
+    padding: 14px 16px;
+    background: linear-gradient(135deg, #F7FAFC, #EDF2F7);
+    border-radius: 10px; border: 1px solid #E2E8F0;
+  }
+  .cf-step {
+    flex: 1; text-align: center; padding: 10px 6px;
+    background: #fff; border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  .cf-num { font-size: 8px; color: #718096; letter-spacing: 1px; margin-bottom: 3px; }
+  .cf-icon { font-size: 18px; margin-bottom: 3px; }
+  .cf-name { font-size: 10px; font-weight: 700; color: #1B2A4A; margin-bottom: 2px; }
+  .cf-desc { font-size: 8px; color: #718096; line-height: 1.4; }
+  .cf-arrow { font-size: 16px; color: #CBD5E0; flex-shrink: 0; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h2>이해관계자 대응 전략</h2>
+    <div class="sub">STAKEHOLDER ENGAGEMENT &amp; CHANGE MANAGEMENT</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="section-label"><div class="dot"></div>소통 체계 매트릭스</div>
+  <table class="comm-table">
+    <thead>
+      <tr>
+        <th>소통 채널</th>
+        <th>주기</th>
+        <th>참여자</th>
+        <th>핵심 내용</th>
+        <th>산출물</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>일일 스크럼</td>
+        <td><span class="freq-badge freq-daily">매일</span></td>
+        <td>개발팀 전원</td>
+        <td>진행상황, 장애요인 공유</td>
+        <td>스크럼 보드</td>
+      </tr>
+      <tr>
+        <td>주간 진척 보고</td>
+        <td><span class="freq-badge freq-weekly">매주</span></td>
+        <td>PM + 발주처 담당</td>
+        <td>진척률, 이슈, 다음 주 계획</td>
+        <td>주간보고서</td>
+      </tr>
+      <tr>
+        <td>스프린트 리뷰</td>
+        <td><span class="freq-badge freq-monthly">4주</span></td>
+        <td>발주처 + 현업 사용자</td>
+        <td>기능 시연, 피드백 수렴</td>
+        <td>리뷰 결과서</td>
+      </tr>
+      <tr>
+        <td>공식 보고회</td>
+        <td><span class="freq-badge freq-quarter">3회</span></td>
+        <td>전체 이해관계자</td>
+        <td>착수/중간/최종 보고</td>
+        <td>공식보고서</td>
+      </tr>
+      <tr>
+        <td>이슈 에스컬레이션</td>
+        <td><span class="freq-badge freq-adhoc">수시</span></td>
+        <td>PM → PD → 경영진</td>
+        <td>긴급 이슈 24시간 내 대응</td>
+        <td>이슈보고서</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="section-label"><div class="dot"></div>이해관계자별 참여 유도 방안</div>
+  <div class="stake-grid">
+    <div class="stake-card">
+      <div class="sc-head h1">
+        <div class="sc-icon">🏛️</div>
+        <div class="sc-title-area">
+          <div class="sc-label">SPONSOR</div>
+          <div class="sc-title">발주처 (중진공 온라인수출처)</div>
+        </div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-item"><div class="sc-dot d1"></div>주간 대면 보고 + 월간 보고회로 투명성 확보</div>
+        <div class="sc-item"><div class="sc-dot d1"></div>의사결정 필요 시 48시간 내 결정 요청 프로세스</div>
+        <div class="sc-item"><div class="sc-dot d1"></div>PM 직통 핫라인 운영 (24시간 응대)</div>
+      </div>
+    </div>
+    <div class="stake-card">
+      <div class="sc-head h2">
+        <div class="sc-icon">👥</div>
+        <div class="sc-title-area">
+          <div class="sc-label">END USER</div>
+          <div class="sc-title">현업 사용자 (수출기업·바이어)</div>
+        </div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-item"><div class="sc-dot d2"></div>스프린트 리뷰 시 사용자 대표 참여 (피드백 반영)</div>
+        <div class="sc-item"><div class="sc-dot d2"></div>UI/UX 프로토타입 사전 검증 (사용성 테스트)</div>
+        <div class="sc-item"><div class="sc-dot d2"></div>오픈 전 베타 테스트 참여 유도</div>
+      </div>
+    </div>
+    <div class="stake-card">
+      <div class="sc-head h3">
+        <div class="sc-icon">🔗</div>
+        <div class="sc-title-area">
+          <div class="sc-label">PARTNER</div>
+          <div class="sc-title">연계 기관 (Tmydata, SIMS 등)</div>
+        </div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-item"><div class="sc-dot d3"></div>API 연계 사전 협의회 (M+1 이내 완료)</div>
+        <div class="sc-item"><div class="sc-dot d3"></div>테스트 환경 사전 구축, Mock 서버 병행</div>
+        <div class="sc-item"><div class="sc-dot d3"></div>연계 기관별 전담 담당자 배정</div>
+      </div>
+    </div>
+    <div class="stake-card">
+      <div class="sc-head h4">
+        <div class="sc-icon">🛠️</div>
+        <div class="sc-title-area">
+          <div class="sc-label">OPERATOR</div>
+          <div class="sc-title">운영 담당자 (시스템 관리자)</div>
+        </div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-item"><div class="sc-dot d4"></div>설계 단계부터 참여하여 운영 관점 반영</div>
+        <div class="sc-item"><div class="sc-dot d4"></div>인수인계 기간 2주 집중 교육 + 1개월 밀착 지원</div>
+        <div class="sc-item"><div class="sc-dot d4"></div>운영 매뉴얼 + 장애 대응 가이드 전달</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label"><div class="dot"></div>변화관리 프로세스 (Change Management)</div>
+  <div class="change-flow">
+    <div class="cf-step">
+      <div class="cf-num">STEP 1</div>
+      <div class="cf-icon">📢</div>
+      <div class="cf-name">인식 제고</div>
+      <div class="cf-desc">변화 필요성 공유<br>비전 전파</div>
+    </div>
+    <div class="cf-arrow">›</div>
+    <div class="cf-step">
+      <div class="cf-num">STEP 2</div>
+      <div class="cf-icon">🎓</div>
+      <div class="cf-name">역량 확보</div>
+      <div class="cf-desc">신기술 교육<br>시스템 적응 훈련</div>
+    </div>
+    <div class="cf-arrow">›</div>
+    <div class="cf-step">
+      <div class="cf-num">STEP 3</div>
+      <div class="cf-icon">🔄</div>
+      <div class="cf-name">참여 유도</div>
+      <div class="cf-desc">피드백 수렴<br>사용자 테스트</div>
+    </div>
+    <div class="cf-arrow">›</div>
+    <div class="cf-step">
+      <div class="cf-num">STEP 4</div>
+      <div class="cf-icon">📊</div>
+      <div class="cf-name">효과 측정</div>
+      <div class="cf-desc">만족도 조사<br>개선점 도출</div>
+    </div>
+    <div class="cf-arrow">›</div>
+    <div class="cf-step">
+      <div class="cf-num">STEP 5</div>
+      <div class="cf-icon">🏆</div>
+      <div class="cf-name">내재화</div>
+      <div class="cf-desc">지속적 개선<br>자립 운영 체계</div>
+    </div>
+  </div>
+</body>
+</html>
