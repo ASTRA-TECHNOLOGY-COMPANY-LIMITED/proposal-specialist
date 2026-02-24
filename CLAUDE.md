@@ -21,15 +21,15 @@ The plugin follows the Claude Code plugin structure (`.claude-plugin/plugin.json
 - `search` — Search multiple platforms (G2B, K-Startup, MSS, MSIT) for matching announcements
 - `evaluate` — Deep-analyze a specific bid/announcement with attachment download and RFP analysis
 - `strategy` — Run the full workflow: analyze → search → evaluate with user interaction at each step
-- `generate-toc` — Generate proposal TOC from RFP + company seed documents with per-section concepts
-- `write-section` — Write detailed proposal sections based on generated TOC with images
+- `generate-toc` — Generate proposal TOC from RFP + company seed document (both required). Outputs `data/output/{사업명}/목차.md` with per-section metadata (배점, 핵심메시지, 도표/이미지 계획, 페이지예산)
+- `write-section` — Write proposal sections based on generated TOC. Produces markdown with HTML→Chrome screenshot tables/charts and AI-generated conceptual diagrams. Supports specific section numbers: `write-section 목차.md 1 3 5`
 
 ### Agents (Subagents for deep analysis)
 - **doc-analyzer** (`agents/doc-analyzer.md`): Deep company document analysis, keyword extraction
 - **bid-searcher** (`agents/bid-searcher.md`): Multi-platform parallel search using MCP Tools
 - **rfp-evaluator** (`agents/rfp-evaluator.md`): RFP analysis, success probability scoring, SWOT analysis
-- **toc-generator** (`agents/toc-generator.md`): Proposal TOC generation with evaluation criteria mapping
-- **section-writer** (`agents/section-writer.md`): Detailed proposal section writing with image generation
+- **toc-generator** (`agents/toc-generator.md`): Proposal TOC generation with evaluation criteria ↔ company strength mapping and A4 page-fill strategy
+- **section-writer** (`agents/section-writer.md`): Proposal section writing with HTML design system for tables/charts (Chrome MCP screenshots) and AI image generation for conceptual diagrams. Classifies sections into types A~K (사업이해도, 기술방안, 수행체계, etc.)
 
 ### Hooks (SessionStart, non-blocking)
 On session start, a shell script validates API key environment variables:
@@ -38,10 +38,13 @@ On session start, a shell script validates API key environment variables:
 The script exits 0 (non-blocking) and outputs warnings to Claude's context.
 
 ### MCP Server (`servers/`)
-A TypeScript MCP server (`procurement-api`) provides 11 tools for external API access:
+A TypeScript MCP server (`procurement-api`) provides 13 tools for external API access:
 - 5 G2B (나라장터) tools: bid search, detail, pre-specs, awards, contract process
 - 2 K-Startup tools: announcements, programs
-- 2 Government tools: MSS (중기부), MSIT (과기부)
+- 1 BizInfo (기업마당) tool: SME support program search (requires `BIZINFO_API_KEY`)
+- 1 MSS (중기부) tool: announcements
+- 1 MSIT (과기부) tool: announcements
+- 1 NTIS tool: national R&D project search (requires `NTIS_API_KEY`)
 - 2 File management tools: download attachment, list downloads
 
 Configuration: `.mcp.json` at plugin root, built to `servers/dist/index.js`.
@@ -60,7 +63,7 @@ Company documents
   → doc-analyzer agent (Read/Glob/Grep tools)
   → Company profile + search keywords
   → bid-searcher agent (MCP Tools, parallel)
-      → G2B, K-Startup, MSS, MSIT APIs
+      → G2B, K-Startup, BizInfo, MSS, MSIT, NTIS APIs
   → Integrated results + scoring
   → rfp-evaluator agent
       → download_attachment (MCP Tool)
@@ -70,25 +73,33 @@ Company documents
 
 ### Proposal Writing Flow
 ```
-RFP document + Company seed document
-  → generate-toc command (Read Tool)
-  → toc-generator agent
-      → Evaluation criteria analysis
-      → Company strength mapping
-      → Section depth allocation (A4 page-fill strategy)
-      → HTML table/chart planning per section
-  → 목차.md (structured TOC with concepts + 도표/이미지 계획)
-  → write-section command (Read Tool)
-  → section-writer agent (per section, sequential)
-      → Section type classification (A~K)
-      → HTML table/chart creation (Write Tool → html/ directory)
-      → Chrome MCP rendering → screenshot (images/ directory)
-      → image_text2img tool (conceptual diagrams, architecture)
-      → Detailed section content (A4 page-fill, no markdown tables)
-  → data/output/{project}/
-      ├── sections/*.md (page-break between sections)
-      ├── html/*.html   (table/chart source HTML)
-      └── images/*.png  (HTML screenshots + AI diagrams)
+RFP document + Company seed document (both REQUIRED from user)
+  → generate-toc command
+      → Step 1: Read RFP (사업명, 평가기준 배점표, 요구사항, 작성요령)
+      → Step 2: Read Seed (기업 강점, 실적, 인력, 기술스택)
+      → Step 3: toc-generator agent
+          → Evaluation criteria ↔ company strength mapping
+          → Section depth allocation by 배점 weight (원칙 2)
+          → 도표/이미지 planning per section (page-fill strategy)
+      → Step 4: Write data/output/{사업명}/목차.md
+         (YAML frontmatter + section metadata: 배점, 핵심메시지, 도표, 이미지, 페이지예산)
+  → write-section command
+      → Step 1: Read 목차.md (YAML frontmatter + section list)
+      → Step 2: Read RFP requirements + seed data
+      → Step 3: Confirm scope with user (which sections to write)
+      → Step 4: Per section (sequential):
+          → section-writer agent
+              → Section type classification (A~K: 사업이해도, 기술방안, 수행체계...)
+              → HTML tables/charts → Write to html/ → Chrome MCP → screenshot to images/
+              → image_text2img (conceptual diagrams, architecture)
+              → Markdown section (no markdown tables — all visuals as images)
+          → Write to sections/{번호:02d}_{절제목}.md
+      → Step 5-6: Progress reporting + final summary
+  → data/output/{사업명}/
+      ├── 목차.md           (TOC with section metadata)
+      ├── sections/*.md     (page-break between sections)
+      ├── html/*.html       (table/chart source HTML, editable)
+      └── images/*.png      (HTML screenshots + AI diagrams)
 ```
 
 ## Key Conventions
@@ -106,6 +117,8 @@ RFP document + Company seed document
 - stdio transport (Claude Code plugin default)
 - Environment variables for API keys (never hardcoded)
 - Download files stored in `${CLAUDE_PLUGIN_ROOT}/downloads/`
+- Each tool module (`servers/src/tools/*.ts`) exports a `register*Tools(server)` function called from `index.ts`
+- Shared API client in `servers/src/utils/api-client.ts` handles data.go.kr standard response format
 
 ### Environment Variables
 - `DATA_GO_KR_API_KEY` (required): Covers G2B, K-Startup, MSS, MSIT APIs
@@ -118,8 +131,11 @@ RFP document + Company seed document
 # Build MCP server
 cd servers && npm install && npm run build
 
+# Watch mode for development
+cd servers && npm run dev
+
 # Test plugin locally
-claude --plugin-dir ./proposal-specialist
+claude --plugin-dir .
 
 # Test commands
 /proposal-specialist:analyze ./company-intro.pdf
@@ -128,6 +144,7 @@ claude --plugin-dir ./proposal-specialist
 /proposal-specialist:strategy ./company-intro.pdf
 /proposal-specialist:generate-toc data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
 /proposal-specialist:write-section data/output/사업명/목차.md
+/proposal-specialist:write-section data/output/사업명/목차.md 1 3 5  # specific sections only
 
 # Debug mode
 claude --debug
@@ -140,9 +157,51 @@ claude --debug
 - **MCP server** (`servers/src/`): TypeScript code. Run `npm run build` after changes.
 - **Data files** (`data/`):
   - `data/evaluation-templates.json`, `data/seed/`, `data/business/`: Reference data. Do not modify during normal operation.
-  - `data/output/`: Runtime output generated by `generate-toc` and `write-section`. Not committed (see `.gitignore`). Contains `sections/` (markdown), `html/` (table/chart source), `images/` (screenshots + AI diagrams).
+  - `data/output/`: Runtime output generated by `generate-toc` and `write-section`. Not committed (see `.gitignore`). Contains `목차.md` (TOC), `sections/` (markdown), `html/` (editable table/chart source), `images/` (Chrome screenshots + AI diagrams).
 - **`hooks/hooks.json`**: Hook configuration referencing scripts via `${CLAUDE_PLUGIN_ROOT}`.
 - **`.mcp.json`**: MCP server configuration. References `${CLAUDE_PLUGIN_ROOT}` for paths and `${ENV_VAR}` for secrets.
+
+## Version Management (MANDATORY before push)
+
+Claude Code는 `plugin.json`의 version 필드로 플러그인 업데이트 여부를 판단한다. **버전을 올리지 않으면 기존 사용자의 캐시가 갱신되지 않아 변경사항이 반영되지 않는다.**
+
+### Version Bump Rule
+
+**코드 변경 후 push 전에 반드시 버전을 올려야 한다.** 두 파일을 동시에 수정한다:
+
+1. `.claude-plugin/plugin.json` → `"version"` 필드
+2. `.claude-plugin/marketplace.json` → `plugins[0].version` 필드
+
+두 파일의 버전은 항상 동일하게 유지한다.
+
+### Semantic Versioning (semver)
+
+| 변경 유형 | 버전 | 커밋 prefix | 예시 |
+|-----------|------|------------|------|
+| 버그 수정 | PATCH (x.y.Z) | `fix:` | 1.1.1 → 1.1.2 |
+| 새 기능 추가 | MINOR (x.Y.0) | `feat:` | 1.1.2 → 1.2.0 |
+| 호환성 깨지는 변경 | MAJOR (X.0.0) | `feat!:` / `BREAKING CHANGE` | 1.2.0 → 2.0.0 |
+| 문서/설정만 변경 | PATCH (x.y.Z) | `docs:` / `chore:` | 1.1.1 → 1.1.2 |
+
+### Push Workflow
+
+```bash
+# 1. 코드 변경 완료
+# 2. plugin.json + marketplace.json 버전 동시 수정
+# 3. 커밋 (버전 bump 포함)
+git commit -m "feat: add new search filter
+
+bump version to 1.2.0"
+# 4. push
+git push origin staging
+# 5. main 머지 시에도 동일 버전이 반영됨
+```
+
+### 주의사항
+
+- `plugin.json`과 `marketplace.json` 모두에 version이 있을 경우, **`plugin.json`이 우선**한다. 반드시 두 파일을 동일하게 유지할 것.
+- `--plugin-dir`로 로컬 테스트할 때는 버전과 무관하게 항상 최신 코드가 로드된다.
+- 마켓플레이스를 통해 설치한 사용자는 버전이 바뀌어야만 `/plugin update`로 업데이트를 받을 수 있다.
 
 ## PPTX Generation Pipeline
 
@@ -230,8 +289,11 @@ with zipfile.ZipFile(temp_path) as zin:
 pip3 install --user --break-system-packages python-pptx Pillow
 ```
 
-## Design Documents
+## Section Writer Design System
 
-- `docs/proposal-specialist-plugin-design.md` — Comprehensive plugin design document
-- `docs/mcp-server-spec.md` — MCP server implementation details with TypeScript code
-- `docs/api-reference.md` — External API endpoints, parameters, and response fields
+The section-writer agent uses a consistent HTML design system for all tables/charts. Key CSS variables defined in the agent's HTML template:
+
+- `--primary: #1B3A5C` (navy blue), `--accent: #0078D4` (blue), `--accent-light: #E8F4FD`
+- HTML body width: 794px (A4 at 96 DPI), font: Pretendard/Noto Sans KR/Malgun Gothic
+- Component classes: `.table-title`, `.highlight-box`, `.badge-*`, `.flow-container`, `.kpi-grid`, `.comparison`, `.timeline`, `.org-chart`
+- Section types A~K each have specific required tables/charts and AI image types defined in `agents/section-writer.md`

@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "proposal-specialist-marketplace",
-  "description": "기업 문서 기반 공공조달/지원사업 탐색 및 제안 전략 수립 Claude Code 플러그인 마켓플레이스",
+  "description": "기업 문서 기반 공공조달/지원사업 탐색 및 제안서 작성 Claude Code 플러그인 마켓플레이스",
   "owner": {
     "name": "Zeans",
     "email": "zeans@astravision.co.kr"
@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "proposal-specialist",
-      "description": "기업 문서 기반 공공조달/지원사업 탐색, RFP 분석, 수주 확률 평가 및 제안 전략 수립 플러그인",
+      "description": "기업 문서 기반 공공조달/지원사업 탐색, RFP 분석, 수주 확률 평가 및 제안서 작성 플러그인",
       "version": "1.1.1",
       "author": {
         "name": "Zeans",
