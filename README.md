@@ -6,8 +6,9 @@
 
 ## 사전 요구사항
 
-- **Claude Code** CLI (최신 버전)
+- **Claude Code** v1.0.33 이상 (`claude --version`으로 확인)
 - **Node.js** 18 이상
+- **Git** (마켓플레이스 설치 시 필요)
 - **공공데이터포털 API 키** (필수)
 
 ## 설치
@@ -18,15 +19,34 @@ Claude Code의 플러그인 마켓플레이스를 통해 간편하게 설치할 
 
 ```bash
 # 1. 마켓플레이스 추가
-/plugins marketplace add zeanxai/proposal-specialist
+/plugin marketplace add ASTRA-TECHNOLOGY-COMPANY-LIMITED/proposal-specialist
 
 # 2. 플러그인 설치
-/plugins install proposal-specialist@proposal-specialist-marketplace
+/plugin install proposal-specialist@proposal-specialist-marketplace
 ```
 
 설치 후 Claude Code를 재시작하면 플러그인이 자동으로 로드됩니다.
 
-**팀/조직 배포:** 프로젝트의 `.claude/settings.json`에 아래 설정을 추가하면, 팀원이 Claude Code 실행 시 자동으로 플러그인 설치를 안내받습니다.
+> `/plugin` 명령어를 실행하면 인터랙티브 UI가 열려 Discover/Installed/Marketplaces 탭에서 플러그인을 관리할 수 있습니다.
+
+#### 설치 스코프 옵션
+
+플러그인은 세 가지 스코프로 설치할 수 있습니다:
+
+| 스코프 | 설정 파일 | 적용 범위 |
+|--------|----------|-----------|
+| `user` (기본) | `~/.claude/settings.json` | 모든 프로젝트에서 사용 |
+| `project` | `.claude/settings.json` | 팀원과 공유 (Git 커밋) |
+| `local` | `.claude/settings.local.json` | 로컬 전용 (gitignored) |
+
+```bash
+# 특정 스코프로 설치
+/plugin install proposal-specialist@proposal-specialist-marketplace --scope project
+```
+
+#### 팀/조직 배포
+
+프로젝트의 `.claude/settings.json`에 아래 설정을 추가하면, 팀원이 Claude Code 실행 시 자동으로 플러그인 설치를 안내받습니다.
 
 ```json
 {
@@ -37,7 +57,7 @@ Claude Code의 플러그인 마켓플레이스를 통해 간편하게 설치할 
     "proposal-specialist-marketplace": {
       "source": {
         "source": "github",
-        "repo": "zeanxai/proposal-specialist"
+        "repo": "ASTRA-TECHNOLOGY-COMPANY-LIMITED/proposal-specialist"
       }
     }
   },
@@ -49,10 +69,12 @@ Claude Code의 플러그인 마켓플레이스를 통해 간편하게 설치할 
 
 ### 방법 2: 소스에서 직접 설치
 
+개발 또는 테스트 목적으로 소스 코드를 직접 클론하여 사용할 수 있습니다.
+
 #### 1. 저장소 클론
 
 ```bash
-git clone https://github.com/zeanxai/proposal-specialist.git
+git clone https://github.com/ASTRA-TECHNOLOGY-COMPANY-LIMITED/proposal-specialist.git
 cd proposal-specialist
 ```
 
@@ -67,19 +89,43 @@ cd ..
 
 빌드 결과물은 `servers/dist/index.js`에 생성됩니다.
 
-#### 3. 플러그인 등록
+#### 3. 플러그인 로드
 
-Claude Code에서 플러그인 디렉토리를 지정하여 실행합니다.
+Claude Code에서 `--plugin-dir` 옵션으로 플러그인을 로드합니다.
 
 ```bash
+# 절대 경로로 지정
 claude --plugin-dir /path/to/proposal-specialist
-```
 
-또는 프로젝트 루트에서 바로 실행합니다.
-
-```bash
+# 또는 플러그인 디렉토리에서 바로 실행
 cd /path/to/proposal-specialist
 claude --plugin-dir .
+```
+
+> 여러 플러그인을 동시에 로드하려면 `--plugin-dir`을 여러 번 사용할 수 있습니다:
+> ```bash
+> claude --plugin-dir ./plugin-1 --plugin-dir ./plugin-2
+> ```
+
+### 플러그인 관리
+
+```bash
+# 설치된 플러그인 목록 확인
+/plugin list
+
+# 플러그인 비활성화/활성화
+/plugin disable proposal-specialist@proposal-specialist-marketplace
+/plugin enable proposal-specialist@proposal-specialist-marketplace
+
+# 플러그인 업데이트
+/plugin update proposal-specialist@proposal-specialist-marketplace
+/plugin update --all  # 모든 플러그인 업데이트
+
+# 플러그인 제거
+/plugin uninstall proposal-specialist@proposal-specialist-marketplace
+
+# 디버그 모드 (플러그인 로딩 상세 정보 확인)
+claude --debug
 ```
 
 ## API 키 설정
@@ -207,6 +253,8 @@ export COMPANY_DOCS_DIR="/path/to/company-docs"
 | `search` | 복수 플랫폼에서 매칭되는 공고 검색 | `/proposal-specialist:search AI 솔루션` |
 | `evaluate` | 특정 입찰공고의 상세 분석 및 수주 확률 평가 | `/proposal-specialist:evaluate 20260101001` |
 | `strategy` | 전체 워크플로우 (분석→검색→평가→전략 수립) | `/proposal-specialist:strategy` 또는 `/proposal-specialist:strategy ./회사소개서.pdf` |
+| `generate-toc` | RFP + 기업 시드 문서로 제안서 목차 생성 | `/proposal-specialist:generate-toc RFP.pdf seed.md` |
+| `write-section` | 생성된 목차 기반으로 제안서 섹션 작성 | `/proposal-specialist:write-section 목차.md` |
 
 ### 전체 워크플로우 예시
 
@@ -227,6 +275,16 @@ claude --plugin-dir /path/to/proposal-specialist
 5. **심층 평가** - RFP 다운로드, 100점 만점 평가, SWOT 분석
 6. **최종 보고** - 수주 확률, 전략 방향, 제안서 목차 제시
 
+### 제안서 작성 워크플로우
+
+```bash
+# 1. 제안서 목차 생성 (RFP + 기업 시드 문서)
+/proposal-specialist:generate-toc data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
+
+# 2. 섹션별 상세 내용 작성
+/proposal-specialist:write-section data/output/사업명/목차.md
+```
+
 ## 디렉토리 구조
 
 ```
@@ -240,6 +298,8 @@ proposal-specialist/
 │   ├── analyze.md
 │   ├── search.md
 │   ├── evaluate.md
+│   ├── generate-toc.md
+│   ├── write-section.md
 │   └── strategy.md
 ├── skills/                      # 자동 적용 스킬
 │   ├── company-profiler/
@@ -247,10 +307,16 @@ proposal-specialist/
 ├── agents/                      # 서브 에이전트
 │   ├── doc-analyzer.md
 │   ├── bid-searcher.md
-│   └── rfp-evaluator.md
+│   ├── rfp-evaluator.md
+│   ├── toc-generator.md
+│   └── section-writer.md
 ├── hooks/hooks.json             # 세션 시작 훅
 ├── scripts/validate-env.sh      # 환경 변수 검증
-├── data/                        # 평가 템플릿 데이터
+├── data/                        # 평가 템플릿 및 프로젝트 데이터
+│   ├── evaluation-templates.json
+│   ├── seed/                    # 기업 시드 문서
+│   ├── business/                # RFP 문서
+│   └── output/                  # 생성된 제안서 (런타임)
 ├── servers/                     # MCP 서버 (TypeScript)
 │   ├── src/
 │   ├── dist/                    # 빌드 결과물
@@ -273,6 +339,16 @@ proposal-specialist/
 ```bash
 # node_modules 재설치
 cd servers && rm -rf node_modules && npm install && npm run build
+```
+
+### 플러그인 로딩 오류
+
+```bash
+# 디버그 모드로 상세 정보 확인
+claude --debug
+
+# 플러그인 에러 확인 (인터랙티브 UI의 Errors 탭)
+/plugin
 ```
 
 ### 파일 다운로드 오류
