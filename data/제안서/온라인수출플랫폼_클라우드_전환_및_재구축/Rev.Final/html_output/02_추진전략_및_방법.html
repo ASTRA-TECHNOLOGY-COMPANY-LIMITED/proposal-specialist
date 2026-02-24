@@ -1,0 +1,4789 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>추진전략 및 방법</title>
+<link rel="stylesheet" href="_common/page-frame.css">
+</head>
+<body>
+<div class="a4-page">
+  <div class="sub-toc-wrapper">
+    <div class="sub-toc-hero">
+      <span class="sub-toc-badge">II</span>
+      <div class="sub-toc-label">SECTION II</div>
+      <h2 class="sub-toc-title">추진전략 및 방법</h2>
+      <div class="sub-toc-line"></div>
+    </div>
+    <div class="sub-toc-body">
+      <ul class="sub-toc-list">
+      <li class="sub-toc-item">
+        <span class="sub-toc-num">1</span>
+        <div class="sub-toc-text">
+          <div class="sub-toc-sub-title">사업이해도</div>
+          <div class="sub-toc-desc">현황 분석 및 AS-IS/TO-BE 도출</div>
+        </div>
+        <span class="sub-toc-arrow">&#x203A;</span>
+      </li>
+      <li class="sub-toc-item">
+        <span class="sub-toc-num">2</span>
+        <div class="sub-toc-text">
+          <div class="sub-toc-sub-title">추진전략</div>
+          <div class="sub-toc-desc">3대 추진 축 및 단계별 전략</div>
+        </div>
+        <span class="sub-toc-arrow">&#x203A;</span>
+      </li>
+      <li class="sub-toc-item">
+        <span class="sub-toc-num">3</span>
+        <div class="sub-toc-text">
+          <div class="sub-toc-sub-title">적용기술</div>
+          <div class="sub-toc-desc">클라우드 네이티브 기술 스택</div>
+        </div>
+        <span class="sub-toc-arrow">&#x203A;</span>
+      </li>
+      <li class="sub-toc-item">
+        <span class="sub-toc-num">4</span>
+        <div class="sub-toc-text">
+          <div class="sub-toc-sub-title">표준 프레임워크 적용</div>
+          <div class="sub-toc-desc">전자정부 표준프레임워크 5.0</div>
+        </div>
+        <span class="sub-toc-arrow">&#x203A;</span>
+      </li>
+      <li class="sub-toc-item">
+        <span class="sub-toc-num">5</span>
+        <div class="sub-toc-text">
+          <div class="sub-toc-sub-title">개발 방법론</div>
+          <div class="sub-toc-desc">Agile 기반 하이브리드 방법론</div>
+        </div>
+        <span class="sub-toc-arrow">&#x203A;</span>
+      </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="a4-page">
+<h1 id="ii-추진전략-및-방법">II. 추진전략 및 방법</h1>
+
+<h2 id="1-사업이해도">1. 사업이해도</h2>
+
+<h3 id="11-제안요청-내용-이해">1.1 제안요청 내용 이해</h3>
+
+<p>본 사업은 중소벤처기업진흥공단(온라인수출처)이 운영하는 <strong>온라인수출플랫폼(고비즈코리아)</strong> 의 전면 재구축과 클라우드 전환을 목적으로 합니다. 디지털 무역의 급격한 성장에 따라 국내 중소기업의 온라인 수출 참여가 확대되고 있으며, 이에 발맞추어 고비즈코리아가 차세대 플랫폼으로 도약하기 위해 <strong>데이터 표준 체계 수립</strong>, <strong>문서관리 고도화</strong>, <strong>기술 스택 현대화</strong>, <strong>클라우드 전환</strong>이 필요한 시점입니다.</p>
+
+<p>본 컨소시엄은 <strong>베트남 온라인 수출플랫폼 모델 전수 ODA 사업</strong>(중진공 발주, 2024.09 착수~2025.11 완료, 전체 사업규모 3,116,500천원)을 통해 Gobiz Vietnam을 직접 구축하여 고비즈코리아의 업무 프로세스와 데이터 구조를 실무적으로 파악하고 있습니다.</p>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>사업 목적</th>
+  <th>내용</th>
+  <th>대응 요구사항</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>플랫폼 현대화</td>
+  <td>4개 사이트(국문/영문/관리자/통합정보) 전면 재구축</td>
+  <td>SFR-004, 005, 009, 012</td>
+</tr>
+<tr>
+  <td>클라우드 전환</td>
+  <td>민간클라우드 기반 하이브리드 인프라 구성</td>
+  <td>SFR-001, 002</td>
+</tr>
+<tr>
+  <td>데이터 표준화</td>
+  <td>수출 데이터 아키텍처 수립 및 통계 고도화</td>
+  <td>SFR-006, 007, DAR-001~009</td>
+</tr>
+<tr>
+  <td>사용자 경험 혁신</td>
+  <td>디지털 정부서비스 UI/UX 가이드라인 준수 재설계</td>
+  <td>INR-001~012</td>
+</tr>
+<tr>
+  <td>기관 연계 강화</td>
+  <td>수출유관기관 API 기반 통합 연계</td>
+  <td>SFR-011, 013</td>
+</tr>
+</tbody>
+</table></div>
+
+
+</div>
+
+<div class="a4-page">
+<h3 id="12-사업-목적--범위--전제조건">1.2 사업 목적 / 범위 / 전제조건</h3>
+
+<h4 id="1-플랫폼-발전을-위한-4대-핵심-과제">(1) 플랫폼 발전을 위한 4대 핵심 과제</h4>
+
+<p>고비즈코리아가 차세대 온라인 수출 플랫폼으로 도약하기 위해 다음 <strong>4대 핵심 과제</strong>의 전략적 추진이 필요합니다. 각 과제는 상호 유기적으로 연결되어, 데이터 표준화는 정확한 수출 통계로, 문서관리 체계화는 효율적 유지보수로, 기술 현대화는 안전한 서비스로, 클라우드 전환은 민첩한 대응력으로 이어집니다.</p>
+
+<div class="figure-container">
+
+<style>
+  .embedded-chart-1 { margin: 0; padding: 0; box-sizing: border-box; }
+  .embedded-chart-1 {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+
+  .embedded-chart-1 .header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .embedded-chart-1 .header h2 {
+    font-size: 17px;
+    color: #1B2A4A;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .embedded-chart-1 .header .sub {
+    font-size: 10px;
+    color: #718096;
+    letter-spacing: 1px;
+  }
+  .embedded-chart-1 .header .line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #2D5F8A, #4A90D9);
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+
+  .embedded-chart-1 .summary-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding: 14px 16px;
+    background: linear-gradient(135deg, #EBF8FF, #BEE3F8);
+    border-radius: 10px;
+    border-left: 4px solid #3182CE;
+    align-items: center;
+  }
+  .embedded-chart-1 .summary-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .embedded-chart-1 .summary-text {
+    font-size: 12px;
+    color: #1A365D;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .embedded-chart-1 .summary-text strong {
+    color: #2B6CB0;
+  }
+
+  .embedded-chart-1 .problems-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  .embedded-chart-1 .problem-card {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .embedded-chart-1 .problem-header {
+    padding: 12px 14px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .embedded-chart-1 .problem-header.db { background: linear-gradient(135deg, #2B6CB0, #3182CE); }
+  .embedded-chart-1 .problem-header.doc { background: linear-gradient(135deg, #2C7A7B, #38B2AC); }
+  .embedded-chart-1 .problem-header.tech { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .embedded-chart-1 .problem-header.cloud { background: linear-gradient(135deg, #276749, #38A169); }
+
+  .embedded-chart-1 .problem-icon {
+    font-size: 18px;
+  }
+  .embedded-chart-1 .problem-title-area {
+    flex: 1;
+  }
+  .embedded-chart-1 .problem-num {
+    font-size: 9px;
+    opacity: 0.8;
+    letter-spacing: 1px;
+  }
+  .embedded-chart-1 .problem-title {
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .embedded-chart-1 .priority-badge {
+    background: rgba(255,255,255,0.25);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .embedded-chart-1 .problem-body {
+    padding: 14px;
+    background: #fff;
+  }
+
+  .embedded-chart-1 .issue-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 8px;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #4A5568;
+  }
+  .embedded-chart-1 .issue-item:last-child { margin-bottom: 0; }
+  .embedded-chart-1 .issue-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+  .embedded-chart-1 .issue-dot.blue { background: #3182CE; }
+  .embedded-chart-1 .issue-dot.teal { background: #38B2AC; }
+  .embedded-chart-1 .issue-dot.purple { background: #805AD5; }
+  .embedded-chart-1 .issue-dot.green { background: #38A169; }
+
+  .embedded-chart-1 .gauge-bar {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .embedded-chart-1 .gauge-track {
+    flex: 1;
+    height: 6px;
+    background: #EDF2F7;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .embedded-chart-1 .gauge-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s;
+  }
+  .embedded-chart-1 .gauge-fill.blue { background: linear-gradient(90deg, #3182CE, #63B3ED); }
+  .embedded-chart-1 .gauge-fill.teal { background: linear-gradient(90deg, #38B2AC, #81E6D9); }
+  .embedded-chart-1 .gauge-fill.purple { background: linear-gradient(90deg, #805AD5, #B794F4); }
+  .embedded-chart-1 .gauge-fill.green { background: linear-gradient(90deg, #38A169, #68D391); }
+  .embedded-chart-1 .gauge-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: #718096;
+    width: 50px;
+    text-align: right;
+  }
+
+  .embedded-chart-1 .bottom-note {
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #F7FAFC, #EDF2F7);
+    border-radius: 8px;
+    border: 1px solid #E2E8F0;
+  }
+  .embedded-chart-1 .bottom-note-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #1B2A4A;
+    margin-bottom: 6px;
+  }
+  .embedded-chart-1 .bottom-note-text {
+    font-size: 10px;
+    color: #4A5568;
+    line-height: 1.6;
+  }
+</style>
+<div class="embedded-chart-1 embedded-chart">
+<div class="header">
+    <h2>플랫폼 발전을 위한 4대 핵심 과제</h2>
+    <div class="sub">KEY ADVANCEMENT AREAS FOR NEXT-GENERATION PLATFORM</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="summary-bar">
+    <div class="summary-icon">💡</div>
+    <div class="summary-text">
+      고비즈코리아가 차세대 온라인 수출 플랫폼으로 도약하기 위해
+      <strong>데이터 표준화</strong>, <strong>문서관리 체계화</strong>,
+      <strong>기술 스택 현대화</strong>, <strong>클라우드 전환</strong> 등
+      4대 핵심 과제의 전략적 추진이 필요합니다.
+    </div>
+  </div>
+
+  <div class="problems-grid">
+    <!-- 과제1: 데이터 표준화 -->
+    <div class="problem-card">
+      <div class="problem-header db">
+        <div class="problem-icon">🗄️</div>
+        <div class="problem-title-area">
+          <div class="problem-num">TASK 01</div>
+          <div class="problem-title">데이터 표준 체계 수립</div>
+        </div>
+        <div class="priority-badge">핵심</div>
+      </div>
+      <div class="problem-body">
+        <div class="issue-item">
+          <div class="issue-dot blue"></div>
+          <div>통합 명명규칙 및 코드성 데이터 표준 체계 수립 필요</div>
+        </div>
+        <div class="issue-item">
+          <div class="issue-dot blue"></div>
+          <div>국문/영문/관리자 DB 간 통합 정합성 확보 필요</div>
+        </div>
+        <div class="issue-item">
+          <div class="issue-dot blue"></div>
+          <div>메타데이터 관리 체계 도입으로 데이터 추적성 강화</div>
+        </div>
+        <div class="issue-item">
+          <div class="issue-dot blue"></div>
+          <div>오픈소스 DB(MariaDB HA) 전환으로 비용 효율화</div>
+        </div>
+        <div class="gauge-bar">
+          <div class="gauge-track"><div class="gauge-fill blue" style="width:90%"></div></div>
+          <div class="gauge-label">필요도 90%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 과제2: 문서관리 체계화 -->
+    <div class="problem-card">
+      <div class="problem-header doc">
+        <div class="problem-icon">📋</div>
+        <div class="problem-title-area">
+          <div class="problem-num">TASK 02</div>
+          <div class="problem-title">문서관리 체계 고도화</div>
+        </div>
+        <div class="priority-badge">필요</div>
+      </div>
+      <div class="problem-body">
+        <div class="issue-item">
+          <div class="issue-dot teal"></div>
+          <div>설계문서-소스코드 간 연동 및 변경이력 자동 추적</div>
+        </div>
+        <div class="issue-item">
+          <div class="issue-dot teal"></div>
+          <div>API 명세서 자동생성 및 버전관리 체계 구축</div>
+        </div>
+        <div class="issue-item">
+          <div class="issue-dot teal"></div>
+          <div>Git 기반 형상관리 및 산출물 체계적 관리</div>
+        </div>
+        <div class="issue-item">
+          <div class="issue-dot teal"></div>
+          <div>운영 매뉴얼 지식베이스화로 유지보수 효율 향상</div>
+        </div>
+        <div class="gauge-bar">
+          <div class="gauge-track"><div class="gauge-fill teal" style="width:75%"></div></div>
+          <div class="gauge-label">필요도 75%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 과제3: 기술 스택 현대화 -->
+    <div class="problem-card">
+      <div class="problem-header tech">
+        <div class="problem-icon">⚙️</div>
+        <div class="problem-title-area">
+          <div class="problem-num">TASK 03</div>
+          <div class="problem-title">기술 스택 현대화</div>
+        </div>
+        <div class="priority-badge">핵심</div>
+      </div>
+      <div class="problem-body">
+        <div class="issue-item">
+          <div class="issue-dot purple"></div>
+          <div>전자정부 표준프레임워크 5.0 업그레이드로 최신 기능 활용</div>
+        </div>
+        <div class="issue-item">
+          <div class="issue-dot purple"></div>
+          <div>반응형 웹 + Nexacro N V24 도입으로 UI/UX 혁신</div>
+        </div>
+        <div class="issue-item">
+          <div class="issue-dot purple"></div>
+          <div>Open JDK 17/21/23 등 최신 런타임 환경 적용</div>
+        </div>
+        <div class="issue-item">
+          <div class="issue-dot purple"></div>
+          <div>라이브러리 의존성 정리 및 기술부채 해소</div>
+        </div>
+        <div class="gauge-bar">
+          <div class="gauge-track"><div class="gauge-fill purple" style="width:85%"></div></div>
+          <div class="gauge-label">필요도 85%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 과제4: 클라우드 전환 -->
+    <div class="problem-card">
+      <div class="problem-header cloud">
+        <div class="problem-icon">☁️</div>
+        <div class="problem-title-area">
+          <div class="problem-num">TASK 04</div>
+          <div class="problem-title">클라우드 전환</div>
+        </div>
+        <div class="priority-badge">핵심</div>
+      </div>
+      <div class="problem-body">
+        <div class="issue-item">
+          <div class="issue-dot green"></div>
+          <div>오토스케일링으로 수출사업 신청 시기 트래픽 유연 대응</div>
+        </div>
+        <div class="issue-item">
+          <div class="issue-dot green"></div>
+          <div>CDN 적용으로 해외바이어 글로벌 접속 속도 개선</div>
+        </div>
+        <div class="issue-item">
+          <div class="issue-dot green"></div>
+          <div>컨테이너 기반 무중단 배포로 서비스 연속성 확보</div>
+        </div>
+        <div class="issue-item">
+          <div class="issue-dot green"></div>
+          <div>K8s 자동 복구로 장애 시 신속 대응 체계 구축</div>
+        </div>
+        <div class="gauge-bar">
+          <div class="gauge-track"><div class="gauge-fill green" style="width:90%"></div></div>
+          <div class="gauge-label">필요도 90%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-note">
+    <div class="bottom-note-title">📌 4대 과제 추진 기대효과</div>
+    <div class="bottom-note-text">
+      4대 핵심 과제는 <strong>상호 유기적으로 연결</strong>되어 있습니다.
+      데이터 표준화는 정확한 수출 통계로, 문서관리 체계화는 효율적 유지보수로, 기술 현대화는 안전한 서비스로,
+      클라우드 전환은 민첩한 대응력으로 이어져, 고비즈코리아가 <strong>차세대 온라인 수출 플랫폼</strong>으로
+      도약하는 견고한 기반이 됩니다.
+    </div>
+  </div>
+</div>
+
+<p class="figure-caption">[그림 2-1] 플랫폼 발전을 위한 4대 핵심 과제</p>
+
+</div>
+
+</div>
+
+<div class="a4-page">
+<h4 id="2-기술-스택-현대화-방향">(2) 기술 스택 현대화 방향</h4>
+
+<p>운영체제부터 프레임워크, 데이터베이스, 프론트엔드에 이르기까지 <strong>전 영역에 걸친 기술 현대화</strong>를 통해 현대 기술력을 소화할 수 있는 구조로 전환합니다. 특히 전자정부 표준프레임워크 5.0 업그레이드(Spring Boot 3.x, Open JDK 17/21/23)와 Git 기반 형상관리·CI/CD 도입은 보안 강화와 개발 생산성 향상을 동시에 달성하는 핵심 전환 포인트입니다.</p>
+
+<div class="figure-container">
+
+<style>
+  .embedded-chart-2 { margin: 0; padding: 0; box-sizing: border-box; }
+  .embedded-chart-2 {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+  .embedded-chart-2 .header { text-align: center; margin-bottom: 22px; }
+  .embedded-chart-2 .header h2 { font-size: 17px; color: #1B2A4A; letter-spacing: 2px; margin-bottom: 4px; }
+  .embedded-chart-2 .header .sub { font-size: 10px; color: #718096; letter-spacing: 1px; }
+  .embedded-chart-2 .header .line { width: 60px; height: 3px; background: linear-gradient(90deg, #2D5F8A, #4A90D9); margin: 10px auto 0; border-radius: 2px; }
+
+  .embedded-chart-2 .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .embedded-chart-2 .stack-card {
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .embedded-chart-2 .stack-header {
+    padding: 8px 12px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .embedded-chart-2 .stack-header .icon { font-size: 14px; }
+  .embedded-chart-2 .stack-header.os { background: linear-gradient(135deg, #2B6CB0, #4A90D9); }
+  .embedded-chart-2 .stack-header.db { background: linear-gradient(135deg, #276749, #48BB78); }
+  .embedded-chart-2 .stack-header.fw { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .embedded-chart-2 .stack-header.fe { background: linear-gradient(135deg, #9C4221, #ED8936); }
+  .embedded-chart-2 .stack-header.web { background: linear-gradient(135deg, #234E52, #38B2AC); }
+  .embedded-chart-2 .stack-header.was { background: linear-gradient(135deg, #C53030, #E53E3E); }
+
+  .embedded-chart-2 .stack-body {
+    padding: 10px 12px;
+    background: #FAFCFF;
+  }
+  .embedded-chart-2 .stack-tech {
+    font-size: 13px;
+    font-weight: 800;
+    color: #1B2A4A;
+    margin-bottom: 4px;
+  }
+  .embedded-chart-2 .stack-version {
+    font-size: 9px;
+    color: #4A90D9;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .embedded-chart-2 .stack-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+  .embedded-chart-2 .stack-tag {
+    font-size: 8px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-weight: 600;
+    background: #EBF8FF;
+    color: #2A4365;
+    border: 1px solid #BEE3F8;
+  }
+  .embedded-chart-2 .stack-tag.green { background: #F0FFF4; color: #276749; border-color: #C6F6D5; }
+  .embedded-chart-2 .stack-tag.purple { background: #FAF5FF; color: #553C9A; border-color: #E9D8FD; }
+
+  .embedded-chart-2 .principle-row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .embedded-chart-2 .principle-card {
+    flex: 1;
+    text-align: center;
+    padding: 10px 6px;
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .embedded-chart-2 .principle-icon { font-size: 18px; margin-bottom: 3px; }
+  .embedded-chart-2 .principle-title { font-size: 9px; font-weight: 700; color: #1B2A4A; margin-bottom: 2px; }
+  .embedded-chart-2 .principle-desc { font-size: 8px; color: #718096; line-height: 1.4; }
+
+  .embedded-chart-2 .infra-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .embedded-chart-2 .infra-table thead th {
+    padding: 8px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+    color: #fff;
+  }
+  .embedded-chart-2 .infra-table tbody td {
+    padding: 7px 10px;
+    font-size: 10px;
+    text-align: center;
+    border-bottom: 1px solid #F0F0F0;
+    color: #2D3748;
+  }
+  .embedded-chart-2 .infra-table tbody tr:nth-child(even) td { background: #F7FAFC; }
+  .embedded-chart-2 .infra-table tbody tr:last-child td { border-bottom: none; }
+  .embedded-chart-2 .infra-table tbody td:first-child { font-weight: 600; text-align: left; padding-left: 14px; }
+
+  .embedded-chart-2 .env-tag {
+    display: inline-block;
+    font-size: 8px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-weight: 700;
+  }
+  .embedded-chart-2 .env-tag.cloud { background: #BEE3F8; color: #2A4365; }
+  .embedded-chart-2 .env-tag.idc { background: #E9D8FD; color: #553C9A; }
+  .embedded-chart-2 .env-tag.open { background: #C6F6D5; color: #276749; }
+</style>
+<div class="embedded-chart-2 embedded-chart">
+<div class="header">
+    <h2>공개 SW 기반 클라우드 네이티브 기술 스택</h2>
+    <div class="sub">OPEN SOURCE CLOUD-NATIVE TECHNOLOGY STACK (SFR-001)</div>
+    <div class="line"></div>
+  </div>
+
+  <!-- 적용 원칙 -->
+  <div class="principle-row">
+    <div class="principle-card">
+      <div class="principle-icon">🏛️</div>
+      <div class="principle-title">전자정부 표준 준수</div>
+      <div class="principle-desc">전자정부 표준FW 5.0<br>Spring Boot 3.x 기반</div>
+    </div>
+    <div class="principle-card">
+      <div class="principle-icon">🔓</div>
+      <div class="principle-title">공개 SW 우선</div>
+      <div class="principle-desc">오픈소스 기반 구성<br>벤더 종속 최소화</div>
+    </div>
+    <div class="principle-card">
+      <div class="principle-icon">☁️</div>
+      <div class="principle-title">클라우드 네이티브</div>
+      <div class="principle-desc">컨테이너 + K8s<br>오토스케일링 지원</div>
+    </div>
+    <div class="principle-card">
+      <div class="principle-icon">🔒</div>
+      <div class="principle-title">보안 내재화</div>
+      <div class="principle-desc">시큐어코딩 준수<br>OWASP Top 10 대응</div>
+    </div>
+    <div class="principle-card">
+      <div class="principle-icon">🔗</div>
+      <div class="principle-title">하이브리드 연계</div>
+      <div class="principle-desc">클라우드 + 중진공 IDC<br>VPN 기반 통합</div>
+    </div>
+  </div>
+
+  <!-- 기술 스택 6개 카드 -->
+  <div class="stack-grid">
+    <div class="stack-card">
+      <div class="stack-header os"><span class="icon">🖥️</span> 운영체제</div>
+      <div class="stack-body">
+        <div class="stack-tech">Linux</div>
+        <div class="stack-version">Rocky Linux 9.x (LTS)</div>
+        <div class="stack-features">
+          <span class="stack-tag">컨테이너 최적화</span>
+          <span class="stack-tag green">장기 보안 지원</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-header db"><span class="icon">🗄️</span> 데이터베이스</div>
+      <div class="stack-body">
+        <div class="stack-tech">MariaDB HA</div>
+        <div class="stack-version">Cloud DB for MySQL (8C/32GB × 2)</div>
+        <div class="stack-features">
+          <span class="stack-tag green">자동 Failover</span>
+          <span class="stack-tag">공개 SW</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-header fw"><span class="icon">⚙️</span> 프레임워크</div>
+      <div class="stack-body">
+        <div class="stack-tech">전자정부 FW 5.0</div>
+        <div class="stack-version">Spring Boot 3.x + Open JDK 17/21/23</div>
+        <div class="stack-features">
+          <span class="stack-tag purple">국가 표준</span>
+          <span class="stack-tag">JPA/MyBatis</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-header fe"><span class="icon">🎨</span> 프론트엔드</div>
+      <div class="stack-body">
+        <div class="stack-tech">Nexacro N V24</div>
+        <div class="stack-version">반응형 웹 + UI/UX 가이드라인 준수</div>
+        <div class="stack-features">
+          <span class="stack-tag">반응형</span>
+          <span class="stack-tag green">접근성 준수</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-header web"><span class="icon">🌐</span> WEB 서버</div>
+      <div class="stack-body">
+        <div class="stack-tech">Nginx</div>
+        <div class="stack-version">리버스 프록시 + 정적 자원 서빙</div>
+        <div class="stack-features">
+          <span class="stack-tag">L7 로드밸런싱</span>
+          <span class="stack-tag green">CDN 연계</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-header was"><span class="icon">🚀</span> WAS 서버</div>
+      <div class="stack-body">
+        <div class="stack-tech">Tomcat</div>
+        <div class="stack-version">컨테이너 기반 다중 Pod 구성</div>
+        <div class="stack-features">
+          <span class="stack-tag">K8s 오케스트레이션</span>
+          <span class="stack-tag purple">HA 이중화</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 인프라 구성 -->
+  <table class="infra-table">
+    <thead>
+      <tr><th>구성요소</th><th>기술</th><th>환경</th><th>규격</th><th>비고</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>컨테이너 오케스트레이션</td>
+        <td>NKS (Ncloud K8s Service)</td>
+        <td><span class="env-tag cloud">클라우드</span></td>
+        <td>prd + stg 클러스터</td>
+        <td>CSP Managed</td>
+      </tr>
+      <tr>
+        <td>서비스 DB</td>
+        <td>Cloud DB for MySQL (MariaDB)</td>
+        <td><span class="env-tag cloud">클라우드</span></td>
+        <td>8C/32GB × 2 (HA)</td>
+        <td><span class="env-tag open">공개SW</span></td>
+      </tr>
+      <tr>
+        <td>업무 DB</td>
+        <td>Oracle DB (기존 활용)</td>
+        <td><span class="env-tag idc">중진공 IDC</span></td>
+        <td>기존 인프라 유지</td>
+        <td>VPN 연계</td>
+      </tr>
+      <tr>
+        <td>캐시/세션</td>
+        <td>Redis Cluster (StatefulSet)</td>
+        <td><span class="env-tag cloud">클라우드</span></td>
+        <td>3M + 3R 구성</td>
+        <td><span class="env-tag open">공개SW</span></td>
+      </tr>
+      <tr>
+        <td>검색 엔진</td>
+        <td>Elasticsearch</td>
+        <td><span class="env-tag cloud">클라우드</span></td>
+        <td>3 Node Cluster</td>
+        <td><span class="env-tag open">공개SW</span></td>
+      </tr>
+      <tr>
+        <td>CI/CD</td>
+        <td>GitLab + ArgoCD</td>
+        <td><span class="env-tag cloud">클라우드</span></td>
+        <td>GitOps 기반</td>
+        <td><span class="env-tag open">공개SW</span></td>
+      </tr>
+      <tr>
+        <td>모니터링</td>
+        <td>Prometheus + Grafana + EFK</td>
+        <td><span class="env-tag cloud">클라우드</span></td>
+        <td>통합 관제</td>
+        <td><span class="env-tag open">공개SW</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p class="figure-caption">[그림 2-2] 기술 스택 현대화 비교 (AS-IS → TO-BE)</p>
+
+</div>
+
+</div>
+
+<div class="a4-page">
+<h4 id="3-클라우드-전환-필요성">(3) 클라우드 전환 필요성</h4>
+
+<p>현행 인프라 구조에서는 수출지원사업 신청 시기의 트래픽 급증이나 해외바이어의 다양한 시간대 접속 등 <strong>다양한 상황에 빠르게 대처하기 어렵습니다</strong>. 클라우드 전환은 비즈니스 요구, 기술 환경 변화, 정부 정책 방향이라는 3가지 동인에 의해 추진되며, 구체적 기대효과를 제시합니다.</p>
+
+<div class="figure-container">
+
+<style>
+  .embedded-chart-3 { margin: 0; padding: 0; box-sizing: border-box; }
+  .embedded-chart-3 {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+
+  .embedded-chart-3 .header {
+    text-align: center;
+    margin-bottom: 22px;
+  }
+  .embedded-chart-3 .header h2 {
+    font-size: 17px;
+    color: #1B2A4A;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .embedded-chart-3 .header .sub {
+    font-size: 10px;
+    color: #718096;
+    letter-spacing: 1px;
+  }
+  .embedded-chart-3 .header .line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #2D5F8A, #4A90D9);
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+
+  .embedded-chart-3 .drivers-section {
+    margin-bottom: 20px;
+  }
+
+  .embedded-chart-3 .section-label {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+    padding: 4px 12px;
+    border-radius: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  .embedded-chart-3 .driver-cards {
+    display: flex;
+    gap: 10px;
+  }
+
+  .embedded-chart-3 .driver-card {
+    flex: 1;
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+
+  .embedded-chart-3 .driver-card-top {
+    padding: 14px 12px 10px;
+    text-align: center;
+  }
+  .embedded-chart-3 .driver-card-top.demand { background: linear-gradient(135deg, #FFF5F5, #FEFCBF); }
+  .embedded-chart-3 .driver-card-top.tech { background: linear-gradient(135deg, #EBF8FF, #E9D8FD); }
+  .embedded-chart-3 .driver-card-top.policy { background: linear-gradient(135deg, #F0FFF4, #C6F6D5); }
+
+  .embedded-chart-3 .driver-emoji { font-size: 28px; margin-bottom: 6px; }
+  .embedded-chart-3 .driver-title { font-size: 12px; font-weight: 700; color: #1B2A4A; margin-bottom: 2px; }
+  .embedded-chart-3 .driver-subtitle { font-size: 9px; color: #718096; }
+
+  .embedded-chart-3 .driver-card-body {
+    padding: 12px;
+    background: #fff;
+  }
+  .embedded-chart-3 .driver-point {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 6px;
+    font-size: 10px;
+    line-height: 1.5;
+    color: #4A5568;
+  }
+  .embedded-chart-3 .driver-point:last-child { margin-bottom: 0; }
+  .embedded-chart-3 .driver-bullet {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    color: #fff;
+    font-weight: 700;
+    margin-top: 1px;
+  }
+  .embedded-chart-3 .driver-bullet.r { background: #E53E3E; }
+  .embedded-chart-3 .driver-bullet.b { background: #3182CE; }
+  .embedded-chart-3 .driver-bullet.g { background: #38A169; }
+
+  .embedded-chart-3 .center-arrow {
+    text-align: center;
+    margin: 14px 0;
+    position: relative;
+  }
+  .embedded-chart-3 .center-arrow::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #CBD5E0, transparent);
+  }
+  .embedded-chart-3 .center-arrow-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #2D5F8A, #4A90D9);
+    color: #fff;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 2px 8px rgba(45,95,138,0.3);
+  }
+
+  .embedded-chart-3 .effects-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+
+  .embedded-chart-3 .effect-card {
+    border-radius: 10px;
+    padding: 14px 10px;
+    text-align: center;
+    border: 1px solid #E2E8F0;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+
+  .embedded-chart-3 .effect-metric {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 2px;
+  }
+  .embedded-chart-3 .effect-metric.blue { color: #2D5F8A; }
+  .embedded-chart-3 .effect-metric.green { color: #276749; }
+  .embedded-chart-3 .effect-metric.purple { color: #553C9A; }
+  .embedded-chart-3 .effect-metric.orange { color: #C05621; }
+
+  .embedded-chart-3 .effect-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: #2D3748;
+    margin-bottom: 4px;
+  }
+  .embedded-chart-3 .effect-desc {
+    font-size: 9px;
+    color: #718096;
+    line-height: 1.4;
+  }
+
+  .embedded-chart-3 .scenario-strip {
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+    border-radius: 10px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .embedded-chart-3 .scenario-icon { font-size: 22px; flex-shrink: 0; }
+  .embedded-chart-3 .scenario-content { flex: 1; }
+  .embedded-chart-3 .scenario-title { font-size: 11px; font-weight: 700; margin-bottom: 3px; }
+  .embedded-chart-3 .scenario-desc { font-size: 10px; opacity: 0.85; line-height: 1.5; }
+</style>
+<div class="embedded-chart-3 embedded-chart">
+<div class="header">
+    <h2>클라우드 전환 필요성 및 기대효과</h2>
+    <div class="sub">CLOUD MIGRATION DRIVERS & EXPECTED OUTCOMES</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="drivers-section">
+    <div class="section-label">전환 동인 (Migration Drivers)</div>
+    <div class="driver-cards">
+      <div class="driver-card">
+        <div class="driver-card-top demand">
+          <div class="driver-emoji">📊</div>
+          <div class="driver-title">비즈니스 요구</div>
+          <div class="driver-subtitle">Business Demand</div>
+        </div>
+        <div class="driver-card-body">
+          <div class="driver-point">
+            <div class="driver-bullet r">1</div>
+            <div>수출지원사업 신청 시기 <strong>트래픽 5배 급증</strong> 대응 필요</div>
+          </div>
+          <div class="driver-point">
+            <div class="driver-bullet r">2</div>
+            <div>해외바이어 24시간 <strong>글로벌 접속</strong> 요구 증가</div>
+          </div>
+          <div class="driver-point">
+            <div class="driver-bullet r">3</div>
+            <div>장애 발생 시 수출거래 <strong>직접적 매출 손실</strong> 초래</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="driver-card">
+        <div class="driver-card-top tech">
+          <div class="driver-emoji">⚡</div>
+          <div class="driver-title">기술 환경 변화</div>
+          <div class="driver-subtitle">Technology Shift</div>
+        </div>
+        <div class="driver-card-body">
+          <div class="driver-point">
+            <div class="driver-bullet b">1</div>
+            <div>컨테이너/K8s 기반 <strong>클라우드 네이티브</strong>가 업계 표준</div>
+          </div>
+          <div class="driver-point">
+            <div class="driver-bullet b">2</div>
+            <div>CI/CD 자동화 파이프라인으로 <strong>배포 주기 단축</strong></div>
+          </div>
+          <div class="driver-point">
+            <div class="driver-bullet b">3</div>
+            <div>마이크로서비스로 <strong>독립 배포·확장</strong> 가능</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="driver-card">
+        <div class="driver-card-top policy">
+          <div class="driver-emoji">🏛️</div>
+          <div class="driver-title">정책 방향</div>
+          <div class="driver-subtitle">Government Policy</div>
+        </div>
+        <div class="driver-card-body">
+          <div class="driver-point">
+            <div class="driver-bullet g">1</div>
+            <div><strong>민간클라우드 우선</strong> 정부 정보화 정책 추진</div>
+          </div>
+          <div class="driver-point">
+            <div class="driver-bullet g">2</div>
+            <div>디지털 정부서비스 <strong>UI/UX 가이드라인</strong> 준수 의무</div>
+          </div>
+          <div class="driver-point">
+            <div class="driver-bullet g">3</div>
+            <div>공공데이터 <strong>표준화·개방</strong> 정책 확대</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="center-arrow">
+    <span class="center-arrow-badge">클라우드 전환으로 해결 ▼</span>
+  </div>
+
+  <div class="effects-grid">
+    <div class="effect-card">
+      <div class="effect-metric blue">99.9%</div>
+      <div class="effect-label">서비스 가용성</div>
+      <div class="effect-desc">HA 구성 + 오토스케일링으로 무중단 서비스</div>
+    </div>
+    <div class="effect-card">
+      <div class="effect-metric green">≤3초</div>
+      <div class="effect-label">응답시간 보장</div>
+      <div class="effect-desc">CDN + 컨테이너 최적화로 글로벌 응답 단축</div>
+    </div>
+    <div class="effect-card">
+      <div class="effect-metric purple">↓40%</div>
+      <div class="effect-label">인프라 비용</div>
+      <div class="effect-desc">오토스케일링으로 유휴 자원 비용 최소화</div>
+    </div>
+    <div class="effect-card">
+      <div class="effect-metric orange">5분</div>
+      <div class="effect-label">배포 소요시간</div>
+      <div class="effect-desc">CI/CD 파이프라인 Blue/Green 무중단 배포</div>
+    </div>
+  </div>
+
+  <div class="scenario-strip">
+    <div class="scenario-icon">🚀</div>
+    <div class="scenario-content">
+      <div class="scenario-title">핵심 시나리오 — 수출지원사업 신청 시기 대응</div>
+      <div class="scenario-desc">
+        매년 수출지원사업 신청 시기에 발생하는 트래픽 급증을 오토스케일링으로 자동 대응하고,
+        해외바이어의 다양한 시간대 접속을 CDN과 글로벌 캐시로 빠르게 처리합니다.
+        장애 발생 시에도 K8s 자동 복구와 롤백으로 <strong>5분 이내 서비스 정상화</strong>를 보장합니다.
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="figure-caption">[그림 2-3] 클라우드 전환 필요성 및 기대효과</p>
+
+</div>
+
+</div>
+
+<div class="a4-page">
+<h4 id="4-사업-범위-및-전제조건">(4) 사업 범위 및 전제조건</h4>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>구분</th>
+  <th>내용</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>사업 범위</strong></td>
+  <td>4개 사이트(국문/영문/관리자/통합정보) 전면 재구축, 민간클라우드 전환, Oracle→MariaDB 마이그레이션, 외부기관 API 연계</td>
+</tr>
+<tr>
+  <td><strong>사업 기간</strong></td>
+  <td>계약체결일로부터 270일(약 9개월)</td>
+</tr>
+<tr>
+  <td><strong>전제조건</strong></td>
+  <td>전자정부 표준프레임워크 5.0 적용, 민간클라우드 + 중진공 IDC 하이브리드 구성, 디지털정부서비스 UI/UX 가이드라인 준수</td>
+</tr>
+<tr>
+  <td><strong>제외 범위</strong></td>
+  <td>기존 시스템 운영/유지보수, 하드웨어 조달, 외부기관 시스템 개발</td>
+</tr>
+</tbody>
+</table></div>
+
+</div>
+
+<div class="a4-page">
+<h3 id="13-본-사업의-특징-및-당사-강점">1.3 본 사업의 특징 및 당사 강점</h3>
+
+<h4 id="1-목표시스템-to-be-구성">(1) 목표시스템 TO-BE 구성</h4>
+
+<p>민간클라우드와 중진공 IDC를 IPsec VPN으로 연결하는 하이브리드 클라우드 환경 위에, K8s 컨테이너 오케스트레이션을 적용하여 오토스케일링·무중단 배포·자동 복구가 가능한 인프라를 구축합니다.</p>
+
+<div class="figure-container">
+
+<style>
+  .embedded-chart-4 { margin: 0; padding: 0; box-sizing: border-box; }
+  .embedded-chart-4 {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+
+  .embedded-chart-4 .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .embedded-chart-4 .header h2 {
+    font-size: 17px;
+    color: #1B2A4A;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .embedded-chart-4 .header .sub {
+    font-size: 10px;
+    color: #718096;
+    letter-spacing: 1px;
+  }
+  .embedded-chart-4 .header .line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #2D5F8A, #4A90D9);
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+
+  .embedded-chart-4 .arch-container {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .embedded-chart-4 .arch-zone {
+    flex: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+
+  .embedded-chart-4 .zone-header {
+    padding: 10px 14px;
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .embedded-chart-4 .zone-header.cloud { background: linear-gradient(135deg, #2B6CB0, #4A90D9); }
+  .embedded-chart-4 .zone-header.idc { background: linear-gradient(135deg, #553C9A, #805AD5); }
+
+  .embedded-chart-4 .zone-body {
+    padding: 12px;
+    background: #FAFCFF;
+  }
+
+  .embedded-chart-4 .server-group {
+    margin-bottom: 10px;
+  }
+  .embedded-chart-4 .server-group:last-child { margin-bottom: 0; }
+
+  .embedded-chart-4 .server-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: #718096;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    padding-bottom: 3px;
+    border-bottom: 1px dashed #E2E8F0;
+  }
+
+  .embedded-chart-4 .server-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .embedded-chart-4 .server-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 9px;
+    font-weight: 600;
+    border: 1px solid;
+  }
+  .embedded-chart-4 .server-chip.web {
+    background: #EBF8FF;
+    border-color: #90CDF4;
+    color: #2A4365;
+  }
+  .embedded-chart-4 .server-chip.was {
+    background: #F0FFF4;
+    border-color: #9AE6B4;
+    color: #276749;
+  }
+  .embedded-chart-4 .server-chip.db {
+    background: #FEFCE8;
+    border-color: #FDE68A;
+    color: #92400E;
+  }
+  .embedded-chart-4 .server-chip.front {
+    background: #FAF5FF;
+    border-color: #D6BCFA;
+    color: #553C9A;
+  }
+  .embedded-chart-4 .server-chip.infra {
+    background: #FFF5F5;
+    border-color: #FEB2B2;
+    color: #C53030;
+  }
+
+  .embedded-chart-4 .server-count {
+    background: rgba(0,0,0,0.08);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 8px;
+  }
+
+  .embedded-chart-4 .vpn-connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 0;
+    gap: 8px;
+  }
+  .embedded-chart-4 .vpn-line {
+    flex: 1;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, #4A90D9 0, #4A90D9 6px, transparent 6px, transparent 10px);
+  }
+  .embedded-chart-4 .vpn-badge {
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 9px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .embedded-chart-4 .sites-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .embedded-chart-4 .site-card {
+    border-radius: 8px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .embedded-chart-4 .site-name {
+    padding: 6px 4px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #2D5F8A, #4A90D9);
+  }
+  .embedded-chart-4 .site-name.admin { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .embedded-chart-4 .site-name.integ { background: linear-gradient(135deg, #276749, #38A169); }
+
+  .embedded-chart-4 .site-tech {
+    padding: 8px 6px;
+    font-size: 9px;
+    color: #4A5568;
+    line-height: 1.5;
+    background: #fff;
+  }
+  .embedded-chart-4 .site-req {
+    font-size: 8px;
+    color: #A0AEC0;
+    padding: 4px 6px;
+    background: #F7FAFC;
+    border-top: 1px solid #EDF2F7;
+  }
+
+  .embedded-chart-4 .features-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  .embedded-chart-4 .feature-box {
+    flex: 1;
+    border-radius: 10px;
+    padding: 12px;
+    border: 1px solid #E2E8F0;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    text-align: center;
+  }
+  .embedded-chart-4 .feature-icon { font-size: 18px; margin-bottom: 4px; }
+  .embedded-chart-4 .feature-title { font-size: 10px; font-weight: 700; color: #1B2A4A; margin-bottom: 3px; }
+  .embedded-chart-4 .feature-desc { font-size: 9px; color: #718096; line-height: 1.4; }
+</style>
+<div class="embedded-chart-4 embedded-chart">
+<div class="header">
+    <h2>TO-BE 목표 시스템 구성 개요</h2>
+    <div class="sub">TARGET SYSTEM ARCHITECTURE OVERVIEW</div>
+    <div class="line"></div>
+  </div>
+
+  <!-- 4개 사이트 -->
+  <div class="sites-grid">
+    <div class="site-card">
+      <div class="site-name">국문사이트</div>
+      <div class="site-tech">Nginx + Tomcat<br>MariaDB HA<br>전자정부 FW 5.0</div>
+      <div class="site-req">SFR-004</div>
+    </div>
+    <div class="site-card">
+      <div class="site-name">영문사이트</div>
+      <div class="site-tech">Nginx + Tomcat<br>MariaDB HA<br>CDN 이미지캐시</div>
+      <div class="site-req">SFR-005</div>
+    </div>
+    <div class="site-card">
+      <div class="site-name admin">관리자사이트</div>
+      <div class="site-tech">Nginx + Nexacro<br>Tomcat + MariaDB<br>N V24</div>
+      <div class="site-req">SFR-009</div>
+    </div>
+    <div class="site-card">
+      <div class="site-name integ">통합정보시스템</div>
+      <div class="site-tech">Nginx + Nexacro<br>Tomcat + Oracle<br>(기존활용)</div>
+      <div class="site-req">SFR-012, 013</div>
+    </div>
+  </div>
+
+  <!-- 인프라 구성 -->
+  <div class="arch-container">
+    <div class="arch-zone">
+      <div class="zone-header cloud">민간클라우드 (신규)</div>
+      <div class="zone-body">
+        <div class="server-group">
+          <div class="server-label">WEB TIER</div>
+          <div class="server-items">
+            <div class="server-chip web">Nginx <span class="server-count">국문/영문 2식</span></div>
+            <div class="server-chip web">Nginx <span class="server-count">관리자 1식</span></div>
+            <div class="server-chip infra">CDN <span class="server-count">영문이미지</span></div>
+          </div>
+        </div>
+        <div class="server-group">
+          <div class="server-label">APP TIER</div>
+          <div class="server-items">
+            <div class="server-chip was">Tomcat <span class="server-count">국문 2식</span></div>
+            <div class="server-chip was">Tomcat <span class="server-count">영문 2식</span></div>
+            <div class="server-chip was">Tomcat <span class="server-count">관리자 1식</span></div>
+          </div>
+        </div>
+        <div class="server-group">
+          <div class="server-label">DATA TIER</div>
+          <div class="server-items">
+            <div class="server-chip db">MariaDB HA <span class="server-count">2식</span></div>
+            <div class="server-chip infra">NAS <span class="server-count">운영/개발 2식</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 50px; flex-shrink: 0;">
+      <div class="vpn-badge">IPsec VPN</div>
+    </div>
+
+    <div class="arch-zone" style="flex: 0.7;">
+      <div class="zone-header idc">중진공 IDC (기존)</div>
+      <div class="zone-body">
+        <div class="server-group">
+          <div class="server-label">WEB TIER</div>
+          <div class="server-items">
+            <div class="server-chip web">Nginx <span class="server-count">통합정보 1식</span></div>
+          </div>
+        </div>
+        <div class="server-group">
+          <div class="server-label">APP TIER</div>
+          <div class="server-items">
+            <div class="server-chip front">Nexacro <span class="server-count">관리자 1식</span></div>
+            <div class="server-chip front">Nexacro <span class="server-count">통합정보 1식</span></div>
+            <div class="server-chip was">Tomcat <span class="server-count">통합정보 1식</span></div>
+          </div>
+        </div>
+        <div class="server-group">
+          <div class="server-label">DATA TIER</div>
+          <div class="server-items">
+            <div class="server-chip db">Oracle <span class="server-count">기존활용</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 핵심 특징 -->
+  <div class="features-row">
+    <div class="feature-box">
+      <div class="feature-icon">🐳</div>
+      <div class="feature-title">컨테이너화</div>
+      <div class="feature-desc">K8s 오케스트레이션<br>Docker 표준 이미지</div>
+    </div>
+    <div class="feature-box">
+      <div class="feature-icon">📈</div>
+      <div class="feature-title">오토스케일링</div>
+      <div class="feature-desc">HPA 자동 확장<br>부하 기반 Pod 조정</div>
+    </div>
+    <div class="feature-box">
+      <div class="feature-icon">🔄</div>
+      <div class="feature-title">무중단 배포</div>
+      <div class="feature-desc">Blue/Green 배포<br>자동 롤백</div>
+    </div>
+    <div class="feature-box">
+      <div class="feature-icon">🔒</div>
+      <div class="feature-title">보안 강화</div>
+      <div class="feature-desc">DMZ 분리, VPN<br>NetworkPolicy</div>
+    </div>
+    <div class="feature-box">
+      <div class="feature-icon">📊</div>
+      <div class="feature-title">통합 모니터링</div>
+      <div class="feature-desc">Prometheus<br>Grafana + EFK</div>
+    </div>
+  </div>
+</div>
+
+<p class="figure-caption">[그림 2-4] TO-BE 목표 시스템 구성 개요</p>
+
+</div>
+
+<h4 id="2-사업-추진-방향-3대-축">(2) 사업 추진 방향 3대 축</h4>
+
+<p>본 컨소시엄은 <strong>플랫폼 전면 재구축</strong>, <strong>클라우드 전환</strong>, <strong>통합정보 고도화</strong>의 3대 축으로 차별화된 사업 추진 방향을 제시합니다.</p>
+
+<div class="figure-container">
+
+<style>
+  .embedded-chart-5 { margin: 0; padding: 0; box-sizing: border-box; }
+  .embedded-chart-5 {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+
+  .embedded-chart-5 .header {
+    text-align: center;
+    margin-bottom: 22px;
+  }
+  .embedded-chart-5 .header h2 {
+    font-size: 17px;
+    color: #1B2A4A;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .embedded-chart-5 .header .sub {
+    font-size: 10px;
+    color: #718096;
+    letter-spacing: 1px;
+  }
+  .embedded-chart-5 .header .line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #2D5F8A, #4A90D9);
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+
+  .embedded-chart-5 .axes-container {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .embedded-chart-5 .axis-card {
+    flex: 1;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+    position: relative;
+  }
+
+  .embedded-chart-5 .axis-header {
+    padding: 16px 14px;
+    color: #fff;
+    text-align: center;
+    position: relative;
+  }
+  .embedded-chart-5 .axis-header.ax1 { background: linear-gradient(135deg, #1B2A4A, #2D5F8A); }
+  .embedded-chart-5 .axis-header.ax2 { background: linear-gradient(135deg, #2B6CB0, #4299E1); }
+  .embedded-chart-5 .axis-header.ax3 { background: linear-gradient(135deg, #276749, #38A169); }
+
+  .embedded-chart-5 .axis-number {
+    font-size: 9px;
+    letter-spacing: 2px;
+    opacity: 0.7;
+    margin-bottom: 4px;
+  }
+  .embedded-chart-5 .axis-icon {
+    font-size: 28px;
+    margin-bottom: 6px;
+  }
+  .embedded-chart-5 .axis-title {
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+  }
+  .embedded-chart-5 .axis-subtitle {
+    font-size: 9px;
+    opacity: 0.75;
+    margin-top: 3px;
+  }
+
+  .embedded-chart-5 .axis-body {
+    padding: 14px 12px;
+    background: #fff;
+  }
+
+  .embedded-chart-5 .axis-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 8px;
+    font-size: 10px;
+    line-height: 1.5;
+    color: #4A5568;
+  }
+  .embedded-chart-5 .axis-item:last-child { margin-bottom: 0; }
+  .embedded-chart-5 .axis-check {
+    flex-shrink: 0;
+    font-size: 11px;
+    margin-top: 0;
+  }
+
+  .embedded-chart-5 .axis-footer {
+    padding: 8px 12px;
+    background: #F7FAFC;
+    border-top: 1px solid #EDF2F7;
+  }
+  .embedded-chart-5 .axis-req {
+    font-size: 9px;
+    color: #A0AEC0;
+  }
+  .embedded-chart-5 .axis-req strong {
+    color: #718096;
+  }
+
+  .embedded-chart-5 .bottom-banner {
+    padding: 16px 20px;
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+    border-radius: 12px;
+    color: #fff;
+    text-align: center;
+  }
+  .embedded-chart-5 .banner-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .embedded-chart-5 .banner-items {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+  }
+  .embedded-chart-5 .banner-item {
+    text-align: center;
+  }
+  .embedded-chart-5 .banner-num {
+    font-size: 22px;
+    font-weight: 800;
+    color: #63B3ED;
+  }
+  .embedded-chart-5 .banner-label {
+    font-size: 9px;
+    opacity: 0.8;
+    margin-top: 2px;
+  }
+</style>
+<div class="embedded-chart-5 embedded-chart">
+<div class="header">
+    <h2>사업 추진 방향 3대 축</h2>
+    <div class="sub">THREE PILLARS OF PROJECT EXECUTION</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="axes-container">
+    <!-- 1축 -->
+    <div class="axis-card">
+      <div class="axis-header ax1">
+        <div class="axis-number">AXIS 01</div>
+        <div class="axis-icon">🏗️</div>
+        <div class="axis-title">플랫폼 전면 재구축</div>
+        <div class="axis-subtitle">Platform Reconstruction</div>
+      </div>
+      <div class="axis-body">
+        <div class="axis-item">
+          <span class="axis-check">✓</span>
+          <span>4개 사이트 전면 재개발 (국문/영문/관리자/통합정보)</span>
+        </div>
+        <div class="axis-item">
+          <span class="axis-check">✓</span>
+          <span>전자정부 표준FW 5.0 버전 업그레이드</span>
+        </div>
+        <div class="axis-item">
+          <span class="axis-check">✓</span>
+          <span>UI/UX 재설계 (디지털정부서비스 가이드라인)</span>
+        </div>
+        <div class="axis-item">
+          <span class="axis-check">✓</span>
+          <span>DB 설계 표준화, 데이터 아키텍처 수립</span>
+        </div>
+        <div class="axis-item">
+          <span class="axis-check">✓</span>
+          <span>문서관리 체계 구축, 형상관리 도입</span>
+        </div>
+      </div>
+      <div class="axis-footer">
+        <div class="axis-req"><strong>대응:</strong> SFR-004~009, DAR-001~010, INR-001~012</div>
+      </div>
+    </div>
+
+    <!-- 2축 -->
+    <div class="axis-card">
+      <div class="axis-header ax2">
+        <div class="axis-number">AXIS 02</div>
+        <div class="axis-icon">☁️</div>
+        <div class="axis-title">클라우드 전환</div>
+        <div class="axis-subtitle">Cloud Migration</div>
+      </div>
+      <div class="axis-body">
+        <div class="axis-item">
+          <span class="axis-check">✓</span>
+          <span>민간클라우드 + 중진공 IDC 하이브리드 구성</span>
+        </div>
+        <div class="axis-item">
+          <span class="axis-check">✓</span>
+          <span>K8s 컨테이너 오케스트레이션</span>
+        </div>
+        <div class="axis-item">
+          <span class="axis-check">✓</span>
+          <span>오토스케일링으로 트래픽 급증 자동 대응</span>
+        </div>
+        <div class="axis-item">
+          <span class="axis-check">✓</span>
+          <span>CI/CD 파이프라인 무중단 배포</span>
+        </div>
+        <div class="axis-item">
+          <span class="axis-check">✓</span>
+          <span>CDN 글로벌 접속 최적화</span>
+        </div>
+      </div>
+      <div class="axis-footer">
+        <div class="axis-req"><strong>대응:</strong> SFR-001~003, PER-001~004</div>
+      </div>
+    </div>
+
+    <!-- 3축 -->
+    <div class="axis-card">
+      <div class="axis-header ax3">
+        <div class="axis-number">AXIS 03</div>
+        <div class="axis-icon">🔗</div>
+        <div class="axis-title">통합정보 고도화</div>
+        <div class="axis-subtitle">Integration Enhancement</div>
+      </div>
+      <div class="axis-body">
+        <div class="axis-item">
+          <span class="axis-check">✓</span>
+          <span>수출 데이터 표준화 및 통계 체계 고도화</span>
+        </div>
+        <div class="axis-item">
+          <span class="axis-check">✓</span>
+          <span>민감정보 처리를 통합정보시스템에서 수행</span>
+        </div>
+        <div class="axis-item">
+          <span class="axis-check">✓</span>
+          <span>API 기반 타기관 연계 (Tmydata, SIMS, 물류)</span>
+        </div>
+        <div class="axis-item">
+          <span class="axis-check">✓</span>
+          <span>공공마이데이터(PDS) 연계</span>
+        </div>
+        <div class="axis-item">
+          <span class="axis-check">✓</span>
+          <span>Oracle↔MariaDB 하이브리드 DB 관리</span>
+        </div>
+      </div>
+      <div class="axis-footer">
+        <div class="axis-req"><strong>대응:</strong> SFR-006~008, SFR-011~013</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-banner">
+    <div class="banner-title">요구사항 총괄 대응 현황</div>
+    <div class="banner-items">
+      <div class="banner-item">
+        <div class="banner-num">68</div>
+        <div class="banner-label">전체 요구사항</div>
+      </div>
+      <div class="banner-item">
+        <div class="banner-num">68</div>
+        <div class="banner-label">대응 완료</div>
+      </div>
+      <div class="banner-item">
+        <div class="banner-num">100%</div>
+        <div class="banner-label">대응률</div>
+      </div>
+      <div class="banner-item">
+        <div class="banner-num">10</div>
+        <div class="banner-label">평가영역</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="figure-caption">[그림 2-5] 사업 추진 방향 3대 축</p>
+
+</div>
+
+<h4 id="3-컨소시엄-차별화-역량">(3) 컨소시엄 차별화 역량</h4>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>차별화 요소</th>
+  <th>내용</th>
+  <th>근거</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>동일 플랫폼 구축 경험</strong></td>
+  <td>Gobiz Vietnam(고비즈코리아 베트남 버전)을 직접 구축하여 업무 프로세스·데이터 구조 실무 파악</td>
+  <td>ODA 사업 467백만원, 동일 발주기관</td>
+</tr>
+<tr>
+  <td><strong>K8s 실운영 + VortexUI</strong></td>
+  <td>APEX/FECT에서 K8s + Blue/Green 배포 실운영, VortexUI(React 19 + Next.js 16) 자체 프론트엔드 플랫폼 보유</td>
+  <td>SFR-001, COR-001</td>
+</tr>
+<tr>
+  <td><strong>수출 도메인 전문성</strong></td>
+  <td>관세사(대표) + KOTRA AI무역지원센터 3개소 운영, 수출 업무 심층 이해</td>
+  <td>8년 연속 FTA Korea 운영</td>
+</tr>
+</tbody>
+</table></div>
+
+<blockquote>
+
+  <p><strong>컨소시엄 강점</strong>: 아스트라비전은 ODA 사업으로 Gobiz Vietnam을 구축하고, KOTRA AI무역지원센터 3개소를 운영하여 고비즈코리아의 업무 프로세스를 실무적으로 파악하고 있습니다. 퀸텟시스템즈는 AWS ISV Partner로서 MSA/멀티테넌트 아키텍처 운영 경험을 보유하고 있습니다.</p>
+
+</blockquote>
+
+</div>
+
+<div class="a4-page">
+<h2 id="2-추진전략">2. 추진전략</h2>
+
+<h3 id="21-사업-추진전략-및-방향">2.1 사업 추진전략 및 방향</h3>
+
+<h4 id="1-핵심-전략-방향">(1) 핵심 전략 방향</h4>
+
+<p>본 컨소시엄은 <strong>"안전한 전환, 진화하는 플랫폼, 지속 가능한 성장"</strong> 이라는 비전 아래, 고비즈코리아를 차세대 온라인 수출 플랫폼으로 도약시키기 위한 3대 핵심 전략을 수립하였습니다.</p>
+
+<div class="figure-container">
+
+<style>
+  .embedded-chart-6 { margin: 0; padding: 0; box-sizing: border-box; }
+  .embedded-chart-6 {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+  .embedded-chart-6 .header { text-align: center; margin-bottom: 22px; }
+  .embedded-chart-6 .header h2 { font-size: 17px; color: #1B2A4A; letter-spacing: 2px; margin-bottom: 4px; }
+  .embedded-chart-6 .header .sub { font-size: 10px; color: #718096; letter-spacing: 1px; }
+  .embedded-chart-6 .header .line { width: 60px; height: 3px; background: linear-gradient(90deg, #2D5F8A, #4A90D9); margin: 10px auto 0; border-radius: 2px; }
+  .embedded-chart-6 .vision-box {
+    padding: 18px 22px; background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+    border-radius: 14px; color: #fff; text-align: center; margin-bottom: 18px;
+    position: relative; overflow: hidden;
+  }
+  .embedded-chart-6 .vision-box::before { content: ''; position: absolute; top: -30px; right: -30px; width: 100px; height: 100px; background: rgba(255,255,255,0.05); border-radius: 50%; }
+  .embedded-chart-6 .vision-label { font-size: 9px; letter-spacing: 3px; opacity: 0.7; margin-bottom: 6px; }
+  .embedded-chart-6 .vision-title { font-size: 16px; font-weight: 800; letter-spacing: 1px; margin-bottom: 4px; }
+  .embedded-chart-6 .vision-sub { font-size: 10px; opacity: 0.8; line-height: 1.5; }
+  .embedded-chart-6 .pillars { display: flex; gap: 10px; margin-bottom: 18px; }
+  .embedded-chart-6 .pillar { flex: 1; border-radius: 12px; overflow: hidden; border: 1px solid #E2E8F0; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+  .embedded-chart-6 .pillar-head { padding: 14px 12px; color: #fff; text-align: center; }
+  .embedded-chart-6 .pillar-head.p1 { background: linear-gradient(135deg, #2B6CB0, #4299E1); }
+  .embedded-chart-6 .pillar-head.p2 { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .embedded-chart-6 .pillar-head.p3 { background: linear-gradient(135deg, #276749, #38A169); }
+  .embedded-chart-6 .pillar-num { font-size: 9px; letter-spacing: 2px; opacity: 0.7; margin-bottom: 2px; }
+  .embedded-chart-6 .pillar-icon { font-size: 24px; margin-bottom: 4px; }
+  .embedded-chart-6 .pillar-title { font-size: 13px; font-weight: 800; }
+  .embedded-chart-6 .pillar-eng { font-size: 8px; opacity: 0.75; margin-top: 2px; }
+  .embedded-chart-6 .pillar-body { padding: 12px 10px; background: #fff; }
+  .embedded-chart-6 .pillar-item { display: flex; align-items: flex-start; gap: 5px; margin-bottom: 6px; font-size: 10px; line-height: 1.5; color: #4A5568; }
+  .embedded-chart-6 .pillar-item:last-child { margin-bottom: 0; }
+  .embedded-chart-6 .pi-check { flex-shrink: 0; font-size: 10px; }
+  .embedded-chart-6 .diff-section { margin-bottom: 14px; }
+  .embedded-chart-6 .section-label { font-size: 11px; font-weight: 700; color: #1B2A4A; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+  .embedded-chart-6 .section-label .dot { width: 4px; height: 13px; border-radius: 2px; background: linear-gradient(180deg, #2D5F8A, #4A90D9); }
+  .embedded-chart-6 .diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .embedded-chart-6 .diff-card { padding: 14px; border-radius: 10px; border: 1px solid #E2E8F0; background: #FAFBFC; position: relative; }
+  .embedded-chart-6 .diff-badge { position: absolute; top: -1px; right: -1px; font-size: 7px; font-weight: 700; padding: 3px 8px; border-radius: 0 9px 0 9px; color: #fff; background: #2D5F8A; }
+  .embedded-chart-6 .diff-title { font-size: 11px; font-weight: 700; color: #1B2A4A; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .embedded-chart-6 .diff-title .dt-icon { font-size: 16px; }
+  .embedded-chart-6 .diff-desc { font-size: 9.5px; color: #4A5568; line-height: 1.6; }
+  .embedded-chart-6 .diff-desc strong { color: #2D5F8A; }
+  .embedded-chart-6 .pain-row { display: flex; gap: 8px; padding: 14px 16px; background: linear-gradient(135deg, #EBF8FF, #BEE3F8); border-radius: 10px; border-left: 4px solid #2B6CB0; align-items: flex-start; }
+  .embedded-chart-6 .pain-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .embedded-chart-6 .pain-content { flex: 1; }
+  .embedded-chart-6 .pain-title { font-size: 11px; font-weight: 700; color: #1A365D; margin-bottom: 6px; }
+  .embedded-chart-6 .pain-items { display: flex; flex-direction: column; gap: 4px; }
+  .embedded-chart-6 .pain-item { font-size: 10px; color: #2D3748; line-height: 1.5; display: flex; align-items: flex-start; gap: 4px; }
+  .embedded-chart-6 .pain-dot { width: 4px; height: 4px; border-radius: 50%; background: #2B6CB0; flex-shrink: 0; margin-top: 5px; }
+</style>
+<div class="embedded-chart-6 embedded-chart">
+<div class="header">
+    <h2>핵심 전략 방향</h2>
+    <div class="sub">STRATEGIC DIRECTION FOR PROJECT SUCCESS</div>
+    <div class="line"></div>
+  </div>
+  <div class="vision-box">
+    <div class="vision-label">PROJECT VISION</div>
+    <div class="vision-title">"안전한 전환, 진화하는 플랫폼, 지속 가능한 성장"</div>
+    <div class="vision-sub">클라우드 네이티브 전환을 통해 고비즈코리아를 차세대 온라인 수출 플랫폼으로 도약시킵니다</div>
+  </div>
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-head p1">
+        <div class="pillar-num">STRATEGY 01</div>
+        <div class="pillar-icon">🛡️</div>
+        <div class="pillar-title">무중단 안전 전환</div>
+        <div class="pillar-eng">Zero-Downtime Migration</div>
+      </div>
+      <div class="pillar-body">
+        <div class="pillar-item"><span class="pi-check">✓</span><span>Blue/Green 배포로 서비스 중단 제로</span></div>
+        <div class="pillar-item"><span class="pi-check">✓</span><span>단계별 마이그레이션 + 자동 롤백</span></div>
+        <div class="pillar-item"><span class="pi-check">✓</span><span>데이터 정합성 100% 검증</span></div>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-head p2">
+        <div class="pillar-num">STRATEGY 02</div>
+        <div class="pillar-icon">⚡</div>
+        <div class="pillar-title">클라우드 네이티브</div>
+        <div class="pillar-eng">Cloud-Native Architecture</div>
+      </div>
+      <div class="pillar-body">
+        <div class="pillar-item"><span class="pi-check">✓</span><span>K8s 오토스케일링 탄력적 확장</span></div>
+        <div class="pillar-item"><span class="pi-check">✓</span><span>GitLab CI/CD + ArgoCD 자동 배포</span></div>
+        <div class="pillar-item"><span class="pi-check">✓</span><span>Rolling/B-G/Canary 적응형 배포</span></div>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-head p3">
+        <div class="pillar-num">STRATEGY 03</div>
+        <div class="pillar-icon">📊</div>
+        <div class="pillar-title">데이터 기반 혁신</div>
+        <div class="pillar-eng">Data-Driven Innovation</div>
+      </div>
+      <div class="pillar-body">
+        <div class="pillar-item"><span class="pi-check">✓</span><span>수출 데이터 표준 체계 수립</span></div>
+        <div class="pillar-item"><span class="pi-check">✓</span><span>공공마이데이터 연계 확장</span></div>
+        <div class="pillar-item"><span class="pi-check">✓</span><span>통계 분석 고도화 기반 마련</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="diff-section">
+    <div class="section-label"><div class="dot"></div>차별화 포인트 (Differentiators)</div>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-badge">ODA 경험</div>
+        <div class="diff-title"><span class="dt-icon">🌏</span>동일 플랫폼 구축 경험</div>
+        <div class="diff-desc">Gobiz Vietnam을 <strong>직접 구축</strong>하여 고비즈코리아의 업무 프로세스·데이터 구조를 실무적으로 파악</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-badge">기술력</div>
+        <div class="diff-title"><span class="dt-icon">🔧</span>K8s 실운영 + VortexUI</div>
+        <div class="diff-desc">APEX/FECT에서 <strong>K8s + Blue/Green 배포</strong> 실운영, <strong>VortexUI(React 19)</strong> 자체 프론트엔드 플랫폼</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-badge">글로벌</div>
+        <div class="diff-title"><span class="dt-icon">👥</span>한-베 28명 전문 인력</div>
+        <div class="diff-desc">한국 8명 + 베트남 20명의 <strong>시차 활용 병렬 개발</strong>로 270일 내 안정적 납기 달성</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-badge">도메인</div>
+        <div class="diff-title"><span class="dt-icon">📋</span>수출 도메인 전문성</div>
+        <div class="diff-desc">관세사(대표) + KOTRA AI무역지원센터 3개소 운영으로 <strong>수출 업무 심층 이해</strong></div>
+      </div>
+    </div>
+  </div>
+  <div class="pain-row">
+    <div class="pain-icon">🎯</div>
+    <div class="pain-content">
+      <div class="pain-title">발주처 Pain Point 해결 전략</div>
+      <div class="pain-items">
+        <div class="pain-item"><div class="pain-dot"></div><span><strong>트래픽 급증 대응 불가</strong> → K8s 오토스케일링으로 수출지원사업 신청 시기 자동 확장</span></div>
+        <div class="pain-item"><div class="pain-dot"></div><span><strong>해외 접속 속도 저하</strong> → CDN + Next.js 16 SSG로 해외바이어 접속 최적화</span></div>
+        <div class="pain-item"><div class="pain-dot"></div><span><strong>배포 시 서비스 중단</strong> → Rolling/Blue-Green/Canary 적응형 무중단 배포 체계</span></div>
+        <div class="pain-item"><div class="pain-dot"></div><span><strong>노후 기술 스택</strong> → 전자정부 FW 5.0 + VortexUI(React 19) 프론트엔드 이원화</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="figure-caption">[그림 2-6] 핵심 전략 방향</p>
+
+</div>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>전략 원칙</th>
+  <th>핵심 목표</th>
+  <th>구현 방안</th>
+  <th>대응 요구사항</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>무중단 안전 전환</strong></td>
+  <td>서비스 중단 제로</td>
+  <td>Blue/Green 배포 + 단계적 마이그레이션 + 자동 롤백</td>
+  <td>SFR-001, SFR-002</td>
+</tr>
+<tr>
+  <td><strong>클라우드 네이티브</strong></td>
+  <td>탄력적 인프라 확보</td>
+  <td>K8s 오토스케일링 + GitLab CI/CD + ArgoCD 자동 배포</td>
+  <td>SFR-001, PER-001</td>
+</tr>
+<tr>
+  <td><strong>데이터 기반 혁신</strong></td>
+  <td>수출 데이터 가치 창출</td>
+  <td>데이터 표준 체계 + 공공마이데이터 연계 + 통계 고도화</td>
+  <td>SFR-006, DAR-001</td>
+</tr>
+</tbody>
+</table></div>
+
+<h4 id="2-발주처-pain-point-해결-전략">(2) 발주처 Pain Point 해결 전략</h4>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>발주처 Pain Point</th>
+  <th>해결 전략</th>
+  <th>기대 효과</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>수출지원사업 신청 시기 트래픽 급증</td>
+  <td>K8s HPA 오토스케일링으로 자동 확장</td>
+  <td>동시 접속 무제한 확장</td>
+</tr>
+<tr>
+  <td>해외바이어 접속 속도 저하</td>
+  <td>CDN + Next.js 16 SSG 정적 사이트 배포</td>
+  <td>글로벌 접속 70%+ 개선</td>
+</tr>
+<tr>
+  <td>배포 시 서비스 중단</td>
+  <td>Rolling/Blue-Green/Canary 적응형 무중단 배포</td>
+  <td>서비스 중단 제로</td>
+</tr>
+<tr>
+  <td>노후 기술 스택</td>
+  <td>전자정부 FW 5.0 + VortexUI(React 19 + Next.js 16) 프론트엔드 이원화</td>
+  <td>기술부채 해소</td>
+</tr>
+</tbody>
+</table></div>
+
+<h4 id="3-단계별-추진-전략">(3) 단계별 추진 전략</h4>
+
+<p>프로젝트를 <strong>기반 구축 → 핵심 개발 → 검증·안정화</strong>의 3단계로 나누어, 각 단계의 핵심 목표에 집중하는 점진적 접근 전략을 적용합니다.</p>
+
+<div class="figure-container">
+
+<style>
+  .embedded-chart-7 { margin: 0; padding: 0; box-sizing: border-box; }
+  .embedded-chart-7 {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    width: 700px;
+    padding: 28px;
+    background: #fff;
+    color: #2D3748;
+    line-height: 1.6;
+  }
+
+  /* Header */
+  .embedded-chart-7 .header { text-align: center; margin-bottom: 32px; }
+  .embedded-chart-7 .header h2 {
+    font-size: 17px;
+    color: #1B2A4A;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .embedded-chart-7 .header .sub {
+    font-size: 10px;
+    color: #718096;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .embedded-chart-7 .header .gradient-line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #2D5F8A, #4A90D9);
+    border-radius: 2px;
+    margin: 0 auto;
+  }
+
+  /* Timeline container */
+  .embedded-chart-7 .timeline {
+    position: relative;
+    padding: 10px 0 20px 0;
+  }
+  .embedded-chart-7 .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #2D5F8A 0%, #4A90D9 20%, #805AD5 50%, #553C9A 65%, #38A169 85%, #276749 100%);
+    border-radius: 2px;
+    transform: translateX(-50%);
+  }
+
+  /* Phase item */
+  .embedded-chart-7 .phase-item {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 28px;
+  }
+  .embedded-chart-7 .phase-item:last-child { margin-bottom: 0; }
+
+  /* Timeline node */
+  .embedded-chart-7 .phase-node {
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    z-index: 2;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.1), 0 2px 6px rgba(0,0,0,0.12);
+  }
+  .embedded-chart-7 .phase-node.blue { background: linear-gradient(135deg, #2D5F8A, #4A90D9); }
+  .embedded-chart-7 .phase-node.purple { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .embedded-chart-7 .phase-node.green { background: linear-gradient(135deg, #276749, #38A169); }
+
+  /* Phase card */
+  .embedded-chart-7 .phase-card {
+    width: 44%;
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    overflow: hidden;
+    background: #fff;
+  }
+  .embedded-chart-7 .phase-item.left .phase-card { margin-right: auto; }
+  .embedded-chart-7 .phase-item.right .phase-card { margin-left: auto; }
+
+  .embedded-chart-7 .phase-card-header {
+    padding: 10px 14px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .embedded-chart-7 .phase-card-header.blue { background: linear-gradient(135deg, #2D5F8A, #4A90D9); }
+  .embedded-chart-7 .phase-card-header.purple { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .embedded-chart-7 .phase-card-header.green { background: linear-gradient(135deg, #276749, #38A169); }
+
+  .embedded-chart-7 .phase-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    opacity: 0.85;
+  }
+  .embedded-chart-7 .phase-title {
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .embedded-chart-7 .phase-period {
+    font-size: 9px;
+    opacity: 0.8;
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  .embedded-chart-7 .phase-card-body {
+    padding: 12px 14px;
+  }
+  .embedded-chart-7 .phase-card-body ul {
+    list-style: none;
+    padding: 0;
+  }
+  .embedded-chart-7 .phase-card-body li {
+    font-size: 11px;
+    color: #4A5568;
+    padding: 3px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    line-height: 1.5;
+  }
+  .embedded-chart-7 .phase-card-body li::before {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+  .embedded-chart-7 .phase-card-body.blue li::before { background: #4A90D9; }
+  .embedded-chart-7 .phase-card-body.purple li::before { background: #805AD5; }
+  .embedded-chart-7 .phase-card-body.green li::before { background: #38A169; }
+
+  .embedded-chart-7 .tech-tag {
+    display: inline-block;
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-weight: 600;
+    margin-left: 2px;
+  }
+  .embedded-chart-7 .tech-tag.blue { background: #EBF4FF; color: #2B6CB0; }
+  .embedded-chart-7 .tech-tag.purple { background: #F3E8FF; color: #553C9A; }
+  .embedded-chart-7 .tech-tag.green { background: #E6FFED; color: #276749; }
+
+  /* Connector lines from node to card */
+  .phase-item.left::after,
+  .embedded-chart-7 .phase-item.right::after {
+    content: '';
+    position: absolute;
+    top: 28px;
+    height: 1px;
+    border-top: 1.5px dashed #CBD5E0;
+  }
+  .embedded-chart-7 .phase-item.left::after {
+    left: 44%;
+    right: 50%;
+    margin-right: 10px;
+    margin-left: 0;
+  }
+  .embedded-chart-7 .phase-item.right::after {
+    left: 50%;
+    right: 44%;
+    margin-left: 10px;
+    margin-right: 0;
+  }
+
+  /* Summary bar */
+  .embedded-chart-7 .summary-bar {
+    display: flex;
+    gap: 8px;
+    margin-top: 30px;
+    padding: 0 20px;
+  }
+  .embedded-chart-7 .summary-box {
+    flex: 1;
+    border-radius: 10px;
+    padding: 12px 14px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .embedded-chart-7 .summary-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+  }
+  .embedded-chart-7 .summary-box.blue { background: linear-gradient(135deg, #2D5F8A, #4A90D9); }
+  .embedded-chart-7 .summary-box.purple { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .embedded-chart-7 .summary-box.green { background: linear-gradient(135deg, #276749, #38A169); }
+
+  .embedded-chart-7 .summary-phase-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    opacity: 0.85;
+  }
+  .embedded-chart-7 .summary-month {
+    font-size: 18px;
+    font-weight: 800;
+    margin: 2px 0;
+  }
+  .embedded-chart-7 .summary-name {
+    font-size: 10px;
+    font-weight: 600;
+    opacity: 0.9;
+  }
+
+  /* Arrow between summary boxes */
+  .embedded-chart-7 .summary-arrow {
+    display: flex;
+    align-items: center;
+    color: #A0AEC0;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+</style>
+<div class="embedded-chart-7 embedded-chart">
+<div class="header">
+  <h2>단계별 추진 전략</h2>
+  <div class="sub">PHASED IMPLEMENTATION STRATEGY</div>
+  <div class="gradient-line"></div>
+</div>
+
+<!-- Timeline -->
+<div class="timeline">
+
+  <!-- PHASE 1 -->
+  <div class="phase-item left">
+    <div class="phase-card">
+      <div class="phase-card-header blue">
+        <div>
+          <div class="phase-label">PHASE 1</div>
+          <div class="phase-title">기반구축</div>
+        </div>
+        <div class="phase-period">M ~ M+3</div>
+      </div>
+      <div class="phase-card-body blue">
+        <ul>
+          <li>현행 시스템 분석 및 요구사항 정의</li>
+          <li>하이브리드 클라우드 인프라 구성 <span class="tech-tag blue">K8s</span></li>
+          <li>DB 스키마 설계 및 데이터 모델링</li>
+          <li>CI/CD 파이프라인 구축 <span class="tech-tag blue">GitLab CI</span> <span class="tech-tag blue">Harbor</span> <span class="tech-tag blue">ArgoCD</span></li>
+          <li>전자정부 프레임워크 5.0 기반 환경 구성</li>
+        </ul>
+      </div>
+    </div>
+    <div class="phase-node blue"></div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase-item right">
+    <div class="phase-node purple"></div>
+    <div class="phase-card">
+      <div class="phase-card-header purple">
+        <div>
+          <div class="phase-label">PHASE 2</div>
+          <div class="phase-title">핵심개발</div>
+        </div>
+        <div class="phase-period">M+3 ~ M+6</div>
+      </div>
+      <div class="phase-card-body purple">
+        <ul>
+          <li>4개 사이트 병렬 개발<br/>
+            <span style="margin-left: 0;">- 국문/영문: <span class="tech-tag purple">VortexUI</span> <span class="tech-tag purple">React 19</span> <span class="tech-tag purple">Next.js 16</span></span><br/>
+            <span style="margin-left: 0;">- 관리자/통합정보: <span class="tech-tag purple">Nexacro N V24</span></span>
+          </li>
+          <li>Oracle &rarr; MariaDB 단계적 마이그레이션</li>
+          <li>외부기관 API 연계 인터페이스 개발</li>
+          <li>CBD 컴포넌트 기반 <span class="tech-tag purple">4주 스프린트&times;4</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase-item left">
+    <div class="phase-card">
+      <div class="phase-card-header green">
+        <div>
+          <div class="phase-label">PHASE 3</div>
+          <div class="phase-title">검증안정화</div>
+        </div>
+        <div class="phase-period">M+6 ~ M+8</div>
+      </div>
+      <div class="phase-card-body green">
+        <ul>
+          <li>성능 &middot; 보안 &middot; 접근성 통합 테스트</li>
+          <li>Blue/Green 무중단 전환 배포</li>
+          <li>사용자 교육 및 운영 매뉴얼 제공</li>
+          <li>시범운영 안정화 및 이슈 대응</li>
+        </ul>
+      </div>
+    </div>
+    <div class="phase-node green"></div>
+  </div>
+
+</div>
+
+<!-- Summary bar -->
+<div class="summary-bar">
+  <div class="summary-box blue">
+    <div class="summary-phase-label">PHASE 1</div>
+    <div class="summary-month">3개월</div>
+    <div class="summary-name">기반구축</div>
+  </div>
+  <div class="summary-arrow">&rarr;</div>
+  <div class="summary-box purple">
+    <div class="summary-phase-label">PHASE 2</div>
+    <div class="summary-month">3개월</div>
+    <div class="summary-name">핵심개발</div>
+  </div>
+  <div class="summary-arrow">&rarr;</div>
+  <div class="summary-box green">
+    <div class="summary-phase-label">PHASE 3</div>
+    <div class="summary-month">2개월</div>
+    <div class="summary-name">검증안정화</div>
+  </div>
+</div>
+</div>
+
+<p class="figure-caption">[그림 2-7] 단계별 추진 전략</p>
+
+</div>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>단계</th>
+  <th>기간</th>
+  <th>핵심 목표</th>
+  <th>주요 활동</th>
+  <th>마일스톤</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>PHASE 1: 기반 구축</strong></td>
+  <td>M ~ M+3</td>
+  <td>안전한 전환 기반 확보</td>
+  <td>현행 분석, 하이브리드 클라우드 인프라 구축, DB 스키마 설계, CI/CD 구축(GitLab CI + Harbor + ArgoCD), 전자정부 FW 5.0 환경 구성</td>
+  <td>착수보고회</td>
+</tr>
+<tr>
+  <td><strong>PHASE 2: 핵심 개발</strong></td>
+  <td>M+3 ~ M+6</td>
+  <td>4개 사이트 기능 구현</td>
+  <td>국문/영문 VortexUI(React 19 + Next.js 16) 개발, 관리자/통합정보 Nexacro N V24 개발, Oracle→MariaDB 마이그레이션, 외부기관 API 연계, CBD 4주 스프린트×4</td>
+  <td>중간보고회</td>
+</tr>
+<tr>
+  <td><strong>PHASE 3: 검증·안정화</strong></td>
+  <td>M+6 ~ M+8</td>
+  <td>무결점 오픈</td>
+  <td>성능·보안·접근성 통합 테스트, Blue/Green 무중단 전환 실행, 사용자 교육, 시범운영 및 안정화</td>
+  <td>최종보고회</td>
+</tr>
+</tbody>
+</table></div>
+
+<p><strong>PHASE 1 — "실패 없는 전환 기반 확보"</strong></p>
+
+<ul>
+
+  <li>착수 즉시 클라우드 인프라를 선행 구축하여 개발 환경 조기 확보</li>
+
+  <li>DB 스키마 설계 리뷰 2회 + 발주처 승인으로 마이그레이션 리스크 선제 해소</li>
+
+  <li>CI/CD 파이프라인(GitLab CE → Harbor → ArgoCD) 구축으로 자동 빌드/배포 체계 확립</li>
+
+  <li><strong>KPI</strong>: 요구사항 확정률 100%, PoC(기술 검증) 완료</li>
+
+</ul>
+
+<p><strong>PHASE 2 — "CBD 컴포넌트 기반 민첩한 구축"</strong></p>
+
+<ul>
+
+  <li>CBD 방법론 기반 컴포넌트 단위 재사용으로 4개 사이트 효율적 개발</li>
+
+  <li>프론트엔드 이원화: 국문/영문은 VortexUI(React 19 + Next.js 16 SSG), 관리자/통합정보는 Nexacro N V24</li>
+
+  <li>4주 스프린트 리뷰에서 발주처 피드백 조기 반영</li>
+
+  <li><strong>KPI</strong>: 스프린트당 기능 완료율 90%+, 스프린트 리뷰 4회</li>
+
+</ul>
+
+<p><strong>PHASE 3 — "안전한 오픈, 무결점 인수인계"</strong></p>
+
+<ul>
+
+  <li>5단계 테스트(단위→통합→성능→시스템→인수) 체계적 수행</li>
+
+  <li>Blue/Green 배포로 무중단 전환, Canary 배포로 리스크 사전 검증</li>
+
+  <li>사이트별 단계적 전환(관리자 → 국문 → 영문 → 통합정보) 안전성 확보</li>
+
+  <li><strong>KPI</strong>: 가용성 99.9%, 응답시간 3초 이내(CDN 정적 페이지 1초 이내), 국정원 보안점검 통과</li>
+
+</ul>
+
+<h4 id="4-안정적-전환오픈-전략">(4) 안정적 전환/오픈 전략</h4>
+
+<p>본 사업은 5만여 개 중소기업과 글로벌 바이어가 실시간 거래하는 플랫폼 특성을 고려하여, <strong>단계적 전환(Phased Rollout) + Blue/Green 배포</strong>를 채택합니다.</p>
+
+<div class="figure-container">
+
+<style>
+  .embedded-chart-8 { margin: 0; padding: 0; box-sizing: border-box; }
+  .embedded-chart-8 {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+  .embedded-chart-8 .header { text-align: center; margin-bottom: 20px; }
+  .embedded-chart-8 .header h2 { font-size: 17px; color: #1B2A4A; letter-spacing: 2px; margin-bottom: 4px; }
+  .embedded-chart-8 .header .sub { font-size: 10px; color: #718096; letter-spacing: 1px; }
+  .embedded-chart-8 .header .line { width: 60px; height: 3px; background: linear-gradient(90deg, #2D5F8A, #4A90D9); margin: 10px auto 0; border-radius: 2px; }
+
+  .embedded-chart-8 .section-label {
+    font-size: 11px; font-weight: 700; color: #1B2A4A;
+    margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+  }
+  .embedded-chart-8 .section-label .dot { width: 4px; height: 13px; border-radius: 2px; background: linear-gradient(180deg, #2D5F8A, #4A90D9); }
+
+  /* Comparison Table */
+  .embedded-chart-8 .compare-table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    border-radius: 10px; overflow: hidden;
+    border: 1px solid #E2E8F0;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .embedded-chart-8 .compare-table thead th {
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+    color: #fff; font-size: 9.5px; font-weight: 600;
+    padding: 10px 12px; text-align: center;
+  }
+  .embedded-chart-8 .compare-table tbody td {
+    padding: 9px 12px; font-size: 9.5px; color: #4A5568;
+    border-bottom: 1px solid #F0F4F8;
+    text-align: center; line-height: 1.5;
+  }
+  .embedded-chart-8 .compare-table tbody tr:last-child td { border-bottom: none; }
+  .embedded-chart-8 .compare-table tbody td:first-child { font-weight: 700; color: #1B2A4A; text-align: left; }
+  .embedded-chart-8 .selected-badge {
+    display: inline-block; padding: 3px 10px;
+    border-radius: 8px; font-size: 8px; font-weight: 700;
+    background: #C6F6D5; color: #276749;
+  }
+  .embedded-chart-8 .not-badge {
+    display: inline-block; padding: 3px 10px;
+    border-radius: 8px; font-size: 8px; font-weight: 700;
+    background: #FED7D7; color: #9B2C2C;
+  }
+
+  /* Migration Flow */
+  .embedded-chart-8 .migration-flow { margin-bottom: 18px; }
+  .embedded-chart-8 .mf-steps { display: flex; gap: 4px; align-items: stretch; }
+  .embedded-chart-8 .mf-step {
+    flex: 1; border-radius: 10px; overflow: hidden;
+    border: 1px solid #E2E8F0; box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .embedded-chart-8 .mf-head {
+    padding: 10px 8px; color: #fff; text-align: center;
+  }
+  .embedded-chart-8 .mf-head.s1 { background: linear-gradient(135deg, #1B2A4A, #2D5F8A); }
+  .embedded-chart-8 .mf-head.s2 { background: linear-gradient(135deg, #2B6CB0, #4299E1); }
+  .embedded-chart-8 .mf-head.s3 { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .embedded-chart-8 .mf-head.s4 { background: linear-gradient(135deg, #C05621, #ED8936); }
+  .embedded-chart-8 .mf-head.s5 { background: linear-gradient(135deg, #276749, #38A169); }
+  .embedded-chart-8 .mf-num { font-size: 8px; opacity: 0.7; letter-spacing: 1px; }
+  .embedded-chart-8 .mf-icon { font-size: 18px; margin: 3px 0; }
+  .embedded-chart-8 .mf-title { font-size: 10px; font-weight: 700; }
+  .embedded-chart-8 .mf-body {
+    padding: 8px; background: #fff;
+    font-size: 8.5px; color: #4A5568; line-height: 1.5;
+  }
+  .embedded-chart-8 .mf-body div { margin-bottom: 2px; }
+  .embedded-chart-8 .mf-body div:last-child { margin-bottom: 0; }
+
+  .embedded-chart-8 .mf-arrow { display: flex; align-items: center; font-size: 16px; color: #CBD5E0; flex-shrink: 0; }
+
+  /* Data Migration */
+  .embedded-chart-8 .dm-container { margin-bottom: 14px; }
+  .embedded-chart-8 .dm-flow {
+    display: flex; align-items: center; gap: 6px;
+    padding: 16px;
+    background: linear-gradient(135deg, #F7FAFC, #EDF2F7);
+    border-radius: 12px; border: 1px solid #E2E8F0;
+  }
+  .embedded-chart-8 .dm-box {
+    flex: 1; text-align: center; padding: 12px 8px;
+    background: #fff; border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  .embedded-chart-8 .dm-icon { font-size: 22px; margin-bottom: 4px; }
+  .embedded-chart-8 .dm-name { font-size: 10px; font-weight: 700; color: #1B2A4A; margin-bottom: 2px; }
+  .embedded-chart-8 .dm-desc { font-size: 8px; color: #718096; line-height: 1.4; }
+  .embedded-chart-8 .dm-arrow { font-size: 20px; color: #2D5F8A; flex-shrink: 0; font-weight: 800; }
+
+  /* Stabilization */
+  .embedded-chart-8 .stab-cards { display: flex; gap: 8px; }
+  .embedded-chart-8 .stab-card {
+    flex: 1; padding: 14px 12px; border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    text-align: center;
+  }
+  .embedded-chart-8 .stab-icon { font-size: 20px; margin-bottom: 6px; }
+  .embedded-chart-8 .stab-title { font-size: 10px; font-weight: 700; color: #1B2A4A; margin-bottom: 4px; }
+  .embedded-chart-8 .stab-desc { font-size: 9px; color: #4A5568; line-height: 1.5; }
+  .embedded-chart-8 .stab-period {
+    display: inline-block; margin-top: 6px;
+    padding: 2px 8px; border-radius: 6px;
+    font-size: 8px; font-weight: 700;
+    background: #EBF8FF; color: #2B6CB0;
+  }
+</style>
+<div class="embedded-chart-8 embedded-chart">
+<div class="header">
+    <h2>안정적 전환/오픈 전략</h2>
+    <div class="sub">MIGRATION &amp; GO-LIVE STRATEGY — PHASED ROLLOUT</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="section-label"><div class="dot"></div>전환 방식 비교 및 선정</div>
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>비교 항목</th>
+        <th>빅뱅(일괄 전환)</th>
+        <th>단계적 전환 (Phased Rollout)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>서비스 중단 위험</td>
+        <td>높음 (전면 중단)</td>
+        <td>낮음 (사이트별 순차 전환)</td>
+      </tr>
+      <tr>
+        <td>롤백 용이성</td>
+        <td>어려움 (전체 롤백 필요)</td>
+        <td>용이 (개별 사이트 롤백)</td>
+      </tr>
+      <tr>
+        <td>리스크 수준</td>
+        <td>높음</td>
+        <td>단계별 분산</td>
+      </tr>
+      <tr>
+        <td>전환 기간</td>
+        <td>짧음 (1회)</td>
+        <td>길지만 안전 (4단계)</td>
+      </tr>
+      <tr>
+        <td>본 사업 적합성</td>
+        <td><span class="not-badge">미선정</span></td>
+        <td><span class="selected-badge">✓ 채택</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="section-label"><div class="dot"></div>단계적 전환 로드맵 (Blue/Green 배포)</div>
+  <div class="migration-flow">
+    <div class="mf-steps">
+      <div class="mf-step">
+        <div class="mf-head s1">
+          <div class="mf-num">STEP 1</div>
+          <div class="mf-icon">🔍</div>
+          <div class="mf-title">사전 검증</div>
+        </div>
+        <div class="mf-body">
+          <div>· 전환 리허설 2회</div>
+          <div>· 데이터 정합성 검증</div>
+          <div>· 롤백 시나리오 확인</div>
+        </div>
+      </div>
+      <div class="mf-step">
+        <div class="mf-head s2">
+          <div class="mf-num">STEP 2</div>
+          <div class="mf-icon">🏛️</div>
+          <div class="mf-title">관리자 전환</div>
+        </div>
+        <div class="mf-body">
+          <div>· 관리자사이트 우선 전환</div>
+          <div>· 내부 사용자 검증</div>
+          <div>· 1주간 안정성 확인</div>
+        </div>
+      </div>
+      <div class="mf-step">
+        <div class="mf-head s3">
+          <div class="mf-num">STEP 3</div>
+          <div class="mf-icon">🇰🇷</div>
+          <div class="mf-title">국문사이트</div>
+        </div>
+        <div class="mf-body">
+          <div>· 국문사이트 전환</div>
+          <div>· 트래픽 모니터링</div>
+          <div>· 사용자 피드백 수집</div>
+        </div>
+      </div>
+      <div class="mf-step">
+        <div class="mf-head s4">
+          <div class="mf-num">STEP 4</div>
+          <div class="mf-icon">🌍</div>
+          <div class="mf-title">영문사이트</div>
+        </div>
+        <div class="mf-body">
+          <div>· 영문사이트 전환</div>
+          <div>· CDN 글로벌 캐싱 확인</div>
+          <div>· 해외 접속 성능 검증</div>
+        </div>
+      </div>
+      <div class="mf-step">
+        <div class="mf-head s5">
+          <div class="mf-num">STEP 5</div>
+          <div class="mf-icon">🔗</div>
+          <div class="mf-title">통합정보</div>
+        </div>
+        <div class="mf-body">
+          <div>· 통합정보시스템 전환</div>
+          <div>· 기관 연계 최종 확인</div>
+          <div>· 전체 안정화 선언</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label"><div class="dot"></div>데이터 마이그레이션 전략 (Oracle → MariaDB)</div>
+  <div class="dm-container">
+    <div class="dm-flow">
+      <div class="dm-box">
+        <div class="dm-icon">🗄️</div>
+        <div class="dm-name">Oracle (기존)</div>
+        <div class="dm-desc">중진공 IDC<br>기존 운영 DB</div>
+      </div>
+      <div class="dm-arrow">→</div>
+      <div class="dm-box">
+        <div class="dm-icon">🔄</div>
+        <div class="dm-name">ETL 변환</div>
+        <div class="dm-desc">스키마 변환<br>데이터 정제·매핑</div>
+      </div>
+      <div class="dm-arrow">→</div>
+      <div class="dm-box">
+        <div class="dm-icon">✅</div>
+        <div class="dm-name">정합성 검증</div>
+        <div class="dm-desc">건별 자동 비교<br>무결성 확인</div>
+      </div>
+      <div class="dm-arrow">→</div>
+      <div class="dm-box">
+        <div class="dm-icon">💾</div>
+        <div class="dm-name">MariaDB HA</div>
+        <div class="dm-desc">민간클라우드<br>이중화 신규 DB</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label"><div class="dot"></div>오픈 전후 안정화 대응</div>
+  <div class="stab-cards">
+    <div class="stab-card">
+      <div class="stab-icon">🔍</div>
+      <div class="stab-title">오픈 전 (D-14)</div>
+      <div class="stab-desc">전환 리허설, 성능 부하 테스트, 롤백 시나리오 확인, 비상 연락망 구성</div>
+      <div class="stab-period">사전 준비 2주</div>
+    </div>
+    <div class="stab-card">
+      <div class="stab-icon">🚀</div>
+      <div class="stab-title">오픈 당일 (D-Day)</div>
+      <div class="stab-desc">Blue/Green 전환, 전담팀 24시간 대기, 실시간 모니터링, 5분 롤백 대기</div>
+      <div class="stab-period">전환 당일 집중 관리</div>
+    </div>
+    <div class="stab-card">
+      <div class="stab-icon">🛡️</div>
+      <div class="stab-title">오픈 후 (D+30)</div>
+      <div class="stab-desc">집중 모니터링 1개월, 긴급 패치 체계, 사용자 피드백 대응, 성능 최적화</div>
+      <div class="stab-period">안정화 기간 30일</div>
+    </div>
+  </div>
+</div>
+
+<p class="figure-caption">[그림 2-8] 안정적 전환/오픈 전략</p>
+
+</div>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>비교 항목</th>
+  <th>빅뱅(일괄 전환)</th>
+  <th>단계적 전환 (Phased Rollout)</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>서비스 중단 위험</td>
+  <td>높음 (전면 중단)</td>
+  <td><strong>낮음</strong> (사이트별 순차 전환)</td>
+</tr>
+<tr>
+  <td>롤백 용이성</td>
+  <td>어려움 (전체 롤백)</td>
+  <td><strong>용이</strong> (개별 사이트 롤백)</td>
+</tr>
+<tr>
+  <td>리스크 수준</td>
+  <td>높음</td>
+  <td><strong>단계별 분산</strong></td>
+</tr>
+<tr>
+  <td>전환 기간</td>
+  <td>짧음 (1회)</td>
+  <td>길지만 안전 (4단계)</td>
+</tr>
+<tr>
+  <td><strong>본 사업 적합성</strong></td>
+  <td>미선정</td>
+  <td><strong>채택</strong></td>
+</tr>
+</tbody>
+</table></div>
+
+<p><strong>단계적 전환 로드맵</strong></p>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>STEP</th>
+  <th>대상</th>
+  <th>주요 활동</th>
+  <th>검증 기간</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>1. 사전 검증</strong></td>
+  <td>전체</td>
+  <td>전환 리허설 2회, 데이터 정합성 검증, 롤백 시나리오 확인</td>
+  <td>2주</td>
+</tr>
+<tr>
+  <td><strong>2. 관리자 전환</strong></td>
+  <td>관리자사이트</td>
+  <td>내부 사용자 우선 전환, 1주간 안정성 확인</td>
+  <td>1주</td>
+</tr>
+<tr>
+  <td><strong>3. 국문사이트</strong></td>
+  <td>국문사이트</td>
+  <td>Blue/Green 전환, 트래픽 모니터링, 사용자 피드백 수집</td>
+  <td>1주</td>
+</tr>
+<tr>
+  <td><strong>4. 영문사이트</strong></td>
+  <td>영문사이트</td>
+  <td>CDN 글로벌 캐싱 확인, 해외 접속 성능 검증</td>
+  <td>1주</td>
+</tr>
+<tr>
+  <td><strong>5. 통합정보</strong></td>
+  <td>통합정보시스템</td>
+  <td>기관 연계 최종 확인, 전체 안정화 선언</td>
+  <td>1주</td>
+</tr>
+</tbody>
+</table></div>
+
+<p><strong>오픈 전후 안정화 대응</strong></p>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>시점</th>
+  <th>기간</th>
+  <th>핵심 활동</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>오픈 전 (D-14)</strong></td>
+  <td>2주</td>
+  <td>전환 리허설, 성능 부하 테스트, 롤백 시나리오 확인, 비상 연락망 구성</td>
+</tr>
+<tr>
+  <td><strong>오픈 당일 (D-Day)</strong></td>
+  <td>1일</td>
+  <td>Blue/Green 전환, 전담팀 24시간 대기, 실시간 모니터링, 5분 롤백 대기</td>
+</tr>
+<tr>
+  <td><strong>오픈 후 (D+30)</strong></td>
+  <td>30일</td>
+  <td>집중 모니터링, 긴급 패치 체계, 사용자 피드백 대응, 성능 최적화</td>
+</tr>
+</tbody>
+</table></div>
+
+</div>
+
+<div class="a4-page">
+<h3 id="22-기대효과">2.2 기대효과</h3>
+
+<p>본 사업 추진을 통해 다음과 같은 정량적·정성적 기대효과를 달성합니다.</p>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>구분</th>
+  <th>기대효과</th>
+  <th>목표 수치</th>
+  <th>달성 방안</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>서비스 안정성</strong></td>
+  <td>시스템 가용성 향상</td>
+  <td>99.9% 이상</td>
+  <td>K8s HA 구성 + Blue/Green 무중단 배포 + 자동 복구</td>
+</tr>
+<tr>
+  <td><strong>사용자 경험</strong></td>
+  <td>페이지 응답시간 단축</td>
+  <td>3초 이내(CDN 정적 1초 이내)</td>
+  <td>CDN + Next.js 16 SSG + Nginx 캐싱 + 오토스케일링</td>
+</tr>
+<tr>
+  <td><strong>글로벌 접근성</strong></td>
+  <td>해외 접속 속도 개선</td>
+  <td>70%+ 개선</td>
+  <td>CDN 글로벌 캐싱 + 정적 사이트 배포</td>
+</tr>
+<tr>
+  <td><strong>운영 효율성</strong></td>
+  <td>배포 주기 단축</td>
+  <td>30배 단축</td>
+  <td>GitLab CI + Harbor + ArgoCD 자동 배포</td>
+</tr>
+<tr>
+  <td><strong>비용 절감</strong></td>
+  <td>DB 라이선스 비용 절감</td>
+  <td>Oracle→MariaDB</td>
+  <td>공개SW 전환으로 연간 라이선스 비용 절감</td>
+</tr>
+<tr>
+  <td><strong>보안 강화</strong></td>
+  <td>보안 취약점 제로</td>
+  <td>0건</td>
+  <td>시큐어코딩 상시 적용 + 정적/동적 보안 분석</td>
+</tr>
+<tr>
+  <td><strong>데이터 활용</strong></td>
+  <td>수출 통계 정확도 향상</td>
+  <td>데이터 표준 체계 수립</td>
+  <td>표준 코드 체계 + 공공마이데이터 연계</td>
+</tr>
+<tr>
+  <td><strong>확장성 확보</strong></td>
+  <td>트래픽 급증 자동 대응</td>
+  <td>무제한 확장</td>
+  <td>K8s HPA 오토스케일링</td>
+</tr>
+</tbody>
+</table></div>
+
+</div>
+
+<div class="a4-page">
+<h3 id="23-위험요소-및-대응방안">2.3 위험요소 및 대응방안</h3>
+
+<h4 id="1-핵심-리스크-식별-및-선제적-대응">(1) 핵심 리스크 식별 및 선제적 대응</h4>
+
+<p>본 컨소시엄은 유사 프로젝트 경험을 기반으로 핵심 리스크를 사전 식별하고, 선제적 대응 전략을 수립하였습니다.</p>
+
+<div class="figure-container">
+
+<style>
+  .embedded-chart-9 { margin: 0; padding: 0; box-sizing: border-box; }
+  .embedded-chart-9 {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+  .embedded-chart-9 .header { text-align: center; margin-bottom: 20px; }
+  .embedded-chart-9 .header h2 { font-size: 17px; color: #1B2A4A; letter-spacing: 2px; margin-bottom: 4px; }
+  .embedded-chart-9 .header .sub { font-size: 10px; color: #718096; letter-spacing: 1px; }
+  .embedded-chart-9 .header .line { width: 60px; height: 3px; background: linear-gradient(90deg, #2D5F8A, #4A90D9); margin: 10px auto 0; border-radius: 2px; }
+
+  .embedded-chart-9 .section-label {
+    font-size: 11px; font-weight: 700; color: #1B2A4A;
+    margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+  }
+  .embedded-chart-9 .section-label .dot { width: 4px; height: 13px; border-radius: 2px; background: linear-gradient(180deg, #2D5F8A, #4A90D9); }
+
+  /* Risk Matrix */
+  .embedded-chart-9 .matrix-container { margin-bottom: 18px; }
+  .embedded-chart-9 .matrix {
+    display: grid;
+    grid-template-columns: 30px repeat(3, 1fr);
+    grid-template-rows: repeat(3, 60px) 24px;
+    gap: 2px;
+    width: 100%;
+  }
+  .embedded-chart-9 .matrix-ylabel {
+    writing-mode: vertical-rl; text-orientation: mixed;
+    transform: rotate(180deg);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 700; color: #718096;
+    grid-row: 1 / 4;
+  }
+  .embedded-chart-9 .matrix-cell {
+    border-radius: 6px; padding: 6px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 3px; position: relative;
+  }
+  .embedded-chart-9 .cell-green { background: #F0FFF4; border: 1px solid #C6F6D5; }
+  .embedded-chart-9 .cell-yellow { background: #FFFFF0; border: 1px solid #FEFCBF; }
+  .embedded-chart-9 .cell-orange { background: #FFFAF0; border: 1px solid #FEEBC8; }
+  .embedded-chart-9 .cell-red { background: #FFF5F5; border: 1px solid #FED7D7; }
+
+  .embedded-chart-9 .risk-tag {
+    font-size: 7.5px; font-weight: 700; padding: 2px 6px;
+    border-radius: 4px; color: #fff; white-space: nowrap;
+    line-height: 1.3;
+  }
+  .embedded-chart-9 .rt-r1 { background: #E53E3E; }
+  .embedded-chart-9 .rt-r2 { background: #DD6B20; }
+  .embedded-chart-9 .rt-r3 { background: #D69E2E; }
+  .embedded-chart-9 .rt-r4 { background: #38A169; }
+  .embedded-chart-9 .rt-r5 { background: #3182CE; }
+  .embedded-chart-9 .rt-r6 { background: #805AD5; }
+
+  .embedded-chart-9 .matrix-xlabel {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 700; color: #718096;
+  }
+  .embedded-chart-9 .matrix-corner { }
+  .embedded-chart-9 .matrix-label-row {
+    display: flex; justify-content: space-around;
+    margin-top: 4px; padding-left: 30px;
+  }
+
+  .embedded-chart-9 .axis-labels {
+    display: flex; justify-content: space-between;
+    padding: 4px 0 0 32px;
+  }
+  .embedded-chart-9 .al-item { flex: 1; text-align: center; font-size: 8px; color: #A0AEC0; }
+
+  /* Risk Cards */
+  .embedded-chart-9 .risk-cards { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+  .embedded-chart-9 .risk-row {
+    display: flex; align-items: stretch; gap: 8px;
+    border-radius: 10px; overflow: hidden;
+    border: 1px solid #E2E8F0; box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .embedded-chart-9 .rr-left {
+    width: 180px; padding: 10px 12px;
+    display: flex; flex-direction: column; justify-content: center;
+    flex-shrink: 0;
+  }
+  .embedded-chart-9 .rr-left.high { background: linear-gradient(135deg, #FFF5F5, #FED7D7); border-right: 3px solid #E53E3E; }
+  .embedded-chart-9 .rr-left.mid { background: linear-gradient(135deg, #FFFAF0, #FEEBC8); border-right: 3px solid #DD6B20; }
+  .embedded-chart-9 .rr-left.low { background: linear-gradient(135deg, #FFFFF0, #FEFCBF); border-right: 3px solid #D69E2E; }
+  .embedded-chart-9 .rr-risk { font-size: 11px; font-weight: 700; color: #1B2A4A; margin-bottom: 2px; }
+  .embedded-chart-9 .rr-level { font-size: 8px; color: #718096; }
+
+  .embedded-chart-9 .rr-right {
+    flex: 1; padding: 10px 12px;
+    display: flex; flex-direction: column; gap: 3px;
+    background: #fff;
+  }
+  .embedded-chart-9 .rr-action { font-size: 9.5px; color: #4A5568; line-height: 1.5; display: flex; align-items: flex-start; gap: 4px; }
+  .embedded-chart-9 .rr-dot { width: 4px; height: 4px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .embedded-chart-9 .rr-dot.red { background: #E53E3E; }
+  .embedded-chart-9 .rr-dot.orange { background: #DD6B20; }
+  .embedded-chart-9 .rr-dot.yellow { background: #D69E2E; }
+  .embedded-chart-9 .rr-exp { font-size: 8px; color: #805AD5; font-weight: 600; margin-top: 2px; }
+
+  .embedded-chart-9 .bottom-note {
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #F7FAFC, #EDF2F7);
+    border-radius: 8px; border: 1px solid #E2E8F0;
+  }
+  .embedded-chart-9 .bn-title { font-size: 10px; font-weight: 700; color: #1B2A4A; margin-bottom: 4px; }
+  .embedded-chart-9 .bn-text { font-size: 9px; color: #4A5568; line-height: 1.6; }
+  .embedded-chart-9 .bn-text strong { color: #2D5F8A; }
+</style>
+<div class="embedded-chart-9 embedded-chart">
+<div class="header">
+    <h2>리스크 최소화 전략</h2>
+    <div class="sub">RISK MINIMIZATION — PROBABILITY × IMPACT MATRIX</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="section-label"><div class="dot"></div>리스크 매트릭스 (영향도 × 발생확률)</div>
+  <div class="matrix-container">
+    <div class="matrix">
+      <div class="matrix-ylabel">영 향 도 →</div>
+      <!-- Row 1: 영향도 상 -->
+      <div class="matrix-cell cell-orange">
+        <div class="risk-tag rt-r3">일정 지연</div>
+      </div>
+      <div class="matrix-cell cell-red">
+        <div class="risk-tag rt-r1">데이터 마이그레이션</div>
+        <div class="risk-tag rt-r5">기관 연계 장애</div>
+      </div>
+      <div class="matrix-cell cell-red">
+      </div>
+      <!-- Row 2: 영향도 중 -->
+      <div class="matrix-cell cell-green">
+        <div class="risk-tag rt-r4">성능 미달</div>
+      </div>
+      <div class="matrix-cell cell-orange">
+        <div class="risk-tag rt-r2">요구사항 변경</div>
+      </div>
+      <div class="matrix-cell cell-orange">
+      </div>
+      <!-- Row 3: 영향도 하 -->
+      <div class="matrix-cell cell-green">
+        <div class="risk-tag rt-r6">보안 취약점</div>
+      </div>
+      <div class="matrix-cell cell-green">
+      </div>
+      <div class="matrix-cell cell-yellow">
+      </div>
+      <!-- X labels -->
+      <div class="matrix-corner"></div>
+      <div class="matrix-xlabel">하</div>
+      <div class="matrix-xlabel">중</div>
+      <div class="matrix-xlabel">상</div>
+    </div>
+    <div style="text-align:center; font-size:8px; color:#A0AEC0; margin-top:4px;">← 발생확률 →</div>
+  </div>
+
+  <div class="section-label"><div class="dot"></div>핵심 리스크 선제 대응 전략</div>
+  <div class="risk-cards">
+    <div class="risk-row">
+      <div class="rr-left high">
+        <div class="rr-risk">데이터 마이그레이션 실패</div>
+        <div class="rr-level">영향도: 상 | 확률: 중</div>
+      </div>
+      <div class="rr-right">
+        <div class="rr-action"><div class="rr-dot red"></div>단계별 마이그레이션: 검증 → 병행운영 → 전환 → 롤백 체계</div>
+        <div class="rr-action"><div class="rr-dot red"></div>건별 정합성 검증 자동화, Oracle↔MariaDB 호환성 사전 PoC</div>
+        <div class="rr-exp">경험: VLE 11개사 대용량 마이그레이션 성공 수행</div>
+      </div>
+    </div>
+    <div class="risk-row">
+      <div class="rr-left high">
+        <div class="rr-risk">기관 연계 장애</div>
+        <div class="rr-level">영향도: 상 | 확률: 중</div>
+      </div>
+      <div class="rr-right">
+        <div class="rr-action"><div class="rr-dot red"></div>Mock 서버 기반 선행 개발, 연계기관별 사전 협의 체계</div>
+        <div class="rr-action"><div class="rr-dot red"></div>API 연동 사전 테스트 환경 구축, 장애 시 Fallback 처리</div>
+        <div class="rr-exp">경험: FECT 베트남 세관 VNACCS 연계, FTA Korea 관세청 API</div>
+      </div>
+    </div>
+    <div class="risk-row">
+      <div class="rr-left mid">
+        <div class="rr-risk">일정 지연</div>
+        <div class="rr-level">영향도: 상 | 확률: 하</div>
+      </div>
+      <div class="rr-right">
+        <div class="rr-action"><div class="rr-dot orange"></div>4주 스프린트 기반 조기 경보, 크리티컬 패스 집중 관리</div>
+        <div class="rr-action"><div class="rr-dot orange"></div>베트남 20명 추가 투입 가능, 시차 활용 24시간 개발 체계</div>
+        <div class="rr-exp">경험: ODA 사업 270일 내 성공 수행, 한-베 28명 유연 자원 관리</div>
+      </div>
+    </div>
+    <div class="risk-row">
+      <div class="rr-left mid">
+        <div class="rr-risk">요구사항 변경</div>
+        <div class="rr-level">영향도: 중 | 확률: 중</div>
+      </div>
+      <div class="rr-right">
+        <div class="rr-action"><div class="rr-dot orange"></div>4주 스프린트 리뷰에서 조기 피드백 반영, 변경영향분석 절차</div>
+        <div class="rr-action"><div class="rr-dot orange"></div>CCB(변경관리위원회) 운영, 변경 범위·일정·비용 영향 사전 분석</div>
+        <div class="rr-exp">경험: 8년간 공공시스템 변경관리 운영(FTA Korea)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-note">
+    <div class="bn-title">🛡️ 리스크 관리 원칙</div>
+    <div class="bn-text">
+      <strong>선제적 예방</strong>: 과거 유사 프로젝트 경험 기반 리스크 사전 식별 |
+      <strong>단계별 검증</strong>: 각 Phase 종료 시 리스크 재평가 |
+      <strong>즉시 대응</strong>: 24시간 내 대응 원칙, PM→PD→경영진 3단계 에스컬레이션
+    </div>
+  </div>
+</div>
+
+<p class="figure-caption">[그림 2-9] 리스크 최소화 전략</p>
+
+</div>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>리스크</th>
+  <th>영향도</th>
+  <th>확률</th>
+  <th>선제적 대응 전략</th>
+  <th>컨소시엄 경험 근거</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>데이터 마이그레이션 실패</strong></td>
+  <td>상</td>
+  <td>중</td>
+  <td>단계별 마이그레이션(검증→병행운영→전환→롤백), 건별 정합성 자동 검증, Oracle↔MariaDB 호환성 사전 PoC</td>
+  <td>VLE 11개사 대용량 마이그레이션 성공</td>
+</tr>
+<tr>
+  <td><strong>기관 연계 장애</strong></td>
+  <td>상</td>
+  <td>중</td>
+  <td>Mock 서버 기반 선행 개발, 연계기관별 사전 협의, API 장애 시 Fallback 처리</td>
+  <td>FECT 베트남 세관 VNACCS 연계, FTA Korea 관세청 API</td>
+</tr>
+<tr>
+  <td><strong>일정 지연</strong></td>
+  <td>상</td>
+  <td>하</td>
+  <td>4주 스프린트 기반 조기 경보, 크리티컬 패스 집중 관리, 인력 추가 투입 체계 확보</td>
+  <td>ODA 사업 270일 내 성공 수행</td>
+</tr>
+<tr>
+  <td><strong>요구사항 변경</strong></td>
+  <td>중</td>
+  <td>중</td>
+  <td>4주 스프린트 리뷰 조기 피드백, CCB(변경관리위원회) 운영, 변경 영향분석 절차</td>
+  <td>FTA Korea 8년간 공공시스템 변경관리</td>
+</tr>
+<tr>
+  <td><strong>성능 미달</strong></td>
+  <td>중</td>
+  <td>하</td>
+  <td>성능 테스트 자동화(JMeter/K6), 병목 구간 사전 식별, 오토스케일링 정책 최적화</td>
+  <td>APEX 250개 기업 동시 서비스</td>
+</tr>
+<tr>
+  <td><strong>보안 취약점</strong></td>
+  <td>상</td>
+  <td>하</td>
+  <td>시큐어코딩 상시 적용, 정적/동적 보안 분석, 국정원 보안성 검토 대비</td>
+  <td>FTA Korea 8년간 보안 준수 실적</td>
+</tr>
+</tbody>
+</table></div>
+
+<h4 id="2-리스크-관리-원칙">(2) 리스크 관리 원칙</h4>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>원칙</th>
+  <th>적용 방법</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>선제적 예방</strong></td>
+  <td>과거 유사 프로젝트 경험 기반 리스크 사전 식별, PoC 수행</td>
+</tr>
+<tr>
+  <td><strong>단계별 검증</strong></td>
+  <td>각 Phase 종료 시 리스크 재평가, 리스크 등록부 갱신</td>
+</tr>
+<tr>
+  <td><strong>즉시 대응</strong></td>
+  <td>24시간 내 대응 원칙, PM→PD→경영진 3단계 에스컬레이션</td>
+</tr>
+</tbody>
+</table></div>
+
+<blockquote>
+
+  <p>리스크 관리의 상세 절차(리스크 등록부 관리, 에스컬레이션 경로, 대응 이력 추적)는 <strong>V. 프로젝트 관리 > 1.1 위험 관리</strong>에서 상세히 기술합니다.</p>
+
+</blockquote>
+
+</div>
+
+<div class="a4-page">
+<h2 id="3-적용기술">3. 적용기술</h2>
+
+<h3 id="31-핵심-적용기술">3.1 핵심 적용기술</h3>
+
+<h4 id="1-기술-스택-선정-근거-및-방향성">(1) 기술 스택 선정 근거 및 방향성</h4>
+
+<div class="figure-container">
+
+<style>
+  .embedded-chart-10 { margin: 0; padding: 0; box-sizing: border-box; }
+  .embedded-chart-10 {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    width: 700px;
+    padding: 28px;
+    background: #fff;
+    color: #2D3748;
+    line-height: 1.6;
+  }
+
+  /* Header */
+  .embedded-chart-10 .header { text-align: center; margin-bottom: 28px; }
+  .embedded-chart-10 .header h2 {
+    font-size: 17px;
+    color: #1B2A4A;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .embedded-chart-10 .header .sub {
+    font-size: 10px;
+    color: #718096;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .embedded-chart-10 .header .gradient-line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #2D5F8A, #4A90D9);
+    border-radius: 2px;
+    margin: 0 auto;
+  }
+
+  /* Section label with vertical dot */
+  .embedded-chart-10 .section-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    margin-top: 24px;
+  }
+  .embedded-chart-10 .section-label:first-of-type { margin-top: 0; }
+  .embedded-chart-10 .section-label .dot {
+    width: 4px;
+    height: 13px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, #2D5F8A, #4A90D9);
+    flex-shrink: 0;
+  }
+  .embedded-chart-10 .section-label span {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1B2A4A;
+  }
+
+  /* Tech stack table */
+  .embedded-chart-10 .tech-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    overflow: hidden;
+    margin-bottom: 4px;
+  }
+  .embedded-chart-10 .tech-table thead th {
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 9px 12px;
+    text-align: left;
+    letter-spacing: 0.5px;
+  }
+  .embedded-chart-10 .tech-table thead th:first-child { width: 90px; }
+  .embedded-chart-10 .tech-table thead th:nth-child(2) { width: 180px; }
+  .embedded-chart-10 .tech-table tbody td {
+    font-size: 11px;
+    padding: 9px 12px;
+    border-bottom: 1px solid #EDF2F7;
+    vertical-align: top;
+  }
+  .embedded-chart-10 .tech-table tbody tr:last-child td { border-bottom: none; }
+  .embedded-chart-10 .tech-table tbody td:first-child {
+    font-weight: 700;
+    color: #1B2A4A;
+    background: #F7FAFC;
+    white-space: nowrap;
+  }
+  .embedded-chart-10 .tech-table tbody td:nth-child(2) {
+    font-weight: 600;
+    color: #2D5F8A;
+  }
+
+  .embedded-chart-10 .tag {
+    display: inline-block;
+    font-size: 9px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+    margin: 1px 2px;
+  }
+  .embedded-chart-10 .tag.blue { background: #EBF4FF; color: #2B6CB0; }
+  .embedded-chart-10 .tag.purple { background: #F3E8FF; color: #553C9A; }
+  .embedded-chart-10 .tag.green { background: #E6FFED; color: #276749; }
+  .embedded-chart-10 .tag.orange { background: #FEEBC8; color: #C05621; }
+
+  /* Principle cards */
+  .embedded-chart-10 .principles-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .embedded-chart-10 .principle-card {
+    flex: 1;
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    overflow: hidden;
+    background: #fff;
+  }
+  .embedded-chart-10 .principle-header {
+    padding: 10px 12px;
+    color: #fff;
+    text-align: center;
+  }
+  .embedded-chart-10 .principle-header.blue { background: linear-gradient(135deg, #2D5F8A, #4A90D9); }
+  .embedded-chart-10 .principle-header.purple { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .embedded-chart-10 .principle-header.green { background: linear-gradient(135deg, #276749, #38A169); }
+
+  .embedded-chart-10 .principle-icon {
+    font-size: 22px;
+    margin-bottom: 2px;
+  }
+  .embedded-chart-10 .principle-title-kr {
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .embedded-chart-10 .principle-title-en {
+    font-size: 9px;
+    opacity: 0.8;
+    letter-spacing: 0.5px;
+  }
+  .embedded-chart-10 .principle-body {
+    padding: 10px 12px;
+  }
+  .embedded-chart-10 .principle-body ul {
+    list-style: none;
+    padding: 0;
+  }
+  .embedded-chart-10 .principle-body li {
+    font-size: 10px;
+    color: #4A5568;
+    padding: 2px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    line-height: 1.5;
+  }
+  .embedded-chart-10 .principle-body li .check {
+    color: #38A169;
+    font-weight: 700;
+    flex-shrink: 0;
+    font-size: 10px;
+  }
+
+  /* Deploy note */
+  .embedded-chart-10 .deploy-note {
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 14px 18px;
+    background: #F7FAFC;
+    margin-top: 0;
+  }
+  .embedded-chart-10 .deploy-note-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #1B2A4A;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .embedded-chart-10 .deploy-bars {
+    display: flex;
+    gap: 0;
+    height: 22px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .embedded-chart-10 .deploy-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .embedded-chart-10 .deploy-bar.rolling {
+    flex: 85;
+    background: linear-gradient(135deg, #2D5F8A, #4A90D9);
+  }
+  .embedded-chart-10 .deploy-bar.bluegreen {
+    flex: 10;
+    background: linear-gradient(135deg, #276749, #38A169);
+  }
+  .embedded-chart-10 .deploy-bar.canary {
+    flex: 5;
+    background: linear-gradient(135deg, #C05621, #ED8936);
+  }
+  .embedded-chart-10 .deploy-legend {
+    display: flex;
+    gap: 14px;
+    font-size: 9px;
+    color: #718096;
+  }
+  .embedded-chart-10 .deploy-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .embedded-chart-10 .deploy-legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+  }
+  .embedded-chart-10 .deploy-legend-dot.blue { background: #4A90D9; }
+  .embedded-chart-10 .deploy-legend-dot.green { background: #38A169; }
+  .embedded-chart-10 .deploy-legend-dot.orange { background: #ED8936; }
+
+  /* Open source note */
+  .embedded-chart-10 .oss-note {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #EBF4FF, #F3E8FF);
+    border: 1px solid #D6BCFA;
+  }
+  .embedded-chart-10 .oss-badge {
+    font-size: 9px;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #553C9A, #805AD5);
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .embedded-chart-10 .oss-text {
+    font-size: 10px;
+    color: #4A5568;
+    font-weight: 600;
+  }
+</style>
+<div class="embedded-chart-10 embedded-chart">
+<div class="header">
+  <h2>기술 전략</h2>
+  <div class="sub">TECHNOLOGY STRATEGY</div>
+  <div class="gradient-line"></div>
+</div>
+
+<!-- Tech Stack Table -->
+<div class="section-label">
+  <div class="dot"></div>
+  <span>기술 스택 구성</span>
+</div>
+
+<table class="tech-table">
+  <thead>
+    <tr>
+      <th>영역</th>
+      <th>기술 스택</th>
+      <th>적용 내용</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>인프라</td>
+      <td><span class="tag blue">Kubernetes</span> <span class="tag blue">하이브리드 클라우드</span></td>
+      <td>온프레미스 + G-Cloud 하이브리드 구성, 컨테이너 오케스트레이션 기반 서비스 운영</td>
+    </tr>
+    <tr>
+      <td>백엔드</td>
+      <td><span class="tag green">eGov FW 5.0</span> <span class="tag green">Spring Boot 3.x</span></td>
+      <td>전자정부 표준프레임워크 5.0 기반, RESTful API 설계, 마이크로서비스 패턴 적용</td>
+    </tr>
+    <tr>
+      <td>프론트엔드</td>
+      <td>
+        <span class="tag purple">VortexUI</span> <span class="tag purple">React 19</span> <span class="tag purple">Next.js 16</span><br/>
+        <span class="tag orange">Nexacro N V24</span>
+      </td>
+      <td>
+        국문/영문 사이트: VortexUI(React 19 + Next.js 16 SSG)<br/>
+        관리자/통합정보: Nexacro N V24 이원화 전략
+      </td>
+    </tr>
+    <tr>
+      <td>데이터</td>
+      <td><span class="tag green">MariaDB HA</span> <span class="tag orange">Oracle</span></td>
+      <td>MariaDB HA 클러스터(주) + Oracle(전환 기간 병행), 단계적 마이그레이션</td>
+    </tr>
+    <tr>
+      <td>DevOps</td>
+      <td><span class="tag blue">GitLab CI/CD</span> <span class="tag blue">Harbor</span> <span class="tag blue">ArgoCD</span></td>
+      <td>GitOps 기반 CI/CD, 컨테이너 이미지 레지스트리, 선언적 배포 자동화</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Architecture Principles -->
+<div class="section-label">
+  <div class="dot"></div>
+  <span>아키텍처 설계 원칙</span>
+</div>
+
+<div class="principles-row">
+  <div class="principle-card">
+    <div class="principle-header blue">
+      <div class="principle-icon">&#9881;</div>
+      <div class="principle-title-kr">확장성</div>
+      <div class="principle-title-en">Scalability</div>
+    </div>
+    <div class="principle-body">
+      <ul>
+        <li><span class="check">&#10003;</span>K8s HPA 기반 자동 스케일링</li>
+        <li><span class="check">&#10003;</span>마이크로서비스 독립 배포</li>
+        <li><span class="check">&#10003;</span>이벤트 기반 비동기 처리</li>
+        <li><span class="check">&#10003;</span>컨테이너 기반 자원 최적화</li>
+      </ul>
+    </div>
+  </div>
+  <div class="principle-card">
+    <div class="principle-header purple">
+      <div class="principle-icon">&#9741;</div>
+      <div class="principle-title-kr">안정성</div>
+      <div class="principle-title-en">Reliability</div>
+    </div>
+    <div class="principle-body">
+      <ul>
+        <li><span class="check">&#10003;</span>Blue/Green 무중단 배포</li>
+        <li><span class="check">&#10003;</span>DB 이중화 HA 클러스터</li>
+        <li><span class="check">&#10003;</span>자동 장애 감지 &amp; 롤백</li>
+        <li><span class="check">&#10003;</span>서킷 브레이커 패턴 적용</li>
+      </ul>
+    </div>
+  </div>
+  <div class="principle-card">
+    <div class="principle-header green">
+      <div class="principle-icon">&#9889;</div>
+      <div class="principle-title-kr">성능</div>
+      <div class="principle-title-en">Performance</div>
+    </div>
+    <div class="principle-body">
+      <ul>
+        <li><span class="check">&#10003;</span>Next.js SSG 정적 생성</li>
+        <li><span class="check">&#10003;</span>CDN 기반 정적 자원 캐싱</li>
+        <li><span class="check">&#10003;</span>Redis 캐시 레이어 적용</li>
+        <li><span class="check">&#10003;</span>DB 쿼리 최적화 &amp; 인덱싱</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Deployment Strategy -->
+<div class="section-label">
+  <div class="dot"></div>
+  <span>배포 전략 구성</span>
+</div>
+
+<div class="deploy-note">
+  <div class="deploy-note-title">
+    <span>배포 방식 비율</span>
+  </div>
+  <div class="deploy-bars">
+    <div class="deploy-bar rolling">Rolling Update 85%</div>
+    <div class="deploy-bar bluegreen">B/G 10%</div>
+    <div class="deploy-bar canary">5%</div>
+  </div>
+  <div class="deploy-legend">
+    <div class="deploy-legend-item">
+      <div class="deploy-legend-dot blue"></div>
+      <span>Rolling Update &mdash; 일반 서비스 (85%)</span>
+    </div>
+    <div class="deploy-legend-item">
+      <div class="deploy-legend-dot green"></div>
+      <span>Blue/Green &mdash; 핵심 서비스 (10%)</span>
+    </div>
+    <div class="deploy-legend-item">
+      <div class="deploy-legend-dot orange"></div>
+      <span>Canary &mdash; 신규 기능 (5%)</span>
+    </div>
+  </div>
+</div>
+
+<div class="oss-note">
+  <div class="oss-badge">100% Open Source</div>
+  <div class="oss-text">DevOps 전 구간 오픈소스 기반: GitLab CE + Harbor + Argo CD &mdash; 라이선스 비용 Zero</div>
+</div>
+</div>
+
+<p class="figure-caption">[그림 2-10] 기술 전략 개요</p>
+
+</div>
+
+<p>본 사업의 기술 스택은 <strong>RFP 지정 요건</strong>과 <strong>클라우드 네이티브 최적화</strong>를 기준으로 선정하였습니다.</p>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>영역</th>
+  <th>기술 스택</th>
+  <th>선정 근거</th>
+  <th>기대 효과</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>인프라</strong></td>
+  <td>K8s + 하이브리드 클라우드</td>
+  <td>RFP 지정 민간클라우드 + 중진공 IDC 연계 필수(SFR-001)</td>
+  <td>오토스케일링, 가용성 99.9%</td>
+</tr>
+<tr>
+  <td><strong>백엔드</strong></td>
+  <td>eGov FW 5.0 + Spring Boot 3.x</td>
+  <td>RFP 의무사항, 공공시스템 표준 준수(COR-001)</td>
+  <td>기술부채 해소, 최신 보안 패치</td>
+</tr>
+<tr>
+  <td><strong>프론트(대민)</strong></td>
+  <td>VortexUI — React 19 + Next.js 16 SSG</td>
+  <td>반응형 웹, SEO 최적화, 디지털정부서비스 가이드라인</td>
+  <td>CDN 글로벌 배포, 디자인 유연성</td>
+</tr>
+<tr>
+  <td><strong>프론트(행정)</strong></td>
+  <td>Nexacro N V24</td>
+  <td>RFP 지정 SW, 대량 데이터 그리드 처리 최적화</td>
+  <td>업무 양식 표준화, 업무 효율성</td>
+</tr>
+<tr>
+  <td><strong>데이터</strong></td>
+  <td>MariaDB HA + Oracle(기존)</td>
+  <td>공개SW 전환 요구, 기존 Oracle 병행(SFR-006)</td>
+  <td>라이선스 비용 절감</td>
+</tr>
+<tr>
+  <td><strong>DevOps</strong></td>
+  <td>GitLab CE + Harbor + ArgoCD</td>
+  <td>100% 오픈소스, SCM+CI 통합 단일 플랫폼</td>
+  <td>배포 주기 30배 단축</td>
+</tr>
+</tbody>
+</table></div>
+
+<h4 id="2-아키텍처-3대-설계-원칙">(2) 아키텍처 3대 설계 원칙</h4>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>설계 원칙</th>
+  <th>구현 방안</th>
+  <th>대응 요구사항</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>확장성 (Scalability)</strong></td>
+  <td>K8s HPA로 CPU/메모리 기반 자동 스케일링, 수출지원사업 신청 시기 트래픽 급증 자동 대응</td>
+  <td>SFR-001, PER-004</td>
+</tr>
+<tr>
+  <td><strong>안정성 (Reliability)</strong></td>
+  <td>MariaDB HA 이중화, Blue/Green 무중단 배포, 자동 Health Check 및 장애 복구, 수 초 이내 롤백</td>
+  <td>PER-001, SFR-002</td>
+</tr>
+<tr>
+  <td><strong>성능 (Performance)</strong></td>
+  <td>CDN 글로벌 캐싱 + Next.js 16 SSG 정적 배포, Nginx 리버스 프록시, 응답시간 3초 이내(CDN 정적 1초 이내)</td>
+  <td>PER-003, SFR-005</td>
+</tr>
+</tbody>
+</table></div>
+
+</div>
+
+<div class="a4-page">
+<h3 id="32-대상-업무별-개발방안">3.2 대상 업무별 개발방안</h3>
+
+<h4 id="1-프론트엔드-이원화-전략">(1) 프론트엔드 이원화 전략</h4>
+
+<p>본 사업은 4개 사이트의 특성에 따라 프론트엔드 기술을 이원화하여 적용합니다.</p>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>사이트</th>
+  <th>사용자</th>
+  <th>기술 스택</th>
+  <th>선정 이유</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>국문사이트</strong></td>
+  <td>국내 중소기업</td>
+  <td>VortexUI (React 19 + Next.js 16 SSG)</td>
+  <td>반응형 웹, SEO, 디지털정부서비스 가이드라인</td>
+</tr>
+<tr>
+  <td><strong>영문사이트</strong></td>
+  <td>해외 바이어</td>
+  <td>VortexUI (React 19 + Next.js 16 SSG)</td>
+  <td>CDN 글로벌 배포, 다국어, 빠른 로딩</td>
+</tr>
+<tr>
+  <td><strong>관리자사이트</strong></td>
+  <td>내부 운영자</td>
+  <td>Nexacro N V24</td>
+  <td>대량 데이터 그리드, 업무 양식 표준화</td>
+</tr>
+<tr>
+  <td><strong>통합정보시스템</strong></td>
+  <td>기관 담당자</td>
+  <td>Nexacro N V24</td>
+  <td>통계 대시보드, 대용량 데이터 처리</td>
+</tr>
+</tbody>
+</table></div>
+
+<h4 id="2-적응형-무중단-배포-전략">(2) 적응형 무중단 배포 전략</h4>
+
+<p>배포 규모와 위험도에 따라 <strong>3대 배포 전략을 선택 적용</strong>하는 적응형 배포 체계를 구축합니다.</p>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>배포 전략</th>
+  <th>적용 비율</th>
+  <th>핵심 가치</th>
+  <th>적용 대상</th>
+  <th>롤백 소요시간</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>Rolling Update</strong></td>
+  <td>~85%</td>
+  <td>안정성 + 효율성</td>
+  <td>일상적 패치, 설정 변경, 버그 수정</td>
+  <td>1~3분</td>
+</tr>
+<tr>
+  <td><strong>Blue/Green</strong></td>
+  <td>~10%</td>
+  <td>즉시 전환 + 즉시 롤백</td>
+  <td>대규모 릴리스, DB 스키마 변경</td>
+  <td>수 초</td>
+</tr>
+<tr>
+  <td><strong>Canary</strong></td>
+  <td>~5%</td>
+  <td>리스크 사전 검증</td>
+  <td>신규 기능, 성능 영향 불확실 변경</td>
+  <td>수 초</td>
+</tr>
+</tbody>
+</table></div>
+
+<blockquote>
+
+  <p><strong>자동 롤백 조건</strong>: HTTP 5xx 에러율 배포 전 대비 2배 이상, P99 응답시간 3초 초과, Health Check 연속 실패 3회 → <strong>사람 개입 없이 즉시 자동 롤백</strong></p>
+
+</blockquote>
+
+<h4 id="3-데이터-마이그레이션-전략-oracle--mariadb">(3) 데이터 마이그레이션 전략 (Oracle → MariaDB)</h4>
+
+<p><strong>Oracle(중진공 IDC)</strong> → <strong>ETL 변환</strong>(스키마 변환·데이터 정제·매핑) → <strong>정합성 검증</strong>(건별 자동 비교·무결성 확인) → <strong>MariaDB HA</strong>(민간클라우드 이중화 신규 DB)</p>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>마이그레이션 단계</th>
+  <th>내용</th>
+  <th>리스크 대응</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>사전 분석</strong></td>
+  <td>Oracle 프로시저/함수 호환성 매핑표 작성</td>
+  <td>Oracle↔MariaDB PoC 수행</td>
+</tr>
+<tr>
+  <td><strong>데이터 추출</strong></td>
+  <td>ETL 도구 기반 스키마 변환, 데이터 정제</td>
+  <td>변환 규칙 사전 검증</td>
+</tr>
+<tr>
+  <td><strong>정합성 검증</strong></td>
+  <td>건별 자동 비교, 무결성 리포트 생성</td>
+  <td>100% 일치 확인 후 진행</td>
+</tr>
+<tr>
+  <td><strong>전환 실행</strong></td>
+  <td>병행 운영 기간 후 최종 전환</td>
+  <td>5분 이내 롤백 체계 구축</td>
+</tr>
+</tbody>
+</table></div>
+
+<blockquote>
+
+  <p>데이터 마이그레이션의 상세 검증 방안 및 에러 처리 절차는 <strong>III. 기술 및 기능 > 2. 데이터 요구사항</strong>에서 상세히 기술합니다.</p>
+
+</blockquote>
+
+</div>
+
+<div class="a4-page">
+<h3 id="33-prototype">3.3 Prototype</h3>
+
+<h4 id="1-프로토타입-개발-계획">(1) 프로토타입 개발 계획</h4>
+
+<p>PHASE 1 기반 구축 단계에서 핵심 기술 요소에 대한 <strong>PoC(Proof of Concept) 및 프로토타입</strong>을 개발하여 기술 리스크를 사전 검증합니다.</p>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>프로토타입 영역</th>
+  <th>검증 목표</th>
+  <th>시기</th>
+  <th>산출물</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>VortexUI 국문사이트</strong></td>
+  <td>React 19 + Next.js 16 SSG 기반 국문사이트 메인 페이지 프로토타입</td>
+  <td>M+1 ~ M+2</td>
+  <td>UI 프로토타입, 디자인 시안</td>
+</tr>
+<tr>
+  <td><strong>K8s 오토스케일링</strong></td>
+  <td>HPA 기반 트래픽 급증 대응 검증</td>
+  <td>M+1</td>
+  <td>부하테스트 결과 리포트</td>
+</tr>
+<tr>
+  <td><strong>Oracle→MariaDB</strong></td>
+  <td>프로시저/함수 호환성 검증, 데이터 정합성 확인</td>
+  <td>M+1 ~ M+2</td>
+  <td>호환성 매핑표, PoC 리포트</td>
+</tr>
+<tr>
+  <td><strong>Blue/Green 배포</strong></td>
+  <td>무중단 전환 및 롤백 시나리오 검증</td>
+  <td>M+2</td>
+  <td>배포 시나리오 결과서</td>
+</tr>
+<tr>
+  <td><strong>외부기관 API 연계</strong></td>
+  <td>수출유관기관 API Mock 서버 기반 연계 검증</td>
+  <td>M+2 ~ M+3</td>
+  <td>API 연계 테스트 결과</td>
+</tr>
+</tbody>
+</table></div>
+
+<h4 id="2-프로토타입-검증-프로세스">(2) 프로토타입 검증 프로세스</h4>
+
+<p>프로토타입 개발 → 발주처 시연 및 피드백 → 보완 반영 → 설계 확정의 프로세스를 통해, 본 개발 착수 전에 핵심 기술 요소의 적합성을 확인합니다. 프로토타입 검증 결과는 착수보고회에서 발주처에 보고하고, PHASE 2 본개발 설계에 직접 반영합니다.</p>
+
+</div>
+
+<div class="a4-page">
+<h2 id="4-표준-프레임워크-적용">4. 표준 프레임워크 적용</h2>
+
+<h3 id="41-표준프레임워크-적용-방안">4.1 표준프레임워크 적용 방안</h3>
+
+<h4 id="1-전자정부-표준프레임워크-50-적용">(1) 전자정부 표준프레임워크 5.0 적용</h4>
+
+<p>본 사업은 RFP 의무사항에 따라 <strong>전자정부 표준프레임워크 5.0</strong>을 적용합니다. 표준프레임워크 5.0은 Spring Boot 3.x 기반으로 전면 재구성되어, 클라우드 네이티브 환경에 최적화된 구조를 제공합니다.</p>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>구분</th>
+  <th>표준프레임워크 4.2 (현행)</th>
+  <th>표준프레임워크 5.0 (목표)</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>기반 프레임워크</strong></td>
+  <td>Spring Framework 5.x</td>
+  <td><strong>Spring Boot 3.x</strong></td>
+</tr>
+<tr>
+  <td><strong>Java 버전</strong></td>
+  <td>JDK 8/11</td>
+  <td><strong>Open JDK 17/21/23</strong></td>
+</tr>
+<tr>
+  <td><strong>빌드 도구</strong></td>
+  <td>Maven 중심</td>
+  <td><strong>Gradle + Maven</strong></td>
+</tr>
+<tr>
+  <td><strong>컨테이너 지원</strong></td>
+  <td>제한적</td>
+  <td><strong>Docker/K8s 네이티브</strong></td>
+</tr>
+<tr>
+  <td><strong>보안</strong></td>
+  <td>Spring Security 기존</td>
+  <td><strong>Spring Security 6.x</strong></td>
+</tr>
+<tr>
+  <td><strong>성능</strong></td>
+  <td>동기 방식 중심</td>
+  <td><strong>WebFlux 리액티브 지원</strong></td>
+</tr>
+</tbody>
+</table></div>
+
+<h4 id="2-적용-범위">(2) 적용 범위</h4>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>적용 영역</th>
+  <th>적용 내용</th>
+  <th>비고</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>실행 환경</strong></td>
+  <td>Spring Boot 3.x 기반 서버 실행 환경</td>
+  <td>백엔드 전체</td>
+</tr>
+<tr>
+  <td><strong>개발 환경</strong></td>
+  <td>eGovFrame IDE, 코드 생성기, 디버깅 도구</td>
+  <td>개발자 공통</td>
+</tr>
+<tr>
+  <td><strong>운영 환경</strong></td>
+  <td>배포 관리, 모니터링, 로그 관리</td>
+  <td>K8s 환경 연동</td>
+</tr>
+<tr>
+  <td><strong>관리 환경</strong></td>
+  <td>사용자 인증/권한, 메뉴 관리, 코드 관리</td>
+  <td>관리자사이트</td>
+</tr>
+<tr>
+  <td><strong>공통 컴포넌트</strong></td>
+  <td>표준프레임워크 제공 공통기능 재사용</td>
+  <td>아래 4.2절 상세</td>
+</tr>
+</tbody>
+</table></div>
+
+</div>
+
+<div class="a4-page">
+<h3 id="42-공통컴포넌트-활용-방안">4.2 공통컴포넌트 활용 방안</h3>
+
+<h4 id="1-표준프레임워크-공통컴포넌트-활용">(1) 표준프레임워크 공통컴포넌트 활용</h4>
+
+<p>전자정부 표준프레임워크가 제공하는 공통컴포넌트를 최대한 활용하여 개발 생산성을 높이고, 공공시스템 표준 준수를 보장합니다.</p>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>공통컴포넌트 영역</th>
+  <th>활용 컴포넌트</th>
+  <th>적용 대상</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>사용자 디렉토리/통합인증</strong></td>
+  <td>로그인, 세션 관리, SSO, 권한 관리</td>
+  <td>4개 사이트 공통</td>
+</tr>
+<tr>
+  <td><strong>통계/리포팅</strong></td>
+  <td>통계 조회, 차트 생성, 리포트 출력</td>
+  <td>통합정보시스템</td>
+</tr>
+<tr>
+  <td><strong>협업</strong></td>
+  <td>게시판, 공지사항, FAQ, QnA</td>
+  <td>국문/영문사이트</td>
+</tr>
+<tr>
+  <td><strong>시스템 관리</strong></td>
+  <td>코드 관리, 메뉴 관리, 배치 관리</td>
+  <td>관리자사이트</td>
+</tr>
+<tr>
+  <td><strong>연계/통합</strong></td>
+  <td>외부시스템 연계 어댑터, 메시지 큐</td>
+  <td>기관 연계</td>
+</tr>
+</tbody>
+</table></div>
+
+<h4 id="2-커스텀-공통-컴포넌트-개발">(2) 커스텀 공통 컴포넌트 개발</h4>
+
+<p>표준프레임워크 공통컴포넌트로 충족되지 않는 본 사업 고유의 기능은 CBD 방법론에 따라 재사용 가능한 커스텀 컴포넌트로 개발합니다.</p>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>커스텀 컴포넌트</th>
+  <th>기능</th>
+  <th>재사용 대상</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>수출 데이터 표준 코드</strong></td>
+  <td>수출 관련 표준 코드 체계(HS코드, 국가코드 등) 관리</td>
+  <td>4개 사이트 공통</td>
+</tr>
+<tr>
+  <td><strong>다국어 처리 엔진</strong></td>
+  <td>한/영/베트남어 다국어 콘텐츠 관리</td>
+  <td>국문/영문사이트</td>
+</tr>
+<tr>
+  <td><strong>파일 관리 서비스</strong></td>
+  <td>대용량 파일 업로드/다운로드, 이미지 리사이징</td>
+  <td>4개 사이트 공통</td>
+</tr>
+<tr>
+  <td><strong>API Gateway 연동</strong></td>
+  <td>외부기관 API 호출 표준 인터페이스</td>
+  <td>기관 연계 전체</td>
+</tr>
+</tbody>
+</table></div>
+
+</div>
+
+<div class="a4-page">
+<h3 id="43-문제점-및-대응방안">4.3 문제점 및 대응방안</h3>
+
+<h4 id="1-프레임워크-전환-시-예상-문제점-및-대응">(1) 프레임워크 전환 시 예상 문제점 및 대응</h4>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>예상 문제점</th>
+  <th>영향 범위</th>
+  <th>대응 방안</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>Spring Boot 3.x 전환 시 API 호환성</strong></td>
+  <td>Jakarta EE 전환으로 javax→jakarta 패키지 변경</td>
+  <td>코드 자동 변환 도구 적용, 사전 호환성 테스트 수행</td>
+</tr>
+<tr>
+  <td><strong>Open JDK 17 전환 시 라이브러리 호환</strong></td>
+  <td>일부 라이브러리 JDK 17 미지원 가능</td>
+  <td>사전 라이브러리 호환성 검증, 대체 라이브러리 매핑표 작성</td>
+</tr>
+<tr>
+  <td><strong>보안 정책 변경</strong></td>
+  <td>Spring Security 6.x의 변경된 설정 체계</td>
+  <td>보안 설정 마이그레이션 가이드 작성, 단계별 적용</td>
+</tr>
+<tr>
+  <td><strong>빌드 환경 전환</strong></td>
+  <td>Gradle 전환 시 기존 Maven 빌드 스크립트 비호환</td>
+  <td>Gradle 빌드 스크립트 신규 작성, CI/CD 파이프라인 연동</td>
+</tr>
+<tr>
+  <td><strong>공통컴포넌트 버전 차이</strong></td>
+  <td>표준프레임워크 4.2→5.0 공통컴포넌트 API 변경</td>
+  <td>변경 사항 분석 후 커스터마이징, 하위호환 래퍼 제공</td>
+</tr>
+</tbody>
+</table></div>
+
+<h4 id="2-문제-해결-프로세스">(2) 문제 해결 프로세스</h4>
+
+<ol>
+
+  <li><strong>사전 분석</strong> (PHASE 1): 현행 시스템 코드 분석 → 호환성 이슈 목록 작성 → 대응 방안 수립</li>
+
+  <li><strong>PoC 검증</strong> (PHASE 1): 핵심 이슈에 대한 기술 검증 → 검증 결과 기반 설계 확정</li>
+
+  <li><strong>점진적 적용</strong> (PHASE 2): 컴포넌트 단위 순차 전환 → 단위 테스트 통과 후 통합</li>
+
+  <li><strong>통합 검증</strong> (PHASE 3): 전체 시스템 통합 테스트 → 성능·보안·호환성 최종 확인</li>
+
+</ol>
+
+</div>
+
+<div class="a4-page">
+<h2 id="5-개발-방법론">5. 개발 방법론</h2>
+
+<h3 id="51-적용-방법론-및-수행-경험">5.1 적용 방법론 및 수행 경험</h3>
+
+<h4 id="1-방법론-개요">(1) 방법론 개요</h4>
+
+<p>본 사업은 <strong>CBD(Component Based Development) 기반 반복적/점진적 개발 방법론</strong>을 적용합니다. CBD 방법론은 재사용 가능한 컴포넌트 단위로 시스템을 설계/개발하여 개발 생산성과 품질을 동시에 확보하는 방법론으로, 본 사업의 4개 사이트 재구축 및 하이브리드 클라우드 전환에 최적화된 접근 방식입니다(PMR-003, PMR-004).</p>
+
+<p><strong>방법론 선정 근거</strong></p>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>선정 기준</th>
+  <th>CBD 방법론 적합성</th>
+  <th>본 사업 적용</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>재사용성</strong></td>
+  <td>컴포넌트 단위 재사용으로 개발 효율 극대화</td>
+  <td>4개 사이트 공통 컴포넌트(회원관리, 권한관리, 게시판 등) 재활용</td>
+</tr>
+<tr>
+  <td><strong>점진적 개발</strong></td>
+  <td>반복 사이클을 통한 위험 조기 발견</td>
+  <td>4주 스프린트 단위 점진적 기능 구현/검증</td>
+</tr>
+<tr>
+  <td><strong>아키텍처 중심</strong></td>
+  <td>시스템 구조 우선 설계로 안정성 확보</td>
+  <td>하이브리드 클라우드 아키텍처 선행 설계 후 기능 구현</td>
+</tr>
+<tr>
+  <td><strong>공공사업 적합성</strong></td>
+  <td>정부 SW개발사업 방법론 가이드라인 준수</td>
+  <td>전자정부 표준프레임워크 5.0과 자연스러운 통합</td>
+</tr>
+</tbody>
+</table></div>
+
+<blockquote>
+
+  <p><strong>컨소시엄 강점</strong>: 아스트라비전은 CBD 방법론을 <strong>FTA Korea(8년 연속)</strong>, <strong>FECT 플랫폼</strong>, <strong>KISTI 공공R&D 플랫폼</strong> 등 다수 공공사업에서 적용한 경험을 보유하고 있습니다. 4주 스프린트 기반 반복적 개발 프로세스를 자체적으로 수립하여 운영 중이며, CI/CD 파이프라인(GitHub Actions)을 통한 배포 자동화를 실현하고 있습니다.</p>
+
+</blockquote>
+
+<h4 id="2-방법론-적용-경험">(2) 방법론 적용 경험</h4>
+
+<p>본 컨소시엄은 CBD 기반 개발 방법론을 다수의 프로젝트에서 성공적으로 적용한 경험을 보유하고 있습니다.</p>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>프로젝트</th>
+  <th>적용 방법론</th>
+  <th>규모</th>
+  <th>핵심 성과</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>Gobiz Vietnam (ODA)</strong></td>
+  <td>CBD + 스프린트</td>
+  <td>31.2억원</td>
+  <td>270일 내 4개 사이트 성공 구축</td>
+</tr>
+<tr>
+  <td><strong>FTA Korea</strong></td>
+  <td>CBD + 폭포수 혼합</td>
+  <td>연간 3억원</td>
+  <td>8년 연속 안정적 운영/개발</td>
+</tr>
+<tr>
+  <td><strong>FECT</strong></td>
+  <td>CBD + 애자일</td>
+  <td>K8s 기반</td>
+  <td>Blue/Green 배포 실운영</td>
+</tr>
+<tr>
+  <td><strong>삼성전자 블루멤버십</strong></td>
+  <td>CBD</td>
+  <td>대규모</td>
+  <td>전사 마케팅·멤버십 시스템 구축</td>
+</tr>
+</tbody>
+</table></div>
+
+</div>
+
+<div class="a4-page">
+<h3 id="52-단계별-활동-및-산출물">5.2 단계별 활동 및 산출물</h3>
+
+<div class="figure-container">
+
+  <img src="_images/07_cbd_process_diagram.png" alt="CBD 프로세스 다이어그램" class="figure-image">
+
+  <p class="figure-caption">[그림 2-11] CBD 기반 개발 프로세스 다이어그램</p>
+
+</div>
+
+<h5 id="1단계-요구사항-분석">1단계: 요구사항 분석</h5>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>활동</th>
+  <th>세부 내용</th>
+  <th>산출물</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>요구사항 수집</strong></td>
+  <td>발주처 인터뷰, RFP 68개 요구사항 분석, 현행 시스템 분석</td>
+  <td>요구사항 정의서</td>
+</tr>
+<tr>
+  <td><strong>유스케이스 모델링</strong></td>
+  <td>4개 사이트별 유스케이스 다이어그램, 액터 식별</td>
+  <td>유스케이스 명세서</td>
+</tr>
+<tr>
+  <td><strong>도메인 분석</strong></td>
+  <td>수출 업무 프로세스 분석, 데이터 흐름 분석</td>
+  <td>업무 분석서</td>
+</tr>
+<tr>
+  <td><strong>요구사항 추적</strong></td>
+  <td>요구사항-설계-구현-테스트 추적 매트릭스 수립</td>
+  <td>요구사항 추적표(RTM)</td>
+</tr>
+</tbody>
+</table></div>
+
+<h5 id="2단계-아키텍처설계">2단계: 아키텍처/설계</h5>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>활동</th>
+  <th>세부 내용</th>
+  <th>산출물</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>아키텍처 설계</strong></td>
+  <td>하이브리드 클라우드 아키텍처, 네트워크 구성, 보안 아키텍처</td>
+  <td>시스템 아키텍처 설계서</td>
+</tr>
+<tr>
+  <td><strong>컴포넌트 식별</strong></td>
+  <td>재사용 컴포넌트 식별, 인터페이스 정의, 의존관계 분석</td>
+  <td>컴포넌트 설계서</td>
+</tr>
+<tr>
+  <td><strong>DB 설계</strong></td>
+  <td>ERD, 테이블 정의서, MariaDB/Oracle 듀얼 스키마</td>
+  <td>DB 설계서</td>
+</tr>
+<tr>
+  <td><strong>UI/UX 설계</strong></td>
+  <td>화면 설계서, 스타일 가이드, 디지털 정부서비스 UI/UX 가이드라인 적용</td>
+  <td>화면 설계서</td>
+</tr>
+<tr>
+  <td><strong>API 설계</strong></td>
+  <td>API 명세서, API Gateway 라우팅 정책</td>
+  <td>API 설계서</td>
+</tr>
+</tbody>
+</table></div>
+
+<h5 id="3단계-구현">3단계: 구현</h5>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>활동</th>
+  <th>세부 내용</th>
+  <th>산출물</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>컴포넌트 개발</strong></td>
+  <td>전자정부 FW 5.0 기반 컴포넌트 단위 개발, 코딩 표준 준수</td>
+  <td>소스코드</td>
+</tr>
+<tr>
+  <td><strong>단위 테스트</strong></td>
+  <td>JUnit 5 기반 컴포넌트별 단위 테스트, 코드 커버리지 80% 이상</td>
+  <td>단위 테스트 결과서</td>
+</tr>
+<tr>
+  <td><strong>코드 리뷰</strong></td>
+  <td>2인 이상 코드 리뷰, 시큐어코딩 가이드 준수 확인</td>
+  <td>코드 리뷰 결과서</td>
+</tr>
+<tr>
+  <td><strong>통합 빌드</strong></td>
+  <td>CI/CD 파이프라인을 통한 자동 빌드/테스트/패키징</td>
+  <td>빌드 결과서</td>
+</tr>
+</tbody>
+</table></div>
+
+<h5 id="4단계-테스트">4단계: 테스트</h5>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>활동</th>
+  <th>세부 내용</th>
+  <th>산출물</th>
+  <th>대응 요구사항</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>통합 테스트</strong></td>
+  <td>컴포넌트 간 연계 테스트, API 연동 테스트</td>
+  <td>통합 테스트 결과서</td>
+  <td>TER-003</td>
+</tr>
+<tr>
+  <td><strong>시스템 테스트</strong></td>
+  <td>4개 사이트 전체 기능 테스트, 시나리오 기반 테스트</td>
+  <td>시스템 테스트 결과서</td>
+  <td>TER-003</td>
+</tr>
+<tr>
+  <td><strong>성능 테스트</strong></td>
+  <td>부하 테스트(JMeter/K6), 응답시간/동시처리 검증</td>
+  <td>성능 테스트 결과서</td>
+  <td>TER-003, PER-001~004</td>
+</tr>
+<tr>
+  <td><strong>보안 테스트</strong></td>
+  <td>정적/동적 보안 분석, 웹 취약점 점검, 시큐어코딩 검증</td>
+  <td>보안 점검 결과서</td>
+  <td>SER-001~007</td>
+</tr>
+<tr>
+  <td><strong>인수 테스트(UAT)</strong></td>
+  <td>발주처 참여 인수 테스트, 업무 시나리오 검증</td>
+  <td>인수 테스트 결과서</td>
+  <td>TER-004</td>
+</tr>
+</tbody>
+</table></div>
+
+<h5 id="5단계-이행">5단계: 이행</h5>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>활동</th>
+  <th>세부 내용</th>
+  <th>산출물</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>데이터 마이그레이션</strong></td>
+  <td>Oracle→MariaDB 데이터 이관, 정합성 검증, 롤백 체계</td>
+  <td>마이그레이션 결과서</td>
+</tr>
+<tr>
+  <td><strong>시스템 배포</strong></td>
+  <td>Blue/Green 무중단 배포, 운영 환경 전환</td>
+  <td>배포 결과서</td>
+</tr>
+<tr>
+  <td><strong>사용자 교육</strong></td>
+  <td>관리자/운영자 대상 시스템 교육, 매뉴얼 제공</td>
+  <td>교육 결과서, 운영 매뉴얼</td>
+</tr>
+<tr>
+  <td><strong>안정화</strong></td>
+  <td>서비스 모니터링, 장애 대응, 성능 최적화</td>
+  <td>안정화 보고서</td>
+</tr>
+</tbody>
+</table></div>
+
+</div>
+
+<div class="a4-page">
+<h3 id="53-4주-스프린트-사이클">5.3 4주 스프린트 사이클</h3>
+
+<p>본 사업의 개발 단계(M+2~M+6, 약 4개월)에서 <strong>4주 스프린트</strong> 단위로 반복적/점진적 개발을 수행합니다.</p>
+
+<div class="figure-container">
+
+  <img src="_images/07_4week_sprint_cycle.png" alt="4주 스프린트 사이클" class="figure-image">
+
+  <p class="figure-caption">[그림 2-12] 4주 스프린트 사이클</p>
+
+</div>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>주차</th>
+  <th>활동</th>
+  <th>주요 내용</th>
+  <th>참여자</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>1주차: 화면기획</strong></td>
+  <td>와이어프레임 작성, UI/UX 설계, 스토리 매핑</td>
+  <td>해당 스프린트 대상 화면/기능 기획</td>
+  <td>PM, PL, 기획자, 디자이너</td>
+</tr>
+<tr>
+  <td><strong>2주차: 사업팀 확인 및 디자인</strong></td>
+  <td>발주처 리뷰, 비주얼 디자인, 컴포넌트 설계</td>
+  <td>발주처 피드백 반영, 디자인 확정</td>
+  <td>PM, 발주처, 디자이너, PL</td>
+</tr>
+<tr>
+  <td><strong>3주차: 시스템 개발</strong></td>
+  <td>코딩, 단위테스트, API 연동, 코드 리뷰</td>
+  <td>컴포넌트 단위 개발 및 단위 테스트</td>
+  <td>개발팀 전원</td>
+</tr>
+<tr>
+  <td><strong>4주차: 테스트 및 안정화</strong></td>
+  <td>QA 테스트, 버그 수정, 성능 튜닝, 스프린트 리뷰</td>
+  <td>품질 검증 후 개발 환경 배포</td>
+  <td>QA, 개발팀, PM</td>
+</tr>
+</tbody>
+</table></div>
+
+<p><strong>스프린트 관리 체계</strong></p>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>관리 항목</th>
+  <th>방법</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>스프린트 계획</strong></td>
+  <td>스프린트 시작 시 백로그 우선순위 지정, 스토리 포인트 산정, 목표 합의</td>
+</tr>
+<tr>
+  <td><strong>일일 스탠드업</strong></td>
+  <td>매일 15분 진행 상황 공유, 블로커 식별/해소</td>
+</tr>
+<tr>
+  <td><strong>스프린트 리뷰</strong></td>
+  <td>스프린트 종료 시 데모, 발주처 피드백, 백로그 갱신</td>
+</tr>
+<tr>
+  <td><strong>회고</strong></td>
+  <td>개선사항 도출, 다음 스프린트에 반영</td>
+</tr>
+</tbody>
+</table></div>
+
+</div>
+
+<div class="a4-page">
+<h3 id="54-기대효과-및-차별성">5.4 기대효과 및 차별성</h3>
+
+<h4 id="1-전략적-기대효과--cbd-기반-구조-안정성--4주-sprint-실행-민첩성">(1) 전략적 기대효과 — CBD 기반 구조 안정성 × 4주 Sprint 실행 민첩성</h4>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>기대효과</th>
+  <th>핵심 내용</th>
+  <th>달성 방안</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>구조적 완성도 확보</strong></td>
+  <td>모듈 독립성 확보, 기능 확장 시 영향도 최소화, 장기 운영 효율성 극대화</td>
+  <td>CBD 기반 컴포넌트 아키텍처, 재사용 가능한 구조 설계</td>
+</tr>
+<tr>
+  <td><strong>실행 민첩성 확보</strong></td>
+  <td>4주 Sprint 단위 실행 가능한 Increment 제공, 요구사항 변경 유연 대응</td>
+  <td>우선순위 기반 점진적 기능 고도화, 매 Sprint 실사용 가능 결과물</td>
+</tr>
+<tr>
+  <td><strong>품질 내재화 체계</strong></td>
+  <td>사후 품질관리가 아닌 사전 품질 내재화로 전환</td>
+  <td>단위 테스트 자동화 80%+, CI 기반 상시 검증, 코드 리뷰/정적 분석</td>
+</tr>
+<tr>
+  <td><strong>리스크 선제적 통제</strong></td>
+  <td>리스크를 "관리"하는 것이 아니라 "선제 차단"</td>
+  <td>Sprint 단위 조기 오류 발견, 단계별 고객 검증, 리스크 등록부 상시 관리</td>
+</tr>
+</tbody>
+</table></div>
+
+<h4 id="2-당사-차별화-전략">(2) 당사 차별화 전략</h4>
+
+<p><strong>차별성 1 — CBD 기반 선(先) 아키텍처 고도화</strong></p>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>일반 Agile 방식</th>
+  <th>당사 적용 방식</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>기능 중심 개발</td>
+  <td>아키텍처 중심 설계 후 개발</td>
+</tr>
+<tr>
+  <td>Sprint 내 설계/개발 혼재</td>
+  <td>사전 구조 안정화 후 Sprint 실행</td>
+</tr>
+<tr>
+  <td>단기 결과 중심</td>
+  <td>장기 확장성 고려 구조 설계</td>
+</tr>
+<tr>
+  <td>기능 단위 구현 우선</td>
+  <td>플랫폼 관점 구조 설계 우선</td>
+</tr>
+</tbody>
+</table></div>
+
+<p><strong>차별성 2 — 4주 완결형 Sprint 체계</strong></p>
+
+<ul>
+
+  <li>설계 → 구현 → 테스트 → 통합 → 시연까지 1 Sprint 내 완료</li>
+
+  <li>Sprint 종료 시 실행 가능한 서비스 수준 확보</li>
+
+  <li>기능 단위 실사용 검증 가능</li>
+
+  <li>점진적 통합 및 안정화 구조 적용</li>
+
+</ul>
+
+<blockquote>
+
+  <p>단순 개발 완료가 아닌, <strong>"운영 가능한 수준"</strong> 제공</p>
+
+</blockquote>
+
+<p><strong>차별성 3 — DevOps 기반 자동화 품질체계</strong></p>
+
+<ul>
+
+  <li>CI/CD 자동화 환경 운영 (GitLab CE + Harbor + ArgoCD)</li>
+
+  <li>코드 표준·정적 분석(SonarQube)·자동 테스트 통합 관리</li>
+
+  <li>자동 빌드 및 배포 검증 체계 구축</li>
+
+  <li>배포 리스크 최소화 및 장애 대응 시간 단축</li>
+
+</ul>
+
+<blockquote>
+
+  <p>사람 중심 품질 → <strong>시스템 중심 품질 통제</strong></p>
+
+</blockquote>
+
+
+</div>
+
+<div class="a4-page last-page">
+<h3 id="55-산출물-종류-및-내역">5.5 산출물 종류 및 내역</h3>
+
+<h4 id="1-개발-단계별-산출물">(1) 개발 단계별 산출물</h4>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>단계</th>
+  <th>산출물</th>
+  <th>형식</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>분석</strong></td>
+  <td>요구사항 정의서, 유스케이스 명세서, 업무 분석서, 요구사항 추적표(RTM)</td>
+  <td>문서</td>
+</tr>
+<tr>
+  <td><strong>설계</strong></td>
+  <td>시스템 아키텍처 설계서, 컴포넌트 설계서, DB 설계서, 화면 설계서, API 설계서</td>
+  <td>문서/다이어그램</td>
+</tr>
+<tr>
+  <td><strong>구현</strong></td>
+  <td>소스코드, 단위 테스트 결과서, 코드 리뷰 결과서, 빌드 결과서</td>
+  <td>코드/문서</td>
+</tr>
+<tr>
+  <td><strong>테스트</strong></td>
+  <td>테스트 계획서, 통합/시스템/성능/보안/인수 테스트 결과서</td>
+  <td>문서</td>
+</tr>
+<tr>
+  <td><strong>이행</strong></td>
+  <td>마이그레이션 결과서, 배포 결과서, 교육 결과서, 운영 매뉴얼, 안정화 보고서</td>
+  <td>문서</td>
+</tr>
+<tr>
+  <td><strong>관리</strong></td>
+  <td>사업수행계획서, 주간보고서, 월간보고서, 착수/중간/최종보고서, 회의록</td>
+  <td>문서</td>
+</tr>
+</tbody>
+</table></div>
+
+<h4 id="2-phase별-산출물-타임라인">(2) Phase별 산출물 타임라인</h4>
+
+<div class="table-wrapper"><table class="ctbl">
+<thead><tr>
+  <th>단계</th>
+  <th>산출물</th>
+  <th>작성 시기</th>
+  <th>비고</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>PHASE 1 (기반 구축)</strong></td>
+  <td>착수보고서</td>
+  <td>M</td>
+  <td>공식보고</td>
+</tr>
+<tr>
+  <td></td>
+  <td>현행 시스템 분석서</td>
+  <td>M ~ M+1</td>
+  <td>AS-IS 분석</td>
+</tr>
+<tr>
+  <td></td>
+  <td>요구사항 정의서</td>
+  <td>M+1</td>
+  <td>요구사항 확정</td>
+</tr>
+<tr>
+  <td></td>
+  <td>데이터 아키텍처 설계서</td>
+  <td>M+1 ~ M+2</td>
+  <td>DB 스키마</td>
+</tr>
+<tr>
+  <td></td>
+  <td>시스템 아키텍처 설계서</td>
+  <td>M+1 ~ M+2</td>
+  <td>인프라·SW 설계</td>
+</tr>
+<tr>
+  <td></td>
+  <td>UI/UX 설계서</td>
+  <td>M+2 ~ M+3</td>
+  <td>디자인 시안, 와이어프레임</td>
+</tr>
+<tr>
+  <td></td>
+  <td>PoC 결과 보고서</td>
+  <td>M+2</td>
+  <td>기술 검증</td>
+</tr>
+<tr>
+  <td><strong>PHASE 2 (핵심 개발)</strong></td>
+  <td>중간보고서</td>
+  <td>M+4</td>
+  <td>공식보고</td>
+</tr>
+<tr>
+  <td></td>
+  <td>컴포넌트 설계서</td>
+  <td>M+3 ~ M+4</td>
+  <td>CBD 설계</td>
+</tr>
+<tr>
+  <td></td>
+  <td>소스코드</td>
+  <td>M+3 ~ M+6</td>
+  <td>4개 사이트</td>
+</tr>
+<tr>
+  <td></td>
+  <td>단위/통합 테스트 결과서</td>
+  <td>M+4 ~ M+6</td>
+  <td>테스트</td>
+</tr>
+<tr>
+  <td></td>
+  <td>데이터 마이그레이션 결과서</td>
+  <td>M+5 ~ M+6</td>
+  <td>DB 전환</td>
+</tr>
+<tr>
+  <td></td>
+  <td>스프린트 리뷰 결과서</td>
+  <td>매 4주</td>
+  <td>4회</td>
+</tr>
+<tr>
+  <td><strong>PHASE 3 (검증·안정화)</strong></td>
+  <td>최종보고서</td>
+  <td>M+8</td>
+  <td>공식보고</td>
+</tr>
+<tr>
+  <td></td>
+  <td>성능 테스트 결과서</td>
+  <td>M+6 ~ M+7</td>
+  <td>부하·스트레스</td>
+</tr>
+<tr>
+  <td></td>
+  <td>보안 점검 결과서</td>
+  <td>M+7</td>
+  <td>국정원 기준</td>
+</tr>
+<tr>
+  <td></td>
+  <td>접근성 검증 결과서</td>
+  <td>M+7</td>
+  <td>웹 접근성</td>
+</tr>
+<tr>
+  <td></td>
+  <td>전환 실행 결과서</td>
+  <td>M+7 ~ M+8</td>
+  <td>사이트별 전환</td>
+</tr>
+<tr>
+  <td></td>
+  <td>사용자 교육 결과서</td>
+  <td>M+7 ~ M+8</td>
+  <td>교육</td>
+</tr>
+<tr>
+  <td></td>
+  <td>운영 매뉴얼</td>
+  <td>M+8</td>
+  <td>인수인계</td>
+</tr>
+</tbody>
+</table></div>
+
+<blockquote>
+
+  <p>각 산출물의 상세 작성 기준 및 검수 절차는 <strong>V. 프로젝트 관리 > 1.4 산출물 형상 및 문서 관리</strong>에서 기술합니다.</p>
+
+</blockquote>
+
+</div>
+
+<script>
+var PAGE_CONFIG = {
+  badge:   'II',
+  title:   '추진전략 및 방법',
+  project: '온라인수출플랫폼 클라우드 전환 및 재구축',
+  section: 'II. 추진전략 및 방법',
+  startPage:  17,
+  totalPages: 170
+};
+</script>
+<script src="_common/page-frame.js"></script>
+</body>
+</html>

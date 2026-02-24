@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+  .header { text-align: center; margin-bottom: 22px; }
+  .header h2 { font-size: 17px; color: #1B2A4A; letter-spacing: 2px; margin-bottom: 4px; }
+  .header .sub { font-size: 10px; color: #718096; letter-spacing: 1px; }
+  .header .line { width: 60px; height: 3px; background: linear-gradient(90deg, #2D5F8A, #4A90D9); margin: 10px auto 0; border-radius: 2px; }
+
+  .migration-flow {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 18px;
+    align-items: stretch;
+  }
+
+  .mig-step {
+    flex: 1;
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mig-phase {
+    padding: 6px 6px;
+    text-align: center;
+    color: #fff;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .mig-phase.p1 { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .mig-phase.p2 { background: linear-gradient(135deg, #2B6CB0, #4A90D9); }
+  .mig-phase.p3 { background: linear-gradient(135deg, #276749, #48BB78); }
+  .mig-phase.p4 { background: linear-gradient(135deg, #9C4221, #ED8936); }
+  .mig-phase.p5 { background: linear-gradient(135deg, #234E52, #38B2AC); }
+  .mig-phase.p6 { background: linear-gradient(135deg, #C53030, #E53E3E); }
+
+  .mig-body {
+    padding: 8px 6px;
+    flex: 1;
+    background: #FAFCFF;
+    font-size: 8px;
+    color: #4A5568;
+    line-height: 1.5;
+  }
+  .mig-body strong { color: #1B2A4A; display: block; margin-bottom: 2px; font-size: 9px; }
+
+  .mig-output {
+    font-size: 7px;
+    color: #4A90D9;
+    font-weight: 600;
+    padding: 4px 6px;
+    background: #EBF8FF;
+    border-top: 1px solid #BEE3F8;
+    margin-top: auto;
+  }
+
+  .mig-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #4A90D9;
+    font-weight: 700;
+    width: 12px;
+    flex-shrink: 0;
+  }
+
+  .compat-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 16px;
+  }
+  .compat-table thead th {
+    padding: 9px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+    border-bottom: 2px solid #E2E8F0;
+  }
+  .compat-table thead th:nth-child(1) {
+    background: #FFF5F5;
+    color: #C53030;
+    width: 160px;
+  }
+  .compat-table thead th:nth-child(2) {
+    background: #F7FAFC;
+    color: #718096;
+    width: 30px;
+  }
+  .compat-table thead th:nth-child(3) {
+    background: #EBF8FF;
+    color: #2B6CB0;
+    width: 160px;
+  }
+  .compat-table thead th:nth-child(4) {
+    background: #F0FFF4;
+    color: #276749;
+  }
+  .compat-table tbody td {
+    padding: 7px 10px;
+    font-size: 10px;
+    text-align: center;
+    border-bottom: 1px solid #F0F0F0;
+    color: #2D3748;
+  }
+  .compat-table tbody tr:nth-child(even) td { background: #FAFCFF; }
+  .compat-table tbody tr:last-child td { border-bottom: none; }
+
+  .code-tag {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 9px;
+    background: #F7FAFC;
+    padding: 2px 5px;
+    border-radius: 4px;
+    border: 1px solid #E2E8F0;
+  }
+  .code-tag.oracle { color: #C53030; }
+  .code-tag.maria { color: #2B6CB0; }
+
+  .target-row {
+    display: flex;
+    gap: 10px;
+  }
+  .target-card {
+    flex: 1;
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .target-header {
+    padding: 8px 12px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .target-header.cloud { background: linear-gradient(135deg, #2B6CB0, #4A90D9); }
+  .target-header.onprem { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .target-body {
+    padding: 8px 12px;
+    background: #fff;
+    font-size: 9px;
+    color: #4A5568;
+    line-height: 1.7;
+  }
+  .target-body strong { color: #1B2A4A; }
+  .migrate-badge {
+    display: inline-block;
+    font-size: 8px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-weight: 700;
+  }
+  .migrate-badge.move { background: #BEE3F8; color: #2A4365; }
+  .migrate-badge.keep { background: #E9D8FD; color: #553C9A; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h2>데이터 이행 절차 및 호환성</h2>
+    <div class="sub">DATA MIGRATION PROCESS (DAR-001 ~ DAR-009)</div>
+    <div class="line"></div>
+  </div>
+
+  <!-- 이행 절차 6단계 -->
+  <div class="migration-flow">
+    <div class="mig-step">
+      <div class="mig-phase p1">1. 분석</div>
+      <div class="mig-body">
+        <strong>스키마 분석</strong>
+        Oracle DB 프로시저·함수 분석, 데이터 표준 수립
+      </div>
+      <div class="mig-output">호환성 매핑표</div>
+    </div>
+    <div class="mig-arrow">→</div>
+    <div class="mig-step">
+      <div class="mig-phase p2">2. PoC</div>
+      <div class="mig-body">
+        <strong>샘플 검증</strong>
+        샘플 스키마 마이그레이션, 정합성 검증
+      </div>
+      <div class="mig-output">PoC 결과 보고서</div>
+    </div>
+    <div class="mig-arrow">→</div>
+    <div class="mig-step">
+      <div class="mig-phase p3">3. 변환</div>
+      <div class="mig-body">
+        <strong>ETL 실행</strong>
+        데이터 추출·변환·적재 (ETL)
+      </div>
+      <div class="mig-output">마이그레이션 스크립트</div>
+    </div>
+    <div class="mig-arrow">→</div>
+    <div class="mig-step">
+      <div class="mig-phase p4">4. 검증</div>
+      <div class="mig-body">
+        <strong>자동 검증</strong>
+        건별 정합성, 무결성 확인
+      </div>
+      <div class="mig-output">정합성 리포트</div>
+    </div>
+    <div class="mig-arrow">→</div>
+    <div class="mig-step">
+      <div class="mig-phase p5">5. 병행</div>
+      <div class="mig-body">
+        <strong>듀얼 운영</strong>
+        Oracle/MariaDB 병행 (2주)
+      </div>
+      <div class="mig-output">동기화 로그</div>
+    </div>
+    <div class="mig-arrow">→</div>
+    <div class="mig-step">
+      <div class="mig-phase p6">6. 전환</div>
+      <div class="mig-body">
+        <strong>최종 전환</strong>
+        5분 이내 롤백 체계
+      </div>
+      <div class="mig-output">전환 완료 보고서</div>
+    </div>
+  </div>
+
+  <!-- Oracle ↔ MariaDB 호환성 매핑 -->
+  <table class="compat-table">
+    <thead>
+      <tr>
+        <th>Oracle 문법</th>
+        <th>→</th>
+        <th>MariaDB 문법</th>
+        <th>대응 방안</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="code-tag oracle">SEQ.NEXTVAL</span></td>
+        <td style="color:#4A90D9;font-weight:700;">→</td>
+        <td><span class="code-tag maria">AUTO_INCREMENT</span></td>
+        <td>JPA @GeneratedValue</td>
+      </tr>
+      <tr>
+        <td><span class="code-tag oracle">SYSDATE</span></td>
+        <td style="color:#4A90D9;font-weight:700;">→</td>
+        <td><span class="code-tag maria">NOW()</span></td>
+        <td>LocalDateTime.now()</td>
+      </tr>
+      <tr>
+        <td><span class="code-tag oracle">ROWNUM</span></td>
+        <td style="color:#4A90D9;font-weight:700;">→</td>
+        <td><span class="code-tag maria">LIMIT OFFSET</span></td>
+        <td>JPA Pageable</td>
+      </tr>
+      <tr>
+        <td><span class="code-tag oracle">NVL(col, 0)</span></td>
+        <td style="color:#4A90D9;font-weight:700;">→</td>
+        <td><span class="code-tag maria">IFNULL(col, 0)</span></td>
+        <td>JPA COALESCE</td>
+      </tr>
+      <tr>
+        <td><span class="code-tag oracle">|| (연결)</span></td>
+        <td style="color:#4A90D9;font-weight:700;">→</td>
+        <td><span class="code-tag maria">CONCAT()</span></td>
+        <td>SQL 직접 수정</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 이행 대상 분류 -->
+  <div class="target-row">
+    <div class="target-card">
+      <div class="target-header cloud">☁️ Cloud DB for MySQL (이행)</div>
+      <div class="target-body">
+        <span class="migrate-badge move">전량 이행</span> <strong>고비즈코리아 서비스</strong><br>
+        국문/영문/관리자 사이트 데이터<br>
+        회원·상품·상담·매칭 이력<br>
+        <strong>MariaDB HA</strong> (8C/32GB × 2)
+      </div>
+    </div>
+    <div class="target-card">
+      <div class="target-header onprem">🏢 Oracle DB (유지)</div>
+      <div class="target-body">
+        <span class="migrate-badge keep">온프레미스 유지</span> <strong>통합정보시스템</strong><br>
+        수출사업 접수/평가/정산<br>
+        민감정보, 행정처리, 정책자금<br>
+        <strong>중진공 IDC</strong> (IPsec VPN 연계)
+      </div>
+    </div>
+  </div>
+</body>
+</html>

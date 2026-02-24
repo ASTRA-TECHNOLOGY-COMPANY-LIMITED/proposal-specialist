@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+  .header { text-align: center; margin-bottom: 22px; }
+  .header h2 { font-size: 17px; color: #1B2A4A; letter-spacing: 2px; margin-bottom: 4px; }
+  .header .sub { font-size: 10px; color: #718096; letter-spacing: 1px; }
+  .header .line { width: 60px; height: 3px; background: linear-gradient(90deg, #2D5F8A, #4A90D9); margin: 10px auto 0; border-radius: 2px; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #1B2A4A;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .section-label .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2D5F8A, #4A90D9);
+  }
+
+  /* 5단계 프로세스 */
+  .process-steps {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 18px;
+  }
+  .step-card {
+    flex: 1;
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .step-top {
+    padding: 8px 6px;
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+  }
+  .step-top .num {
+    display: inline-flex;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 800;
+    margin-bottom: 3px;
+  }
+  .step-top .name { font-size: 10px; display: block; }
+  .step-body {
+    padding: 8px 6px;
+    background: #FAFCFF;
+    font-size: 8px;
+    color: #4A5568;
+    line-height: 1.5;
+  }
+  .step-body strong { color: #1B2A4A; }
+  .step-time {
+    margin-top: 4px;
+    padding-top: 4px;
+    border-top: 1px dashed #E2E8F0;
+    font-size: 8px;
+    font-weight: 700;
+    color: #4A90D9;
+  }
+  .step1 .step-top { background: linear-gradient(135deg, #2B6CB0, #4A90D9); }
+  .step2 .step-top { background: linear-gradient(135deg, #276749, #48BB78); }
+  .step3 .step-top { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .step4 .step-top { background: linear-gradient(135deg, #C05621, #ED8936); }
+  .step5 .step-top { background: linear-gradient(135deg, #9B2C2C, #E53E3E); }
+
+  .step-arrow {
+    display: flex;
+    align-items: center;
+    color: #CBD5E0;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  /* SLA 등급 */
+  .sla-grid {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .sla-card {
+    flex: 1;
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .sla-header {
+    padding: 8px 10px;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .sla-header.critical { background: linear-gradient(135deg, #9B2C2C, #E53E3E); }
+  .sla-header.major { background: linear-gradient(135deg, #C05621, #ED8936); }
+  .sla-header.minor { background: linear-gradient(135deg, #2B6CB0, #4A90D9); }
+  .sla-body {
+    padding: 10px;
+    background: #fff;
+  }
+  .sla-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    padding: 4px 0;
+    border-bottom: 1px dashed #EDF2F7;
+  }
+  .sla-item:last-child { border-bottom: none; }
+  .sla-item .label { color: #718096; }
+  .sla-item .value { font-weight: 700; color: #1B2A4A; }
+
+  /* 한-베 시차 */
+  .timezone-wrap {
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .tz-header {
+    padding: 8px 14px;
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .tz-body { padding: 10px 12px; background: #FAFCFF; }
+  .tz-timeline {
+    display: flex;
+    height: 20px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+  .tz-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 7px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .tz-kr { background: linear-gradient(90deg, #2B6CB0, #4A90D9); }
+  .tz-overlap { background: linear-gradient(90deg, #276749, #48BB78); }
+  .tz-vn { background: linear-gradient(90deg, #553C9A, #805AD5); }
+  .tz-weekend { background: linear-gradient(90deg, #C05621, #ED8936); }
+
+  .tz-legend {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 6px;
+  }
+  .tz-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 8px;
+    color: #4A5568;
+  }
+  .tz-dot {
+    width: 8px; height: 8px;
+    border-radius: 2px;
+  }
+  .tz-dot.kr { background: #4A90D9; }
+  .tz-dot.overlap { background: #48BB78; }
+  .tz-dot.vn { background: #805AD5; }
+  .tz-dot.weekend { background: #ED8936; }
+
+  .tz-label-row {
+    display: flex;
+    margin-bottom: 2px;
+  }
+  .tz-label-row span {
+    font-size: 8px;
+    font-weight: 600;
+    color: #1B2A4A;
+    width: 50px;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h2>하자보수 프로세스 및 SLA 체계</h2>
+    <div class="sub">WARRANTY PROCESS & SERVICE LEVEL AGREEMENT (PSR-003)</div>
+    <div class="line"></div>
+  </div>
+
+  <!-- 5단계 프로세스 -->
+  <div class="section-label"><div class="dot"></div> 5단계 하자보수 프로세스</div>
+  <div class="process-steps">
+    <div class="step-card step1">
+      <div class="step-top">
+        <div class="num">1</div>
+        <div class="name">접수</div>
+      </div>
+      <div class="step-body">
+        <strong>하자 접수</strong><br>
+        접수번호 부여<br>담당자 배정
+        <div class="step-time">⏱ 즉시</div>
+      </div>
+    </div>
+    <div class="step-arrow">›</div>
+    <div class="step-card step2">
+      <div class="step-top">
+        <div class="num">2</div>
+        <div class="name">분류</div>
+      </div>
+      <div class="step-body">
+        <strong>등급 판정</strong><br>
+        긴급/중요/일반<br>영향범위 분석
+        <div class="step-time">⏱ 30분 이내</div>
+      </div>
+    </div>
+    <div class="step-arrow">›</div>
+    <div class="step-card step3">
+      <div class="step-top">
+        <div class="num">3</div>
+        <div class="name">대응</div>
+      </div>
+      <div class="step-body">
+        <strong>원인 분석</strong><br>
+        코드 수정/패치<br>테스트 환경 검증
+        <div class="step-time">⏱ 등급별 상이</div>
+      </div>
+    </div>
+    <div class="step-arrow">›</div>
+    <div class="step-card step4">
+      <div class="step-top">
+        <div class="num">4</div>
+        <div class="name">검증</div>
+      </div>
+      <div class="step-body">
+        <strong>QA 검증</strong><br>
+        배포 전 확인<br>회귀 테스트
+        <div class="step-time">⏱ 2시간 이내</div>
+      </div>
+    </div>
+    <div class="step-arrow">›</div>
+    <div class="step-card step5">
+      <div class="step-top">
+        <div class="num">5</div>
+        <div class="name">완료</div>
+      </div>
+      <div class="step-body">
+        <strong>운영 배포</strong><br>
+        발주처 확인<br>이력 등록
+        <div class="step-time">⏱ 1시간 이내</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 장애 등급별 SLA -->
+  <div class="section-label"><div class="dot"></div> 장애 등급별 SLA 기준</div>
+  <div class="sla-grid">
+    <div class="sla-card">
+      <div class="sla-header critical">🔴 긴급 (Critical)</div>
+      <div class="sla-body">
+        <div class="sla-item"><span class="label">정의</span><span class="value">시스템 전체 장애</span></div>
+        <div class="sla-item"><span class="label">초동 대응</span><span class="value">1시간 이내</span></div>
+        <div class="sla-item"><span class="label">해결 목표</span><span class="value">4시간 이내</span></div>
+        <div class="sla-item"><span class="label">투입 인력</span><span class="value">CTO + 전원</span></div>
+      </div>
+    </div>
+    <div class="sla-card">
+      <div class="sla-header major">🟠 중요 (Major)</div>
+      <div class="sla-body">
+        <div class="sla-item"><span class="label">정의</span><span class="value">주요 기능 오류</span></div>
+        <div class="sla-item"><span class="label">초동 대응</span><span class="value">4시간 이내</span></div>
+        <div class="sla-item"><span class="label">해결 목표</span><span class="value">1영업일 이내</span></div>
+        <div class="sla-item"><span class="label">투입 인력</span><span class="value">개발리드 + 담당자</span></div>
+      </div>
+    </div>
+    <div class="sla-card">
+      <div class="sla-header minor">🔵 일반 (Minor)</div>
+      <div class="sla-body">
+        <div class="sla-item"><span class="label">정의</span><span class="value">경미한 기능 이슈</span></div>
+        <div class="sla-item"><span class="label">초동 대응</span><span class="value">24시간 이내</span></div>
+        <div class="sla-item"><span class="label">해결 목표</span><span class="value">3영업일 이내</span></div>
+        <div class="sla-item"><span class="label">투입 인력</span><span class="value">담당 개발자</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 한-베 시차 24시간 체계 -->
+  <div class="section-label"><div class="dot"></div> 한-베 시차 활용 24시간 지원 체계</div>
+  <div class="timezone-wrap">
+    <div class="tz-header">🌏 한국-베트남 시차(2시간) 활용 → 근무시간 외 장애 대응 가능</div>
+    <div class="tz-body">
+      <div class="tz-label-row"><span>평일</span></div>
+      <div class="tz-timeline">
+        <div class="tz-block tz-vn" style="width:8.3%;">00~02</div>
+        <div class="tz-block tz-vn" style="width:20.8%;">02~07 베트남팀</div>
+        <div class="tz-block tz-overlap" style="width:8.3%;">07~09</div>
+        <div class="tz-block tz-kr" style="width:37.5%;">09~18 한국팀 (전체 대응)</div>
+        <div class="tz-block tz-overlap" style="width:4.2%;">18~19</div>
+        <div class="tz-block tz-vn" style="width:20.8%;">19~24 베트남</div>
+      </div>
+      <div class="tz-label-row"><span>주말/공휴일</span></div>
+      <div class="tz-timeline">
+        <div class="tz-block tz-weekend" style="width:100%;">긴급 당직: 한국 1명 + 베트남 2명 (24시간 대응)</div>
+      </div>
+      <div class="tz-legend">
+        <div class="tz-legend-item"><div class="tz-dot kr"></div> 한국팀 전담</div>
+        <div class="tz-legend-item"><div class="tz-dot overlap"></div> 한-베 공동</div>
+        <div class="tz-legend-item"><div class="tz-dot vn"></div> 베트남팀 당직</div>
+        <div class="tz-legend-item"><div class="tz-dot weekend"></div> 주말/공휴일 당직</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

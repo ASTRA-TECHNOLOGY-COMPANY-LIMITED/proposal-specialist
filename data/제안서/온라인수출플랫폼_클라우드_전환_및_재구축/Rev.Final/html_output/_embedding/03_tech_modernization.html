@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+  .header { text-align: center; margin-bottom: 22px; }
+  .header h2 { font-size: 17px; color: #1B2A4A; letter-spacing: 2px; margin-bottom: 4px; }
+  .header .sub { font-size: 10px; color: #718096; letter-spacing: 1px; }
+  .header .line { width: 60px; height: 3px; background: linear-gradient(90deg, #2D5F8A, #4A90D9); margin: 10px auto 0; border-radius: 2px; }
+
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .stack-card {
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .stack-header {
+    padding: 8px 12px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .stack-header .icon { font-size: 14px; }
+  .stack-header.os { background: linear-gradient(135deg, #2B6CB0, #4A90D9); }
+  .stack-header.db { background: linear-gradient(135deg, #276749, #48BB78); }
+  .stack-header.fw { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .stack-header.fe { background: linear-gradient(135deg, #9C4221, #ED8936); }
+  .stack-header.web { background: linear-gradient(135deg, #234E52, #38B2AC); }
+  .stack-header.was { background: linear-gradient(135deg, #C53030, #E53E3E); }
+
+  .stack-body {
+    padding: 10px 12px;
+    background: #FAFCFF;
+  }
+  .stack-tech {
+    font-size: 13px;
+    font-weight: 800;
+    color: #1B2A4A;
+    margin-bottom: 4px;
+  }
+  .stack-version {
+    font-size: 9px;
+    color: #4A90D9;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .stack-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+  .stack-tag {
+    font-size: 8px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-weight: 600;
+    background: #EBF8FF;
+    color: #2A4365;
+    border: 1px solid #BEE3F8;
+  }
+  .stack-tag.green { background: #F0FFF4; color: #276749; border-color: #C6F6D5; }
+  .stack-tag.purple { background: #FAF5FF; color: #553C9A; border-color: #E9D8FD; }
+
+  .principle-row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .principle-card {
+    flex: 1;
+    text-align: center;
+    padding: 10px 6px;
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .principle-icon { font-size: 18px; margin-bottom: 3px; }
+  .principle-title { font-size: 9px; font-weight: 700; color: #1B2A4A; margin-bottom: 2px; }
+  .principle-desc { font-size: 8px; color: #718096; line-height: 1.4; }
+
+  .infra-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .infra-table thead th {
+    padding: 8px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+    color: #fff;
+  }
+  .infra-table tbody td {
+    padding: 7px 10px;
+    font-size: 10px;
+    text-align: center;
+    border-bottom: 1px solid #F0F0F0;
+    color: #2D3748;
+  }
+  .infra-table tbody tr:nth-child(even) td { background: #F7FAFC; }
+  .infra-table tbody tr:last-child td { border-bottom: none; }
+  .infra-table tbody td:first-child { font-weight: 600; text-align: left; padding-left: 14px; }
+
+  .env-tag {
+    display: inline-block;
+    font-size: 8px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-weight: 700;
+  }
+  .env-tag.cloud { background: #BEE3F8; color: #2A4365; }
+  .env-tag.idc { background: #E9D8FD; color: #553C9A; }
+  .env-tag.open { background: #C6F6D5; color: #276749; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h2>공개 SW 기반 클라우드 네이티브 기술 스택</h2>
+    <div class="sub">OPEN SOURCE CLOUD-NATIVE TECHNOLOGY STACK (SFR-001)</div>
+    <div class="line"></div>
+  </div>
+
+  <!-- 적용 원칙 -->
+  <div class="principle-row">
+    <div class="principle-card">
+      <div class="principle-icon">🏛️</div>
+      <div class="principle-title">전자정부 표준 준수</div>
+      <div class="principle-desc">전자정부 표준FW 5.0<br>Spring Boot 3.x 기반</div>
+    </div>
+    <div class="principle-card">
+      <div class="principle-icon">🔓</div>
+      <div class="principle-title">공개 SW 우선</div>
+      <div class="principle-desc">오픈소스 기반 구성<br>벤더 종속 최소화</div>
+    </div>
+    <div class="principle-card">
+      <div class="principle-icon">☁️</div>
+      <div class="principle-title">클라우드 네이티브</div>
+      <div class="principle-desc">컨테이너 + K8s<br>오토스케일링 지원</div>
+    </div>
+    <div class="principle-card">
+      <div class="principle-icon">🔒</div>
+      <div class="principle-title">보안 내재화</div>
+      <div class="principle-desc">시큐어코딩 준수<br>OWASP Top 10 대응</div>
+    </div>
+    <div class="principle-card">
+      <div class="principle-icon">🔗</div>
+      <div class="principle-title">하이브리드 연계</div>
+      <div class="principle-desc">클라우드 + 중진공 IDC<br>VPN 기반 통합</div>
+    </div>
+  </div>
+
+  <!-- 기술 스택 6개 카드 -->
+  <div class="stack-grid">
+    <div class="stack-card">
+      <div class="stack-header os"><span class="icon">🖥️</span> 운영체제</div>
+      <div class="stack-body">
+        <div class="stack-tech">Linux</div>
+        <div class="stack-version">Rocky Linux 9.x (LTS)</div>
+        <div class="stack-features">
+          <span class="stack-tag">컨테이너 최적화</span>
+          <span class="stack-tag green">장기 보안 지원</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-header db"><span class="icon">🗄️</span> 데이터베이스</div>
+      <div class="stack-body">
+        <div class="stack-tech">MariaDB HA</div>
+        <div class="stack-version">Cloud DB for MySQL (8C/32GB × 2)</div>
+        <div class="stack-features">
+          <span class="stack-tag green">자동 Failover</span>
+          <span class="stack-tag">공개 SW</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-header fw"><span class="icon">⚙️</span> 프레임워크</div>
+      <div class="stack-body">
+        <div class="stack-tech">전자정부 FW 5.0</div>
+        <div class="stack-version">Spring Boot 3.x + Open JDK 17/21/23</div>
+        <div class="stack-features">
+          <span class="stack-tag purple">국가 표준</span>
+          <span class="stack-tag">JPA/MyBatis</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-header fe"><span class="icon">🎨</span> 프론트엔드</div>
+      <div class="stack-body">
+        <div class="stack-tech">Nexacro N V24</div>
+        <div class="stack-version">반응형 웹 + UI/UX 가이드라인 준수</div>
+        <div class="stack-features">
+          <span class="stack-tag">반응형</span>
+          <span class="stack-tag green">접근성 준수</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-header web"><span class="icon">🌐</span> WEB 서버</div>
+      <div class="stack-body">
+        <div class="stack-tech">Nginx</div>
+        <div class="stack-version">리버스 프록시 + 정적 자원 서빙</div>
+        <div class="stack-features">
+          <span class="stack-tag">L7 로드밸런싱</span>
+          <span class="stack-tag green">CDN 연계</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-header was"><span class="icon">🚀</span> WAS 서버</div>
+      <div class="stack-body">
+        <div class="stack-tech">Tomcat</div>
+        <div class="stack-version">컨테이너 기반 다중 Pod 구성</div>
+        <div class="stack-features">
+          <span class="stack-tag">K8s 오케스트레이션</span>
+          <span class="stack-tag purple">HA 이중화</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 인프라 구성 -->
+  <table class="infra-table">
+    <thead>
+      <tr><th>구성요소</th><th>기술</th><th>환경</th><th>규격</th><th>비고</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>컨테이너 오케스트레이션</td>
+        <td>NKS (Ncloud K8s Service)</td>
+        <td><span class="env-tag cloud">클라우드</span></td>
+        <td>prd + stg 클러스터</td>
+        <td>CSP Managed</td>
+      </tr>
+      <tr>
+        <td>서비스 DB</td>
+        <td>Cloud DB for MySQL (MariaDB)</td>
+        <td><span class="env-tag cloud">클라우드</span></td>
+        <td>8C/32GB × 2 (HA)</td>
+        <td><span class="env-tag open">공개SW</span></td>
+      </tr>
+      <tr>
+        <td>업무 DB</td>
+        <td>Oracle DB (기존 활용)</td>
+        <td><span class="env-tag idc">중진공 IDC</span></td>
+        <td>기존 인프라 유지</td>
+        <td>VPN 연계</td>
+      </tr>
+      <tr>
+        <td>캐시/세션</td>
+        <td>Redis Cluster (StatefulSet)</td>
+        <td><span class="env-tag cloud">클라우드</span></td>
+        <td>3M + 3R 구성</td>
+        <td><span class="env-tag open">공개SW</span></td>
+      </tr>
+      <tr>
+        <td>검색 엔진</td>
+        <td>Elasticsearch</td>
+        <td><span class="env-tag cloud">클라우드</span></td>
+        <td>3 Node Cluster</td>
+        <td><span class="env-tag open">공개SW</span></td>
+      </tr>
+      <tr>
+        <td>CI/CD</td>
+        <td>GitLab + ArgoCD</td>
+        <td><span class="env-tag cloud">클라우드</span></td>
+        <td>GitOps 기반</td>
+        <td><span class="env-tag open">공개SW</span></td>
+      </tr>
+      <tr>
+        <td>모니터링</td>
+        <td>Prometheus + Grafana + EFK</td>
+        <td><span class="env-tag cloud">클라우드</span></td>
+        <td>통합 관제</td>
+        <td><span class="env-tag open">공개SW</span></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+  .header { text-align: center; margin-bottom: 22px; }
+  .header h2 { font-size: 17px; color: #1B2A4A; letter-spacing: 2px; margin-bottom: 4px; }
+  .header .sub { font-size: 10px; color: #718096; letter-spacing: 1px; }
+  .header .line { width: 60px; height: 3px; background: linear-gradient(90deg, #2D5F8A, #4A90D9); margin: 10px auto 0; border-radius: 2px; }
+
+  .org-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .org-card {
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    text-align: center;
+  }
+  .org-header {
+    padding: 10px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .org-header.pm { background: linear-gradient(135deg, #1B2A4A, #2D5F8A); }
+  .org-header.pmo { background: linear-gradient(135deg, #2B6CB0, #4A90D9); }
+  .org-header.qa { background: linear-gradient(135deg, #276749, #48BB78); }
+  .org-header.cto { background: linear-gradient(135deg, #553C9A, #805AD5); }
+
+  .org-body {
+    padding: 10px 8px;
+    background: #FAFCFF;
+  }
+  .org-icon { font-size: 22px; margin-bottom: 4px; }
+  .org-role { font-size: 9px; color: #718096; line-height: 1.4; }
+
+  .lifecycle-section {
+    margin-bottom: 16px;
+  }
+  .lifecycle-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #1B2A4A;
+    margin-bottom: 10px;
+    padding-left: 8px;
+    border-left: 3px solid #4A90D9;
+  }
+
+  .lifecycle-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 16px;
+  }
+  .lifecycle-table thead th {
+    padding: 9px 8px;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+    color: #fff;
+  }
+  .lifecycle-table tbody td {
+    padding: 8px;
+    font-size: 9px;
+    text-align: center;
+    border-bottom: 1px solid #F0F0F0;
+    color: #2D3748;
+  }
+  .lifecycle-table tbody tr:nth-child(even) td { background: #F7FAFC; }
+  .lifecycle-table tbody tr:last-child td { border-bottom: none; }
+  .lifecycle-table tbody td:first-child { font-weight: 700; text-align: center; }
+
+  .phase-badge {
+    display: inline-block;
+    font-size: 9px;
+    padding: 3px 10px;
+    border-radius: 8px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .phase-badge.analysis { background: linear-gradient(135deg, #2B6CB0, #4A90D9); }
+  .phase-badge.design { background: linear-gradient(135deg, #276749, #48BB78); }
+  .phase-badge.impl { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .phase-badge.test { background: linear-gradient(135deg, #9C4221, #ED8936); }
+  .phase-badge.deploy { background: linear-gradient(135deg, #C53030, #E53E3E); }
+
+  .change-flow {
+    display: flex;
+    align-items: stretch;
+    gap: 6px;
+  }
+  .change-step {
+    flex: 1;
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    text-align: center;
+  }
+  .change-header {
+    padding: 8px 6px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .change-header.c1 { background: linear-gradient(135deg, #2B6CB0, #4A90D9); }
+  .change-header.c2 { background: linear-gradient(135deg, #276749, #48BB78); }
+  .change-header.c3 { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .change-header.c4 { background: linear-gradient(135deg, #9C4221, #ED8936); }
+
+  .change-body {
+    padding: 8px 6px;
+    background: #fff;
+    font-size: 8px;
+    color: #4A5568;
+    line-height: 1.5;
+  }
+  .change-who {
+    font-size: 8px;
+    color: #4A90D9;
+    font-weight: 700;
+    margin-top: 4px;
+  }
+  .change-arrow {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #4A90D9;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h2>품질관리 조직 및 단계별 활동</h2>
+    <div class="sub">QUALITY MANAGEMENT ORGANIZATION &amp; LIFECYCLE (QUR-001~004)</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="org-grid">
+    <div class="org-card">
+      <div class="org-header pm">PM</div>
+      <div class="org-body">
+        <div class="org-icon">👤</div>
+        <div class="org-role">프로젝트 총괄<br>품질 목표 수립<br>의사결정 · 발주처 보고</div>
+      </div>
+    </div>
+    <div class="org-card">
+      <div class="org-header pmo">PMO</div>
+      <div class="org-body">
+        <div class="org-icon">📋</div>
+        <div class="org-role">품질관리 전담<br>산출물 검토 · 일정 점검<br>품질 감사 · 이슈 관리</div>
+      </div>
+    </div>
+    <div class="org-card">
+      <div class="org-header qa">QA</div>
+      <div class="org-body">
+        <div class="org-icon">🔍</div>
+        <div class="org-role">품질보증<br>코드리뷰 · 테스트<br>결함 추적 · 보고</div>
+      </div>
+    </div>
+    <div class="org-card">
+      <div class="org-header cto">CTO</div>
+      <div class="org-body">
+        <div class="org-icon">⚙️</div>
+        <div class="org-role">기술품질<br>아키텍처 리뷰<br>기술 표준 준수 점검</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lifecycle-section">
+    <div class="lifecycle-title">단계별 품질관리 활동</div>
+    <table class="lifecycle-table">
+      <thead>
+        <tr>
+          <th>단계</th>
+          <th>품질관리 활동</th>
+          <th>품질 점검 항목</th>
+          <th>산출물</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="phase-badge analysis">분석</span></td>
+          <td>요구사항 검토, 완전성/일관성 점검</td>
+          <td>요구사항 추적성, 명확성</td>
+          <td>요구사항 검토 결과서</td>
+        </tr>
+        <tr>
+          <td><span class="phase-badge design">설계</span></td>
+          <td>설계 표준 준수 점검, 설계 리뷰</td>
+          <td>아키텍처 적합성, DB 설계</td>
+          <td>설계 리뷰 결과서</td>
+        </tr>
+        <tr>
+          <td><span class="phase-badge impl">구현</span></td>
+          <td>코드리뷰, 정적분석, 코딩표준</td>
+          <td>코드 품질, 보안 취약점</td>
+          <td>코드 품질 보고서</td>
+        </tr>
+        <tr>
+          <td><span class="phase-badge test">테스트</span></td>
+          <td>테스트 커버리지, 결함 분석</td>
+          <td>시험 통과율, 결함 해소율</td>
+          <td>테스트 품질 보고서</td>
+        </tr>
+        <tr>
+          <td><span class="phase-badge deploy">이행</span></td>
+          <td>마이그레이션 검증, 시범운영</td>
+          <td>데이터 정합성, 결함 발생률</td>
+          <td>최종 품질점검 보고서</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="lifecycle-title">변경관리 4단계 절차 (QUR-002)</div>
+  <div class="change-flow">
+    <div class="change-step">
+      <div class="change-header c1">1. 변경 요청</div>
+      <div class="change-body">
+        변경사항 식별<br>변경요청서 작성
+        <div class="change-who">요청자</div>
+      </div>
+    </div>
+    <div class="change-arrow">→</div>
+    <div class="change-step">
+      <div class="change-header c2">2. 영향 분석</div>
+      <div class="change-body">
+        일정/비용/품질<br>영향도 분석
+        <div class="change-who">기술팀</div>
+      </div>
+    </div>
+    <div class="change-arrow">→</div>
+    <div class="change-step">
+      <div class="change-header c3">3. 승인/반려</div>
+      <div class="change-body">
+        변경통제위원회<br>(CCB) 심의
+        <div class="change-who">PM + 중진공</div>
+      </div>
+    </div>
+    <div class="change-arrow">→</div>
+    <div class="change-step">
+      <div class="change-header c4">4. 반영</div>
+      <div class="change-body">
+        변경사항 구현<br>검증 및 완료
+        <div class="change-who">개발팀</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

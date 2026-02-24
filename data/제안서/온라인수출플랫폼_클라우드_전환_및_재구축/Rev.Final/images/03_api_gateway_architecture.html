@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 22px;
+  }
+  .header h2 { font-size: 17px; color: #1B2A4A; letter-spacing: 2px; margin-bottom: 4px; }
+  .header .sub { font-size: 10px; color: #718096; letter-spacing: 1px; }
+  .header .line { width: 60px; height: 3px; background: linear-gradient(90deg, #2D5F8A, #4A90D9); margin: 10px auto 0; border-radius: 2px; }
+
+  .gateway-flow {
+    display: flex;
+    align-items: stretch;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .flow-stage {
+    flex: 1;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stage-header {
+    padding: 8px 6px;
+    text-align: center;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .stage-header.client { background: linear-gradient(135deg, #2D3748, #4A5568); }
+  .stage-header.gateway { background: linear-gradient(135deg, #2B6CB0, #4A90D9); }
+  .stage-header.service { background: linear-gradient(135deg, #276749, #48BB78); }
+
+  .stage-body {
+    padding: 8px;
+    flex: 1;
+    background: #FAFCFF;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stage-item {
+    font-size: 9px;
+    padding: 4px 6px;
+    border-radius: 5px;
+    background: #fff;
+    border: 1px solid #E2E8F0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .stage-item .icon { font-size: 11px; flex-shrink: 0; }
+  .stage-item .label { font-weight: 600; color: #2D3748; }
+  .stage-item .desc { font-size: 8px; color: #718096; }
+
+  .arrow-col {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #4A90D9;
+    font-weight: 700;
+    flex-shrink: 0;
+    width: 20px;
+    justify-content: center;
+  }
+
+  .func-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .func-card {
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .func-card-header {
+    padding: 8px 8px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+  }
+  .func-card-body {
+    padding: 8px;
+    background: #fff;
+    font-size: 9px;
+    color: #4A5568;
+    line-height: 1.5;
+  }
+  .func-tech {
+    font-size: 8px;
+    color: #4A90D9;
+    font-weight: 600;
+    margin-top: 4px;
+    padding-top: 4px;
+    border-top: 1px dashed #E2E8F0;
+  }
+
+  .rate-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .rate-table thead th {
+    padding: 8px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+    color: #fff;
+    border-bottom: 2px solid #E2E8F0;
+  }
+  .rate-table tbody td {
+    padding: 7px 10px;
+    font-size: 10px;
+    text-align: center;
+    border-bottom: 1px solid #F0F0F0;
+    color: #2D3748;
+  }
+  .rate-table tbody tr:nth-child(even) td { background: #F7FAFC; }
+  .rate-table tbody tr:last-child td { border-bottom: none; }
+  .rate-table tbody td:first-child { font-weight: 600; text-align: left; padding-left: 14px; }
+
+  .rate-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-size: 9px;
+    font-weight: 700;
+  }
+  .rate-badge.high { background: #C6F6D5; color: #276749; }
+  .rate-badge.mid { background: #BEE3F8; color: #2A4365; }
+  .rate-badge.low { background: #FEFCE8; color: #92400E; }
+  .rate-badge.unlimited { background: #E9D8FD; color: #553C9A; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h2>API 게이트웨이 아키텍처</h2>
+    <div class="sub">API GATEWAY ARCHITECTURE (SFR-003)</div>
+    <div class="line"></div>
+  </div>
+
+  <!-- 요청 흐름 -->
+  <div class="gateway-flow">
+    <div class="flow-stage">
+      <div class="stage-header client">CLIENT</div>
+      <div class="stage-body">
+        <div class="stage-item"><span class="icon">🌐</span><span class="label">국문사이트</span></div>
+        <div class="stage-item"><span class="icon">🌍</span><span class="label">영문사이트</span></div>
+        <div class="stage-item"><span class="icon">⚙️</span><span class="label">관리자사이트</span></div>
+        <div class="stage-item"><span class="icon">🔗</span><span class="label">외부 연계</span></div>
+      </div>
+    </div>
+    <div class="arrow-col">→</div>
+    <div class="flow-stage" style="flex: 1.5;">
+      <div class="stage-header gateway">API GATEWAY</div>
+      <div class="stage-body">
+        <div class="stage-item"><span class="icon">🔐</span><span class="label">JWT 인증·인가</span><span class="desc">OAuth 2.0</span></div>
+        <div class="stage-item"><span class="icon">🚦</span><span class="label">Rate Limiting</span><span class="desc">대상별 차등</span></div>
+        <div class="stage-item"><span class="icon">🔀</span><span class="label">라우팅·변환</span><span class="desc">프로토콜 변환</span></div>
+        <div class="stage-item"><span class="icon">📊</span><span class="label">모니터링·로깅</span><span class="desc">Prometheus</span></div>
+      </div>
+    </div>
+    <div class="arrow-col">→</div>
+    <div class="flow-stage">
+      <div class="stage-header service">MICROSERVICE</div>
+      <div class="stage-body">
+        <div class="stage-item"><span class="icon">📦</span><span class="label">회원 서비스</span></div>
+        <div class="stage-item"><span class="icon">🛒</span><span class="label">상품 서비스</span></div>
+        <div class="stage-item"><span class="icon">📈</span><span class="label">수출지원</span></div>
+        <div class="stage-item"><span class="icon">💳</span><span class="label">결제 서비스</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 기능 카드 -->
+  <div class="func-grid">
+    <div class="func-card">
+      <div class="func-card-header">토큰 인증</div>
+      <div class="func-card-body">
+        JWT Access Token 발급<br>Refresh Token Rotation
+        <div class="func-tech">Spring Security + OAuth 2.0</div>
+      </div>
+    </div>
+    <div class="func-card">
+      <div class="func-card-header">라우팅</div>
+      <div class="func-card-body">
+        Path + Method 기반<br>클라이언트별 분기
+        <div class="func-tech">Spring Cloud Gateway</div>
+      </div>
+    </div>
+    <div class="func-card">
+      <div class="func-card-header">공통 로직</div>
+      <div class="func-card-body">
+        로깅, 에러 핸들링<br>게이트웨이 필터 처리
+        <div class="func-tech">Gateway Global Filter</div>
+      </div>
+    </div>
+    <div class="func-card">
+      <div class="func-card-header">메시지 패턴</div>
+      <div class="func-card-body">
+        동기·비동기 변환<br>메시지 큐 연동
+        <div class="func-tech">RabbitMQ + WebClient</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rate Limiting -->
+  <table class="rate-table">
+    <thead>
+      <tr>
+        <th>대상</th>
+        <th>Rate Limit</th>
+        <th>Burst</th>
+        <th>식별 방식</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>인증된 사용자</td>
+        <td><span class="rate-badge mid">100 req/min</span></td>
+        <td>200</td>
+        <td>JWT 토큰</td>
+      </tr>
+      <tr>
+        <td>비인증 사용자</td>
+        <td><span class="rate-badge low">30 req/min</span></td>
+        <td>60</td>
+        <td>IP 기반</td>
+      </tr>
+      <tr>
+        <td>외부 연계 API</td>
+        <td><span class="rate-badge high">1,000 req/min</span></td>
+        <td>2,000</td>
+        <td>API Key</td>
+      </tr>
+      <tr>
+        <td>관리자 API</td>
+        <td><span class="rate-badge unlimited">무제한</span></td>
+        <td>-</td>
+        <td>IP 화이트리스트</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

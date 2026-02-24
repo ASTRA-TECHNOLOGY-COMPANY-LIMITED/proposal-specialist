@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 24px;
+    color: #1A202C;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 22px;
+  }
+  .header h2 {
+    font-size: 18px;
+    color: #1B2A4A;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .header .sub {
+    font-size: 11px;
+    color: #718096;
+    letter-spacing: 1px;
+  }
+  .header .line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #2D5F8A, #4A90D9);
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .tl-item {
+    display: flex;
+    align-items: stretch;
+    min-height: 42px;
+  }
+
+  .tl-year {
+    width: 80px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 16px;
+    font-size: 13px;
+    font-weight: 800;
+    color: #1B2A4A;
+  }
+
+  .tl-line {
+    width: 24px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  .tl-line::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: #D0DCE8;
+    border-radius: 2px;
+  }
+  .tl-item:first-child .tl-line::before { top: 50%; }
+  .tl-item:last-child .tl-line::before { bottom: 50%; }
+
+  .tl-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid #4A90D9;
+    position: relative;
+    z-index: 1;
+    margin: auto 0;
+    flex-shrink: 0;
+  }
+  .tl-item.major .tl-dot {
+    width: 14px;
+    height: 14px;
+    background: #1B2A4A;
+    border: 3px solid #63B3ED;
+    box-shadow: 0 0 0 4px rgba(99,179,237,0.2);
+  }
+
+  .tl-content {
+    flex: 1;
+    padding: 5px 0 5px 14px;
+    display: flex;
+    align-items: center;
+  }
+  .tl-box {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: #4A5568;
+    background: #F7FAFC;
+    border-left: 3px solid #E2E8F0;
+  }
+  .tl-item.major .tl-box {
+    background: linear-gradient(135deg, #EBF4FF, #F0F7FF);
+    border-left: 3px solid #4A90D9;
+    color: #1A202C;
+    font-weight: 600;
+  }
+  .tl-box b { color: #1B2A4A; }
+
+  .tag {
+    display: inline-block;
+    font-size: 8.5px;
+    padding: 1px 6px;
+    border-radius: 8px;
+    font-weight: 700;
+    margin-right: 3px;
+    vertical-align: middle;
+  }
+  .tag.award { background: #FEFCE8; color: #92400E; }
+  .tag.global { background: #F0FFF4; color: #276749; }
+  .tag.product { background: #EBF4FF; color: #2D5F8A; }
+
+  .summary-bar {
+    margin-top: 18px;
+    display: flex;
+    gap: 8px;
+  }
+  .summary-item {
+    flex: 1;
+    text-align: center;
+    padding: 10px 8px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+    color: #fff;
+  }
+  .summary-number {
+    font-size: 20px;
+    font-weight: 800;
+  }
+  .summary-label {
+    font-size: 9px;
+    opacity: 0.85;
+    margin-top: 2px;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h2>퀸텟시스템즈 주요 연혁</h2>
+    <div class="sub">QUINTETSYSTEMS MILESTONES</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item major">
+      <div class="tl-year">2003</div>
+      <div class="tl-line"><div class="tl-dot"></div></div>
+      <div class="tl-content"><div class="tl-box">
+        <span class="tag product">설립</span> (주)퀸텟시스템즈 설립 · 삼성SDS CRM/DW 특화 협력사
+      </div></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">2006</div>
+      <div class="tl-line"><div class="tl-dot"></div></div>
+      <div class="tl-content"><div class="tl-box">
+        IBM Core Supplier · 한국오라클 SIEBEL Reseller · 디지털이노베이션 100대 기업
+      </div></div>
+    </div>
+
+    <div class="tl-item major">
+      <div class="tl-year">2007~09</div>
+      <div class="tl-line"><div class="tl-dot"></div></div>
+      <div class="tl-content"><div class="tl-box">
+        <span class="tag award">수상</span> <b>오라클 Partner of the Year 3년 연속</b> (CRM) · 미국법인 설립
+      </div></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">2014</div>
+      <div class="tl-line"><div class="tl-dot"></div></div>
+      <div class="tl-content"><div class="tl-box">
+        삼성전자 전사 마케팅 실행관리 시스템 · O2O/IoT 솔루션 iCIGNAL 출시
+      </div></div>
+    </div>
+
+    <div class="tl-item major">
+      <div class="tl-year">2017~18</div>
+      <div class="tl-line"><div class="tl-dot"></div></div>
+      <div class="tl-content"><div class="tl-box">
+        <span class="tag award">인증</span> <b>가트너(Gartner) CRM 벤더가이드 2년 연속 등재</b>
+      </div></div>
+    </div>
+
+    <div class="tl-item major">
+      <div class="tl-year">2020</div>
+      <div class="tl-line"><div class="tl-dot"></div></div>
+      <div class="tl-content"><div class="tl-box">
+        <span class="tag product">플랫폼</span> <b>CALS Platz</b> 클라우드 로우코드 플랫폼 출시 — 국내 최초 SaaS
+      </div></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">2021</div>
+      <div class="tl-line"><div class="tl-dot"></div></div>
+      <div class="tl-content"><div class="tl-box">
+        <span class="tag global">글로벌</span> AWS 글로벌 마켓플레이스 등록 · ISV 엑셀러레이트 파트너
+      </div></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">2024</div>
+      <div class="tl-line"><div class="tl-dot"></div></div>
+      <div class="tl-content"><div class="tl-box">
+        <span class="tag product">AI</span> 생성형 AI 로우코드 'CAI' 출시 · CALS 플랫폼 고도화
+      </div></div>
+    </div>
+
+    <div class="tl-item major">
+      <div class="tl-year">2025</div>
+      <div class="tl-line"><div class="tl-dot"></div></div>
+      <div class="tl-content"><div class="tl-box">
+        <span class="tag product">AI</span> <b>AI BOAT</b> (Business Orchestration Automation Technology) 출시
+      </div></div>
+    </div>
+  </div>
+
+  <div class="summary-bar">
+    <div class="summary-item">
+      <div class="summary-number">23년</div>
+      <div class="summary-label">업력</div>
+    </div>
+    <div class="summary-item">
+      <div class="summary-number">104명</div>
+      <div class="summary-label">임직원</div>
+    </div>
+    <div class="summary-item">
+      <div class="summary-number">40+</div>
+      <div class="summary-label">엔터프라이즈 프로젝트</div>
+    </div>
+    <div class="summary-item">
+      <div class="summary-number">3종</div>
+      <div class="summary-label">자체 솔루션</div>
+    </div>
+  </div>
+</body>
+</html>

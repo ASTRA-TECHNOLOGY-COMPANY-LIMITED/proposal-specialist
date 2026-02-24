@@ -7,6 +7,6 @@
         "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
     },
     "enabledPlugins": {
-        "proposal-specialist@proposal-specialist-local": true
+        "proposal-specialist@proposal-specialist-marketplace": true
     }
 }

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+  .header { text-align: center; margin-bottom: 20px; }
+  .header h2 { font-size: 17px; color: #1B2A4A; letter-spacing: 2px; margin-bottom: 4px; }
+  .header .sub { font-size: 10px; color: #718096; letter-spacing: 1px; }
+  .header .line { width: 60px; height: 3px; background: linear-gradient(90deg, #2D5F8A, #4A90D9); margin: 10px auto 0; border-radius: 2px; }
+
+  .section-label {
+    font-size: 11px; font-weight: 700; color: #1B2A4A;
+    margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+  }
+  .section-label .dot { width: 4px; height: 13px; border-radius: 2px; background: linear-gradient(180deg, #2D5F8A, #4A90D9); }
+
+  /* Gantt Chart */
+  .gantt {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    border-radius: 10px; overflow: hidden;
+    border: 1px solid #E2E8F0;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .gantt thead th {
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+    color: #fff; font-size: 9px; font-weight: 600;
+    padding: 8px 4px; text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+  .gantt thead th:last-child { border-right: none; }
+  .gantt thead th:first-child { text-align: left; padding-left: 10px; width: 150px; }
+
+  .gantt tbody td {
+    padding: 5px 3px; font-size: 8.5px; color: #4A5568;
+    border-bottom: 1px solid #F0F4F8;
+    text-align: center; position: relative;
+    height: 28px;
+  }
+  .gantt tbody tr:last-child td { border-bottom: none; }
+  .gantt tbody td:first-child {
+    font-weight: 700; color: #1B2A4A;
+    text-align: left; padding-left: 10px;
+    background: #FAFBFC;
+  }
+
+  /* Gantt bars */
+  .gbar {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    height: 16px; border-radius: 4px;
+    left: 4px; right: 4px;
+  }
+  .gbar.b1 { background: linear-gradient(90deg, #4299E1, #63B3ED); }
+  .gbar.b2 { background: linear-gradient(90deg, #48BB78, #68D391); }
+  .gbar.b3 { background: linear-gradient(90deg, #805AD5, #A78BFA); }
+  .gbar.b4 { background: linear-gradient(90deg, #ED8936, #F6AD55); }
+  .gbar.b5 { background: linear-gradient(90deg, #E53E3E, #FC8181); }
+  .gbar.b6 { background: linear-gradient(90deg, #D69E2E, #F6E05E); }
+  .gbar.b7 { background: linear-gradient(90deg, #319795, #4FD1C5); }
+
+  /* Milestone markers */
+  .milestone-row td { border-top: 2px solid #E2E8F0; }
+  .milestone {
+    font-size: 10px; font-weight: 800;
+  }
+  .ms-start { color: #4299E1; }
+  .ms-mid { color: #ED8936; }
+  .ms-end { color: #48BB78; }
+
+  /* Sprint 사이클 */
+  .sprint-box {
+    border-radius: 12px; overflow: hidden;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    margin-bottom: 16px;
+  }
+  .sprint-head {
+    padding: 10px 16px;
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+    color: #fff; font-size: 11px; font-weight: 700;
+    text-align: center;
+  }
+  .sprint-body { padding: 12px; background: #fff; }
+  .sprint-weeks {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+  .sw-card {
+    border-radius: 8px; overflow: hidden;
+    border: 1px solid #E2E8F0;
+  }
+  .sw-num {
+    padding: 6px; text-align: center;
+    font-size: 9px; font-weight: 700; color: #fff;
+  }
+  .sw-num.w1 { background: linear-gradient(135deg, #2B6CB0, #4299E1); }
+  .sw-num.w2 { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .sw-num.w3 { background: linear-gradient(135deg, #C05621, #ED8936); }
+  .sw-num.w4 { background: linear-gradient(135deg, #276749, #48BB78); }
+  .sw-body { padding: 6px 8px; font-size: 8px; color: #4A5568; line-height: 1.5; }
+  .sw-out { font-size: 7px; color: #4A90D9; font-weight: 600; margin-top: 3px; }
+
+  /* 마일스톤 카드 */
+  .ms-cards { display: flex; gap: 8px; }
+  .ms-card {
+    flex: 1; border-radius: 10px; overflow: hidden;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .ms-head {
+    padding: 8px 10px; color: #fff;
+    font-size: 10px; font-weight: 700;
+    text-align: center;
+  }
+  .ms-head.m1 { background: linear-gradient(135deg, #2B6CB0, #4299E1); }
+  .ms-head.m2 { background: linear-gradient(135deg, #C05621, #ED8936); }
+  .ms-head.m3 { background: linear-gradient(135deg, #276749, #48BB78); }
+  .ms-body {
+    padding: 8px 10px; background: #fff;
+    font-size: 8px; color: #4A5568; line-height: 1.6;
+  }
+  .ms-time { font-size: 7px; color: #4A90D9; font-weight: 600; margin-bottom: 3px; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h2>WBS 추진일정 및 스프린트 계획</h2>
+    <div class="sub">WORK BREAKDOWN STRUCTURE — 270 DAYS (9 MONTHS)</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="section-label"><div class="dot"></div>전체 사업 추진 일정 (간트 차트)</div>
+  <table class="gantt">
+    <thead>
+      <tr>
+        <th>세부 내용</th>
+        <th>M</th><th>M+1</th><th>M+2</th><th>M+3</th><th>M+4</th><th>M+5</th><th>M+6</th><th>M+7</th><th>M+8</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>분석/설계</td>
+        <td><div class="gbar b1"></div></td>
+        <td><div class="gbar b1"></div></td>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>국문사이트 개발</td>
+        <td></td><td></td>
+        <td><div class="gbar b2"></div></td>
+        <td><div class="gbar b2"></div></td>
+        <td><div class="gbar b2"></div></td>
+        <td><div class="gbar b2"></div></td>
+        <td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>영문사이트 개발</td>
+        <td></td><td></td>
+        <td><div class="gbar b3"></div></td>
+        <td><div class="gbar b3"></div></td>
+        <td><div class="gbar b3"></div></td>
+        <td><div class="gbar b3"></div></td>
+        <td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>행정/사업관리 개발</td>
+        <td></td><td></td>
+        <td><div class="gbar b4"></div></td>
+        <td><div class="gbar b4"></div></td>
+        <td><div class="gbar b4"></div></td>
+        <td><div class="gbar b4"></div></td>
+        <td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>민간/타기관 연계</td>
+        <td></td><td></td><td></td>
+        <td><div class="gbar b5"></div></td>
+        <td><div class="gbar b5"></div></td>
+        <td><div class="gbar b5"></div></td>
+        <td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>통합정보시스템(수출)</td>
+        <td></td><td></td>
+        <td><div class="gbar b6"></div></td>
+        <td><div class="gbar b6"></div></td>
+        <td><div class="gbar b6"></div></td>
+        <td><div class="gbar b6"></div></td>
+        <td><div class="gbar b6"></div></td>
+        <td></td><td></td>
+      </tr>
+      <tr>
+        <td>데이터 마이그레이션</td>
+        <td></td><td></td><td></td><td></td><td></td>
+        <td><div class="gbar b7"></div></td>
+        <td><div class="gbar b7"></div></td>
+        <td></td><td></td>
+      </tr>
+      <tr>
+        <td>테스트 (통합/인수)</td>
+        <td></td><td></td><td></td><td></td><td></td><td></td>
+        <td><div class="gbar b1"></div></td>
+        <td><div class="gbar b1"></div></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>안정화/오픈</td>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        <td><div class="gbar b2"></div></td>
+        <td><div class="gbar b2"></div></td>
+      </tr>
+      <tr class="milestone-row">
+        <td style="font-weight:800; color:#1B2A4A;">보고회</td>
+        <td><span class="milestone ms-start">▲착수</span></td>
+        <td></td><td></td><td></td>
+        <td><span class="milestone ms-mid">▲중간</span></td>
+        <td></td><td></td><td></td>
+        <td><span class="milestone ms-end">▲최종</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="section-label"><div class="dot"></div>4주 스프린트 운영 방식 (CBD 방법론)</div>
+  <div class="sprint-box">
+    <div class="sprint-head">4주 스프린트 사이클 — 개발 생산성과 품질의 동시 확보</div>
+    <div class="sprint-body">
+      <div class="sprint-weeks">
+        <div class="sw-card">
+          <div class="sw-num w1">1주차 · 기획</div>
+          <div class="sw-body">
+            화면기획<br>요구사항 상세화<br>
+            <div class="sw-out">→ 화면기획서, 스토리보드</div>
+          </div>
+        </div>
+        <div class="sw-card">
+          <div class="sw-num w2">2주차 · 디자인</div>
+          <div class="sw-body">
+            사업팀 확인<br>UI/UX 디자인<br>
+            <div class="sw-out">→ 디자인 시안, 퍼블리싱</div>
+          </div>
+        </div>
+        <div class="sw-card">
+          <div class="sw-num w3">3주차 · 개발</div>
+          <div class="sw-body">
+            백엔드/프론트엔드<br>시스템 개발<br>
+            <div class="sw-out">→ 소스코드, API</div>
+          </div>
+        </div>
+        <div class="sw-card">
+          <div class="sw-num w4">4주차 · 검증</div>
+          <div class="sw-body">
+            테스트 및 안정화<br>스프린트 리뷰<br>
+            <div class="sw-out">→ 테스트 결과, 리뷰 노트</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label"><div class="dot"></div>핵심 마일스톤</div>
+  <div class="ms-cards">
+    <div class="ms-card">
+      <div class="ms-head m1">착수보고회</div>
+      <div class="ms-body">
+        <div class="ms-time">M (계약 후 2주 이내)</div>
+        사업수행계획 발표<br>조직/일정/위험관리 보고
+      </div>
+    </div>
+    <div class="ms-card">
+      <div class="ms-head m2">중간보고회</div>
+      <div class="ms-body">
+        <div class="ms-time">M+4</div>
+        행정서비스 시범 오픈<br>대량메일 서비스 시연
+      </div>
+    </div>
+    <div class="ms-card">
+      <div class="ms-head m3">최종보고회</div>
+      <div class="ms-body">
+        <div class="ms-time">M+8</div>
+        전체 기능 시연<br>성능/보안 결과, 인수인계
+      </div>
+    </div>
+  </div>
+</body>
+</html>

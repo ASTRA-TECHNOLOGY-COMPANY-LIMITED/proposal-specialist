@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+  .header { text-align: center; margin-bottom: 20px; }
+  .header h2 { font-size: 17px; color: #1B2A4A; letter-spacing: 2px; margin-bottom: 4px; }
+  .header .sub { font-size: 10px; color: #718096; letter-spacing: 1px; }
+  .header .line { width: 60px; height: 3px; background: linear-gradient(90deg, #2D5F8A, #4A90D9); margin: 10px auto 0; border-radius: 2px; }
+
+  .section-label {
+    font-size: 11px; font-weight: 700; color: #1B2A4A;
+    margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+  }
+  .section-label .dot { width: 4px; height: 13px; border-radius: 2px; background: linear-gradient(180deg, #2D5F8A, #4A90D9); }
+
+  /* Heatmap Table */
+  .heatmap {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    border-radius: 10px; overflow: hidden;
+    border: 1px solid #E2E8F0;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .heatmap thead th {
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+    color: #fff; font-size: 9px; font-weight: 600;
+    padding: 8px 4px; text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+  .heatmap thead th:last-child { border-right: none; }
+  .heatmap thead th:first-child { text-align: left; padding-left: 10px; width: 140px; }
+
+  .heatmap tbody td {
+    padding: 6px 4px; font-size: 9px;
+    border-bottom: 1px solid #F0F4F8;
+    text-align: center; font-weight: 700;
+  }
+  .heatmap tbody tr:last-child td { border-bottom: none; }
+  .heatmap tbody td:first-child {
+    color: #1B2A4A; text-align: left; padding-left: 10px;
+    background: #FAFBFC; font-size: 8.5px;
+  }
+  .heatmap tbody td:last-child { font-weight: 800; color: #1B2A4A; }
+
+  /* Heat intensity colors */
+  .h0 { background: #fff; color: #CBD5E0; }
+  .h03 { background: #F0FFF4; color: #276749; }
+  .h05 { background: #C6F6D5; color: #22543D; }
+  .h10 { background: #9AE6B4; color: #22543D; }
+  .h20 { background: #68D391; color: #fff; }
+  .h40 { background: #48BB78; color: #fff; }
+  .h60 { background: #38A169; color: #fff; }
+  .h80 { background: #2F855A; color: #fff; }
+
+  /* Total row */
+  .total-row td {
+    background: linear-gradient(135deg, #EDF2F7, #E2E8F0) !important;
+    font-weight: 800 !important; color: #1B2A4A !important;
+    border-top: 2px solid #CBD5E0;
+    font-size: 9.5px !important;
+  }
+  .total-row td:first-child { background: linear-gradient(135deg, #EDF2F7, #E2E8F0) !important; }
+
+  /* Legend */
+  .legend { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; justify-content: flex-end; }
+  .legend-text { font-size: 8px; color: #718096; }
+  .legend-scale { display: flex; gap: 2px; }
+  .ls-item { width: 20px; height: 10px; border-radius: 2px; }
+
+  /* 운영 전략 */
+  .strategy-cards { display: flex; gap: 8px; }
+  .st-card {
+    flex: 1; border-radius: 10px; padding: 10px 12px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    background: #FAFCFF;
+  }
+  .st-icon { font-size: 16px; margin-bottom: 4px; }
+  .st-title { font-size: 9px; font-weight: 800; color: #1B2A4A; margin-bottom: 3px; }
+  .st-desc { font-size: 8px; color: #4A5568; line-height: 1.5; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h2>자원 투입 계획 (M/M 히트맵)</h2>
+    <div class="sub">RESOURCE ALLOCATION — MONTHLY MAN-MONTH PLAN</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-text">투입 강도:</div>
+    <div class="legend-scale">
+      <div class="ls-item" style="background:#fff; border:1px solid #E2E8F0;"></div>
+      <div class="ls-item" style="background:#F0FFF4;"></div>
+      <div class="ls-item" style="background:#C6F6D5;"></div>
+      <div class="ls-item" style="background:#9AE6B4;"></div>
+      <div class="ls-item" style="background:#68D391;"></div>
+      <div class="ls-item" style="background:#48BB78;"></div>
+      <div class="ls-item" style="background:#38A169;"></div>
+      <div class="ls-item" style="background:#2F855A;"></div>
+    </div>
+    <div class="legend-text">Low → High</div>
+  </div>
+
+  <div class="section-label"><div class="dot"></div>월별 투입 M/M 계획</div>
+  <table class="heatmap">
+    <thead>
+      <tr>
+        <th>역할</th>
+        <th>M</th><th>M+1</th><th>M+2</th><th>M+3</th><th>M+4</th><th>M+5</th><th>M+6</th><th>M+7</th><th>M+8</th>
+        <th>합계</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>PM (임진규)</td>
+        <td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td>
+        <td>9.0</td>
+      </tr>
+      <tr>
+        <td>PMO (남의석)</td>
+        <td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td>
+        <td>9.0</td>
+      </tr>
+      <tr>
+        <td>CTO (이상진)</td>
+        <td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h05">0.5</td><td class="h0">-</td>
+        <td>7.5</td>
+      </tr>
+      <tr>
+        <td>PL 수출전략 (민세준)</td>
+        <td class="h0">-</td><td class="h05">0.5</td><td class="h05">0.5</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h05">0.5</td><td class="h03">0.3</td><td class="h0">-</td>
+        <td>4.8</td>
+      </tr>
+      <tr>
+        <td>PL 바이어매칭 (오대산)</td>
+        <td class="h0">-</td><td class="h05">0.5</td><td class="h05">0.5</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h05">0.5</td><td class="h03">0.3</td><td class="h0">-</td>
+        <td>4.8</td>
+      </tr>
+      <tr>
+        <td>PL 콘텐츠 (김지예)</td>
+        <td class="h0">-</td><td class="h05">0.5</td><td class="h05">0.5</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h05">0.5</td><td class="h03">0.3</td><td class="h0">-</td>
+        <td>4.8</td>
+      </tr>
+      <tr>
+        <td>개발리드 (지원호)</td>
+        <td class="h0">-</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h10">1.0</td><td class="h05">0.5</td><td class="h03">0.3</td>
+        <td>6.8</td>
+      </tr>
+      <tr>
+        <td>개발자 (퀸텟+아스트라)</td>
+        <td class="h20">2.0</td><td class="h40">4.0</td><td class="h60">6.0</td><td class="h80">8.0</td><td class="h80">8.0</td><td class="h60">6.0</td><td class="h40">4.0</td><td class="h20">2.0</td><td class="h10">1.0</td>
+        <td>41.0</td>
+      </tr>
+      <tr class="total-row">
+        <td>합계 (M/M)</td>
+        <td>5.0</td><td>10.5</td><td>12.5</td><td>16.0</td><td>16.0</td><td>13.0</td><td>10.5</td><td>6.9</td><td>3.3</td>
+        <td style="color:#2B6CB0;">87.7</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="section-label"><div class="dot"></div>자원 운영 전략</div>
+  <div class="strategy-cards">
+    <div class="st-card">
+      <div class="st-icon">👤</div>
+      <div class="st-title">PM·PMO 전 기간 전담</div>
+      <div class="st-desc">PM(임진규)·PMO(남의석) 9개월 전 기간 전담 투입으로 프로젝트 연속성 확보</div>
+    </div>
+    <div class="st-card">
+      <div class="st-icon">📈</div>
+      <div class="st-title">개발 단계 집중 배치</div>
+      <div class="st-desc">M+3~M+4 최대 16 M/M 투입 — 핵심 기능 구현 완료 후 점진적 축소</div>
+    </div>
+    <div class="st-card">
+      <div class="st-icon">🌏</div>
+      <div class="st-title">베트남 개발팀 지원</div>
+      <div class="st-desc">개발~테스트 구간 백엔드/프론트엔드 병렬 개발 지원 (20명 규모)</div>
+    </div>
+  </div>
+</body>
+</html>

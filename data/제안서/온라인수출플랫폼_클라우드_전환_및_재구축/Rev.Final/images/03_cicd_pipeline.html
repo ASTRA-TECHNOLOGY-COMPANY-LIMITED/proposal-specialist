@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+  .header { text-align: center; margin-bottom: 22px; }
+  .header h2 { font-size: 17px; color: #1B2A4A; letter-spacing: 2px; margin-bottom: 4px; }
+  .header .sub { font-size: 10px; color: #718096; letter-spacing: 1px; }
+  .header .line { width: 60px; height: 3px; background: linear-gradient(90deg, #2D5F8A, #4A90D9); margin: 10px auto 0; border-radius: 2px; }
+
+  .pipeline {
+    display: flex;
+    align-items: stretch;
+    gap: 4px;
+    margin-bottom: 16px;
+  }
+
+  .pipe-step {
+    flex: 1;
+    position: relative;
+  }
+
+  .pipe-num {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2B6CB0, #4A90D9);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    box-shadow: 0 2px 4px rgba(43,108,176,0.3);
+  }
+
+  .pipe-card {
+    margin-top: 12px;
+    border-radius: 8px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pipe-title {
+    padding: 14px 6px 6px;
+    text-align: center;
+    font-size: 9px;
+    font-weight: 700;
+    color: #1B2A4A;
+    background: #F7FAFC;
+    border-bottom: 1px solid #E2E8F0;
+    letter-spacing: 0.3px;
+  }
+
+  .pipe-content {
+    padding: 8px 6px;
+    font-size: 8px;
+    color: #4A5568;
+    line-height: 1.6;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .pipe-item {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .pipe-item .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .pipe-item .dot.blue { background: #4A90D9; }
+  .pipe-item .dot.green { background: #48BB78; }
+  .pipe-item .dot.purple { background: #805AD5; }
+  .pipe-item .dot.orange { background: #ED8936; }
+  .pipe-item .dot.red { background: #E53E3E; }
+
+  .pipe-tool {
+    font-size: 7px;
+    color: #4A90D9;
+    font-weight: 700;
+    padding: 2px 4px;
+    background: #EBF8FF;
+    border-radius: 4px;
+    text-align: center;
+    margin-top: auto;
+  }
+
+  .pipe-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #4A90D9;
+    font-weight: 700;
+    flex-shrink: 0;
+    width: 14px;
+    margin-top: 12px;
+  }
+
+  .deploy-compare {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .deploy-card {
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .deploy-name {
+    padding: 8px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+  }
+  .deploy-name.bg { background: linear-gradient(135deg, #2B6CB0, #4A90D9); }
+  .deploy-name.rolling { background: linear-gradient(135deg, #276749, #48BB78); }
+  .deploy-name.canary { background: linear-gradient(135deg, #9C4221, #ED8936); }
+
+  .deploy-body {
+    padding: 10px;
+    background: #fff;
+  }
+
+  .deploy-visual {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 8px;
+    justify-content: center;
+  }
+  .deploy-block {
+    width: 28px;
+    height: 18px;
+    border-radius: 4px;
+    font-size: 7px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+  .deploy-block.old { background: #E2E8F0; color: #718096; }
+  .deploy-block.new { background: #4A90D9; }
+  .deploy-block.partial { background: #ED8936; }
+
+  .deploy-desc {
+    font-size: 9px;
+    color: #4A5568;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .deploy-tag {
+    display: inline-block;
+    font-size: 8px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+  .deploy-tag.prod { background: #C6F6D5; color: #276749; }
+  .deploy-tag.dev { background: #BEE3F8; color: #2A4365; }
+
+  .env-row {
+    display: flex;
+    gap: 8px;
+  }
+  .env-box {
+    flex: 1;
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .env-header {
+    padding: 7px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+  }
+  .env-header.dev { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .env-header.prd { background: linear-gradient(135deg, #2B6CB0, #4A90D9); }
+  .env-body {
+    padding: 8px 10px;
+    font-size: 9px;
+    color: #4A5568;
+    line-height: 1.6;
+    background: #fff;
+  }
+  .env-body strong { color: #1B2A4A; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h2>컨테이너 CI/CD 파이프라인</h2>
+    <div class="sub">CONTAINER-BASED CI/CD PIPELINE (SFR-002)</div>
+    <div class="line"></div>
+  </div>
+
+  <!-- 파이프라인 플로우 -->
+  <div class="pipeline">
+    <div class="pipe-step">
+      <div class="pipe-num">1</div>
+      <div class="pipe-card">
+        <div class="pipe-title">코드 커밋</div>
+        <div class="pipe-content">
+          <div class="pipe-item"><span class="dot blue"></span>Git Push</div>
+          <div class="pipe-item"><span class="dot blue"></span>Merge Request</div>
+          <div class="pipe-item"><span class="dot blue"></span>코드 리뷰</div>
+          <div class="pipe-tool">GitLab</div>
+        </div>
+      </div>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-step">
+      <div class="pipe-num">2</div>
+      <div class="pipe-card">
+        <div class="pipe-title">CI 빌드</div>
+        <div class="pipe-content">
+          <div class="pipe-item"><span class="dot green"></span>Maven/Gradle 빌드</div>
+          <div class="pipe-item"><span class="dot green"></span>단위 테스트</div>
+          <div class="pipe-item"><span class="dot green"></span>SonarQube 분석</div>
+          <div class="pipe-tool">GitLab CI</div>
+        </div>
+      </div>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-step">
+      <div class="pipe-num">3</div>
+      <div class="pipe-card">
+        <div class="pipe-title">이미지 빌드</div>
+        <div class="pipe-content">
+          <div class="pipe-item"><span class="dot purple"></span>Docker Build</div>
+          <div class="pipe-item"><span class="dot purple"></span>Trivy 취약점 스캔</div>
+          <div class="pipe-item"><span class="dot purple"></span>Registry Push</div>
+          <div class="pipe-tool">Container Registry</div>
+        </div>
+      </div>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-step">
+      <div class="pipe-num">4</div>
+      <div class="pipe-card">
+        <div class="pipe-title">dev 배포</div>
+        <div class="pipe-content">
+          <div class="pipe-item"><span class="dot orange"></span>Helm Values 갱신</div>
+          <div class="pipe-item"><span class="dot orange"></span>자동 Sync</div>
+          <div class="pipe-item"><span class="dot orange"></span>Rolling Update</div>
+          <div class="pipe-tool">ArgoCD (dev)</div>
+        </div>
+      </div>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-step">
+      <div class="pipe-num">5</div>
+      <div class="pipe-card">
+        <div class="pipe-title">prd 배포</div>
+        <div class="pipe-content">
+          <div class="pipe-item"><span class="dot red"></span>QA 승인</div>
+          <div class="pipe-item"><span class="dot red"></span>Blue/Green 배포</div>
+          <div class="pipe-item"><span class="dot red"></span>자동 Rollback</div>
+          <div class="pipe-tool">ArgoCD (prd)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 무중단 배포 방식 -->
+  <div class="deploy-compare">
+    <div class="deploy-card">
+      <div class="deploy-name bg">Blue/Green 배포</div>
+      <div class="deploy-body">
+        <div class="deploy-visual">
+          <div class="deploy-block old">B</div>
+          <div class="deploy-block old">B</div>
+          <div style="font-size:10px;color:#718096;display:flex;align-items:center;">→</div>
+          <div class="deploy-block new">G</div>
+          <div class="deploy-block new">G</div>
+        </div>
+        <div class="deploy-desc">
+          신규 환경 구성 후<br>트래픽 즉시 전환
+          <br><span class="deploy-tag prod">운영 환경 권장</span>
+        </div>
+      </div>
+    </div>
+    <div class="deploy-card">
+      <div class="deploy-name rolling">Rolling 배포</div>
+      <div class="deploy-body">
+        <div class="deploy-visual">
+          <div class="deploy-block old">v1</div>
+          <div class="deploy-block new">v2</div>
+          <div class="deploy-block new">v2</div>
+          <div class="deploy-block old">v1</div>
+        </div>
+        <div class="deploy-desc">
+          순차적 Pod 교체<br>점진적 버전 전환
+          <br><span class="deploy-tag dev">개발 환경</span>
+        </div>
+      </div>
+    </div>
+    <div class="deploy-card">
+      <div class="deploy-name canary">Canary 배포</div>
+      <div class="deploy-body">
+        <div class="deploy-visual">
+          <div class="deploy-block old">v1</div>
+          <div class="deploy-block old">v1</div>
+          <div class="deploy-block old">v1</div>
+          <div class="deploy-block partial">v2</div>
+        </div>
+        <div class="deploy-desc">
+          10% 트래픽으로 검증<br>이상 없으면 전체 전환
+          <br><span class="deploy-tag prod">위험 최소화</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 환경별 배포 정책 -->
+  <div class="env-row">
+    <div class="env-box">
+      <div class="env-header dev">dev 클러스터</div>
+      <div class="env-body">
+        <strong>자동 배포</strong> (Push 기반)<br>
+        ArgoCD Auto Sync → Rolling Update<br>
+        WEB ×1 + App ×1 (2 Node)
+      </div>
+    </div>
+    <div class="env-box">
+      <div class="env-header prd">prd 클러스터</div>
+      <div class="env-body">
+        <strong>수동 승인</strong> (Approval 기반)<br>
+        QA 검증 → Release Tag → Blue/Green<br>
+        WEB ×2 + App ×2 (CA 최대 8)
+      </div>
+    </div>
+  </div>
+</body>
+</html>

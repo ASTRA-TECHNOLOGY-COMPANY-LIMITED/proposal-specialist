@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+  .header { text-align: center; margin-bottom: 20px; }
+  .header h2 { font-size: 17px; color: #1B2A4A; letter-spacing: 2px; margin-bottom: 4px; }
+  .header .sub { font-size: 10px; color: #718096; letter-spacing: 1px; }
+  .header .line { width: 60px; height: 3px; background: linear-gradient(90deg, #2D5F8A, #4A90D9); margin: 10px auto 0; border-radius: 2px; }
+
+  .section-label {
+    font-size: 11px; font-weight: 700; color: #1B2A4A;
+    margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+  }
+  .section-label .dot { width: 4px; height: 13px; border-radius: 2px; background: linear-gradient(180deg, #2D5F8A, #4A90D9); }
+
+  /* Comparison Table */
+  .compare-table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    border-radius: 10px; overflow: hidden;
+    border: 1px solid #E2E8F0;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .compare-table thead th {
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+    color: #fff; font-size: 9.5px; font-weight: 600;
+    padding: 10px 12px; text-align: center;
+  }
+  .compare-table tbody td {
+    padding: 9px 12px; font-size: 9.5px; color: #4A5568;
+    border-bottom: 1px solid #F0F4F8;
+    text-align: center; line-height: 1.5;
+  }
+  .compare-table tbody tr:last-child td { border-bottom: none; }
+  .compare-table tbody td:first-child { font-weight: 700; color: #1B2A4A; text-align: left; }
+  .selected-badge {
+    display: inline-block; padding: 3px 10px;
+    border-radius: 8px; font-size: 8px; font-weight: 700;
+    background: #C6F6D5; color: #276749;
+  }
+  .not-badge {
+    display: inline-block; padding: 3px 10px;
+    border-radius: 8px; font-size: 8px; font-weight: 700;
+    background: #FED7D7; color: #9B2C2C;
+  }
+
+  /* Migration Flow */
+  .migration-flow { margin-bottom: 18px; }
+  .mf-steps { display: flex; gap: 4px; align-items: stretch; }
+  .mf-step {
+    flex: 1; border-radius: 10px; overflow: hidden;
+    border: 1px solid #E2E8F0; box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .mf-head {
+    padding: 10px 8px; color: #fff; text-align: center;
+  }
+  .mf-head.s1 { background: linear-gradient(135deg, #1B2A4A, #2D5F8A); }
+  .mf-head.s2 { background: linear-gradient(135deg, #2B6CB0, #4299E1); }
+  .mf-head.s3 { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .mf-head.s4 { background: linear-gradient(135deg, #C05621, #ED8936); }
+  .mf-head.s5 { background: linear-gradient(135deg, #276749, #38A169); }
+  .mf-num { font-size: 8px; opacity: 0.7; letter-spacing: 1px; }
+  .mf-icon { font-size: 18px; margin: 3px 0; }
+  .mf-title { font-size: 10px; font-weight: 700; }
+  .mf-body {
+    padding: 8px; background: #fff;
+    font-size: 8.5px; color: #4A5568; line-height: 1.5;
+  }
+  .mf-body div { margin-bottom: 2px; }
+  .mf-body div:last-child { margin-bottom: 0; }
+
+  .mf-arrow { display: flex; align-items: center; font-size: 16px; color: #CBD5E0; flex-shrink: 0; }
+
+  /* Data Migration */
+  .dm-container { margin-bottom: 14px; }
+  .dm-flow {
+    display: flex; align-items: center; gap: 6px;
+    padding: 16px;
+    background: linear-gradient(135deg, #F7FAFC, #EDF2F7);
+    border-radius: 12px; border: 1px solid #E2E8F0;
+  }
+  .dm-box {
+    flex: 1; text-align: center; padding: 12px 8px;
+    background: #fff; border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  .dm-icon { font-size: 22px; margin-bottom: 4px; }
+  .dm-name { font-size: 10px; font-weight: 700; color: #1B2A4A; margin-bottom: 2px; }
+  .dm-desc { font-size: 8px; color: #718096; line-height: 1.4; }
+  .dm-arrow { font-size: 20px; color: #2D5F8A; flex-shrink: 0; font-weight: 800; }
+
+  /* Stabilization */
+  .stab-cards { display: flex; gap: 8px; }
+  .stab-card {
+    flex: 1; padding: 14px 12px; border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    text-align: center;
+  }
+  .stab-icon { font-size: 20px; margin-bottom: 6px; }
+  .stab-title { font-size: 10px; font-weight: 700; color: #1B2A4A; margin-bottom: 4px; }
+  .stab-desc { font-size: 9px; color: #4A5568; line-height: 1.5; }
+  .stab-period {
+    display: inline-block; margin-top: 6px;
+    padding: 2px 8px; border-radius: 6px;
+    font-size: 8px; font-weight: 700;
+    background: #EBF8FF; color: #2B6CB0;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h2>안정적 전환/오픈 전략</h2>
+    <div class="sub">MIGRATION &amp; GO-LIVE STRATEGY — PHASED ROLLOUT</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="section-label"><div class="dot"></div>전환 방식 비교 및 선정</div>
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>비교 항목</th>
+        <th>빅뱅(일괄 전환)</th>
+        <th>단계적 전환 (Phased Rollout)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>서비스 중단 위험</td>
+        <td>높음 (전면 중단)</td>
+        <td>낮음 (사이트별 순차 전환)</td>
+      </tr>
+      <tr>
+        <td>롤백 용이성</td>
+        <td>어려움 (전체 롤백 필요)</td>
+        <td>용이 (개별 사이트 롤백)</td>
+      </tr>
+      <tr>
+        <td>리스크 수준</td>
+        <td>높음</td>
+        <td>단계별 분산</td>
+      </tr>
+      <tr>
+        <td>전환 기간</td>
+        <td>짧음 (1회)</td>
+        <td>길지만 안전 (4단계)</td>
+      </tr>
+      <tr>
+        <td>본 사업 적합성</td>
+        <td><span class="not-badge">미선정</span></td>
+        <td><span class="selected-badge">✓ 채택</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="section-label"><div class="dot"></div>단계적 전환 로드맵 (Blue/Green 배포)</div>
+  <div class="migration-flow">
+    <div class="mf-steps">
+      <div class="mf-step">
+        <div class="mf-head s1">
+          <div class="mf-num">STEP 1</div>
+          <div class="mf-icon">🔍</div>
+          <div class="mf-title">사전 검증</div>
+        </div>
+        <div class="mf-body">
+          <div>· 전환 리허설 2회</div>
+          <div>· 데이터 정합성 검증</div>
+          <div>· 롤백 시나리오 확인</div>
+        </div>
+      </div>
+      <div class="mf-step">
+        <div class="mf-head s2">
+          <div class="mf-num">STEP 2</div>
+          <div class="mf-icon">🏛️</div>
+          <div class="mf-title">관리자 전환</div>
+        </div>
+        <div class="mf-body">
+          <div>· 관리자사이트 우선 전환</div>
+          <div>· 내부 사용자 검증</div>
+          <div>· 1주간 안정성 확인</div>
+        </div>
+      </div>
+      <div class="mf-step">
+        <div class="mf-head s3">
+          <div class="mf-num">STEP 3</div>
+          <div class="mf-icon">🇰🇷</div>
+          <div class="mf-title">국문사이트</div>
+        </div>
+        <div class="mf-body">
+          <div>· 국문사이트 전환</div>
+          <div>· 트래픽 모니터링</div>
+          <div>· 사용자 피드백 수집</div>
+        </div>
+      </div>
+      <div class="mf-step">
+        <div class="mf-head s4">
+          <div class="mf-num">STEP 4</div>
+          <div class="mf-icon">🌍</div>
+          <div class="mf-title">영문사이트</div>
+        </div>
+        <div class="mf-body">
+          <div>· 영문사이트 전환</div>
+          <div>· CDN 글로벌 캐싱 확인</div>
+          <div>· 해외 접속 성능 검증</div>
+        </div>
+      </div>
+      <div class="mf-step">
+        <div class="mf-head s5">
+          <div class="mf-num">STEP 5</div>
+          <div class="mf-icon">🔗</div>
+          <div class="mf-title">통합정보</div>
+        </div>
+        <div class="mf-body">
+          <div>· 통합정보시스템 전환</div>
+          <div>· 기관 연계 최종 확인</div>
+          <div>· 전체 안정화 선언</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label"><div class="dot"></div>데이터 마이그레이션 전략 (Oracle → MariaDB)</div>
+  <div class="dm-container">
+    <div class="dm-flow">
+      <div class="dm-box">
+        <div class="dm-icon">🗄️</div>
+        <div class="dm-name">Oracle (기존)</div>
+        <div class="dm-desc">중진공 IDC<br>기존 운영 DB</div>
+      </div>
+      <div class="dm-arrow">→</div>
+      <div class="dm-box">
+        <div class="dm-icon">🔄</div>
+        <div class="dm-name">ETL 변환</div>
+        <div class="dm-desc">스키마 변환<br>데이터 정제·매핑</div>
+      </div>
+      <div class="dm-arrow">→</div>
+      <div class="dm-box">
+        <div class="dm-icon">✅</div>
+        <div class="dm-name">정합성 검증</div>
+        <div class="dm-desc">건별 자동 비교<br>무결성 확인</div>
+      </div>
+      <div class="dm-arrow">→</div>
+      <div class="dm-box">
+        <div class="dm-icon">💾</div>
+        <div class="dm-name">MariaDB HA</div>
+        <div class="dm-desc">민간클라우드<br>이중화 신규 DB</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label"><div class="dot"></div>오픈 전후 안정화 대응</div>
+  <div class="stab-cards">
+    <div class="stab-card">
+      <div class="stab-icon">🔍</div>
+      <div class="stab-title">오픈 전 (D-14)</div>
+      <div class="stab-desc">전환 리허설, 성능 부하 테스트, 롤백 시나리오 확인, 비상 연락망 구성</div>
+      <div class="stab-period">사전 준비 2주</div>
+    </div>
+    <div class="stab-card">
+      <div class="stab-icon">🚀</div>
+      <div class="stab-title">오픈 당일 (D-Day)</div>
+      <div class="stab-desc">Blue/Green 전환, 전담팀 24시간 대기, 실시간 모니터링, 5분 롤백 대기</div>
+      <div class="stab-period">전환 당일 집중 관리</div>
+    </div>
+    <div class="stab-card">
+      <div class="stab-icon">🛡️</div>
+      <div class="stab-title">오픈 후 (D+30)</div>
+      <div class="stab-desc">집중 모니터링 1개월, 긴급 패치 체계, 사용자 피드백 대응, 성능 최적화</div>
+      <div class="stab-period">안정화 기간 30일</div>
+    </div>
+  </div>
+</body>
+</html>

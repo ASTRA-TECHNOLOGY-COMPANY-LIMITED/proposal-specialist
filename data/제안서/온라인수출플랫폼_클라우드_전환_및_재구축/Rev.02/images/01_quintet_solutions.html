@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 24px;
+    color: #1A202C;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .header h2 {
+    font-size: 18px;
+    color: #1B2A4A;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .header .sub {
+    font-size: 11px;
+    color: #718096;
+    letter-spacing: 1px;
+  }
+  .header .line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #2D5F8A, #4A90D9);
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+
+  .solutions {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  .solution-card {
+    flex: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    border: 1px solid #E2E8F0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sol-header {
+    padding: 14px 14px 10px;
+    text-align: center;
+    position: relative;
+  }
+  .sol-header.crm {
+    background: linear-gradient(135deg, #1B2A4A, #2D4A6A);
+    color: #fff;
+  }
+  .sol-header.lowcode {
+    background: linear-gradient(135deg, #2D5F8A, #4A7FAA);
+    color: #fff;
+  }
+  .sol-header.ai {
+    background: linear-gradient(135deg, #4A90D9, #63B3ED);
+    color: #fff;
+  }
+  .sol-icon {
+    font-size: 28px;
+    margin-bottom: 6px;
+  }
+  .sol-name {
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+  }
+  .sol-subtitle {
+    font-size: 9px;
+    opacity: 0.8;
+    margin-top: 2px;
+  }
+
+  .sol-body {
+    padding: 12px 14px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sol-desc {
+    font-size: 10.5px;
+    color: #4A5568;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    flex: 1;
+  }
+
+  .sol-features {
+    list-style: none;
+  }
+  .sol-features li {
+    font-size: 10px;
+    color: #4A5568;
+    padding: 3px 0;
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.4;
+  }
+  .sol-features li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #4A90D9;
+    font-weight: 700;
+  }
+
+  .sol-metric {
+    margin-top: 10px;
+    padding: 8px 10px;
+    background: #F7FAFC;
+    border-radius: 6px;
+    text-align: center;
+  }
+  .sol-metric-value {
+    font-size: 16px;
+    font-weight: 800;
+    color: #1B2A4A;
+  }
+  .sol-metric-label {
+    font-size: 9px;
+    color: #718096;
+    margin-top: 1px;
+  }
+
+  .relevance {
+    background: linear-gradient(135deg, #F7FAFC, #EDF2F7);
+    border-radius: 12px;
+    padding: 14px 16px;
+    border: 1px solid #E2E8F0;
+  }
+  .relevance-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1B2A4A;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .relevance-grid {
+    display: flex;
+    gap: 10px;
+  }
+  .relevance-item {
+    flex: 1;
+    font-size: 10px;
+    padding: 8px 10px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    border-left: 3px solid;
+    line-height: 1.4;
+  }
+  .relevance-item.r1 { border-color: #1B2A4A; }
+  .relevance-item.r2 { border-color: #2D5F8A; }
+  .relevance-item.r3 { border-color: #4A90D9; }
+  .relevance-item strong {
+    display: block;
+    font-size: 10.5px;
+    color: #1B2A4A;
+    margin-bottom: 3px;
+  }
+  .relevance-item span {
+    color: #718096;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h2>퀸텟시스템즈 핵심 솔루션</h2>
+    <div class="sub">CORE SOLUTIONS &amp; PLATFORMS</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="solutions">
+    <div class="solution-card">
+      <div class="sol-header crm">
+        <div class="sol-icon">📊</div>
+        <div class="sol-name">iCIGNAL</div>
+        <div class="sol-subtitle">Enterprise CRM Suite</div>
+      </div>
+      <div class="sol-body">
+        <div class="sol-desc">가트너 CRM 벤더가이드 등재 국내 1위 CRM 솔루션</div>
+        <ul class="sol-features">
+          <li>고객360 뷰 / 멤버십</li>
+          <li>마케팅 자동화</li>
+          <li>세일즈·서비스 통합</li>
+          <li>옴니채널 / O2O</li>
+        </ul>
+        <div class="sol-metric">
+          <div class="sol-metric-value">40+</div>
+          <div class="sol-metric-label">대기업 구축 사례</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="solution-card">
+      <div class="sol-header lowcode">
+        <div class="sol-icon">⚡</div>
+        <div class="sol-name">CALS Platz</div>
+        <div class="sol-subtitle">Low-Code Platform</div>
+      </div>
+      <div class="sol-body">
+        <div class="sol-desc">국내 최초 AWS 기반 SaaS 로우코드 개발 플랫폼</div>
+        <ul class="sol-features">
+          <li>런타임 코드 제너레이션</li>
+          <li>앱 프로비저닝</li>
+          <li>서비스 오케스트레이션</li>
+          <li>빌드 파이프라인</li>
+        </ul>
+        <div class="sol-metric">
+          <div class="sol-metric-value">10~20x</div>
+          <div class="sol-metric-label">개발 생산성 향상</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="solution-card">
+      <div class="sol-header ai">
+        <div class="sol-icon">🤖</div>
+        <div class="sol-name">AI BOAT</div>
+        <div class="sol-subtitle">AI Agent Platform</div>
+      </div>
+      <div class="sol-body">
+        <div class="sol-desc">기업 비즈니스 프로세스 AI 자동화 플랫폼 (2025)</div>
+        <ul class="sol-features">
+          <li>AI 에이전트 빌더</li>
+          <li>LLMOps / RAG 구성</li>
+          <li>Text-To-SQL</li>
+          <li>프로세스 시뮬레이션</li>
+        </ul>
+        <div class="sol-metric">
+          <div class="sol-metric-value">Hyper</div>
+          <div class="sol-metric-label">오토메이션 실현</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="relevance">
+    <div class="relevance-title">본 사업 적용 가능 영역</div>
+    <div class="relevance-grid">
+      <div class="relevance-item r1">
+        <strong>iCIGNAL → 회원관리</strong>
+        <span>바이어-셀러 매칭, 멤버십, 마케팅 자동화 적용</span>
+      </div>
+      <div class="relevance-item r2">
+        <strong>CALS → 관리자사이트</strong>
+        <span>로우코드 기반 신속 구축, 비용 40% 절감</span>
+      </div>
+      <div class="relevance-item r3">
+        <strong>AI BOAT → 수출 AI</strong>
+        <span>AI 기반 수출지원 고도화, 데이터 분석 자동화</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

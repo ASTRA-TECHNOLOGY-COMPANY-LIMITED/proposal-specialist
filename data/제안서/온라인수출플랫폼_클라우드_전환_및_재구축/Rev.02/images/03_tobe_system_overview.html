@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .header h2 {
+    font-size: 17px;
+    color: #1B2A4A;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .header .sub {
+    font-size: 10px;
+    color: #718096;
+    letter-spacing: 1px;
+  }
+  .header .line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #2D5F8A, #4A90D9);
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+
+  .arch-container {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .arch-zone {
+    flex: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+
+  .zone-header {
+    padding: 10px 14px;
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .zone-header.cloud { background: linear-gradient(135deg, #2B6CB0, #4A90D9); }
+  .zone-header.idc { background: linear-gradient(135deg, #553C9A, #805AD5); }
+
+  .zone-body {
+    padding: 12px;
+    background: #FAFCFF;
+  }
+
+  .server-group {
+    margin-bottom: 10px;
+  }
+  .server-group:last-child { margin-bottom: 0; }
+
+  .server-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: #718096;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    padding-bottom: 3px;
+    border-bottom: 1px dashed #E2E8F0;
+  }
+
+  .server-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .server-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 9px;
+    font-weight: 600;
+    border: 1px solid;
+  }
+  .server-chip.web {
+    background: #EBF8FF;
+    border-color: #90CDF4;
+    color: #2A4365;
+  }
+  .server-chip.was {
+    background: #F0FFF4;
+    border-color: #9AE6B4;
+    color: #276749;
+  }
+  .server-chip.db {
+    background: #FEFCE8;
+    border-color: #FDE68A;
+    color: #92400E;
+  }
+  .server-chip.front {
+    background: #FAF5FF;
+    border-color: #D6BCFA;
+    color: #553C9A;
+  }
+  .server-chip.infra {
+    background: #FFF5F5;
+    border-color: #FEB2B2;
+    color: #C53030;
+  }
+
+  .server-count {
+    background: rgba(0,0,0,0.08);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 8px;
+  }
+
+  .vpn-connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 0;
+    gap: 8px;
+  }
+  .vpn-line {
+    flex: 1;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, #4A90D9 0, #4A90D9 6px, transparent 6px, transparent 10px);
+  }
+  .vpn-badge {
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 9px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .sites-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .site-card {
+    border-radius: 8px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .site-name {
+    padding: 6px 4px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #2D5F8A, #4A90D9);
+  }
+  .site-name.admin { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .site-name.integ { background: linear-gradient(135deg, #276749, #38A169); }
+
+  .site-tech {
+    padding: 8px 6px;
+    font-size: 9px;
+    color: #4A5568;
+    line-height: 1.5;
+    background: #fff;
+  }
+  .site-req {
+    font-size: 8px;
+    color: #A0AEC0;
+    padding: 4px 6px;
+    background: #F7FAFC;
+    border-top: 1px solid #EDF2F7;
+  }
+
+  .features-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  .feature-box {
+    flex: 1;
+    border-radius: 10px;
+    padding: 12px;
+    border: 1px solid #E2E8F0;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    text-align: center;
+  }
+  .feature-icon { font-size: 18px; margin-bottom: 4px; }
+  .feature-title { font-size: 10px; font-weight: 700; color: #1B2A4A; margin-bottom: 3px; }
+  .feature-desc { font-size: 9px; color: #718096; line-height: 1.4; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h2>TO-BE 목표 시스템 구성 개요</h2>
+    <div class="sub">TARGET SYSTEM ARCHITECTURE OVERVIEW</div>
+    <div class="line"></div>
+  </div>
+
+  <!-- 4개 사이트 -->
+  <div class="sites-grid">
+    <div class="site-card">
+      <div class="site-name">국문사이트</div>
+      <div class="site-tech">Nginx + Tomcat<br>MariaDB HA<br>전자정부 FW 5.0</div>
+      <div class="site-req">SFR-004</div>
+    </div>
+    <div class="site-card">
+      <div class="site-name">영문사이트</div>
+      <div class="site-tech">Nginx + Tomcat<br>MariaDB HA<br>CDN 이미지캐시</div>
+      <div class="site-req">SFR-005</div>
+    </div>
+    <div class="site-card">
+      <div class="site-name admin">관리자사이트</div>
+      <div class="site-tech">Nginx + Nexacro<br>Tomcat + MariaDB<br>N V24</div>
+      <div class="site-req">SFR-009</div>
+    </div>
+    <div class="site-card">
+      <div class="site-name integ">통합정보시스템</div>
+      <div class="site-tech">Nginx + Nexacro<br>Tomcat + Oracle<br>(기존활용)</div>
+      <div class="site-req">SFR-012, 013</div>
+    </div>
+  </div>
+
+  <!-- 인프라 구성 -->
+  <div class="arch-container">
+    <div class="arch-zone">
+      <div class="zone-header cloud">민간클라우드 (신규)</div>
+      <div class="zone-body">
+        <div class="server-group">
+          <div class="server-label">WEB TIER</div>
+          <div class="server-items">
+            <div class="server-chip web">Nginx <span class="server-count">국문/영문 2식</span></div>
+            <div class="server-chip web">Nginx <span class="server-count">관리자 1식</span></div>
+            <div class="server-chip infra">CDN <span class="server-count">영문이미지</span></div>
+          </div>
+        </div>
+        <div class="server-group">
+          <div class="server-label">APP TIER</div>
+          <div class="server-items">
+            <div class="server-chip was">Tomcat <span class="server-count">국문 2식</span></div>
+            <div class="server-chip was">Tomcat <span class="server-count">영문 2식</span></div>
+            <div class="server-chip was">Tomcat <span class="server-count">관리자 1식</span></div>
+          </div>
+        </div>
+        <div class="server-group">
+          <div class="server-label">DATA TIER</div>
+          <div class="server-items">
+            <div class="server-chip db">MariaDB HA <span class="server-count">2식</span></div>
+            <div class="server-chip infra">NAS <span class="server-count">운영/개발 2식</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 50px; flex-shrink: 0;">
+      <div class="vpn-badge">IPsec VPN</div>
+    </div>
+
+    <div class="arch-zone" style="flex: 0.7;">
+      <div class="zone-header idc">중진공 IDC (기존)</div>
+      <div class="zone-body">
+        <div class="server-group">
+          <div class="server-label">WEB TIER</div>
+          <div class="server-items">
+            <div class="server-chip web">Nginx <span class="server-count">통합정보 1식</span></div>
+          </div>
+        </div>
+        <div class="server-group">
+          <div class="server-label">APP TIER</div>
+          <div class="server-items">
+            <div class="server-chip front">Nexacro <span class="server-count">관리자 1식</span></div>
+            <div class="server-chip front">Nexacro <span class="server-count">통합정보 1식</span></div>
+            <div class="server-chip was">Tomcat <span class="server-count">통합정보 1식</span></div>
+          </div>
+        </div>
+        <div class="server-group">
+          <div class="server-label">DATA TIER</div>
+          <div class="server-items">
+            <div class="server-chip db">Oracle <span class="server-count">기존활용</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 핵심 특징 -->
+  <div class="features-row">
+    <div class="feature-box">
+      <div class="feature-icon">🐳</div>
+      <div class="feature-title">컨테이너화</div>
+      <div class="feature-desc">K8s 오케스트레이션<br>Docker 표준 이미지</div>
+    </div>
+    <div class="feature-box">
+      <div class="feature-icon">📈</div>
+      <div class="feature-title">오토스케일링</div>
+      <div class="feature-desc">HPA 자동 확장<br>부하 기반 Pod 조정</div>
+    </div>
+    <div class="feature-box">
+      <div class="feature-icon">🔄</div>
+      <div class="feature-title">무중단 배포</div>
+      <div class="feature-desc">Blue/Green 배포<br>자동 롤백</div>
+    </div>
+    <div class="feature-box">
+      <div class="feature-icon">🔒</div>
+      <div class="feature-title">보안 강화</div>
+      <div class="feature-desc">DMZ 분리, VPN<br>NetworkPolicy</div>
+    </div>
+    <div class="feature-box">
+      <div class="feature-icon">📊</div>
+      <div class="feature-title">통합 모니터링</div>
+      <div class="feature-desc">Prometheus<br>Grafana + EFK</div>
+    </div>
+  </div>
+</body>
+</html>

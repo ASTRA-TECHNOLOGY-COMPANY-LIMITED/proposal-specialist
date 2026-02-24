@@ -4,3 +4,6 @@ downloads/
 data/output/
 *.log
 .DS_Store
+
+# Large files (exceeds GitHub 100MB limit)
+data/제안서/온라인수출플랫폼_클라우드_전환_및_재구축/Rev.01/퀸텟작성본/NCP_표준제안서_3.0 (1).pptx

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 24px;
+    color: #1A202C;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .header h2 {
+    font-size: 18px;
+    color: #1B2A4A;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .header .sub {
+    font-size: 11px;
+    color: #718096;
+    letter-spacing: 1px;
+  }
+  .header .line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #2D5F8A, #4A90D9);
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+
+  .kpi-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .kpi-card {
+    flex: 1;
+    padding: 14px 12px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .kpi-card.revenue {
+    background: linear-gradient(135deg, #EBF4FF, #F0F7FF);
+    border: 1px solid #BEE3F8;
+  }
+  .kpi-card.revenue::before { background: linear-gradient(90deg, #2D5F8A, #4A90D9); }
+  .kpi-card.growth {
+    background: linear-gradient(135deg, #F0FFF4, #F0FFF8);
+    border: 1px solid #C6F6D5;
+  }
+  .kpi-card.growth::before { background: linear-gradient(90deg, #276749, #48BB78); }
+  .kpi-card.profit {
+    background: linear-gradient(135deg, #FEFCE8, #FFFFF0);
+    border: 1px solid #FEFCBF;
+  }
+  .kpi-card.profit::before { background: linear-gradient(90deg, #92400E, #D69E2E); }
+  .kpi-card.credit {
+    background: linear-gradient(135deg, #F7FAFC, #EDF2F7);
+    border: 1px solid #E2E8F0;
+  }
+  .kpi-card.credit::before { background: linear-gradient(90deg, #1B2A4A, #2D5F8A); }
+
+  .kpi-value {
+    font-size: 24px;
+    font-weight: 800;
+    margin-top: 4px;
+  }
+  .kpi-card.revenue .kpi-value { color: #2D5F8A; }
+  .kpi-card.growth .kpi-value { color: #276749; }
+  .kpi-card.profit .kpi-value { color: #92400E; }
+  .kpi-card.credit .kpi-value { color: #1B2A4A; }
+  .kpi-label {
+    font-size: 10px;
+    color: #718096;
+    margin-top: 2px;
+  }
+  .kpi-sub {
+    font-size: 9px;
+    color: #A0AEC0;
+    margin-top: 1px;
+  }
+
+  .chart-section {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .chart-box {
+    flex: 1;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .chart-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1B2A4A;
+    margin-bottom: 12px;
+  }
+
+  /* Bar Chart */
+  .bar-chart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 20px;
+    height: 140px;
+    padding: 0 10px;
+    border-bottom: 1px solid #E2E8F0;
+  }
+  .bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .bar {
+    width: 44px;
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 4px;
+  }
+  .bar .value {
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  }
+  .bar.y2024 {
+    background: linear-gradient(180deg, #A0C4E8, #6BA3D0);
+    height: 8px;
+  }
+  .bar.y2025 {
+    background: linear-gradient(180deg, #2D5F8A, #4A90D9);
+    height: 120px;
+  }
+  .bar-label {
+    font-size: 10px;
+    color: #718096;
+    margin-top: 4px;
+  }
+
+  /* Ratio Table */
+  .ratio-table {
+    width: 100%;
+  }
+  .ratio-row {
+    display: flex;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid #F7FAFC;
+  }
+  .ratio-row:last-child { border: none; }
+  .ratio-name {
+    width: 110px;
+    font-size: 10.5px;
+    color: #4A5568;
+    flex-shrink: 0;
+  }
+  .ratio-bar-wrap {
+    flex: 1;
+    height: 16px;
+    background: #F7FAFC;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0 8px;
+  }
+  .ratio-bar-fill {
+    height: 100%;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #2D5F8A, #4A90D9);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 6px;
+  }
+  .ratio-bar-fill.green {
+    background: linear-gradient(90deg, #276749, #48BB78);
+  }
+  .ratio-bar-fill.amber {
+    background: linear-gradient(90deg, #92400E, #D69E2E);
+  }
+  .ratio-val {
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    white-space: nowrap;
+  }
+
+  .footnote {
+    text-align: center;
+    font-size: 9px;
+    color: #A0AEC0;
+    margin-top: 8px;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h2>아스트라비전 재무현황</h2>
+    <div class="sub">FINANCIAL PERFORMANCE DASHBOARD</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi-card revenue">
+      <div class="kpi-label">2025 매출액</div>
+      <div class="kpi-value">721백만</div>
+      <div class="kpi-sub">전년비 75배 성장</div>
+    </div>
+    <div class="kpi-card growth">
+      <div class="kpi-label">매출 성장률</div>
+      <div class="kpi-value">7,524%</div>
+      <div class="kpi-sub">초고속 성장</div>
+    </div>
+    <div class="kpi-card profit">
+      <div class="kpi-label">영업이익률</div>
+      <div class="kpi-value">5.18%</div>
+      <div class="kpi-sub">흑자 경영 지속</div>
+    </div>
+    <div class="kpi-card credit">
+      <div class="kpi-label">신용등급</div>
+      <div class="kpi-value">B0</div>
+      <div class="kpi-sub">서울평가정보 2026.02</div>
+    </div>
+  </div>
+
+  <div class="chart-section">
+    <div class="chart-box">
+      <div class="chart-title">매출액 추이 (백만원)</div>
+      <div class="bar-chart">
+        <div class="bar-group">
+          <div class="bar y2024" style="height: 8px;">
+          </div>
+          <div class="bar-label">2024</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar y2025" style="height: 120px;">
+            <span class="value">721</span>
+          </div>
+          <div class="bar-label">2025</div>
+        </div>
+      </div>
+      <div class="footnote">9백만 → 721백만 (전년비 7,524% 성장)</div>
+    </div>
+
+    <div class="chart-box">
+      <div class="chart-title">주요 재무비율 (2025)</div>
+      <div class="ratio-table">
+        <div class="ratio-row">
+          <span class="ratio-name">영업이익률</span>
+          <div class="ratio-bar-wrap">
+            <div class="ratio-bar-fill green" style="width: 52%;">
+              <span class="ratio-val">5.18%</span>
+            </div>
+          </div>
+        </div>
+        <div class="ratio-row">
+          <span class="ratio-name">경상이익률</span>
+          <div class="ratio-bar-wrap">
+            <div class="ratio-bar-fill green" style="width: 48%;">
+              <span class="ratio-val">4.76%</span>
+            </div>
+          </div>
+        </div>
+        <div class="ratio-row">
+          <span class="ratio-name">유동비율</span>
+          <div class="ratio-bar-wrap">
+            <div class="ratio-bar-fill" style="width: 85%;">
+              <span class="ratio-val">265%</span>
+            </div>
+          </div>
+        </div>
+        <div class="ratio-row">
+          <span class="ratio-name">총자산증가율</span>
+          <div class="ratio-bar-wrap">
+            <div class="ratio-bar-fill amber" style="width: 90%;">
+              <span class="ratio-val">881%</span>
+            </div>
+          </div>
+        </div>
+        <div class="ratio-row">
+          <span class="ratio-name">매출액증가율</span>
+          <div class="ratio-bar-wrap">
+            <div class="ratio-bar-fill amber" style="width: 100%;">
+              <span class="ratio-val">7,524%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

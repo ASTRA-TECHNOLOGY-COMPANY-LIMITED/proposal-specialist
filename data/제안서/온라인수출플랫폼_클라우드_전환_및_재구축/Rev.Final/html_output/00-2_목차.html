@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>목차</title>
+<style>
+  /* ===== Reset & Base ===== */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #E5E9EF;
+    color: #1A202C;
+    line-height: 1.7;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ===== A4 Page Container ===== */
+  .a4-page {
+    max-width: 210mm;
+    min-height: 297mm;
+    height: 297mm;
+    margin: 0 auto;
+    background: #fff;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ===== Background Image ===== */
+  .bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.35;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ===== Left Accent Stripe ===== */
+  .left-stripe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(180deg, #1B2A4A 0%, #2E75B6 100%);
+    z-index: 10;
+  }
+
+  /* ===== Page Header ===== */
+  .page-header {
+    position: relative;
+    z-index: 20;
+    background: rgba(255,255,255,0.92);
+    padding: 22px 36px 0 52px;
+    flex-shrink: 0;
+  }
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-badge {
+    background: linear-gradient(135deg, #1B2A4A, #2E75B6);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 5px 18px;
+    border-radius: 5px;
+    letter-spacing: 1.5px;
+    white-space: nowrap;
+  }
+  .header-section-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1A3C5E;
+    letter-spacing: 0.5px;
+  }
+  .header-right {
+    text-align: right;
+  }
+  .project-name {
+    font-size: 10px;
+    color: #999;
+    letter-spacing: 0.3px;
+  }
+  .header-line {
+    height: 2.5px;
+    background: linear-gradient(90deg, #1B2A4A 0%, #2E75B6 40%, #5B9BD5 75%, #E2E8F0 100%);
+    margin-top: 14px;
+    border-radius: 2px;
+  }
+
+  /* ===== Document Body ===== */
+  .document-body {
+    flex: 1;
+    padding: 32px 48px 24px 64px;
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ===== TOC Title ===== */
+  .toc-title {
+    font-size: 28px;
+    color: #1B2A4A;
+    letter-spacing: 6px;
+    text-align: center;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  .toc-title-line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #2E75B6, #5B9BD5);
+    margin: 0 auto 40px;
+    border-radius: 2px;
+  }
+
+  /* ===== TOC Items ===== */
+  .toc-list {
+    list-style: none;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    max-width: 540px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .toc-item {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(226,232,240,0.6);
+    transition: all 0.2s;
+    gap: 18px;
+  }
+  .toc-item:hover {
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 4px 16px rgba(27,42,74,0.08);
+    transform: translateX(4px);
+  }
+
+  .toc-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 8px;
+    flex-shrink: 0;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(27,42,74,0.2);
+  }
+
+  .toc-text {
+    flex: 1;
+  }
+  .toc-section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1B2A4A;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+  .toc-section-desc {
+    font-size: 10.5px;
+    color: #718096;
+    letter-spacing: 0.3px;
+  }
+
+  .toc-arrow {
+    color: #CBD5E0;
+    font-size: 18px;
+    flex-shrink: 0;
+    transition: color 0.2s;
+  }
+  .toc-item:hover .toc-arrow {
+    color: #2E75B6;
+  }
+
+  /* ===== Page Footer ===== */
+  .page-footer {
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.92);
+    padding: 0 36px 18px 52px;
+    position: relative;
+    z-index: 20;
+  }
+  .footer-line {
+    height: 1px;
+    background: linear-gradient(90deg, #CBD5E0 0%, #E2E8F0 60%, transparent 100%);
+    margin-bottom: 10px;
+  }
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-text {
+    font-size: 9px;
+    color: #A0AEC0;
+    letter-spacing: 0.3px;
+  }
+  .footer-badge {
+    background: #C0392B;
+    color: #fff;
+    font-size: 8px;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== Print Styles ===== */
+  @media print {
+    body { background: #fff; margin: 0; padding: 0; }
+    @page { size: 210mm 297mm; margin: 0; }
+    .a4-page {
+      max-width: none; min-height: auto; height: auto;
+      margin: 0; box-shadow: none;
+    }
+    .left-stripe {
+      position: fixed; top: 0; left: 0;
+      width: 5px; height: 100%;
+      background: linear-gradient(180deg, #1B2A4A 0%, #2E75B6 100%);
+      z-index: 100;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="a4-page">
+  <img class="bg-image" src="_images/toc_background.png" alt="">
+  <div class="left-stripe"></div>
+
+  <header class="page-header">
+    <div class="header-content">
+      <div class="header-left">
+        <span class="section-badge">CONTENTS</span>
+        <span class="header-section-title">목차</span>
+      </div>
+      <div class="header-right">
+        <span class="project-name">온라인수출플랫폼 클라우드 전환 및 재구축</span>
+      </div>
+    </div>
+    <div class="header-line"></div>
+  </header>
+
+  <main class="document-body">
+
+    <div class="toc-title">목  차</div>
+    <div class="toc-title-line"></div>
+
+    <ul class="toc-list">
+
+      <li class="toc-item">
+        <span class="toc-number">I</span>
+        <div class="toc-text">
+          <div class="toc-section-title">일반현황</div>
+          <div class="toc-section-desc">제안사 일반현황 / 조직 및 인원현황</div>
+        </div>
+        <span class="toc-arrow">&#x203A;</span>
+      </li>
+
+      <li class="toc-item">
+        <span class="toc-number">II</span>
+        <div class="toc-text">
+          <div class="toc-section-title">추진전략 및 방법</div>
+          <div class="toc-section-desc">사업이해도 / 추진전략 / 적용기술 / 표준프레임워크 / 개발방법론</div>
+        </div>
+        <span class="toc-arrow">&#x203A;</span>
+      </li>
+
+      <li class="toc-item">
+        <span class="toc-number">III</span>
+        <div class="toc-text">
+          <div class="toc-section-title">기술 및 기능</div>
+          <div class="toc-section-desc">기능 요구사항 / 데이터 요구사항 / 보안 요구사항 / 제약사항</div>
+        </div>
+        <span class="toc-arrow">&#x203A;</span>
+      </li>
+
+      <li class="toc-item">
+        <span class="toc-number">IV</span>
+        <div class="toc-text">
+          <div class="toc-section-title">성능 및 품질</div>
+          <div class="toc-section-desc">성능 요구사항 / 인터페이스 / 테스트 / 품질 요구사항</div>
+        </div>
+        <span class="toc-arrow">&#x203A;</span>
+      </li>
+
+      <li class="toc-item">
+        <span class="toc-number">V</span>
+        <div class="toc-text">
+          <div class="toc-section-title">프로젝트 관리</div>
+          <div class="toc-section-desc">관리방법론 / 일정계획 / 수행조직 및 업무분장</div>
+        </div>
+        <span class="toc-arrow">&#x203A;</span>
+      </li>
+
+      <li class="toc-item">
+        <span class="toc-number">VI</span>
+        <div class="toc-text">
+          <div class="toc-section-title">프로젝트 지원</div>
+          <div class="toc-section-desc">품질보증 / 교육훈련 / 하자보수 / 기밀보안</div>
+        </div>
+        <span class="toc-arrow">&#x203A;</span>
+      </li>
+
+    </ul>
+
+  </main>
+
+  <footer class="page-footer">
+    <div class="footer-line"></div>
+    <div class="footer-content">
+      <span class="footer-text">온라인수출플랫폼 클라우드 전환 및 재구축</span>
+      <span class="footer-badge">목차</span>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

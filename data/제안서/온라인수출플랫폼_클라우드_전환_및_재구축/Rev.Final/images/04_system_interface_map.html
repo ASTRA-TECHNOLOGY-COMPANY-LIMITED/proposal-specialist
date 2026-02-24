@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+  .header { text-align: center; margin-bottom: 22px; }
+  .header h2 { font-size: 17px; color: #1B2A4A; letter-spacing: 2px; margin-bottom: 4px; }
+  .header .sub { font-size: 10px; color: #718096; letter-spacing: 1px; }
+  .header .line { width: 60px; height: 3px; background: linear-gradient(90deg, #2D5F8A, #4A90D9); margin: 10px auto 0; border-radius: 2px; }
+
+  .center-hub {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .hub-box {
+    width: 200px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #1B2A4A, #2D5F8A);
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(43,108,176,0.3);
+    margin-bottom: 12px;
+  }
+  .hub-icon { font-size: 24px; margin-bottom: 4px; }
+  .hub-name { font-size: 13px; font-weight: 800; }
+  .hub-sub { font-size: 8px; opacity: 0.8; }
+
+  .interface-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .if-card {
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .if-header {
+    padding: 8px 8px;
+    font-size: 9px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+  .if-header .icon { font-size: 14px; }
+  .if-header.gov { background: linear-gradient(135deg, #2B6CB0, #4A90D9); }
+  .if-header.biz { background: linear-gradient(135deg, #276749, #48BB78); }
+  .if-header.pay { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .if-header.mall { background: linear-gradient(135deg, #9C4221, #ED8936); }
+
+  .if-body {
+    padding: 8px 8px;
+    background: #FAFCFF;
+    text-align: center;
+  }
+  .if-name {
+    font-size: 10px;
+    font-weight: 700;
+    color: #1B2A4A;
+    margin-bottom: 3px;
+  }
+  .if-data {
+    font-size: 8px;
+    color: #718096;
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+  .if-method {
+    display: inline-block;
+    font-size: 7px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-weight: 700;
+  }
+  .if-method.api { background: #EBF8FF; color: #2B6CB0; }
+  .if-method.sso { background: #C6F6D5; color: #276749; }
+  .if-method.vpn { background: #E9D8FD; color: #553C9A; }
+
+  .if-connector {
+    text-align: center;
+    font-size: 10px;
+    color: #4A90D9;
+    margin-bottom: 8px;
+    letter-spacing: 6px;
+  }
+
+  .integrity-section {
+    margin-bottom: 0;
+  }
+  .integrity-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #1B2A4A;
+    margin-bottom: 10px;
+    padding-left: 8px;
+    border-left: 3px solid #4A90D9;
+  }
+
+  .integrity-flow {
+    display: flex;
+    gap: 6px;
+  }
+  .integ-step {
+    flex: 1;
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    padding: 10px 8px;
+    text-align: center;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .integ-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2B6CB0, #4A90D9);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+  .integ-name {
+    font-size: 10px;
+    font-weight: 700;
+    color: #1B2A4A;
+    margin-bottom: 2px;
+  }
+  .integ-desc {
+    font-size: 8px;
+    color: #718096;
+    line-height: 1.4;
+  }
+  .integ-arrow {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #4A90D9;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h2>시스템 인터페이스 연계 구성도</h2>
+    <div class="sub">SYSTEM INTERFACE MAP (INR-010~012)</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="center-hub">
+    <div class="hub-box">
+      <div class="hub-icon">🌐</div>
+      <div class="hub-name">온라인수출플랫폼</div>
+      <div class="hub-sub">API Gateway (REST API)</div>
+    </div>
+    <div class="if-connector">↕ ↕ ↕ ↕ ↕ ↕ ↕ ↕</div>
+  </div>
+
+  <div class="interface-grid">
+    <div class="if-card">
+      <div class="if-header gov"><span class="icon">🏛️</span> 공공기관</div>
+      <div class="if-body">
+        <div class="if-name">Tmydata</div>
+        <div class="if-data">고비즈데이터<br>무역통계</div>
+        <div class="if-method api">REST API</div>
+      </div>
+    </div>
+    <div class="if-card">
+      <div class="if-header gov"><span class="icon">🏛️</span> 공공기관</div>
+      <div class="if-body">
+        <div class="if-name">SIMS</div>
+        <div class="if-data">중소기업<br>통합관리</div>
+        <div class="if-method api">REST API</div>
+      </div>
+    </div>
+    <div class="if-card">
+      <div class="if-header biz"><span class="icon">📦</span> 물류시스템</div>
+      <div class="if-body">
+        <div class="if-name">스마트트레이드허브</div>
+        <div class="if-data">물류/회원<br>데이터</div>
+        <div class="if-method sso">SSO + API</div>
+      </div>
+    </div>
+    <div class="if-card">
+      <div class="if-header gov"><span class="icon">🔒</span> 내부시스템</div>
+      <div class="if-body">
+        <div class="if-name">통합정보시스템</div>
+        <div class="if-data">수출정보<br>(Oracle DB)</div>
+        <div class="if-method vpn">IPsec VPN</div>
+      </div>
+    </div>
+    <div class="if-card">
+      <div class="if-header gov"><span class="icon">📋</span> 공공데이터</div>
+      <div class="if-body">
+        <div class="if-name">공공마이데이터</div>
+        <div class="if-data">기업정보<br>(행안부)</div>
+        <div class="if-method api">표준 API</div>
+      </div>
+    </div>
+    <div class="if-card">
+      <div class="if-header pay"><span class="icon">💳</span> 결제</div>
+      <div class="if-body">
+        <div class="if-name">토스페이먼츠</div>
+        <div class="if-data">결제 연동<br>정산 처리</div>
+        <div class="if-method api">REST API</div>
+      </div>
+    </div>
+    <div class="if-card">
+      <div class="if-header mall"><span class="icon">🛒</span> 커머스</div>
+      <div class="if-body">
+        <div class="if-name">카페24</div>
+        <div class="if-data">상품 연동<br>쇼핑몰</div>
+        <div class="if-method api">REST API</div>
+      </div>
+    </div>
+    <div class="if-card">
+      <div class="if-header mall"><span class="icon">🛒</span> 커머스</div>
+      <div class="if-body">
+        <div class="if-name">아마존</div>
+        <div class="if-data">상품 연동<br>글로벌</div>
+        <div class="if-method api">REST API</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="integrity-section">
+    <div class="integrity-title">연계데이터 정합성 검증 체계 (INR-012)</div>
+    <div class="integrity-flow">
+      <div class="integ-step">
+        <div class="integ-num">1</div>
+        <div class="integ-name">연계 전 검증</div>
+        <div class="integ-desc">데이터 포맷/타입<br>범위 사전 검증</div>
+      </div>
+      <div class="integ-arrow">→</div>
+      <div class="integ-step">
+        <div class="integ-num">2</div>
+        <div class="integ-name">연계 중 검증</div>
+        <div class="integ-desc">트랜잭션 무결성<br>타임아웃 관리</div>
+      </div>
+      <div class="integ-arrow">→</div>
+      <div class="integ-step">
+        <div class="integ-num">3</div>
+        <div class="integ-name">연계 후 검증</div>
+        <div class="integ-desc">건수 대사<br>데이터 비교 검증</div>
+      </div>
+      <div class="integ-arrow">→</div>
+      <div class="integ-step">
+        <div class="integ-num">4</div>
+        <div class="integ-name">정기 검증</div>
+        <div class="integ-desc">전체 정합성<br>주 1회 배치</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

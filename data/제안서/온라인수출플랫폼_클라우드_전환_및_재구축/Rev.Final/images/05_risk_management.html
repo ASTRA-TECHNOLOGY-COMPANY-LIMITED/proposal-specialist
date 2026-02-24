@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+  .header { text-align: center; margin-bottom: 20px; }
+  .header h2 { font-size: 17px; color: #1B2A4A; letter-spacing: 2px; margin-bottom: 4px; }
+  .header .sub { font-size: 10px; color: #718096; letter-spacing: 1px; }
+  .header .line { width: 60px; height: 3px; background: linear-gradient(90deg, #2D5F8A, #4A90D9); margin: 10px auto 0; border-radius: 2px; }
+
+  .section-label {
+    font-size: 11px; font-weight: 700; color: #1B2A4A;
+    margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+  }
+  .section-label .dot { width: 4px; height: 13px; border-radius: 2px; background: linear-gradient(180deg, #2D5F8A, #4A90D9); }
+
+  /* 4-Step Process */
+  .process-flow {
+    display: flex; gap: 6px; margin-bottom: 18px;
+  }
+  .pf-step {
+    flex: 1; border-radius: 10px; overflow: hidden;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    position: relative;
+  }
+  .pf-num {
+    position: absolute; top: 8px; right: 8px;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 800; color: #fff;
+  }
+  .pf-head {
+    padding: 10px 10px; color: #fff;
+    font-size: 10px; font-weight: 700;
+    text-align: center;
+  }
+  .pf-head.c1 { background: linear-gradient(135deg, #2B6CB0, #4299E1); }
+  .pf-head.c2 { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .pf-head.c3 { background: linear-gradient(135deg, #C05621, #ED8936); }
+  .pf-head.c4 { background: linear-gradient(135deg, #276749, #48BB78); }
+  .pf-body {
+    padding: 8px 10px; background: #fff;
+    font-size: 8px; color: #4A5568; line-height: 1.6; text-align: center;
+  }
+  .pf-arrow {
+    display: flex; align-items: center;
+    font-size: 14px; color: #CBD5E0; flex-shrink: 0;
+  }
+
+  /* Risk Cards with severity */
+  .risk-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .risk-item {
+    display: flex; align-items: stretch;
+    border-radius: 10px; overflow: hidden;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .ri-severity {
+    width: 6px; flex-shrink: 0;
+  }
+  .ri-severity.critical { background: #E53E3E; }
+  .ri-severity.high { background: #DD6B20; }
+  .ri-severity.medium { background: #D69E2E; }
+  .ri-severity.low { background: #38A169; }
+
+  .ri-left {
+    width: 170px; padding: 8px 10px;
+    display: flex; flex-direction: column; justify-content: center;
+    flex-shrink: 0; background: #FAFBFC;
+  }
+  .ri-type { font-size: 7px; color: #718096; margin-bottom: 1px; }
+  .ri-name { font-size: 10px; font-weight: 700; color: #1B2A4A; margin-bottom: 3px; }
+  .ri-level { display: flex; gap: 6px; }
+  .ri-badge {
+    font-size: 7px; font-weight: 700; padding: 2px 6px;
+    border-radius: 4px; color: #fff;
+  }
+  .badge-impact-h { background: #E53E3E; }
+  .badge-impact-m { background: #DD6B20; }
+  .badge-prob-h { background: #9B2C2C; }
+  .badge-prob-m { background: #C05621; }
+  .badge-prob-l { background: #38A169; }
+
+  .ri-right {
+    flex: 1; padding: 8px 10px;
+    display: flex; flex-direction: column; justify-content: center;
+    background: #fff;
+  }
+  .ri-action {
+    font-size: 8.5px; color: #4A5568; line-height: 1.5;
+    display: flex; align-items: flex-start; gap: 4px;
+  }
+  .ri-dot { width: 3px; height: 3px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; background: #4A90D9; }
+
+  /* Bottom principle */
+  .principle {
+    display: flex; gap: 8px;
+  }
+  .pr-card {
+    flex: 1; text-align: center; padding: 10px 8px;
+    border-radius: 10px; border: 1px solid #E2E8F0;
+    background: #FAFCFF;
+  }
+  .pr-icon { font-size: 18px; margin-bottom: 4px; }
+  .pr-title { font-size: 9px; font-weight: 800; color: #1B2A4A; margin-bottom: 2px; }
+  .pr-desc { font-size: 7.5px; color: #718096; line-height: 1.4; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h2>위험관리 프로세스 및 대응 전략</h2>
+    <div class="sub">RISK MANAGEMENT — 4-STEP PROCESS & MITIGATION</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="section-label"><div class="dot"></div>4단계 위험관리 프로세스</div>
+  <div class="process-flow">
+    <div class="pf-step">
+      <div class="pf-num">1</div>
+      <div class="pf-head c1">위험 식별</div>
+      <div class="pf-body">프로젝트 부정적<br>영향 요소 조기 식별<br><strong style="color:#2B6CB0;">매주 주간회의</strong></div>
+    </div>
+    <div class="pf-arrow">→</div>
+    <div class="pf-step">
+      <div class="pf-num">2</div>
+      <div class="pf-head c2">위험 분석</div>
+      <div class="pf-body">영향력 및 우선순위<br>판단 (상/중/하)<br><strong style="color:#553C9A;">발생확률×영향도</strong></div>
+    </div>
+    <div class="pf-arrow">→</div>
+    <div class="pf-step">
+      <div class="pf-num">3</div>
+      <div class="pf-head c3">대응 계획</div>
+      <div class="pf-body">회피·전가·완화·수용<br>전략별 대응방안<br><strong style="color:#C05621;">위험관리대장 작성</strong></div>
+    </div>
+    <div class="pf-arrow">→</div>
+    <div class="pf-step">
+      <div class="pf-num">4</div>
+      <div class="pf-head c4">모니터링</div>
+      <div class="pf-body">주간 추적 관리<br>시정조치 이행 확인<br><strong style="color:#276749;">주간보고 반영</strong></div>
+    </div>
+  </div>
+
+  <div class="section-label"><div class="dot"></div>핵심 위험요인 및 선제 대응방안</div>
+  <div class="risk-list">
+    <div class="risk-item">
+      <div class="ri-severity critical"></div>
+      <div class="ri-left">
+        <div class="ri-type">기술 위험</div>
+        <div class="ri-name">데이터 마이그레이션 품질</div>
+        <div class="ri-level">
+          <span class="ri-badge badge-impact-h">영향 상</span>
+          <span class="ri-badge badge-prob-h">확률 상</span>
+        </div>
+      </div>
+      <div class="ri-right">
+        <div class="ri-action"><div class="ri-dot"></div>데이터 정합성 사전 검증, 단계별 이행 리허설 2회 수행</div>
+        <div class="ri-action"><div class="ri-dot"></div>Oracle→MariaDB 호환성 PoC, 마이그레이션 검증 도구 적용</div>
+        <div class="ri-action"><div class="ri-dot"></div>롤백 체계 수립 — 전환 실패 시 즉시 원복 가능</div>
+      </div>
+    </div>
+    <div class="risk-item">
+      <div class="ri-severity critical"></div>
+      <div class="ri-left">
+        <div class="ri-type">기술 위험</div>
+        <div class="ri-name">클라우드 전환 호환성</div>
+        <div class="ri-level">
+          <span class="ri-badge badge-impact-h">영향 상</span>
+          <span class="ri-badge badge-prob-m">확률 중</span>
+        </div>
+      </div>
+      <div class="ri-right">
+        <div class="ri-action"><div class="ri-dot"></div>사전 호환성 검증 — 현행 시스템 기능별 클라우드 적합성 분석</div>
+        <div class="ri-action"><div class="ri-dot"></div>단계적 전환 전략 — 스테이징 환경 선행 검증 후 전환</div>
+        <div class="ri-action"><div class="ri-dot"></div>Rollback 계획 수립 — 전환 단계별 원복 포인트 사전 확보</div>
+      </div>
+    </div>
+    <div class="risk-item">
+      <div class="ri-severity high"></div>
+      <div class="ri-left">
+        <div class="ri-type">외부 위험</div>
+        <div class="ri-name">민간/타기관 API 연계 지연</div>
+        <div class="ri-level">
+          <span class="ri-badge badge-impact-h">영향 상</span>
+          <span class="ri-badge badge-prob-m">확률 중</span>
+        </div>
+      </div>
+      <div class="ri-right">
+        <div class="ri-action"><div class="ri-dot"></div>조기 연계 테스트 환경 구축, Mock API 병행 개발</div>
+        <div class="ri-action"><div class="ri-dot"></div>연계기관별 사전 협의 — 관세청, KTNET, 한국무역통계진흥원</div>
+        <div class="ri-action"><div class="ri-dot"></div>장애 시 Fallback 처리 로직 사전 구현</div>
+      </div>
+    </div>
+    <div class="risk-item">
+      <div class="ri-severity medium"></div>
+      <div class="ri-left">
+        <div class="ri-type">일정 위험</div>
+        <div class="ri-name">요구사항 변경 일정 지연</div>
+        <div class="ri-level">
+          <span class="ri-badge badge-impact-m">영향 중</span>
+          <span class="ri-badge badge-prob-m">확률 중</span>
+        </div>
+      </div>
+      <div class="ri-right">
+        <div class="ri-action"><div class="ri-dot"></div>변경관리 프로세스(CCB) 운영, 영향도 사전 분석</div>
+        <div class="ri-action"><div class="ri-dot"></div>버퍼 일정 10% 확보, Crashing/Fast Tracking 적용</div>
+      </div>
+    </div>
+    <div class="risk-item">
+      <div class="ri-severity low"></div>
+      <div class="ri-left">
+        <div class="ri-type">자원 위험</div>
+        <div class="ri-name">핵심인력 이탈</div>
+        <div class="ri-level">
+          <span class="ri-badge badge-impact-h">영향 상</span>
+          <span class="ri-badge badge-prob-l">확률 하</span>
+        </div>
+      </div>
+      <div class="ri-right">
+        <div class="ri-action"><div class="ri-dot"></div>백업 인력 사전 지정 — 역할별 1:1 후보자 확보</div>
+        <div class="ri-action"><div class="ri-dot"></div>기술 문서화 강화 — 업무 인수인계 영향 최소화</div>
+      </div>
+    </div>
+    <div class="risk-item">
+      <div class="ri-severity low"></div>
+      <div class="ri-left">
+        <div class="ri-type">성능 위험</div>
+        <div class="ri-name">성능 목표 미달</div>
+        <div class="ri-level">
+          <span class="ri-badge badge-impact-m">영향 중</span>
+          <span class="ri-badge badge-prob-l">확률 하</span>
+        </div>
+      </div>
+      <div class="ri-right">
+        <div class="ri-action"><div class="ri-dot"></div>개발 중 성능 모니터링 — 응답시간 3초 / 동시 1,000명 기준</div>
+        <div class="ri-action"><div class="ri-dot"></div>부하 테스트 조기 실시 — M+5부터 단계별 성능 검증</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label"><div class="dot"></div>위험관리 3대 원칙</div>
+  <div class="principle">
+    <div class="pr-card">
+      <div class="pr-icon">🔍</div>
+      <div class="pr-title">선제적 예방</div>
+      <div class="pr-desc">유사 프로젝트 경험 기반<br>위험 사전 식별·등록</div>
+    </div>
+    <div class="pr-card">
+      <div class="pr-icon">📊</div>
+      <div class="pr-title">주간 모니터링</div>
+      <div class="pr-desc">위험관리대장 주간 갱신<br>주간보고서 위험 현황 포함</div>
+    </div>
+    <div class="pr-card">
+      <div class="pr-icon">⚡</div>
+      <div class="pr-title">즉시 대응</div>
+      <div class="pr-desc">24시간 내 대응 원칙<br>PM→경영진 에스컬레이션</div>
+    </div>
+    <div class="pr-card">
+      <div class="pr-icon">📝</div>
+      <div class="pr-title">이력 추적</div>
+      <div class="pr-desc">해결 시까지 추적 관리<br>회의록·조치결과 기록</div>
+    </div>
+  </div>
+</body>
+</html>

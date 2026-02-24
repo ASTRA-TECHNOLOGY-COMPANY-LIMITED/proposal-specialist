@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #fff;
+    width: 700px;
+    padding: 28px;
+    color: #1A202C;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 22px;
+  }
+  .header h2 {
+    font-size: 17px;
+    color: #1B2A4A;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .header .sub {
+    font-size: 10px;
+    color: #718096;
+    letter-spacing: 1px;
+  }
+  .header .line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #2D5F8A, #4A90D9);
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+
+  .domain-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .domain-card {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+
+  .domain-header {
+    padding: 10px 12px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .domain-header .icon { font-size: 16px; }
+  .domain-header.blue { background: linear-gradient(135deg, #2B6CB0, #4A90D9); }
+  .domain-header.teal { background: linear-gradient(135deg, #234E52, #38B2AC); }
+  .domain-header.purple { background: linear-gradient(135deg, #553C9A, #805AD5); }
+  .domain-header.green { background: linear-gradient(135deg, #276749, #48BB78); }
+  .domain-header.orange { background: linear-gradient(135deg, #9C4221, #ED8936); }
+
+  .domain-body {
+    padding: 10px 12px;
+    background: #FAFCFF;
+  }
+
+  .domain-target {
+    font-size: 9px;
+    color: #718096;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .domain-target strong { color: #2D3748; font-size: 9px; }
+
+  .domain-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 6px;
+  }
+  .feature-tag {
+    font-size: 8px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-weight: 600;
+    background: #EBF8FF;
+    color: #2A4365;
+    border: 1px solid #BEE3F8;
+  }
+  .feature-tag.core {
+    background: #FFF5F5;
+    color: #C53030;
+    border-color: #FED7D7;
+  }
+
+  .domain-req {
+    font-size: 8px;
+    color: #A0AEC0;
+    padding-top: 4px;
+    border-top: 1px dashed #E2E8F0;
+  }
+  .domain-req strong { color: #4A90D9; }
+
+  .domain-card.wide {
+    grid-column: span 2;
+  }
+
+  .stats-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .stat-box {
+    flex: 1;
+    text-align: center;
+    padding: 10px 8px;
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    background: #F7FAFC;
+  }
+  .stat-num {
+    font-size: 20px;
+    font-weight: 800;
+    color: #2B6CB0;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 9px;
+    color: #718096;
+    margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h2>현행 시스템 업무 영역 총괄</h2>
+    <div class="sub">GOBIZKOREA SERVICE DOMAIN OVERVIEW</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="domain-grid">
+    <div class="domain-card">
+      <div class="domain-header blue">
+        <span class="icon">🇰🇷</span> 국문사이트
+      </div>
+      <div class="domain-body">
+        <div class="domain-target">대상: <strong>국내 중소기업, 개인회원</strong></div>
+        <div class="domain-features">
+          <span class="feature-tag core">회원관리</span>
+          <span class="feature-tag">수출지원사업 신청</span>
+          <span class="feature-tag">상품등록</span>
+          <span class="feature-tag">정보제공</span>
+          <span class="feature-tag">상담신청</span>
+        </div>
+        <div class="domain-req">대응: <strong>SFR-004</strong></div>
+      </div>
+    </div>
+
+    <div class="domain-card">
+      <div class="domain-header teal">
+        <span class="icon">🌐</span> 영문사이트
+      </div>
+      <div class="domain-body">
+        <div class="domain-target">대상: <strong>해외바이어</strong></div>
+        <div class="domain-features">
+          <span class="feature-tag core">SNS 회원가입</span>
+          <span class="feature-tag">상품검색·주문</span>
+          <span class="feature-tag">쇼핑몰 연동</span>
+          <span class="feature-tag">결제(토스)</span>
+        </div>
+        <div class="domain-req">대응: <strong>SFR-005</strong></div>
+      </div>
+    </div>
+
+    <div class="domain-card">
+      <div class="domain-header purple">
+        <span class="icon">⚙️</span> 행정·사업관리
+      </div>
+      <div class="domain-body">
+        <div class="domain-target">대상: <strong>중진공 직원 (관리자)</strong></div>
+        <div class="domain-features">
+          <span class="feature-tag core">회원·권한관리</span>
+          <span class="feature-tag">수출지원</span>
+          <span class="feature-tag">상품검수</span>
+          <span class="feature-tag">상담·통계</span>
+        </div>
+        <div class="domain-req">대응: <strong>SFR-009</strong></div>
+      </div>
+    </div>
+
+    <div class="domain-card">
+      <div class="domain-header green">
+        <span class="icon">🏢</span> 통합정보시스템 (수출)
+      </div>
+      <div class="domain-body">
+        <div class="domain-target">대상: <strong>중진공 직원 (업무망)</strong></div>
+        <div class="domain-features">
+          <span class="feature-tag core">수출사업 접수·평가</span>
+          <span class="feature-tag">정산</span>
+          <span class="feature-tag">임차료관리</span>
+          <span class="feature-tag">중복수혜방지</span>
+        </div>
+        <div class="domain-req">대응: <strong>SFR-012, SFR-013</strong></div>
+      </div>
+    </div>
+
+    <div class="domain-card wide">
+      <div class="domain-header orange">
+        <span class="icon">🔗</span> 외부 연계 시스템
+      </div>
+      <div class="domain-body">
+        <div class="domain-target">대상: <strong>타기관 · 민간서비스</strong></div>
+        <div class="domain-features">
+          <span class="feature-tag">한국무역통계진흥원</span>
+          <span class="feature-tag">중기기술정보진흥원</span>
+          <span class="feature-tag">스마트허브트레이</span>
+          <span class="feature-tag">공공마이데이터</span>
+          <span class="feature-tag core">카페24</span>
+          <span class="feature-tag core">토스페이먼츠</span>
+          <span class="feature-tag core">아마존</span>
+        </div>
+        <div class="domain-req">대응: <strong>SFR-008, SFR-011</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="stat-num">5</div>
+      <div class="stat-label">업무 영역</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">13</div>
+      <div class="stat-label">요구사항 항목</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">7</div>
+      <div class="stat-label">외부 연계 대상</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">4</div>
+      <div class="stat-label">서비스 사이트</div>
+    </div>
+  </div>
+</body>
+</html>
