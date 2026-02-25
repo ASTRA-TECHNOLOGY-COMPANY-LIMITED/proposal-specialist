@@ -138,7 +138,7 @@ description: >
     badge: "{장번호}",
     title: "{장제목}",
     project: "{사업명}",
-    section: "{장제목}",
+    section: "{절제목}",
     startPage: {시작페이지번호},
     totalPages: {총페이지}
   };

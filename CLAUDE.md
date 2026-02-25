@@ -218,7 +218,7 @@ Markdown 제안서 → PPTX 변환 시 아래 파이프라인을 따른다.
 ### Pipeline: HTML → Chrome Screenshot → PPTX
 
 ```
-HTML (body width: 700px, 시스템 폰트)
+HTML (body width: 794px, 시스템 폰트)
   → Chrome headless (--force-device-scale-factor=2, 레티나 품질)
   → 고해상도 PNG (1400px 폭, 정확한 폰트 렌더링)
   → python-pptx (full-width 삽입, 자동 페이지 분할)
