@@ -2,13 +2,38 @@
 name: html-design-system
 description: >
   제안서 HTML 도표/차트/다이어그램 작성 시 공통 디자인 시스템을 적용합니다.
-  HTML 컴포넌트 작성, 스타일 적용, Chrome 렌더링 시 사용합니다.
+  HTML 컴포넌트 작성, 스타일 적용 시 사용합니다.
 ---
 
 # HTML 디자인 시스템
 
-제안서의 모든 도표, 차트, 다이어그램은 HTML로 작성하고 Chrome MCP로 스크린샷하여 이미지로 삽입한다.
+제안서의 모든 도표, 차트, 다이어그램, 개념도는 HTML/CSS/JS로 작성한다.
 이 스킬은 공통 CSS/JS 파일과 컴포넌트 템플릿을 제공한다.
+
+## 두 가지 사용 방식
+
+### 1. 섹션 작성 (기본 — 인라인 HTML)
+
+`write-section` 커맨드에서 섹션을 작성할 때, 도표와 도안은 **섹션 HTML 파일 내에 인라인으로** 작성한다.
+별도 HTML 파일로 분리하거나 Chrome 스크린샷으로 이미지 변환하지 않는다.
+
+```html
+<!-- 섹션 HTML (sections/01_제안사일반현황.html) -->
+<link rel="stylesheet" href="../_common/page-frame.css">
+<script src="../_common/page-frame.js"></script>
+<div class="a4-page">
+  <h3>1.1 제안사 일반현황</h3>
+  <p>본문...</p>
+  <div class="table-title">표 1. 기업 개요</div>
+  <table><!-- 인라인 테이블 --></table>
+  <div class="table-title">그림 1. 사업 추진 체계</div>
+  <div class="flow-container"><!-- 인라인 도안 --></div>
+</div>
+```
+
+### 2. PPTX 변환용 (별도 HTML → Chrome → PNG)
+
+PPTX 생성 파이프라인에서는 별도 HTML 파일을 만들어 Chrome headless로 고해상도 PNG 스크린샷을 캡처한 뒤 python-pptx로 삽입한다. 이 워크플로우는 PPTX 변환 시에만 사용한다.
 
 ## 디자인 토큰
 
@@ -34,22 +59,20 @@ description: >
 - A4 실제 크기: `210mm x 297mm`
 - 콘텐츠 패딩: `20px 40px`
 
-## HTML → Chrome → PNG 워크플로우
-
-1. **HTML 작성**: Write Tool로 `html/{섹션번호:02d}_{도표명}.html` 저장
-2. **Chrome 렌더링**: `navigate_page` → `take_screenshot`으로 이미지 캡처
-3. **마크다운 참조**: `![표 N. 설명](../images/{파일명}.png)`
-
 ## 공유 CSS/JS 사용법
 
-`write-section` 명령이 실행 시 아래 파일을 `_common/` 디렉토리에 자동 복사한다:
+`generate-common` 명령이 실행 시 아래 파일을 `_common/` 디렉토리에 복사한다:
 
 - `_common/page-frame.css` — 페이지 프레임 + 차트 컴포넌트 통합 스타일
 - `_common/page-frame.js` — 헤더/푸터 자동 주입 + 오버플로 분할
+- `_common/common-config.json` — 장별 시작 페이지 설정
 
 HTML 파일에서 참조:
 ```html
 <link rel="stylesheet" href="../_common/page-frame.css">
+<script>
+var PAGE_CONFIG = { badge:"II", title:"기술 방안", project:"사업명", section:"기술 방안", startPage:15, totalPages:80 };
+</script>
 <script src="../_common/page-frame.js"></script>
 ```
 
