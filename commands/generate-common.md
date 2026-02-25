@@ -45,10 +45,9 @@ Read Tool로 목차 파일을 읽고 YAML 프론트매터에서 추출한다:
 
 플러그인 루트의 디자인 시스템 파일을 출력 디렉토리에 복사한다.
 
-1. Glob Tool로 `**/html-design-system/page-frame.css` 패턴을 검색하여 플러그인 루트 경로를 확인한 후,
-   Read Tool로 해당 경로에서 원본 파일을 읽는다:
-   - `{플러그인루트}/skills/html-design-system/page-frame.css`
-   - `{플러그인루트}/skills/html-design-system/page-frame.js`
+1. Read Tool로 플러그인 루트의 원본 파일을 읽는다:
+   - `${CLAUDE_PLUGIN_ROOT}/skills/html-design-system/page-frame.css`
+   - `${CLAUDE_PLUGIN_ROOT}/skills/html-design-system/page-frame.js`
 
 2. Write Tool로 출력 디렉토리에 저장한다:
    - `data/output/{사업명_경로}/_common/page-frame.css`
@@ -85,11 +84,9 @@ Write Tool로 설정 파일을 생성한다:
 
 ### 장별 페이지 배분
 
-| 장 | 제목 | 시작 페이지 | 페이지 수 |
-|----|------|-----------|----------|
-| I  | 일반현황 | 1p | 14p |
-| II | 기술 방안 | 15p | 27p |
-| ... | ... | ... | ... |
+1. **I. 일반현황** — 시작 1p, 총 14p
+2. **II. 기술 방안** — 시작 15p, 총 27p
+...
 
 ### 생성 파일
 
