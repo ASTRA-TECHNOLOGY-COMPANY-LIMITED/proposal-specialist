@@ -21,15 +21,16 @@ The plugin follows the Claude Code plugin structure (`.claude-plugin/plugin.json
 - `search` — Search multiple platforms (G2B, K-Startup, MSS, MSIT) for matching announcements
 - `evaluate` — Deep-analyze a specific bid/announcement with attachment download and RFP analysis
 - `strategy` — Run the full workflow: analyze → search → evaluate with user interaction at each step
-- `generate-toc` — Generate proposal TOC from RFP + company seed document (both required). Outputs `data/output/{사업명}/목차.md` with per-section metadata (배점, 핵심메시지, 도표/이미지 계획, 페이지예산)
-- `write-section` — Write proposal sections based on generated TOC. Produces markdown with HTML→Chrome screenshot tables/charts and AI-generated conceptual diagrams. Supports specific section numbers: `write-section 목차.md 1 3 5`
+- `generate-toc` — Generate proposal TOC from RFP + company seed document (both required). Outputs `data/output/{사업명}/목차.md` with per-section metadata (배점, 핵심메시지, 도표/도안 계획, 페이지예산)
+- `generate-common` — Generate shared CSS/JS/config for section HTML files. Copies page-frame.css/js to `_common/` and creates `common-config.json` with chapter start pages. Must run before `write-section`.
+- `write-section` — Write proposal sections as complete HTML pages with inline tables and HTML/CSS diagrams. Supports specific section numbers: `write-section 목차.md 1 3 5`
 
 ### Agents (Subagents for deep analysis)
 - **doc-analyzer** (`agents/doc-analyzer.md`): Deep company document analysis, keyword extraction
 - **bid-searcher** (`agents/bid-searcher.md`): Multi-platform parallel search using MCP Tools
 - **rfp-evaluator** (`agents/rfp-evaluator.md`): RFP analysis, success probability scoring, SWOT analysis
 - **toc-generator** (`agents/toc-generator.md`): Proposal TOC generation with evaluation criteria ↔ company strength mapping and A4 page-fill strategy
-- **section-writer** (`agents/section-writer.md`): Proposal section writing with HTML design system for tables/charts (Chrome MCP screenshots) and AI image generation for conceptual diagrams. Classifies sections into types A~K (사업이해도, 기술방안, 수행체계, etc.)
+- **section-writer** (`agents/section-writer.md`): Proposal section writing as complete HTML pages with inline tables and HTML/CSS diagrams. All visuals (tables, charts, architecture diagrams, infographics) are embedded directly in the section HTML — no separate image files. Classifies sections into types A~K (사업이해도, 기술방안, 수행체계, etc.)
 
 ### Hooks (SessionStart, non-blocking)
 On session start, a shell script validates API key environment variables:
@@ -80,26 +81,32 @@ RFP document + Company seed document (both REQUIRED from user)
       → Step 3: toc-generator agent
           → Evaluation criteria ↔ company strength mapping
           → Section depth allocation by 배점 weight (원칙 2)
-          → 도표/이미지 planning per section (page-fill strategy)
+          → 도표/도안 planning per section (page-fill strategy)
       → Step 4: Write data/output/{사업명}/목차.md
-         (YAML frontmatter + section metadata: 배점, 핵심메시지, 도표, 이미지, 페이지예산)
+         (YAML frontmatter + section metadata: 배점, 핵심메시지, 도표, 도안, 페이지예산)
+  → generate-common command
+      → Step 1: Read 목차.md (장 구조, 페이지예산)
+      → Step 2: Calculate chapter start pages
+      → Step 3: Copy page-frame.css/js to _common/
+      → Step 4: Write _common/common-config.json
   → write-section command
-      → Step 1: Read 목차.md (YAML frontmatter + section list)
+      → Step 1: Read 목차.md + _common/common-config.json
       → Step 2: Read RFP requirements + seed data
       → Step 3: Confirm scope with user (which sections to write)
       → Step 4: Per section (sequential):
           → section-writer agent
               → Section type classification (A~K: 사업이해도, 기술방안, 수행체계...)
-              → HTML tables/charts → Write to html/ → Chrome MCP → screenshot to images/
-              → image_text2img (conceptual diagrams, architecture)
-              → Markdown section (no markdown tables — all visuals as images)
-          → Write to sections/{번호:02d}_{절제목}.md
+              → Inline HTML tables + HTML/CSS diagrams (no separate files)
+              → Complete HTML page with PAGE_CONFIG, shared CSS/JS
+          → Write to sections/{번호:02d}_{절제목}.html
       → Step 5-6: Progress reporting + final summary
   → data/output/{사업명}/
-      ├── 목차.md           (TOC with section metadata)
-      ├── sections/*.md     (page-break between sections)
-      ├── html/*.html       (table/chart source HTML, editable)
-      └── images/*.png      (HTML screenshots + AI diagrams)
+      ├── 목차.md              (TOC with section metadata)
+      ├── sections/*.html      (complete HTML pages with headers/footers/page numbers)
+      └── _common/
+          ├── page-frame.css   (shared page frame + component styles)
+          ├── page-frame.js    (auto header/footer/page split/numbering)
+          └── common-config.json (chapter start pages config)
 ```
 
 ## Key Conventions
@@ -143,6 +150,7 @@ claude --plugin-dir .
 /proposal-specialist:evaluate 20260101001
 /proposal-specialist:strategy ./company-intro.pdf
 /proposal-specialist:generate-toc data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
+/proposal-specialist:generate-common data/output/사업명/목차.md
 /proposal-specialist:write-section data/output/사업명/목차.md
 /proposal-specialist:write-section data/output/사업명/목차.md 1 3 5  # specific sections only
 
@@ -157,7 +165,7 @@ claude --debug
 - **MCP server** (`servers/src/`): TypeScript code. Run `npm run build` after changes.
 - **Data files** (`data/`):
   - `data/evaluation-templates.json`, `data/seed/`, `data/business/`: Reference data. Do not modify during normal operation.
-  - `data/output/`: Runtime output generated by `generate-toc` and `write-section`. Not committed (see `.gitignore`). Contains `목차.md` (TOC), `sections/` (markdown), `html/` (editable table/chart source), `images/` (Chrome screenshots + AI diagrams).
+  - `data/output/`: Runtime output generated by `generate-toc`, `generate-common`, and `write-section`. Not committed (see `.gitignore`). Contains `목차.md` (TOC), `sections/*.html` (complete HTML pages with inline tables and diagrams), `_common/` (shared CSS/JS/config).
 - **`hooks/hooks.json`**: Hook configuration referencing scripts via `${CLAUDE_PLUGIN_ROOT}`.
 - **`.mcp.json`**: MCP server configuration. References `${CLAUDE_PLUGIN_ROOT}` for paths and `${ENV_VAR}` for secrets.
 
@@ -224,7 +232,7 @@ HTML (body width: 700px, 시스템 폰트)
 - 세로는 원본 비율(aspect ratio)에 맞게 자동 계산
 - 한 슬라이드에 안 들어가면 이미지를 **자동 crop & split** → 다음 슬라이드에 이어서 배치
 - 분할된 각 슬라이드에도 동일한 크롬(헤더, 섹션 뱃지, 페이지번호) 적용
-- AI 생성 이미지(image_text2img)는 직접 삽입하지 않고, HTML로 래핑 후 Chrome 렌더링하여 폰트/비율 일관성 확보
+- 외부 이미지는 직접 삽입하지 않고, HTML로 래핑 후 Chrome 렌더링하여 폰트/비율 일관성 확보
 
 ### HTML Rendering (Chrome Headless)
 
@@ -291,9 +299,20 @@ pip3 install --user --break-system-packages python-pptx Pillow
 
 ## Section Writer Design System
 
-The section-writer agent uses a consistent HTML design system for all tables/charts. Key CSS variables defined in the agent's HTML template:
+The section-writer agent outputs **complete HTML pages** with all visuals inline. No separate image files are generated — all tables, charts, and diagrams are HTML/CSS/JS within the section file.
 
+### Output format
+- Each section is a standalone `.html` file in `sections/`
+- References shared `_common/page-frame.css` and `_common/page-frame.js`
+- `PAGE_CONFIG` variable sets chapter badge, title, project name, start page, total pages
+- `page-frame.js` auto-injects headers/footers, handles page overflow splitting, and numbers pages
+
+### Design tokens
 - `--primary: #1B3A5C` (navy blue), `--accent: #0078D4` (blue), `--accent-light: #E8F4FD`
 - HTML body width: 794px (A4 at 96 DPI), font: Pretendard/Noto Sans KR/Malgun Gothic
-- Component classes: `.table-title`, `.highlight-box`, `.badge-*`, `.flow-container`, `.kpi-grid`, `.comparison`, `.timeline`, `.org-chart`
-- Section types A~K each have specific required tables/charts and AI image types defined in `agents/section-writer.md`
+
+### Component types
+- **Tables** (`<table>`): Data tables, requirement mapping, comparison tables
+- **CSS diagrams** (`.flow-container`, `.org-chart`, `.comparison`, `.kpi-grid`, `.timeline`): Architecture, process flows, org charts, infographics
+- **Inline SVG**: Complex shapes/paths when CSS alone is insufficient
+- Section types A~K each have specific required tables and HTML/CSS diagram types defined in `skills/section-type-guide/type-strategies.md`
