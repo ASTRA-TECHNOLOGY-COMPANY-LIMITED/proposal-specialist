@@ -1,0 +1,518 @@
+/*
+ * finalize.css — 표지, 목차, 장간지, 플로팅 네비게이션 전용 스타일
+ *
+ * 사용법:
+ *   <link rel="stylesheet" href="../styles/finalize.css">
+ *
+ * page-frame.css의 CSS 변수(--primary, --accent 등)를 그대로 활용한다.
+ * 이 파일은 finalize 커맨드에서만 사용되며, 일반 섹션 작성 시에는 불필요하다.
+ */
+
+/* ===== Finalize Body ===== */
+.finalize-body {
+  background: #E5E9EF;
+  min-height: 100vh;
+}
+
+/* =========================================================================
+   Cover Page — 표지
+   ========================================================================= */
+
+.cover-hero {
+  width: 100%;
+  max-width: 794px;
+  margin: 0 auto;
+  height: 420px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--primary, #1B3A5C);
+  position: relative;
+  overflow: hidden;
+}
+
+.cover-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(27, 58, 92, 0.7) 0%,
+    rgba(27, 58, 92, 0.85) 60%,
+    rgba(27, 42, 74, 0.95) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.cover-label {
+  font-size: 12px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 16px;
+}
+
+.cover-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #ffffff;
+  text-align: center;
+  letter-spacing: 2px;
+  line-height: 1.35;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.cover-divider {
+  width: 60px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.4);
+  margin: 24px 0;
+  border-radius: 2px;
+}
+
+.cover-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+}
+
+.cover-meta-item {
+  letter-spacing: 0.5px;
+}
+
+.cover-meta-sep {
+  opacity: 0.4;
+}
+
+/* Cover Info Cards */
+.cover-info {
+  max-width: 794px;
+  margin: 0 auto;
+  padding: 28px 36px;
+  background: #ffffff;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.1);
+}
+
+.cover-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.cover-info-card {
+  text-align: center;
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--gray-50, #FAFAFA);
+  border: 1px solid var(--gray-200, #EEEEEE);
+}
+
+.cover-info-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--accent, #0078D4);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.cover-info-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary, #1B3A5C);
+}
+
+/* Cover Footer */
+.cover-footer {
+  max-width: 794px;
+  margin: 0 auto;
+  padding: 20px 36px;
+  background: #ffffff;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.1);
+  border-top: 1px solid var(--gray-200, #EEEEEE);
+  text-align: center;
+}
+
+.cover-footer p {
+  font-size: 10px;
+  color: var(--gray-600, #757575);
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+/* =========================================================================
+   Main TOC — 대메뉴 목차
+   ========================================================================= */
+
+.main-toc {
+  max-width: 794px;
+  margin: 28px auto 0;
+  padding: 36px;
+  background: #ffffff;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.1);
+}
+
+.main-toc-heading {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary, #1B3A5C);
+  text-align: center;
+  margin-bottom: 28px;
+  padding-bottom: 14px;
+  border-bottom: 3px solid var(--accent, #0078D4);
+  border-left: none;
+  padding-left: 0;
+}
+
+.main-toc-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.main-toc-card {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  border-radius: 8px;
+  background: var(--gray-50, #FAFAFA);
+  border: 1px solid var(--gray-200, #EEEEEE);
+  gap: 16px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.15s ease;
+}
+
+.main-toc-card:hover {
+  background: var(--accent-light, #E8F4FD);
+  border-color: var(--accent, #0078D4);
+  transform: translateX(4px);
+  text-decoration: none;
+}
+
+.main-toc-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--primary, #1B3A5C), var(--primary-light, #2E5C8A));
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 8px;
+  flex-shrink: 0;
+  letter-spacing: 1px;
+  font-family: 'Georgia', serif;
+}
+
+.main-toc-content {
+  flex: 1;
+}
+
+.main-toc-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary, #1B3A5C);
+  margin: 0 0 2px;
+  border: none;
+  padding: 0;
+}
+
+.main-toc-desc {
+  font-size: 11px;
+  color: var(--gray-600, #757575);
+  letter-spacing: 0.3px;
+}
+
+.main-toc-arrow {
+  font-size: 20px;
+  color: var(--gray-300, #E0E0E0);
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+
+.main-toc-card:hover .main-toc-arrow {
+  color: var(--accent, #0078D4);
+}
+
+/* =========================================================================
+   Chapter Divider — 장간지
+   ========================================================================= */
+
+.chapter-divider-hero {
+  width: 100%;
+  max-width: 794px;
+  margin: 0 auto;
+  height: 280px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--primary, #1B3A5C);
+  position: relative;
+  overflow: hidden;
+}
+
+.chapter-divider-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(27, 58, 92, 0.85) 0%,
+    rgba(46, 92, 138, 0.75) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.chapter-divider-number {
+  font-size: 48px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.15);
+  font-family: 'Georgia', serif;
+  letter-spacing: 4px;
+  position: absolute;
+  top: 20px;
+  right: 36px;
+}
+
+.chapter-divider-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 2px;
+  margin: 0;
+  border: none;
+  padding: 0;
+  text-align: center;
+}
+
+.chapter-divider-line {
+  width: 48px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.4);
+  margin-top: 20px;
+  border-radius: 2px;
+}
+
+/* Chapter TOC — 절 목차 */
+.chapter-toc {
+  max-width: 794px;
+  margin: 0 auto;
+  padding: 32px 36px;
+  background: #ffffff;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.1);
+}
+
+.chapter-toc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.chapter-toc-item {
+  display: flex;
+  align-items: center;
+  padding: 14px 18px;
+  border-radius: 8px;
+  background: var(--gray-50, #FAFAFA);
+  border: 1px solid var(--gray-200, #EEEEEE);
+  gap: 16px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.15s ease;
+}
+
+.chapter-toc-item:hover {
+  background: var(--accent-light, #E8F4FD);
+  border-color: var(--accent, #0078D4);
+  transform: translateX(3px);
+  text-decoration: none;
+}
+
+.chapter-toc-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--primary, #1B3A5C), var(--primary-light, #2E5C8A));
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 6px;
+  flex-shrink: 0;
+  padding: 0 8px;
+  letter-spacing: 0.3px;
+}
+
+.chapter-toc-content {
+  flex: 1;
+}
+
+.chapter-toc-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary, #1B3A5C);
+  margin: 0 0 2px;
+  border: none;
+  padding: 0;
+}
+
+.chapter-toc-msg {
+  font-size: 11px;
+  color: var(--text-secondary, #4a4a6a);
+  line-height: 1.5;
+  margin-top: 2px;
+}
+
+.chapter-toc-pages {
+  font-size: 10px;
+  color: var(--gray-600, #757575);
+  margin-top: 4px;
+  letter-spacing: 0.3px;
+}
+
+.chapter-toc-arrow {
+  font-size: 18px;
+  color: var(--gray-300, #E0E0E0);
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+
+.chapter-toc-item:hover .chapter-toc-arrow {
+  color: var(--accent, #0078D4);
+}
+
+/* Chapter Back Link */
+.chapter-back {
+  max-width: 794px;
+  margin: 0 auto;
+  padding: 20px 36px;
+  background: #ffffff;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.1);
+  border-top: 1px solid var(--gray-200, #EEEEEE);
+}
+
+.chapter-back-link {
+  font-size: 13px;
+  color: var(--accent, #0078D4);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.15s;
+}
+
+.chapter-back-link:hover {
+  color: var(--primary, #1B3A5C);
+  text-decoration: none;
+}
+
+/* =========================================================================
+   Floating Navigation Bar — 플로팅 네비게이션
+   ========================================================================= */
+
+.finalize-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(27, 58, 92, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  height: 48px;
+}
+
+.finalize-nav-inner {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 794px;
+  width: 100%;
+  padding: 0 12px;
+}
+
+.finalize-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+
+.finalize-nav a:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.finalize-nav a.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.finalize-nav .nav-prev,
+.finalize-nav .nav-next {
+  flex-shrink: 0;
+}
+
+.finalize-nav .nav-chapter,
+.finalize-nav .nav-home {
+  flex-shrink: 0;
+}
+
+.finalize-nav .nav-spacer {
+  flex: 1;
+}
+
+.finalize-nav .nav-current {
+  flex: 1;
+  text-align: center;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 8px 4px;
+}
+
+/* =========================================================================
+   Print — 인쇄 시 네비게이션 숨김
+   ========================================================================= */
+
+@media print {
+  .finalize-nav {
+    display: none !important;
+  }
+
+  .finalize-body {
+    background: #fff;
+  }
+
+  .cover-hero,
+  .chapter-divider-hero {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
