@@ -105,7 +105,7 @@
     } else {
       prevLink.className += ' disabled';
       prevLink.textContent = '\u2190 \uc774\uc804';
-      prevLink.href = '#';
+      prevLink.setAttribute('aria-disabled', 'true');
     }
     inner.appendChild(prevLink);
 
@@ -150,7 +150,7 @@
     } else {
       nextLink.className += ' disabled';
       nextLink.textContent = '\ub2e4\uc74c \u2192';
-      nextLink.href = '#';
+      nextLink.setAttribute('aria-disabled', 'true');
     }
     inner.appendChild(nextLink);
 
@@ -170,6 +170,7 @@
     xhr.open('GET', manifestPath, true);
     xhr.onreadystatechange = function () {
       if (xhr.readyState !== 4) return;
+      // xhr.status === 0 covers file:// protocol (local filesystem access)
       if (xhr.status === 200 || xhr.status === 0) {
         try {
           var manifest = JSON.parse(xhr.responseText);

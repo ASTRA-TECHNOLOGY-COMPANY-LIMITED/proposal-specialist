@@ -153,6 +153,12 @@ Aspect ratio 21:9, subtle and elegant.
 저장 경로: `data/output/{사업명_경로}/final/images/chapter-divider.webp`
 비율: `21:9`
 
+**image_text2img 사용 불가 시 처리:**
+
+image_text2img Tool이 사용 불가능하거나 실패하면:
+- 이미지 없이 계속 진행한다 (CSS fallback 적용 — `.cover-hero`와 `.chapter-divider-hero`에 그라데이션 배경 자동 표시)
+- Step 8 보고에 "이미지 생성 건너뜀 (CSS fallback 적용)" 항목을 추가한다
+
 ### Step 5: 공통 파일 생성
 
 #### 5-1. 스타일/스크립트 파일 복사
