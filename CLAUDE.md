@@ -280,7 +280,7 @@ HTML (body width: 794px, 시스템 폰트)
 
 ### PPTX Template Design System
 
-템플릿: `data/제안서/{project}/Rev.Final/template/proposal_template.pptx`
+슬라이드는 python-pptx의 `Presentation()`으로 직접 생성 (외부 템플릿 파일 불필요).
 
 | 요소 | 위치 (EMU) | 스타일 |
 |------|-----------|--------|
