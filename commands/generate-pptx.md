@@ -1,5 +1,5 @@
 ---
-description: 프레젠테이션 HTML 슬라이드를 PPTX 파일로 변환합니다 (Chrome headless + python-pptx)
+description: 프레젠테이션 HTML 슬라이드를 PPTX 파일로 변환합니다 (dom-to-pptx, 네이티브 요소 변환)
 ---
 
 # PPTX 변환
@@ -23,14 +23,19 @@ presentation/index.html이 없으면 안내 후 중단한다:
 ## 파이프라인 개요
 
 ```
-presentation/index.html (16:9, 1280×720px)
-  → 슬라이드별 개별 HTML 분리
-  → Chrome headless (--force-device-scale-factor=2)
-  → 고해상도 PNG (2560×1440px, 레티나 품질)
-  → python-pptx (16:9 와이드스크린, 이미지 풀블리드 삽입)
-  → ZIP 정리 (중복 엔트리 제거)
-  → 최종 PPTX
+presentation/index.html (16:9, 1280x720px)
+  -> 슬라이드별 개별 HTML 분리 (standalone)
+  -> Puppeteer로 각 슬라이드 HTML 열기
+  -> dom-to-pptx로 DOM -> 네이티브 PPTX 요소 변환
+  -> 편집 가능한 텍스트/도형/테이블이 포함된 PPTX
+  -> 최종 PPTX
 ```
+
+**핵심 차이점 (기존 스크린샷 방식 대비):**
+- HTML의 텍스트 -> PPTX 네이티브 텍스트 박스 (편집 가능)
+- HTML의 도형/배경 -> PPTX 네이티브 Shape (편집 가능)
+- HTML의 테이블 -> PPTX 네이티브 테이블 (편집 가능)
+- SVG -> 벡터 Shape으로 변환 (PowerPoint에서 "도형으로 변환" 가능)
 
 ## 실행 절차
 
@@ -38,7 +43,7 @@ presentation/index.html (16:9, 1280×720px)
 
 Read Tool로 `presentation/index.html`을 읽고 다음을 파악한다:
 
-- `<section class="slide">` 블록 수 → 총 슬라이드 수
+- `<section class="slide">` 블록 수 -> 총 슬라이드 수
 - 각 슬라이드의 타입 (slide-type-title, slide-type-chapter, slide-type-summary, 콘텐츠)
 - CSS/JS/이미지 참조 경로
 
@@ -53,12 +58,38 @@ Read Tool로 `presentation/index.html`을 읽고 다음을 파악한다:
   - 장간지: {M}매
   - 콘텐츠: {K}매
   - 마무리: 1매
+- **변환 방식**: dom-to-pptx (네이티브 요소, 편집 가능)
 - **출력**: presentation/{사업명}_발표본.pptx
 
 계속 진행하시겠습니까?
 ```
 
-### Step 2: 슬라이드별 HTML 분리
+### Step 2: 의존성 확인 및 설치
+
+Bash Tool로 필수 도구를 확인한다:
+
+```bash
+# Node.js 확인
+node --version || echo "ERROR: Node.js not found"
+
+# puppeteer 확인 (없으면 설치)
+node -e "require('puppeteer')" 2>/dev/null \
+  && echo "puppeteer OK" \
+  || echo "NEED_INSTALL: puppeteer"
+
+# dom-to-pptx 확인 (없으면 설치)
+node -e "require('dom-to-pptx')" 2>/dev/null \
+  && echo "dom-to-pptx OK" \
+  || echo "NEED_INSTALL: dom-to-pptx"
+```
+
+누락된 패키지가 있으면 설치를 안내하고 사용자 확인 후 진행한다:
+
+```bash
+npm install --no-save puppeteer dom-to-pptx
+```
+
+### Step 3: 슬라이드별 HTML 분리
 
 Bash Tool로 Python 스크립트를 실행하여 index.html에서 각 슬라이드를 개별 HTML 파일로 분리한다.
 
@@ -74,9 +105,6 @@ with open(index_path, 'r', encoding='utf-8') as f:
 # Extract <head> content
 head_match = re.search(r'<head>(.*?)</head>', html, re.DOTALL)
 head_content = head_match.group(1) if head_match else ''
-
-# Fix CSS path: styles/ → relative to temp dir
-# We'll use absolute path for CSS reference
 
 # Extract all <section class="slide ..."> blocks
 slides = re.findall(r'(<section\s+class="slide[^"]*".*?</section>)', html, re.DOTALL)
@@ -106,123 +134,147 @@ for i, slide_html in enumerate(slides):
     with open(slide_path, 'w', encoding='utf-8') as f:
         f.write(standalone)
 
-print(f'Extracted {len(slides)} slides to {output_dir}')
+print(f'Extracted {{len(slides)}} slides to {{output_dir}}')
 ```
 
 **CSS 경로 처리:**
-분리된 HTML에서 `href="styles/presentation.css"` 경로가 올바르게 참조되도록 `<link>` 태그의 href를 절대 경로로 변환한다. 이미지 경로도 마찬가지로 `url('images/...')` → 절대 경로로 변환한다.
+분리된 HTML에서 `href="styles/presentation.css"` 경로가 올바르게 참조되도록 `<link>` 태그의 href를 절대 경로로 변환한다. 이미지 경로도 마찬가지로 `url('images/...')` -> 절대 경로로 변환한다.
 
-### Step 3: Chrome Headless 스크린샷
+### Step 4: dom-to-pptx로 PPTX 생성
 
-각 슬라이드 HTML을 Chrome headless로 렌더링하여 PNG 스크린샷을 생성한다.
+Bash Tool로 Node.js 스크립트를 실행한다. 이 스크립트가 Puppeteer로 각 슬라이드 HTML을 열고, dom-to-pptx를 주입하여 네이티브 PPTX 요소로 변환한다.
+
+```javascript
+const puppeteer = require('puppeteer');
+const fs = require('fs');
+const path = require('path');
+
+const slideDir = process.argv[2];     // 분리된 슬라이드 HTML 디렉토리
+const outputPptx = process.argv[3];   // 출력 PPTX 경로
+const presDir = process.argv[4];      // presentation/ 디렉토리 (CSS/이미지 원본)
+
+// dom-to-pptx 번들 경로
+const domToPptxBundle = require.resolve('dom-to-pptx/dist/dom-to-pptx.bundle.js');
+
+(async () => {
+  const browser = await puppeteer.launch({
+    headless: 'new',
+    args: ['--no-sandbox', '--disable-setuid-sandbox', '--font-render-hinting=none']
+  });
+
+  // 슬라이드 HTML 파일 목록 (정렬)
+  const slideFiles = fs.readdirSync(slideDir)
+    .filter(f => f.match(/^slide_\d+\.html$/))
+    .sort();
+
+  console.log(`Processing ${slideFiles.length} slides...`);
+
+  // --- 방법: 모든 슬라이드를 하나의 페이지에 로드하여 일괄 변환 ---
+  // 통합 HTML 생성 (모든 슬라이드를 개별 div로 포함)
+  const combinedSlides = [];
+  for (const file of slideFiles) {
+    const html = fs.readFileSync(path.join(slideDir, file), 'utf-8');
+    // <body> 내용만 추출
+    const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/);
+    if (bodyMatch) {
+      const slideId = file.replace('.html', '');
+      combinedSlides.push(
+        `<div id="${slideId}" style="width:1280px;height:720px;overflow:hidden;position:relative;">${bodyMatch[1]}</div>`
+      );
+    }
+  }
+
+  // 첫 번째 슬라이드 HTML에서 <head> 추출 (CSS 참조 포함)
+  const firstHtml = fs.readFileSync(path.join(slideDir, slideFiles[0]), 'utf-8');
+  const headMatch = firstHtml.match(/<head>([\s\S]*?)<\/head>/);
+  const headContent = headMatch ? headMatch[1] : '';
+
+  const combinedHtml = `<!DOCTYPE html>
+<html lang="ko">
+<head>
+${headContent}
+<style>
+  body { margin: 0; padding: 0; background: #fff; }
+  .slide { position: static; opacity: 1; pointer-events: auto; width: 1280px; height: 720px; }
+  .slide-inner { transform: none !important; box-shadow: none; border-radius: 0; }
+  [class*="anim-"] { opacity: 1 !important; transform: none !important; transition: none !important; }
+</style>
+</head>
+<body>
+${combinedSlides.join('\n')}
+</body>
+</html>`;
+
+  const combinedPath = path.join(slideDir, '_combined.html');
+  fs.writeFileSync(combinedPath, combinedHtml, 'utf-8');
+
+  const page = await browser.newPage();
+  await page.setViewport({ width: 1280, height: 720, deviceScaleFactor: 2 });
+
+  // 파일 프로토콜로 로드
+  await page.goto(`file://${combinedPath}`, { waitUntil: 'networkidle0', timeout: 60000 });
+
+  // dom-to-pptx 번들 주입
+  const bundleCode = fs.readFileSync(domToPptxBundle, 'utf-8');
+  await page.evaluate(bundleCode);
+
+  // 슬라이드 요소 선택 및 PPTX 변환
+  const pptxBuffer = await page.evaluate(async (slideIds) => {
+    // dom-to-pptx는 전역 domToPptx로 노출됨
+    const elements = slideIds.map(id => document.getElementById(id));
+
+    const blob = await domToPptx.exportToPptx(elements, {
+      fileName: 'export.pptx',
+      skipDownload: true,
+      autoEmbedFonts: true
+    });
+
+    // Blob -> ArrayBuffer -> Base64
+    const arrayBuffer = await blob.arrayBuffer();
+    const bytes = new Uint8Array(arrayBuffer);
+    let binary = '';
+    for (let i = 0; i < bytes.length; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+    return btoa(binary);
+  }, slideFiles.map(f => f.replace('.html', '')));
+
+  // Base64 -> Buffer -> 파일 저장
+  const buffer = Buffer.from(pptxBuffer, 'base64');
+  fs.writeFileSync(outputPptx, buffer);
+
+  console.log(`Created ${outputPptx} with ${slideFiles.length} slides (native elements)`);
+
+  // 정리
+  await browser.close();
+})().catch(err => {
+  console.error('Error:', err.message);
+  process.exit(1);
+});
+```
+
+**실행 명령:**
 
 ```bash
-"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
-  --headless=new --disable-gpu --no-sandbox \
-  --window-size=1280,720 \
-  --force-device-scale-factor=2 \
-  --screenshot={output_dir}/slide_{NNN}.png \
-  --default-background-color=FFFFFFFF \
-  file://{slide_html_path}
+node /tmp/generate-pptx.js {slide_temp_dir} {output_pptx_path} {presentation_dir}
 ```
 
-**Chrome 경로 확인:**
-macOS와 Linux에서 Chrome 경로가 다르므로 먼저 확인한다:
-- macOS: `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`
-- Linux: `google-chrome` 또는 `chromium-browser`
-- `which google-chrome || which chromium-browser` 로 확인
-
-**주의사항:**
-- `--window-size=1280,720` — 정확히 슬라이드 크기
-- `--force-device-scale-factor=2` — 레티나 2x 해상도 (출력: 2560×1440px)
-- 슬라이드 수가 많으면 5개씩 병렬 처리: `for` 루프 + `&` + `wait`
-
-### Step 4: PPTX 생성
-
-Bash Tool로 Python 스크립트를 실행하여 PNG 이미지를 PPTX로 조립한다.
-
-```python
-import glob, os, sys, tempfile, zipfile
-from pptx import Presentation
-from pptx.util import Inches, Emu
-from PIL import Image
-
-png_dir = sys.argv[1]
-output_pptx = sys.argv[2]
-project_name = sys.argv[3] if len(sys.argv) > 3 else 'Presentation'
-
-# 16:9 Widescreen dimensions (EMU)
-SLIDE_W = Emu(12_192_000)  # 13.333 inches
-SLIDE_H = Emu(6_858_000)   # 7.5 inches
-
-prs = Presentation()
-prs.slide_width = SLIDE_W
-prs.slide_height = SLIDE_H
-
-# Blank layout
-blank_layout = prs.slide_layouts[6]  # blank
-
-# Sort PNG files
-pngs = sorted(glob.glob(os.path.join(png_dir, 'slide_*.png')))
-
-for png_path in pngs:
-    slide = prs.slides.add_slide(blank_layout)
-
-    # Get image dimensions
-    with Image.open(png_path) as img:
-        img_w, img_h = img.size
-
-    # Calculate EMU — full bleed (fit to slide)
-    aspect = img_w / img_h
-    slide_aspect = 12_192_000 / 6_858_000
-
-    if aspect >= slide_aspect:
-        # Image is wider or equal — fit width
-        w = SLIDE_W
-        h = Emu(int(12_192_000 / aspect))
-        left = Emu(0)
-        top = Emu(int((6_858_000 - int(12_192_000 / aspect)) / 2))
-    else:
-        # Image is taller — fit height
-        h = SLIDE_H
-        w = Emu(int(6_858_000 * aspect))
-        left = Emu(int((12_192_000 - int(6_858_000 * aspect)) / 2))
-        top = Emu(0)
-
-    slide.shapes.add_picture(png_path, left, top, w, h)
-
-# Save to temp, then clean ZIP
-temp_path = output_pptx + '.tmp'
-prs.save(temp_path)
-
-# Clean ZIP (remove duplicate entries)
-seen = {}
-with zipfile.ZipFile(temp_path, 'r') as zin:
-    for item in zin.infolist():
-        seen[item.filename] = item
-    with zipfile.ZipFile(output_pptx, 'w', zipfile.ZIP_DEFLATED) as zout:
-        for name, info in seen.items():
-            zout.writestr(info, zin.read(info.filename))
-
-os.remove(temp_path)
-print(f'Created {output_pptx} with {len(pngs)} slides')
-```
-
-**PPTX 규칙:**
-- 슬라이드 크기: 16:9 와이드스크린 (12,192,000 × 6,858,000 EMU)
-- 이미지는 **풀블리드** — 슬라이드 전체를 채운다
-- 이미지 비율이 정확히 16:9이므로 크롭 없이 삽입
-- 텍스트 요소 없음 — 모든 콘텐츠는 이미지로 렌더링됨
+**핵심 포인트:**
+- `skipDownload: true` — 브라우저 다운로드 대신 Blob 반환
+- `autoEmbedFonts: true` — 사용된 폰트 자동 감지 및 임베딩
+- 각 슬라이드 div가 PPTX의 개별 슬라이드로 변환됨
+- 텍스트, 도형, 테이블이 모두 네이티브 PPTX 요소로 매핑됨
 
 ### Step 5: 임시 파일 정리
 
 Bash Tool로 임시 파일을 정리한다:
 
 ```bash
-rm -rf {temp_dir}/slide_*.html {temp_dir}/slide_*.png
+rm -rf {temp_dir}/slide_*.html {temp_dir}/_combined.html
 ```
 
-분리된 HTML과 PNG 스크린샷은 삭제하되, 원본 `presentation/index.html`은 보존한다.
+분리된 HTML은 삭제하되, 원본 `presentation/index.html`은 보존한다.
+생성된 Node.js 스크립트(`/tmp/generate-pptx.js`)도 삭제한다.
 
 ### Step 6: 최종 보고
 
@@ -236,45 +288,65 @@ rm -rf {temp_dir}/slide_*.html {temp_dir}/slide_*.png
 ### 요약
 
 - **총 슬라이드**: {N}매
-- **슬라이드 크기**: 16:9 와이드스크린 (33.867cm × 19.05cm)
-- **이미지 해상도**: 2560×1440px (레티나 2x)
+- **슬라이드 크기**: 16:9 와이드스크린 (33.867cm x 19.05cm)
+- **변환 방식**: dom-to-pptx (네이티브 요소)
 - **파일 크기**: {size} MB
+
+### 편집 가능한 요소
+
+- **텍스트**: 모든 텍스트가 PowerPoint 텍스트 박스로 변환 (직접 편집 가능)
+- **도형**: CSS 도형/배경이 네이티브 Shape으로 변환
+- **테이블**: HTML 테이블이 PowerPoint 테이블로 변환
+- **SVG**: 벡터 도형으로 변환 (PowerPoint에서 "도형으로 변환" 가능)
 
 ### 사용 안내
 
 1. PPTX 파일을 PowerPoint/Keynote/Google Slides에서 열기
-2. 슬라이드 쇼 모드로 발표
-3. 필요시 개별 슬라이드에 메모/노트 추가 가능
+2. **텍스트 직접 편집 가능** — 오타 수정, 내용 추가/삭제
+3. **도형/색상 변경 가능** — PowerPoint 서식 도구 활용
+4. 슬라이드 쇼 모드로 발표
 
-### 제한사항
+### 폰트 안내
 
-- 이미지 기반 슬라이드이므로 텍스트 편집이 불가합니다
-- 텍스트 수정이 필요하면 원본 HTML을 수정 후 다시 변환하세요:
-  1. 원본 섹션 수정 → `/proposal-specialist:write-section`
-  2. 프레젠테이션 재생성 → `/proposal-specialist:generate-presentation`
-  3. PPTX 재변환 → `/proposal-specialist:generate-pptx`
+- PPTX에 사용된 웹 폰트가 임베딩됩니다
+- 발표 PC에 해당 폰트가 없으면 PowerPoint가 유사 폰트로 대체합니다
+- 권장: 발표 전 폰트 렌더링 확인
 ```
 
-## 의존성 확인
+## 의존성 요약
 
-Step 실행 전 Bash Tool로 필수 도구를 확인한다:
+| 패키지 | 용도 | 설치 |
+|--------|------|------|
+| `puppeteer` | Headless Chrome 제어, DOM 렌더링 | `npm install puppeteer` |
+| `dom-to-pptx` | DOM 요소 -> 네이티브 PPTX 변환 | `npm install dom-to-pptx` |
 
-```bash
-# Chrome 확인
-CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-if [ ! -f "$CHROME" ]; then
-  CHROME=$(which google-chrome 2>/dev/null || which chromium-browser 2>/dev/null || echo "")
-fi
-[ -z "$CHROME" ] && echo "ERROR: Chrome not found" && exit 1
-echo "Chrome: $CHROME"
+**기존 의존성 불필요:**
+- ~~python-pptx~~ -> dom-to-pptx로 대체
+- ~~Pillow~~ -> 이미지 스크린샷 불필요
+- ~~Chrome CLI 직접 호출~~ -> Puppeteer가 Chrome 관리
 
-# python-pptx 확인
-python3 -c "import pptx; print(f'python-pptx {pptx.__version__}')" 2>/dev/null \
-  || echo "ERROR: python-pptx not installed. Run: pip3 install --user python-pptx Pillow"
+## 트러블슈팅
 
-# Pillow 확인
-python3 -c "import PIL; print(f'Pillow {PIL.__version__}')" 2>/dev/null \
-  || echo "ERROR: Pillow not installed. Run: pip3 install --user Pillow"
+### 폰트가 깨지는 경우
+dom-to-pptx의 `autoEmbedFonts`가 웹 폰트를 자동 임베딩하지만, 로컬 시스템 폰트는 임베딩하지 않는다.
+`fonts` 옵션으로 수동 지정할 수 있다:
+
+```javascript
+await domToPptx.exportToPptx(elements, {
+  skipDownload: true,
+  fonts: [
+    { name: 'Pretendard', url: 'https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/woff2/Pretendard-Regular.woff2' },
+    { name: 'Noto Sans KR', url: 'https://fonts.gstatic.com/s/notosanskr/v36/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzuoyeLTq8H4hfeE.woff2' }
+  ]
+});
 ```
 
-누락된 의존성이 있으면 설치 명령을 안내하고 사용자 확인 후 진행한다.
+### CORS 에러로 이미지가 누락되는 경우
+`file://` 프로토콜로 로드하므로 외부 이미지 URL은 CORS 제한에 걸릴 수 있다.
+이미지가 `images/` 디렉토리에 로컬 파일로 존재하면 문제없다.
+
+### 레이아웃이 원본과 다른 경우
+dom-to-pptx는 computed style을 기반으로 변환한다. 슬라이드 HTML의 CSS가 정확히 렌더링되도록:
+- `waitUntil: 'networkidle0'`으로 모든 리소스 로드 대기
+- `deviceScaleFactor: 2`로 고해상도 렌더링
+- 애니메이션을 최종 상태로 강제 (`opacity: 1, transform: none`)

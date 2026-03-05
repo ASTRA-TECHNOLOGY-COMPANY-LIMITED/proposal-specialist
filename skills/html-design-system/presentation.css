@@ -30,11 +30,11 @@
   /* Presentation-specific tokens */
   --slide-w: 1280px;
   --slide-h: 720px;
-  --slide-pad: 60px;
-  --slide-pad-top: 80px;
-  --slide-pad-bottom: 60px;
+  --slide-pad: 40px;
+  --slide-pad-top: 60px;
+  --slide-pad-bottom: 40px;
   --header-h: 6px;
-  --footer-h: 40px;
+  --footer-h: 36px;
   --transition-duration: 0.5s;
 }
 
@@ -126,7 +126,7 @@ body.presentation-body {
 /* ===== Slide Content Area ===== */
 .slide-content {
   position: absolute;
-  top: calc(var(--header-h) + 20px);
+  top: calc(var(--header-h) + 12px);
   left: var(--slide-pad);
   right: var(--slide-pad);
   bottom: var(--footer-h);
@@ -161,7 +161,7 @@ body.presentation-body {
 .slide-divider {
   height: 3px;
   background: linear-gradient(90deg, var(--primary), var(--accent), transparent);
-  margin-bottom: 24px;
+  margin-bottom: 14px;
   border-radius: 2px;
 }
 
@@ -201,11 +201,11 @@ body.presentation-body {
 /* --- layout-split (text left + chart right) --- */
 .layout-split .slide-body {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  height: 100%;
-  align-items: start;
-  padding-top: 8px;
+  grid-template-columns: 2fr 3fr;
+  gap: 24px;
+  height: calc(100% - 60px);
+  align-items: center;
+  padding-top: 4px;
 }
 .layout-split .split-text {
   display: flex;
@@ -241,8 +241,8 @@ body.presentation-body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: calc(100% - 80px);
-  padding-top: 8px;
+  height: calc(100% - 60px);
+  padding-top: 4px;
 }
 .layout-full-diagram .diagram-wrapper {
   width: 100%;
@@ -254,14 +254,18 @@ body.presentation-body {
 .layout-two-column .slide-body {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  padding-top: 8px;
+  gap: 20px;
+  padding-top: 4px;
+  height: calc(100% - 60px);
+  align-content: stretch;
 }
 .layout-two-column .column {
   background: var(--gray-50);
   border-radius: 8px;
-  padding: 20px;
+  padding: 18px;
   border: 1px solid var(--gray-200);
+  display: flex;
+  flex-direction: column;
 }
 .layout-two-column .column h4 {
   font-size: 16px;
@@ -283,21 +287,29 @@ body.presentation-body {
 
 /* --- layout-kpi-dashboard --- */
 .layout-kpi-dashboard .slide-body {
-  padding-top: 8px;
+  padding-top: 4px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 60px);
 }
 .layout-kpi-dashboard .kpi-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  margin-bottom: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 14px;
+  flex: 1;
+  align-content: center;
 }
 .layout-kpi-dashboard .kpi-card {
   background: #fff;
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 24px 20px;
+  padding: 20px 16px;
   text-align: center;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .layout-kpi-dashboard .kpi-card .value {
   font-size: 36px;
@@ -317,13 +329,20 @@ body.presentation-body {
 }
 .layout-kpi-dashboard .kpi-card .trend.up { color: var(--success); }
 .layout-kpi-dashboard .kpi-card .trend.down { color: var(--danger); }
+.layout-kpi-dashboard .kpi-summary {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  padding-top: 8px;
+  border-top: 1px solid var(--gray-200);
+}
 
 /* --- layout-timeline --- */
 .layout-timeline .slide-body {
   display: flex;
   align-items: center;
-  height: calc(100% - 80px);
-  padding-top: 8px;
+  height: calc(100% - 60px);
+  padding-top: 4px;
 }
 .layout-timeline .timeline-track {
   display: flex;
