@@ -17,6 +17,7 @@ The plugin follows the Claude Code plugin structure (`.claude-plugin/plugin.json
 - **proposal-strategist** (`skills/proposal-strategist/SKILL.md`): Automatically applies proposal strategy perspective when working on public procurement bids or support program applications. References evaluation-criteria.md for scoring guidelines.
 - **fp-estimation** (`skills/fp-estimation/SKILL.md`): Automatically provides FP estimation reference data (IFPUG weights, cost formulas, correction factors) when working on function point analysis or SW cost estimation. References fp-reference.md for detailed lookup tables.
 - **bid-risk-framework** (`skills/bid-risk-framework/SKILL.md`): Automatically applies bid risk analysis frameworks (PMBOK, ISO 31000, Shipley) when analyzing RFPs, reviewing bid participation, or writing risk management sections. References risk-frameworks.md for scoring criteria and Korean procurement-specific risk data.
+- **bid-feasibility-review** (`skills/bid-feasibility-review/SKILL.md`): Automatically applies business feasibility review frameworks when analyzing bid participation decisions. Provides PWin calculation, profitability simulation, EV analysis, and Bid/No-Bid scoring. References feasibility-reference.md for Shipley PWin model, cost structure, and decision matrices.
 
 ### Commands (User-invoked via `/proposal-specialist:<command>`)
 - `analyze` — Analyze company documents to extract profile and search keywords
@@ -31,6 +32,7 @@ The plugin follows the Claude Code plugin structure (`.claude-plugin/plugin.json
 - `generate-pptx` — Convert presentation HTML slides to PPTX file using Chrome headless screenshots + python-pptx. Full-bleed 16:9 widescreen slides at retina (2x) quality. Requires Chrome and `pip3 install python-pptx Pillow`.
 - `analyze-fp` — Analyze RFP or requirements documents to estimate Function Points (FP) and calculate SW development costs. Supports simplified (간이법) and standard (정규법) methods. Outputs `data/output/{사업명}/fp-analysis.md` with detailed FP breakdown and cost estimation.
 - `risk-analysis` — Analyze RFP, business plans, or bid announcements to systematically identify, score, and mitigate risks for participating companies. Uses 5x5 probability-impact matrix, Bid/No-Bid decision matrix, and PMBOK mitigation strategies. Accepts file paths, bid numbers, or prior evaluate results.
+- `feasibility-review` — Comprehensive business feasibility review combining profitability simulation, PWin calculation, expected value analysis, and Bid/No-Bid decision. Integrates qualification screening, tech capability matching, risk assessment, and competitive analysis into a single report with Go/No-Go recommendation.
 
 ### Agents (Subagents for deep analysis)
 - **doc-analyzer** (`agents/doc-analyzer.md`): Deep company document analysis, keyword extraction
@@ -42,6 +44,7 @@ The plugin follows the Claude Code plugin structure (`.claude-plugin/plugin.json
 - **presentation-writer** (`agents/presentation-writer.md`): Converts A4 portrait section HTML to 16:9 landscape presentation slides. Extracts content, compresses text to bullet points, selects layouts (text-only, split, full-diagram, two-column, kpi-dashboard, timeline), and applies CSS animations.
 - **fp-analyzer** (`agents/fp-analyzer.md`): Analyzes RFP/requirements to identify functional components (ILF/EIF/EI/EO/EQ), calculates Function Points using IFPUG standard, applies correction factors, and produces SW development cost estimation report.
 - **risk-analyzer** (`agents/risk-analyzer.md`): Systematically identifies, scores, and mitigates bid participation risks across 6 categories (qualification, financial, technical, performance, legal, strategic). Uses 5x5 probability-impact matrix for scoring and Shipley Bid/No-Bid framework for go/no-go decisions.
+- **feasibility-reviewer** (`agents/feasibility-reviewer.md`): Comprehensive business feasibility review combining Shipley PWin model, 3-scenario profitability simulation, expected value calculation, and 7-criteria Bid/No-Bid decision matrix. Integrates qualification screening, tech matching, risk assessment, and competitive analysis.
 
 ### Hooks (SessionStart, non-blocking)
 On session start, a shell script validates API key environment variables:
@@ -115,6 +118,23 @@ RFP document, business plan, or bid number
           → Phase 5: Mitigation strategy (PMBOK 6 response types)
           → Phase 6: Top 5 critical risks prioritization
       → Step 5: Risk analysis report output
+```
+
+### Business Feasibility Review Flow
+```
+RFP document, bid number, or business plan + Company seed (optional)
+  → feasibility-review command
+      → Step 1: Read documents (RFP, 공고 상세, 사업계획서)
+      → Step 2: Confirm business info & analysis scope (Full/Quick/Selective)
+      → Step 3: Read seed (auto-scan data/seed/ if not provided)
+      → Step 4: feasibility-reviewer agent
+          → Phase 1: Context extraction & No-Go trigger check
+          → Phase 2: 5-area analysis (qualification, tech, profitability, risk, competition)
+          → Phase 3: PWin calculation (Shipley 6-factor model)
+          → Phase 4: Profitability simulation (Best/Expected/Worst scenarios)
+          → Phase 5: Expected Value (EV) & ROI calculation
+          → Phase 6: Bid/No-Bid recommendation (7-criteria weighted matrix)
+      → Step 5: Comprehensive feasibility report output
 ```
 
 ### Proposal Writing Flow
@@ -226,6 +246,9 @@ claude --plugin-dir .
 /proposal-specialist:analyze-fp data/output/사업명/목차.md 간이법 이윤율=15
 /proposal-specialist:risk-analysis data/business/사업명/제안요청서.pdf
 /proposal-specialist:risk-analysis data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
+/proposal-specialist:feasibility-review data/business/사업명/제안요청서.pdf
+/proposal-specialist:feasibility-review data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
+/proposal-specialist:feasibility-review 20260101001  # 입찰공고번호로 조회
 
 # Debug mode
 claude --debug
