@@ -15,6 +15,8 @@ The plugin follows the Claude Code plugin structure (`.claude-plugin/plugin.json
 ### Skills (Auto-invoked by Claude)
 - **company-profiler** (`skills/company-profiler/SKILL.md`): Automatically extracts company capabilities, tech stack, and track record when reading company-related documents. References industry-codes.md for procurement category mapping.
 - **proposal-strategist** (`skills/proposal-strategist/SKILL.md`): Automatically applies proposal strategy perspective when working on public procurement bids or support program applications. References evaluation-criteria.md for scoring guidelines.
+- **fp-estimation** (`skills/fp-estimation/SKILL.md`): Automatically provides FP estimation reference data (IFPUG weights, cost formulas, correction factors) when working on function point analysis or SW cost estimation. References fp-reference.md for detailed lookup tables.
+- **risk-analysis** (`skills/risk-analysis/SKILL.md`): Automatically applies bid risk analysis frameworks (PMBOK, ISO 31000, Shipley) when analyzing RFPs, reviewing bid participation, or writing risk management sections. References risk-frameworks.md for scoring criteria and Korean procurement-specific risk data.
 
 ### Commands (User-invoked via `/proposal-specialist:<command>`)
 - `analyze` — Analyze company documents to extract profile and search keywords
@@ -27,6 +29,8 @@ The plugin follows the Claude Code plugin structure (`.claude-plugin/plugin.json
 - `finalize` — Validate written sections, generate cover/TOC/navigation, and package into a self-contained HTML bundle ready for ZIP sharing. Adds `final/` directory with index.html entry point.
 - `generate-presentation` — Transform written A4 section HTMLs into a 16:9 widescreen presentation (발표본). Generates a single-file slide deck with keyboard/touch navigation, CSS animations, and AI-generated backgrounds. Outputs `presentation/` directory with index.html entry point.
 - `generate-pptx` — Convert presentation HTML slides to PPTX file using Chrome headless screenshots + python-pptx. Full-bleed 16:9 widescreen slides at retina (2x) quality. Requires Chrome and `pip3 install python-pptx Pillow`.
+- `analyze-fp` — Analyze RFP or requirements documents to estimate Function Points (FP) and calculate SW development costs. Supports simplified (간이법) and standard (정규법) methods. Outputs `data/output/{사업명}/fp-analysis.md` with detailed FP breakdown and cost estimation.
+- `risk-analysis` — Analyze RFP, business plans, or bid announcements to systematically identify, score, and mitigate risks for participating companies. Uses 5x5 probability-impact matrix, Bid/No-Bid decision matrix, and PMBOK mitigation strategies. Accepts file paths, bid numbers, or prior evaluate results.
 
 ### Agents (Subagents for deep analysis)
 - **doc-analyzer** (`agents/doc-analyzer.md`): Deep company document analysis, keyword extraction
@@ -36,6 +40,8 @@ The plugin follows the Claude Code plugin structure (`.claude-plugin/plugin.json
 - **section-writer** (`agents/section-writer.md`): Proposal section writing as complete HTML pages with inline tables and HTML/CSS diagrams. All visuals (tables, charts, architecture diagrams, infographics) are embedded directly in the section HTML — no separate image files. Classifies sections into types A~K (사업이해도, 기술방안, 수행체계, etc.)
 - **proposal-finalizer** (`agents/proposal-finalizer.md`): Generates index.html (cover + main TOC) and chapters/*.html (chapter divider + section TOC) for the finalize command. Uses page-frame.css design tokens and finalize.css styles.
 - **presentation-writer** (`agents/presentation-writer.md`): Converts A4 portrait section HTML to 16:9 landscape presentation slides. Extracts content, compresses text to bullet points, selects layouts (text-only, split, full-diagram, two-column, kpi-dashboard, timeline), and applies CSS animations.
+- **fp-analyzer** (`agents/fp-analyzer.md`): Analyzes RFP/requirements to identify functional components (ILF/EIF/EI/EO/EQ), calculates Function Points using IFPUG standard, applies correction factors, and produces SW development cost estimation report.
+- **risk-analyzer** (`agents/risk-analyzer.md`): Systematically identifies, scores, and mitigates bid participation risks across 6 categories (qualification, financial, technical, performance, legal, strategic). Uses 5x5 probability-impact matrix for scoring and Shipley Bid/No-Bid framework for go/no-go decisions.
 
 ### Hooks (SessionStart, non-blocking)
 On session start, a shell script validates API key environment variables:
@@ -77,6 +83,40 @@ Company documents
   → Final report (score, SWOT, strategy)
 ```
 
+### FP Estimation & Cost Analysis Flow
+```
+RFP document or 목차.md (from generate-toc)
+  → analyze-fp command
+      → Step 1: Read RFP (기능요구사항, 성능, 연계, 보안, 운영환경)
+      → Step 2: Read seed (optional, for reuse identification)
+      → Step 3: fp-analyzer agent
+          → Phase 1: Scope & boundary definition
+          → Phase 2: Data function identification (ILF/EIF)
+          → Phase 3: Transaction function identification (EI/EO/EQ)
+          → Phase 4: Complexity assessment (정규법 only)
+          → Phase 5: FP calculation (간이법 or 정규법)
+          → Phase 6: Cost estimation (보정계수, 직접경비, 이윤)
+          → Phase 7: Sanity check
+      → Step 4: Write data/output/{사업명}/fp-analysis.md
+```
+
+### Risk Analysis Flow
+```
+RFP document, business plan, or bid number
+  → risk-analysis command
+      → Step 1: Read documents (RFP, 사업계획서, 공고 상세)
+      → Step 2: Read seed (optional, for company-specific risk matching)
+      → Step 3: Confirm analysis scope (full or selective categories)
+      → Step 4: risk-analyzer agent
+          → Phase 1: Document analysis & context extraction
+          → Phase 2: Risk identification across 6 categories
+          → Phase 3: 5x5 probability-impact scoring
+          → Phase 4: Bid/No-Bid decision matrix (7 criteria, weighted)
+          → Phase 5: Mitigation strategy (PMBOK 6 response types)
+          → Phase 6: Top 5 critical risks prioritization
+      → Step 5: Risk analysis report output
+```
+
 ### Proposal Writing Flow
 ```
 RFP document + Company seed document (both REQUIRED from user)
@@ -116,6 +156,7 @@ RFP document + Company seed document (both REQUIRED from user)
       → Step 8: Final report + ZIP instructions
   → data/output/{사업명}/
       ├── 목차.md              (TOC with section metadata)
+      ├── fp-analysis.md       (FP estimation & cost analysis report)
       ├── sections/*.html      (complete HTML pages with headers/footers/page numbers)
       ├── _common/
       │   ├── page-frame.css   (shared page frame + component styles)
@@ -181,6 +222,10 @@ claude --plugin-dir .
 /proposal-specialist:finalize data/output/사업명/목차.md
 /proposal-specialist:generate-presentation data/output/사업명/목차.md
 /proposal-specialist:generate-pptx data/output/사업명/목차.md
+/proposal-specialist:analyze-fp data/business/사업명/제안요청서.pdf
+/proposal-specialist:analyze-fp data/output/사업명/목차.md 간이법 이윤율=15
+/proposal-specialist:risk-analysis data/business/사업명/제안요청서.pdf
+/proposal-specialist:risk-analysis data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
 
 # Debug mode
 claude --debug
