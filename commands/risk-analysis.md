@@ -1,4 +1,5 @@
 ---
+name: risk-analysis
 description: RFP, 사업계획서, 제안서 등의 문서를 분석하여 참여 기업의 리스크를 체계적으로 식별하고 평가합니다
 ---
 

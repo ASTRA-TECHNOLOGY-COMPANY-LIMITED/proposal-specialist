@@ -1,5 +1,5 @@
 ---
-name: risk-analysis
+name: bid-risk-framework
 description: >
   입찰 참여 리스크 분석 프레임워크를 자동 적용합니다.
   RFP, 사업계획서, 입찰공고 분석 시 리스크 관점의 평가를 제공합니다.

@@ -16,7 +16,7 @@ The plugin follows the Claude Code plugin structure (`.claude-plugin/plugin.json
 - **company-profiler** (`skills/company-profiler/SKILL.md`): Automatically extracts company capabilities, tech stack, and track record when reading company-related documents. References industry-codes.md for procurement category mapping.
 - **proposal-strategist** (`skills/proposal-strategist/SKILL.md`): Automatically applies proposal strategy perspective when working on public procurement bids or support program applications. References evaluation-criteria.md for scoring guidelines.
 - **fp-estimation** (`skills/fp-estimation/SKILL.md`): Automatically provides FP estimation reference data (IFPUG weights, cost formulas, correction factors) when working on function point analysis or SW cost estimation. References fp-reference.md for detailed lookup tables.
-- **risk-analysis** (`skills/risk-analysis/SKILL.md`): Automatically applies bid risk analysis frameworks (PMBOK, ISO 31000, Shipley) when analyzing RFPs, reviewing bid participation, or writing risk management sections. References risk-frameworks.md for scoring criteria and Korean procurement-specific risk data.
+- **bid-risk-framework** (`skills/bid-risk-framework/SKILL.md`): Automatically applies bid risk analysis frameworks (PMBOK, ISO 31000, Shipley) when analyzing RFPs, reviewing bid participation, or writing risk management sections. References risk-frameworks.md for scoring criteria and Korean procurement-specific risk data.
 
 ### Commands (User-invoked via `/proposal-specialist:<command>`)
 - `analyze` — Analyze company documents to extract profile and search keywords

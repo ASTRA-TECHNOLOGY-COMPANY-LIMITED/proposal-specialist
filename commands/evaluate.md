@@ -1,4 +1,5 @@
 ---
+name: evaluate
 description: 특정 공고에 대해 상세 분석하고 제안 성공 가능성을 평가합니다
 ---
 
