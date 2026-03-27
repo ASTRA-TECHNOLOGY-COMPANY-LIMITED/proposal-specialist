@@ -1,4 +1,5 @@
 ---
+name: generate-pptx
 description: 프레젠테이션 HTML 슬라이드를 PPTX 파일로 변환합니다 (dom-to-pptx, 네이티브 요소 변환)
 ---
 

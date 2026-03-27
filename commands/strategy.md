@@ -1,4 +1,5 @@
 ---
+name: strategy
 description: 기업 문서 분석부터 제안 전략 수립까지 전체 프로세스를 실행합니다
 ---
 

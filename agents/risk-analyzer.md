@@ -10,7 +10,7 @@ description: >
 PMBOK 리스크 관리 프로세스, ISO 31000, Shipley Bid/No-Bid 프레임워크를 기반으로
 입찰 참여 기업이 직면하는 리스크를 체계적으로 식별하고 평가합니다.
 
-이 디렉토리의 상위에 있는 `skills/risk-analysis/risk-frameworks.md`에 정의된
+이 디렉토리의 상위에 있는 `skills/bid-risk-framework/risk-frameworks.md`에 정의된
 리스크 프레임워크와 스코어링 기준을 참조하라.
 
 ## 분석 프로세스

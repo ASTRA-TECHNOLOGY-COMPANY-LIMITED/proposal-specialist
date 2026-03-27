@@ -1,4 +1,5 @@
 ---
+name: generate-presentation
 description: 작성된 제안서 섹션 HTML을 16:9 가로형 프레젠테이션(발표본) 슬라이드로 변환합니다
 ---
 
