@@ -1,4 +1,5 @@
 ---
+name: generate-toc
 description: RFP와 기업 시드 문서를 분석하여 맞춤형 제안서 목차를 생성하고 각 섹션의 핵심 개념을 도출합니다
 ---
 

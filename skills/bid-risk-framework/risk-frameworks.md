@@ -1,6 +1,6 @@
 # 리스크 분석 프레임워크 레퍼런스
 
-> 이 문서는 risk-analysis 스킬과 risk-analyzer 에이전트가 참조하는
+> 이 문서는 bid-risk-framework 스킬과 risk-analyzer 에이전트가 참조하는
 > 리스크 분석 프레임워크, 스코어링 기준, 한국 공공조달 특수 리스크 데이터를 정의한다.
 
 ---

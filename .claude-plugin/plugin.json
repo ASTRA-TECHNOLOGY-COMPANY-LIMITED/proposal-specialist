@@ -1,11 +1,13 @@
 {
   "name": "proposal-specialist",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "기업 문서 기반 공공조달/지원사업 탐색 및 제안서 작성 플러그인",
   "author": {
     "name": "Zeans",
     "email": "zeans@astravision.co.kr"
   },
+  "homepage": "https://github.com/ASTRA-TECHNOLOGY-COMPANY-LIMITED/proposal-specialist",
+  "repository": "https://github.com/ASTRA-TECHNOLOGY-COMPANY-LIMITED/proposal-specialist",
   "license": "MIT",
   "keywords": [
     "proposal",
@@ -14,6 +16,9 @@
     "k-startup",
     "rfp",
     "bid",
-    "korean-government"
+    "korean-government",
+    "나라장터",
+    "공공조달",
+    "제안서"
   ]
 }
