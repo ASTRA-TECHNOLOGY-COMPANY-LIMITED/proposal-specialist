@@ -1,4 +1,5 @@
 ---
+name: finalize
 description: 작성된 제안서 섹션 HTML을 검증하고 표지/목차/네비게이션을 추가하여 자기완결형 HTML 패키지를 생성합니다
 ---
 

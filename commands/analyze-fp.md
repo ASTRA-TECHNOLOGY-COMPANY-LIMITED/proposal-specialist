@@ -1,4 +1,5 @@
 ---
+name: analyze-fp
 description: RFP 또는 요구사항 문서를 분석하여 기능점수(FP)를 산정하고 SW 개발 대가를 산출합니다
 ---
 

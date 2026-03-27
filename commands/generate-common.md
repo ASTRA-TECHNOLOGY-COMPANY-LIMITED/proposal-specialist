@@ -1,4 +1,5 @@
 ---
+name: generate-common
 description: 제안서 공통 리소스(CSS, JS, 설정)를 생성하여 섹션 HTML의 헤더/푸터/페이지 번호를 통합 관리합니다
 ---
 

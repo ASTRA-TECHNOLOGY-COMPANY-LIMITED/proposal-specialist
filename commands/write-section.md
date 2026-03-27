@@ -1,4 +1,5 @@
 ---
+name: write-section
 description: 생성된 목차를 기반으로 제안서 각 섹션의 상세 내용을 HTML 페이지로 작성합니다
 ---
 
