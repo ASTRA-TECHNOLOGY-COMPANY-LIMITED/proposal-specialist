@@ -20,19 +20,21 @@ The plugin follows the Claude Code plugin structure (`.claude-plugin/plugin.json
 - **bid-feasibility-review** (`skills/bid-feasibility-review/SKILL.md`): Automatically applies business feasibility review frameworks when analyzing bid participation decisions. Provides PWin calculation, profitability simulation, EV analysis, and Bid/No-Bid scoring. References feasibility-reference.md for Shipley PWin model, cost structure, and decision matrices.
 
 ### Commands (User-invoked via `/proposal-specialist:<command>`)
-- `analyze` — Analyze company documents to extract profile and search keywords
-- `search` — Search multiple platforms (G2B, K-Startup, MSS, MSIT) for matching announcements
-- `evaluate` — Deep-analyze a specific bid/announcement with attachment download and RFP analysis
-- `strategy` — Run the full workflow: analyze → search → evaluate with user interaction at each step
-- `generate-toc` — Generate proposal TOC from RFP + company seed document (both required). Outputs `data/output/{사업명}/목차.md` with per-section metadata (배점, 핵심메시지, 도표/도안 계획, 페이지예산)
-- `generate-common` — Generate shared CSS/JS/config for section HTML files. Copies page-frame.css/js to `_common/` and creates `common-config.json` with chapter start pages. Must run before `write-section`.
-- `write-section` — Write proposal sections as complete HTML pages with inline tables and HTML/CSS diagrams. Supports specific section numbers: `write-section 목차.md 1 3 5`
-- `finalize` — Validate written sections, generate cover/TOC/navigation, and package into a self-contained HTML bundle ready for ZIP sharing. Adds `final/` directory with index.html entry point.
-- `generate-presentation` — Transform written A4 section HTMLs into a 16:9 widescreen presentation (발표본). Generates a single-file slide deck with keyboard/touch navigation, CSS animations, and AI-generated backgrounds. Outputs `presentation/` directory with index.html entry point.
-- `generate-pptx` — Convert presentation HTML slides to PPTX file using Chrome headless screenshots + python-pptx. Full-bleed 16:9 widescreen slides at retina (2x) quality. Requires Chrome and `pip3 install python-pptx Pillow`.
+- `analyze-company` — Analyze company documents to extract profile and search keywords
 - `analyze-fp` — Analyze RFP or requirements documents to estimate Function Points (FP) and calculate SW development costs. Supports simplified (간이법) and standard (정규법) methods. Outputs `data/output/{사업명}/fp-analysis.md` with detailed FP breakdown and cost estimation.
-- `risk-analysis` — Analyze RFP, business plans, or bid announcements to systematically identify, score, and mitigate risks for participating companies. Uses 5x5 probability-impact matrix, Bid/No-Bid decision matrix, and PMBOK mitigation strategies. Accepts file paths, bid numbers, or prior evaluate results.
-- `feasibility-review` — Comprehensive business feasibility review combining profitability simulation, PWin calculation, expected value analysis, and Bid/No-Bid decision. Integrates qualification screening, tech capability matching, risk assessment, and competitive analysis into a single report with Go/No-Go recommendation.
+- `analyze-risk` — Analyze RFP, business plans, or bid announcements to systematically identify, score, and mitigate risks for participating companies. Uses 5x5 probability-impact matrix, Bid/No-Bid decision matrix, and PMBOK mitigation strategies. Accepts file paths, bid numbers, or prior evaluate results.
+- `analyze-feasibility` — Comprehensive business feasibility review combining profitability simulation, PWin calculation, expected value analysis, and Bid/No-Bid decision. Integrates qualification screening, tech capability matching, risk assessment, and competitive analysis into a single report with Go/No-Go recommendation.
+- `analyze-all` — Run the full analysis workflow: analyze-company → analyze-fp → analyze-risk → analyze-feasibility sequentially with user interaction at each step.
+- `search-bid` — Search multiple platforms (G2B, K-Startup, MSS, MSIT) for matching announcements
+- `search-evaluate` — Deep-analyze a specific bid/announcement with attachment download and RFP analysis
+- `search-strategy` — Run the full search workflow: analyze-company → search-bid → search-evaluate with user interaction at each step
+- `generate-toc` — Generate proposal TOC from RFP + company seed document (both required). Outputs `data/output/{사업명}/목차.md` with per-section metadata (배점, 핵심메시지, 도표/도안 계획, 페이지예산)
+- `generate-common` — Generate shared CSS/JS/config for section HTML files. Copies page-frame.css/js to `_common/` and creates `common-config.json` with chapter start pages. Must run before `generate-section`.
+- `generate-section` — Write proposal sections as complete HTML pages with inline tables and HTML/CSS diagrams. Supports specific section numbers: `generate-section 목차.md 1 3 5`
+- `generate-proposal` — Validate written sections, generate cover/TOC/navigation, and package into a self-contained HTML bundle ready for ZIP sharing. Adds `final/` directory with index.html entry point.
+- `generate-presentation` — Transform written A4 section HTMLs into a 16:9 widescreen presentation (발표본). Generates a single-file slide deck with keyboard/touch navigation, CSS animations, and AI-generated backgrounds. Outputs `presentation/` directory with index.html entry point.
+- `generate-pptx` — Convert presentation HTML slides to PPTX file using Puppeteer + dom-to-pptx (native editable elements). Full-bleed 16:9 widescreen slides. Requires Node.js and `npm install puppeteer dom-to-pptx`.
+- `generate-all` — Run the full proposal generation workflow: generate-toc → generate-common → generate-section → generate-proposal → generate-presentation → generate-pptx sequentially with user interaction at each step.
 
 ### Agents (Subagents for deep analysis)
 - **doc-analyzer** (`agents/doc-analyzer.md`): Deep company document analysis, keyword extraction
@@ -106,7 +108,7 @@ RFP document or 목차.md (from generate-toc)
 ### Risk Analysis Flow
 ```
 RFP document, business plan, or bid number
-  → risk-analysis command
+  → analyze-risk command
       → Step 1: Read documents (RFP, 사업계획서, 공고 상세)
       → Step 2: Read seed (optional, for company-specific risk matching)
       → Step 3: Confirm analysis scope (full or selective categories)
@@ -123,7 +125,7 @@ RFP document, business plan, or bid number
 ### Business Feasibility Review Flow
 ```
 RFP document, bid number, or business plan + Company seed (optional)
-  → feasibility-review command
+  → analyze-feasibility command
       → Step 1: Read documents (RFP, 공고 상세, 사업계획서)
       → Step 2: Confirm business info & analysis scope (Full/Quick/Selective)
       → Step 3: Read seed (auto-scan data/seed/ if not provided)
@@ -154,7 +156,7 @@ RFP document + Company seed document (both REQUIRED from user)
       → Step 2: Calculate chapter start pages
       → Step 3: Copy page-frame.css/js to _common/
       → Step 4: Write _common/common-config.json
-  → write-section command
+  → generate-section command
       → Step 1: Read 목차.md + _common/common-config.json
       → Step 2: Read RFP requirements + seed data
       → Step 3: Confirm scope with user (which sections to write)
@@ -165,7 +167,7 @@ RFP document + Company seed document (both REQUIRED from user)
               → Complete HTML page with PAGE_CONFIG, shared CSS/JS
           → Write to sections/{번호:02d}_{절제목}.html
       → Step 5-6: Progress reporting + final summary
-  → finalize command
+  → generate-proposal command
       → Step 1: Read 목차.md + common-config.json
       → Step 2: Section inventory check (missing/extra files)
       → Step 3: Quality validation (requirement coverage, {확인 필요} residuals)
@@ -231,24 +233,26 @@ cd servers && npm run dev
 claude --plugin-dir .
 
 # Test commands
-/proposal-specialist:analyze ./company-intro.pdf
-/proposal-specialist:search AI 솔루션
-/proposal-specialist:evaluate 20260101001
-/proposal-specialist:strategy ./company-intro.pdf
+/proposal-specialist:analyze-company ./company-intro.pdf
+/proposal-specialist:search-bid AI 솔루션
+/proposal-specialist:search-evaluate 20260101001
+/proposal-specialist:search-strategy ./company-intro.pdf
 /proposal-specialist:generate-toc data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
 /proposal-specialist:generate-common data/output/사업명/목차.md
-/proposal-specialist:write-section data/output/사업명/목차.md
-/proposal-specialist:write-section data/output/사업명/목차.md 1 3 5  # specific sections only
-/proposal-specialist:finalize data/output/사업명/목차.md
+/proposal-specialist:generate-section data/output/사업명/목차.md
+/proposal-specialist:generate-section data/output/사업명/목차.md 1 3 5  # specific sections only
+/proposal-specialist:generate-proposal data/output/사업명/목차.md
 /proposal-specialist:generate-presentation data/output/사업명/목차.md
 /proposal-specialist:generate-pptx data/output/사업명/목차.md
 /proposal-specialist:analyze-fp data/business/사업명/제안요청서.pdf
 /proposal-specialist:analyze-fp data/output/사업명/목차.md 간이법 이윤율=15
-/proposal-specialist:risk-analysis data/business/사업명/제안요청서.pdf
-/proposal-specialist:risk-analysis data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
-/proposal-specialist:feasibility-review data/business/사업명/제안요청서.pdf
-/proposal-specialist:feasibility-review data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
-/proposal-specialist:feasibility-review 20260101001  # 입찰공고번호로 조회
+/proposal-specialist:analyze-risk data/business/사업명/제안요청서.pdf
+/proposal-specialist:analyze-risk data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
+/proposal-specialist:analyze-feasibility data/business/사업명/제안요청서.pdf
+/proposal-specialist:analyze-feasibility data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
+/proposal-specialist:analyze-feasibility 20260101001  # 입찰공고번호로 조회
+/proposal-specialist:analyze-all data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
+/proposal-specialist:generate-all data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
 
 # Debug mode
 claude --debug
@@ -261,7 +265,7 @@ claude --debug
 - **MCP server** (`servers/src/`): TypeScript code. Run `npm run build` after changes.
 - **Data files** (`data/`):
   - `data/evaluation-templates.json`, `data/seed/`, `data/business/`: Reference data. Do not modify during normal operation.
-  - `data/output/`: Runtime output generated by `generate-toc`, `generate-common`, `write-section`, `finalize`, and `generate-presentation`. Not committed (see `.gitignore`). Contains `목차.md` (TOC), `sections/*.html` (complete HTML pages with inline tables and diagrams), `_common/` (shared CSS/JS/config), `final/` (self-contained HTML package with cover, navigation, and transformed sections), `presentation/` (16:9 slide deck with single index.html entry point).
+  - `data/output/`: Runtime output generated by `generate-toc`, `generate-common`, `generate-section`, `generate-proposal`, and `generate-presentation`. Not committed (see `.gitignore`). Contains `목차.md` (TOC), `sections/*.html` (complete HTML pages with inline tables and diagrams), `_common/` (shared CSS/JS/config), `final/` (self-contained HTML package with cover, navigation, and transformed sections), `presentation/` (16:9 slide deck with single index.html entry point).
 - **`hooks/hooks.json`**: Hook configuration referencing scripts via `${CLAUDE_PLUGIN_ROOT}`.
 - **`.mcp.json`**: MCP server configuration. References `${CLAUDE_PLUGIN_ROOT}` for paths and `${ENV_VAR}` for secrets.
 
@@ -309,88 +313,29 @@ git push origin staging
 
 ## PPTX Generation Pipeline
 
-Markdown 제안서 → PPTX 변환 시 아래 파이프라인을 따른다.
+프레젠테이션 HTML → PPTX 변환 시 아래 파이프라인을 따른다.
 
-### Pipeline: HTML → Chrome Screenshot → PPTX
+### Pipeline: HTML → Puppeteer → dom-to-pptx → PPTX
 
 ```
-HTML (body width: 794px, 시스템 폰트)
-  → Chrome headless (--force-device-scale-factor=2, 레티나 품질)
-  → 고해상도 PNG (1400px 폭, 정확한 폰트 렌더링)
-  → python-pptx (full-width 삽입, 자동 페이지 분할)
-  → ZIP 정리 (중복 엔트리 제거)
-  → 최종 PPTX
+presentation/index.html (16:9, 1280x720px)
+  → 슬라이드별 개별 HTML 분리 (standalone)
+  → Puppeteer로 각 슬라이드 HTML 열기
+  → dom-to-pptx로 DOM → 네이티브 PPTX 요소 변환
+  → 편집 가능한 텍스트/도형/테이블이 포함된 PPTX
 ```
 
-### Image Insertion Rules
+### Native Element Conversion
 
-- **가로는 항상 content full width (6,480,000 EMU) 고정** — 절대로 이미지를 가로 축소하지 않는다
-- 세로는 원본 비율(aspect ratio)에 맞게 자동 계산
-- 한 슬라이드에 안 들어가면 이미지를 **자동 crop & split** → 다음 슬라이드에 이어서 배치
-- 분할된 각 슬라이드에도 동일한 크롬(헤더, 섹션 뱃지, 페이지번호) 적용
-- 외부 이미지는 직접 삽입하지 않고, HTML로 래핑 후 Chrome 렌더링하여 폰트/비율 일관성 확보
-
-### HTML Rendering (Chrome Headless)
-
-```bash
-"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
-  --headless=new --disable-gpu --no-sandbox \
-  --window-size={body_width+40},3000 \
-  --force-device-scale-factor=2 \
-  --screenshot={output.png} \
-  --default-background-color=FFFFFFFF \
-  file://{input.html}
-```
-
-- `--force-device-scale-factor=2`: 레티나 2x 해상도로 선명한 텍스트
-- HTML body width에서 자동 추출하여 window-size 설정
-- 폰트: `'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif`
-
-### PPTX Template Design System
-
-슬라이드는 python-pptx의 `Presentation()`으로 직접 생성 (외부 템플릿 파일 불필요).
-
-| 요소 | 위치 (EMU) | 스타일 |
-|------|-----------|--------|
-| Slide size | 7,560,000 × 10,692,000 | A4 세로 (8.27" × 11.69") |
-| Left stripe | (0, 0) w=180,000 | fill: #2E75B6 |
-| Top-left triangle | (0, 0) w=720,000 h=540,000 | fill: #2E75B6 |
-| Project name | (2,520,000, 288,000) | 8pt, #999999, right-align |
-| Section name | (2,520,000, 468,000) | 9pt bold, #1A3C5E, right-align |
-| Section badge | (540,000, 1,260,000) w=432,000 | 16pt bold white on #2E75B6 |
-| Section title | (1,080,000, 1,260,000) | 16pt bold, #1A3C5E |
-| Divider | (540,000, 1,620,000) w=6,480,000 h=18,000 | fill: #2E75B6 |
-| Page number | (7,128,000, 10,260,000) w=251,999 | 8pt bold white on #C0392B |
-| Content area | left=540,000, top≈1,750,000 | width=6,480,000, bottom limit≈10,100,000 |
-
-### PPTX Slide Deletion (python-pptx)
-
-python-pptx에서 슬라이드 삭제 시 orphaned XML이 ZIP에 남는다. 반드시 저장 후 ZIP 정리:
-
-```python
-# 1. 슬라이드 삭제 (XML 레벨)
-nsmap = {'p': '...presentationml...', 'r': '...relationships...'}
-sldIdLst = prs.part._element.find('.//p:sldIdLst', nsmap)
-for sldId in list(sldIdLst)[1:]:  # keep first slide
-    rId = sldId.get('{...relationships...}id')
-    sldIdLst.remove(sldId)
-    del prs.part.rels[rId]
-
-# 2. 저장 후 ZIP 중복 제거
-prs.save(temp_path)
-seen = {}
-with zipfile.ZipFile(temp_path) as zin:
-    for item in zin.infolist():
-        seen[item.filename] = item  # last entry wins
-    with zipfile.ZipFile(output_path, 'w', ZIP_DEFLATED) as zout:
-        for name, info in seen.items():
-            zout.writestr(info, zin.read(info.filename))
-```
+- HTML 텍스트 → PPTX 네이티브 텍스트 박스 (편집 가능)
+- HTML 도형/배경 → PPTX 네이티브 Shape (편집 가능)
+- HTML 테이블 → PPTX 네이티브 테이블 (편집 가능)
+- SVG → 벡터 Shape으로 변환
 
 ### Dependencies
 
 ```bash
-pip3 install --user --break-system-packages python-pptx Pillow
+npm install puppeteer dom-to-pptx
 ```
 
 ## Section Writer Design System
