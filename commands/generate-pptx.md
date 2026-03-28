@@ -7,17 +7,27 @@ description: 프레젠테이션 HTML 슬라이드를 PPTX 파일로 변환합니
 
 $ARGUMENTS 에 지정된 경로를 기반으로 프레젠테이션 HTML 슬라이드를 PPTX 파일로 변환하라.
 
-## 인자 파싱
+## 인자 파싱 및 프레젠테이션 파일 확보
 
 $ARGUMENTS 형식: `<목차파일경로>` 또는 `<presentation/index.html 경로>`
 
-- `presentation/index.html` 경로가 직접 지정된 경우 해당 파일을 사용한다
-- 목차파일경로가 지정된 경우 `data/output/{사업명_경로}/presentation/index.html`을 찾는다
-- 인자가 없으면 `data/output/` 디렉토리에서 Glob Tool로 `presentation/index.html` 파일을 찾는다
-- 여러 개 발견되면 목록을 보여주고 사용자에게 선택을 요청한다
+다음 순서로 프레젠테이션 파일을 확보한다:
+
+1. **$ARGUMENTS에서 확인**:
+   - `presentation/index.html` 경로가 직접 지정된 경우 해당 파일을 사용한다
+   - 목차파일경로가 지정된 경우 `data/output/{사업명_경로}/presentation/index.html`을 찾는다
+2. **자동 탐색**: 인자가 없으면 `data/output/` 디렉토리에서 Glob Tool로 `**/presentation/index.html` 파일을 찾는다
+   - 1개 발견되면 자동 사용한다
+   - 여러 개 발견되면 목록을 보여주고 사용자에게 선택을 요청한다
+3. **사용자에게 요청**: 프레젠테이션 파일을 찾지 못하면 대화형으로 요청한다:
+   "프레젠테이션 파일을 찾지 못했습니다. 다음 중 하나를 입력해주세요:
+   - 프레젠테이션 경로 (예: data/output/사업명/presentation/index.html)
+   - 목차 파일 경로 (예: data/output/사업명/목차.md)
+   프레젠테이션이 아직 없으면 먼저 생성해주세요: `/proposal-specialist:generate-presentation <목차파일경로>`"
+   - 사용자가 경로를 입력하면 해당 파일로 계속 진행한다
 
 **선행 조건 확인:**
-presentation/index.html이 없으면 안내 후 중단한다:
+presentation/index.html이 확보된 경로에 존재하지 않으면 사용자에게 안내한다:
 "프레젠테이션이 아직 생성되지 않았습니다. 먼저 실행해주세요:
 `/proposal-specialist:generate-presentation {목차파일경로}`"
 
