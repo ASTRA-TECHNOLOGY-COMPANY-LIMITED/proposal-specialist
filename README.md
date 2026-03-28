@@ -203,10 +203,10 @@ export COMPANY_DOCS_DIR="/path/to/company-docs"
 
 ```bash
 # COMPANY_DOCS_DIR 디렉토리의 자료를 자동으로 읽어 분석
-/proposal-specialist:analyze
+/proposal-specialist:analyze-company
 
 # 전체 워크플로우도 경로 생략 가능
-/proposal-specialist:strategy
+/proposal-specialist:search-strategy
 ```
 
 ### 직접 파일 경로 전달
@@ -215,13 +215,13 @@ export COMPANY_DOCS_DIR="/path/to/company-docs"
 
 ```bash
 # 단일 파일 분석
-/proposal-specialist:analyze /path/to/company-intro.pdf
+/proposal-specialist:analyze-company /path/to/company-intro.pdf
 
 # 디렉토리 지정
-/proposal-specialist:analyze /path/to/company-docs/
+/proposal-specialist:analyze-company /path/to/company-docs/
 
 # 전체 워크플로우
-/proposal-specialist:strategy /path/to/company-intro.pdf
+/proposal-specialist:search-strategy /path/to/company-intro.pdf
 ```
 
 **경로 우선순위:** 명령어 인자 > `COMPANY_DOCS_DIR` 환경 변수 > 현재 디렉토리
@@ -249,12 +249,12 @@ export COMPANY_DOCS_DIR="/path/to/company-docs"
 
 | 명령어 | 설명 | 사용 예시 |
 |--------|------|-----------|
-| `analyze` | 회사 문서를 분석하여 기업 프로파일과 검색 키워드 추출 | `/proposal-specialist:analyze` 또는 `/proposal-specialist:analyze ./회사소개서.pdf` |
-| `search` | 복수 플랫폼에서 매칭되는 공고 검색 | `/proposal-specialist:search AI 솔루션` |
-| `evaluate` | 특정 입찰공고의 상세 분석 및 수주 확률 평가 | `/proposal-specialist:evaluate 20260101001` |
-| `strategy` | 전체 워크플로우 (분석→검색→평가→전략 수립) | `/proposal-specialist:strategy` 또는 `/proposal-specialist:strategy ./회사소개서.pdf` |
+| `analyze-company` | 회사 문서를 분석하여 기업 프로파일과 검색 키워드 추출 | `/proposal-specialist:analyze-company` 또는 `/proposal-specialist:analyze-company ./회사소개서.pdf` |
+| `search-bid` | 복수 플랫폼에서 매칭되는 공고 검색 | `/proposal-specialist:search-bid AI 솔루션` |
+| `search-evaluate` | 특정 입찰공고의 상세 분석 및 수주 확률 평가 | `/proposal-specialist:search-evaluate 20260101001` |
+| `search-strategy` | 전체 워크플로우 (분석→검색→평가→전략 수립) | `/proposal-specialist:search-strategy` 또는 `/proposal-specialist:search-strategy ./회사소개서.pdf` |
 | `generate-toc` | RFP + 기업 시드 문서로 제안서 목차 생성 | `/proposal-specialist:generate-toc RFP.pdf seed.md` |
-| `write-section` | 생성된 목차 기반으로 제안서 섹션 작성 | `/proposal-specialist:write-section 목차.md` |
+| `generate-section` | 생성된 목차 기반으로 제안서 섹션 작성 | `/proposal-specialist:generate-section 목차.md` |
 
 ### 전체 워크플로우 예시
 
@@ -263,7 +263,7 @@ export COMPANY_DOCS_DIR="/path/to/company-docs"
 claude --plugin-dir /path/to/proposal-specialist
 
 # 2. 전체 전략 워크플로우 실행 (COMPANY_DOCS_DIR 설정 시 경로 생략 가능)
-/proposal-specialist:strategy
+/proposal-specialist:search-strategy
 ```
 
 워크플로우는 다음 단계로 진행됩니다:
@@ -282,7 +282,7 @@ claude --plugin-dir /path/to/proposal-specialist
 /proposal-specialist:generate-toc data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
 
 # 2. 섹션별 상세 내용 작성
-/proposal-specialist:write-section data/output/사업명/목차.md
+/proposal-specialist:generate-section data/output/사업명/목차.md
 ```
 
 ## 디렉토리 구조
@@ -295,12 +295,12 @@ proposal-specialist/
 ├── .mcp.json                    # MCP 서버 설정
 ├── CLAUDE.md                    # Claude Code 지침
 ├── commands/                    # 사용자 호출 명령어
-│   ├── analyze.md
-│   ├── search.md
-│   ├── evaluate.md
+│   ├── analyze-company.md
+│   ├── search-bid.md
+│   ├── search-evaluate.md
+│   ├── search-strategy.md
 │   ├── generate-toc.md
-│   ├── write-section.md
-│   └── strategy.md
+│   └── generate-section.md
 ├── skills/                      # 자동 적용 스킬
 │   ├── company-profiler/
 │   └── proposal-strategist/

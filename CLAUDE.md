@@ -20,19 +20,21 @@ The plugin follows the Claude Code plugin structure (`.claude-plugin/plugin.json
 - **bid-feasibility-review** (`skills/bid-feasibility-review/SKILL.md`): Automatically applies business feasibility review frameworks when analyzing bid participation decisions. Provides PWin calculation, profitability simulation, EV analysis, and Bid/No-Bid scoring. References feasibility-reference.md for Shipley PWin model, cost structure, and decision matrices.
 
 ### Commands (User-invoked via `/proposal-specialist:<command>`)
-- `analyze` — Analyze company documents to extract profile and search keywords
-- `search` — Search multiple platforms (G2B, K-Startup, MSS, MSIT) for matching announcements
-- `evaluate` — Deep-analyze a specific bid/announcement with attachment download and RFP analysis
-- `strategy` — Run the full workflow: analyze → search → evaluate with user interaction at each step
+- `analyze-company` — Analyze company documents to extract profile and search keywords
+- `analyze-fp` — Analyze RFP or requirements documents to estimate Function Points (FP) and calculate SW development costs. Supports simplified (간이법) and standard (정규법) methods. Outputs `data/output/{사업명}/fp-analysis.md` with detailed FP breakdown and cost estimation.
+- `analyze-risk` — Analyze RFP, business plans, or bid announcements to systematically identify, score, and mitigate risks for participating companies. Uses 5x5 probability-impact matrix, Bid/No-Bid decision matrix, and PMBOK mitigation strategies. Accepts file paths, bid numbers, or prior evaluate results.
+- `analyze-feasibility` — Comprehensive business feasibility review combining profitability simulation, PWin calculation, expected value analysis, and Bid/No-Bid decision. Integrates qualification screening, tech capability matching, risk assessment, and competitive analysis into a single report with Go/No-Go recommendation.
+- `analyze-all` — Run the full analysis workflow: analyze-company → analyze-fp → analyze-risk → analyze-feasibility sequentially with user interaction at each step.
+- `search-bid` — Search multiple platforms (G2B, K-Startup, MSS, MSIT) for matching announcements
+- `search-evaluate` — Deep-analyze a specific bid/announcement with attachment download and RFP analysis
+- `search-strategy` — Run the full search workflow: analyze-company → search-bid → search-evaluate with user interaction at each step
 - `generate-toc` — Generate proposal TOC from RFP + company seed document (both required). Outputs `data/output/{사업명}/목차.md` with per-section metadata (배점, 핵심메시지, 도표/도안 계획, 페이지예산)
-- `generate-common` — Generate shared CSS/JS/config for section HTML files. Copies page-frame.css/js to `_common/` and creates `common-config.json` with chapter start pages. Must run before `write-section`.
-- `write-section` — Write proposal sections as complete HTML pages with inline tables and HTML/CSS diagrams. Supports specific section numbers: `write-section 목차.md 1 3 5`
-- `finalize` — Validate written sections, generate cover/TOC/navigation, and package into a self-contained HTML bundle ready for ZIP sharing. Adds `final/` directory with index.html entry point.
+- `generate-common` — Generate shared CSS/JS/config for section HTML files. Copies page-frame.css/js to `_common/` and creates `common-config.json` with chapter start pages. Must run before `generate-section`.
+- `generate-section` — Write proposal sections as complete HTML pages with inline tables and HTML/CSS diagrams. Supports specific section numbers: `generate-section 목차.md 1 3 5`
+- `generate-proposal` — Validate written sections, generate cover/TOC/navigation, and package into a self-contained HTML bundle ready for ZIP sharing. Adds `final/` directory with index.html entry point.
 - `generate-presentation` — Transform written A4 section HTMLs into a 16:9 widescreen presentation (발표본). Generates a single-file slide deck with keyboard/touch navigation, CSS animations, and AI-generated backgrounds. Outputs `presentation/` directory with index.html entry point.
 - `generate-pptx` — Convert presentation HTML slides to PPTX file using Chrome headless screenshots + python-pptx. Full-bleed 16:9 widescreen slides at retina (2x) quality. Requires Chrome and `pip3 install python-pptx Pillow`.
-- `analyze-fp` — Analyze RFP or requirements documents to estimate Function Points (FP) and calculate SW development costs. Supports simplified (간이법) and standard (정규법) methods. Outputs `data/output/{사업명}/fp-analysis.md` with detailed FP breakdown and cost estimation.
-- `risk-analysis` — Analyze RFP, business plans, or bid announcements to systematically identify, score, and mitigate risks for participating companies. Uses 5x5 probability-impact matrix, Bid/No-Bid decision matrix, and PMBOK mitigation strategies. Accepts file paths, bid numbers, or prior evaluate results.
-- `feasibility-review` — Comprehensive business feasibility review combining profitability simulation, PWin calculation, expected value analysis, and Bid/No-Bid decision. Integrates qualification screening, tech capability matching, risk assessment, and competitive analysis into a single report with Go/No-Go recommendation.
+- `generate-all` — Run the full proposal generation workflow: generate-toc → generate-common → generate-section → generate-proposal → generate-presentation → generate-pptx sequentially with user interaction at each step.
 
 ### Agents (Subagents for deep analysis)
 - **doc-analyzer** (`agents/doc-analyzer.md`): Deep company document analysis, keyword extraction
@@ -106,7 +108,7 @@ RFP document or 목차.md (from generate-toc)
 ### Risk Analysis Flow
 ```
 RFP document, business plan, or bid number
-  → risk-analysis command
+  → analyze-risk command
       → Step 1: Read documents (RFP, 사업계획서, 공고 상세)
       → Step 2: Read seed (optional, for company-specific risk matching)
       → Step 3: Confirm analysis scope (full or selective categories)
@@ -123,7 +125,7 @@ RFP document, business plan, or bid number
 ### Business Feasibility Review Flow
 ```
 RFP document, bid number, or business plan + Company seed (optional)
-  → feasibility-review command
+  → analyze-feasibility command
       → Step 1: Read documents (RFP, 공고 상세, 사업계획서)
       → Step 2: Confirm business info & analysis scope (Full/Quick/Selective)
       → Step 3: Read seed (auto-scan data/seed/ if not provided)
@@ -154,7 +156,7 @@ RFP document + Company seed document (both REQUIRED from user)
       → Step 2: Calculate chapter start pages
       → Step 3: Copy page-frame.css/js to _common/
       → Step 4: Write _common/common-config.json
-  → write-section command
+  → generate-section command
       → Step 1: Read 목차.md + _common/common-config.json
       → Step 2: Read RFP requirements + seed data
       → Step 3: Confirm scope with user (which sections to write)
@@ -165,7 +167,7 @@ RFP document + Company seed document (both REQUIRED from user)
               → Complete HTML page with PAGE_CONFIG, shared CSS/JS
           → Write to sections/{번호:02d}_{절제목}.html
       → Step 5-6: Progress reporting + final summary
-  → finalize command
+  → generate-proposal command
       → Step 1: Read 목차.md + common-config.json
       → Step 2: Section inventory check (missing/extra files)
       → Step 3: Quality validation (requirement coverage, {확인 필요} residuals)
@@ -231,24 +233,26 @@ cd servers && npm run dev
 claude --plugin-dir .
 
 # Test commands
-/proposal-specialist:analyze ./company-intro.pdf
-/proposal-specialist:search AI 솔루션
-/proposal-specialist:evaluate 20260101001
-/proposal-specialist:strategy ./company-intro.pdf
+/proposal-specialist:analyze-company ./company-intro.pdf
+/proposal-specialist:search-bid AI 솔루션
+/proposal-specialist:search-evaluate 20260101001
+/proposal-specialist:search-strategy ./company-intro.pdf
 /proposal-specialist:generate-toc data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
 /proposal-specialist:generate-common data/output/사업명/목차.md
-/proposal-specialist:write-section data/output/사업명/목차.md
-/proposal-specialist:write-section data/output/사업명/목차.md 1 3 5  # specific sections only
-/proposal-specialist:finalize data/output/사업명/목차.md
+/proposal-specialist:generate-section data/output/사업명/목차.md
+/proposal-specialist:generate-section data/output/사업명/목차.md 1 3 5  # specific sections only
+/proposal-specialist:generate-proposal data/output/사업명/목차.md
 /proposal-specialist:generate-presentation data/output/사업명/목차.md
 /proposal-specialist:generate-pptx data/output/사업명/목차.md
 /proposal-specialist:analyze-fp data/business/사업명/제안요청서.pdf
 /proposal-specialist:analyze-fp data/output/사업명/목차.md 간이법 이윤율=15
-/proposal-specialist:risk-analysis data/business/사업명/제안요청서.pdf
-/proposal-specialist:risk-analysis data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
-/proposal-specialist:feasibility-review data/business/사업명/제안요청서.pdf
-/proposal-specialist:feasibility-review data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
-/proposal-specialist:feasibility-review 20260101001  # 입찰공고번호로 조회
+/proposal-specialist:analyze-risk data/business/사업명/제안요청서.pdf
+/proposal-specialist:analyze-risk data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
+/proposal-specialist:analyze-feasibility data/business/사업명/제안요청서.pdf
+/proposal-specialist:analyze-feasibility data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
+/proposal-specialist:analyze-feasibility 20260101001  # 입찰공고번호로 조회
+/proposal-specialist:analyze-all data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
+/proposal-specialist:generate-all data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
 
 # Debug mode
 claude --debug
@@ -261,7 +265,7 @@ claude --debug
 - **MCP server** (`servers/src/`): TypeScript code. Run `npm run build` after changes.
 - **Data files** (`data/`):
   - `data/evaluation-templates.json`, `data/seed/`, `data/business/`: Reference data. Do not modify during normal operation.
-  - `data/output/`: Runtime output generated by `generate-toc`, `generate-common`, `write-section`, `finalize`, and `generate-presentation`. Not committed (see `.gitignore`). Contains `목차.md` (TOC), `sections/*.html` (complete HTML pages with inline tables and diagrams), `_common/` (shared CSS/JS/config), `final/` (self-contained HTML package with cover, navigation, and transformed sections), `presentation/` (16:9 slide deck with single index.html entry point).
+  - `data/output/`: Runtime output generated by `generate-toc`, `generate-common`, `generate-section`, `generate-proposal`, and `generate-presentation`. Not committed (see `.gitignore`). Contains `목차.md` (TOC), `sections/*.html` (complete HTML pages with inline tables and diagrams), `_common/` (shared CSS/JS/config), `final/` (self-contained HTML package with cover, navigation, and transformed sections), `presentation/` (16:9 slide deck with single index.html entry point).
 - **`hooks/hooks.json`**: Hook configuration referencing scripts via `${CLAUDE_PLUGIN_ROOT}`.
 - **`.mcp.json`**: MCP server configuration. References `${CLAUDE_PLUGIN_ROOT}` for paths and `${ENV_VAR}` for secrets.
 
