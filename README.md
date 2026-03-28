@@ -249,12 +249,21 @@ export COMPANY_DOCS_DIR="/path/to/company-docs"
 
 | 명령어 | 설명 | 사용 예시 |
 |--------|------|-----------|
-| `analyze-company` | 회사 문서를 분석하여 기업 프로파일과 검색 키워드 추출 | `/proposal-specialist:analyze-company` 또는 `/proposal-specialist:analyze-company ./회사소개서.pdf` |
+| `analyze-company` | 기업 문서 분석, 프로파일 및 키워드 추출 | `/proposal-specialist:analyze-company ./회사소개서.pdf` |
+| `analyze-fp` | 기능점수(FP) 산정 및 SW 개발 대가 산출 | `/proposal-specialist:analyze-fp RFP.pdf` |
+| `analyze-risk` | 입찰 참여 리스크 분석 | `/proposal-specialist:analyze-risk RFP.pdf` |
+| `analyze-feasibility` | 사업성 종합 검토 (수익성, PWin, Bid/No-Bid) | `/proposal-specialist:analyze-feasibility RFP.pdf` |
+| `analyze-all` | 분석 워크플로우 전체 실행 | `/proposal-specialist:analyze-all RFP.pdf seed.md` |
 | `search-bid` | 복수 플랫폼에서 매칭되는 공고 검색 | `/proposal-specialist:search-bid AI 솔루션` |
 | `search-evaluate` | 특정 입찰공고의 상세 분석 및 수주 확률 평가 | `/proposal-specialist:search-evaluate 20260101001` |
-| `search-strategy` | 전체 워크플로우 (분석→검색→평가→전략 수립) | `/proposal-specialist:search-strategy` 또는 `/proposal-specialist:search-strategy ./회사소개서.pdf` |
+| `search-strategy` | 검색 워크플로우 전체 실행 (분석→검색→평가) | `/proposal-specialist:search-strategy ./회사소개서.pdf` |
 | `generate-toc` | RFP + 기업 시드 문서로 제안서 목차 생성 | `/proposal-specialist:generate-toc RFP.pdf seed.md` |
-| `generate-section` | 생성된 목차 기반으로 제안서 섹션 작성 | `/proposal-specialist:generate-section 목차.md` |
+| `generate-common` | 공통 리소스 생성 (CSS/JS/설정) | `/proposal-specialist:generate-common 목차.md` |
+| `generate-section` | 제안서 섹션 작성 (HTML 페이지) | `/proposal-specialist:generate-section 목차.md` |
+| `generate-proposal` | 제안서 패키징 (표지/목차/네비게이션) | `/proposal-specialist:generate-proposal 목차.md` |
+| `generate-presentation` | 16:9 프레젠테이션 슬라이드 변환 | `/proposal-specialist:generate-presentation 목차.md` |
+| `generate-pptx` | HTML 슬라이드 → PPTX 변환 | `/proposal-specialist:generate-pptx 목차.md` |
+| `generate-all` | 제안서 생성 워크플로우 전체 실행 | `/proposal-specialist:generate-all RFP.pdf seed.md` |
 
 ### 전체 워크플로우 예시
 
@@ -281,8 +290,23 @@ claude --plugin-dir /path/to/proposal-specialist
 # 1. 제안서 목차 생성 (RFP + 기업 시드 문서)
 /proposal-specialist:generate-toc data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
 
-# 2. 섹션별 상세 내용 작성
+# 2. 공통 리소스 생성 (CSS/JS/설정)
+/proposal-specialist:generate-common data/output/사업명/목차.md
+
+# 3. 섹션별 상세 내용 작성
 /proposal-specialist:generate-section data/output/사업명/목차.md
+
+# 4. 제안서 패키징 (표지/목차/네비게이션)
+/proposal-specialist:generate-proposal data/output/사업명/목차.md
+
+# 5. 프레젠테이션 생성
+/proposal-specialist:generate-presentation data/output/사업명/목차.md
+
+# 6. PPTX 변환
+/proposal-specialist:generate-pptx data/output/사업명/목차.md
+
+# 또는 전체 워크플로우를 한 번에 실행
+/proposal-specialist:generate-all data/business/사업명/제안요청서.pdf data/seed/회사명/시드.md
 ```
 
 ## 디렉토리 구조
@@ -296,11 +320,20 @@ proposal-specialist/
 ├── CLAUDE.md                    # Claude Code 지침
 ├── commands/                    # 사용자 호출 명령어
 │   ├── analyze-company.md
+│   ├── analyze-fp.md
+│   ├── analyze-risk.md
+│   ├── analyze-feasibility.md
+│   ├── analyze-all.md
 │   ├── search-bid.md
 │   ├── search-evaluate.md
 │   ├── search-strategy.md
 │   ├── generate-toc.md
-│   └── generate-section.md
+│   ├── generate-common.md
+│   ├── generate-section.md
+│   ├── generate-proposal.md
+│   ├── generate-presentation.md
+│   ├── generate-pptx.md
+│   └── generate-all.md
 ├── skills/                      # 자동 적용 스킬
 │   ├── company-profiler/
 │   └── proposal-strategist/

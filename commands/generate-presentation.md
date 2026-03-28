@@ -27,6 +27,8 @@ $ARGUMENTS 형식: `<목차파일경로>`
 ```
 data/output/{사업명_경로}/presentation/
 ├── index.html              ← 단일 진입점 (모든 슬라이드 임베디드)
+├── slides/                 ← 에이전트 출력 중간파일 (index.html 조립 후 삭제 가능)
+│   └── {절번호}_{절제목}.html
 ├── styles/
 │   ├── presentation.css
 │   └── presentation.js
@@ -202,7 +204,7 @@ Read Tool로 원본을 읽고 Write Tool로 복사한다:
 data/output/{사업명_경로}/presentation/slides/{절번호:02d}_{절제목}.html
 ```
 
-에이전트가 출력한 슬라이드 HTML 파일을 수집한다.
+에이전트가 출력한 슬라이드 HTML 파일을 Glob Tool로 `presentation/slides/*.html`에서 수집한다.
 
 ### Step 7: index.html 조립
 

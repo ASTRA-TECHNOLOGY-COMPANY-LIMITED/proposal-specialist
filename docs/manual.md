@@ -279,12 +279,20 @@ proposal-specialist/
 │   └── marketplace.json         ← 마켓플레이스 등록 정보
 ├── commands/                    ← 사용자 호출 명령어
 │   ├── analyze-company.md       ← /proposal-specialist:analyze-company
+│   ├── analyze-fp.md            ← /proposal-specialist:analyze-fp
+│   ├── analyze-risk.md          ← /proposal-specialist:analyze-risk
+│   ├── analyze-feasibility.md   ← /proposal-specialist:analyze-feasibility
+│   ├── analyze-all.md           ← /proposal-specialist:analyze-all
 │   ├── search-bid.md            ← /proposal-specialist:search-bid
 │   ├── search-evaluate.md       ← /proposal-specialist:search-evaluate
 │   ├── search-strategy.md       ← /proposal-specialist:search-strategy
 │   ├── generate-toc.md          ← /proposal-specialist:generate-toc
 │   ├── generate-common.md       ← /proposal-specialist:generate-common
-│   └── generate-section.md         ← /proposal-specialist:generate-section
+│   ├── generate-section.md      ← /proposal-specialist:generate-section
+│   ├── generate-proposal.md     ← /proposal-specialist:generate-proposal
+│   ├── generate-presentation.md ← /proposal-specialist:generate-presentation
+│   ├── generate-pptx.md         ← /proposal-specialist:generate-pptx
+│   └── generate-all.md          ← /proposal-specialist:generate-all
 ├── agents/                      ← 서브에이전트 (도구 사용)
 │   ├── doc-analyzer.md          ← 기업 문서 심층 분석
 │   ├── bid-searcher.md          ← 멀티 플랫폼 병렬 검색
@@ -316,12 +324,20 @@ proposal-specialist/
 | 명령어 | 용도 | 인자 |
 |--------|------|------|
 | `analyze-company` | 기업 문서 분석 | `<문서경로>` |
+| `analyze-fp` | 기능점수(FP) 산정 및 SW 개발 대가 산출 | `<RFP경로> [간이법\|정규법] [이윤율=N]` |
+| `analyze-risk` | 입찰 참여 리스크 분석 | `<RFP경로> [시드경로]` |
+| `analyze-feasibility` | 사업성 종합 검토 (수익성, PWin, Bid/No-Bid) | `<RFP경로> [시드경로]` |
+| `analyze-all` | 분석 워크플로우 전체 실행 | `<RFP경로> <시드경로>` |
 | `search-bid` | 공고 통합 검색 | `<키워드...>` |
 | `search-evaluate` | 공고 적합성 평가 | `<공고번호>` |
-| `search-strategy` | 전체 워크플로우 (분석→검색→평가) | `<문서경로>` |
+| `search-strategy` | 검색 워크플로우 전체 실행 (분석→검색→평가) | `<문서경로>` |
 | `generate-toc` | 제안서 목차 생성 | `<RFP경로> <시드경로>` |
 | `generate-common` | 공통 리소스 생성 (CSS/JS/설정) | `<목차파일>` |
 | `generate-section` | 제안서 섹션 작성 (HTML 페이지) | `<목차파일> [섹션번호...]` |
+| `generate-proposal` | 제안서 패키징 (표지/목차/네비게이션 추가) | `<목차파일>` |
+| `generate-presentation` | 16:9 프레젠테이션 슬라이드 변환 | `<목차파일>` |
+| `generate-pptx` | 프레젠테이션 HTML → PPTX 변환 | `<목차파일>` |
+| `generate-all` | 제안서 생성 워크플로우 전체 실행 | `<RFP경로> <시드경로>` |
 
 ---
 
