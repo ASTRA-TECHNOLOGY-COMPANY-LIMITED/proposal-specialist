@@ -10,7 +10,7 @@
     {
       "name": "proposal-specialist",
       "description": "기업 문서 기반 공공조달/지원사업 탐색, RFP 분석, 수주 확률 평가 및 제안서 작성 플러그인",
-      "version": "1.10.0",
+      "version": "1.11.0",
       "author": {
         "name": "Zeans",
         "email": "zeans@astravision.co.kr"
