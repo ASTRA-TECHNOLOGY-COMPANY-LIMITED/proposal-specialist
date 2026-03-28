@@ -115,9 +115,9 @@ RFP와 시드 문서를 toc-generator 에이전트에 위임한다:
 
 사용자에게 PPTX 변환 여부를 확인한다:
 "프레젠테이션을 PPTX 파일로도 변환하시겠습니까? (Y/N)
-(Chrome, python-pptx, Pillow가 필요합니다)"
+(Node.js, puppeteer, dom-to-pptx가 필요합니다)"
 
-- **Yes** → Chrome headless 스크린샷 + python-pptx로 PPTX 생성
+- **Yes** → dom-to-pptx + Puppeteer로 네이티브 PPTX 요소 변환
 - **No** → 건너뛰기
 
 ## 최종 요약
